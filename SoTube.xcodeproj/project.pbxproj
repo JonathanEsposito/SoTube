@@ -8,10 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		22AEF9D662FE869E806435F1 /* Pods_SoTubeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE00E31D6BDA723D74E74335 /* Pods_SoTubeUITests.framework */; };
+		2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F662C1EC077E60019034F /* LogInViewController.swift */; };
+		2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */; };
+		2F0F66321EC079340019034F /* RecoverPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */; };
+		2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66CA1EC1CA400019034F /* MusicCollectionViewCell.swift */; };
+		2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D01EC1CA860019034F /* MusicCollectionViewController.swift */; };
+		2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D31EC1CB1C0019034F /* MusicTableViewController.swift */; };
+		2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */; };
+		2F0F66DE1EC1CE3F0019034F /* MusicViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */; };
+		2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */; };
 		486AD1AADA1121E7657201DB /* Pods_SoTubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */; };
 		8DD367DE4ADB1638B8C1254D /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */; };
 		A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09477C31EBCA03A00B62278 /* AppDelegate.swift */; };
-		A09477C61EBCA03A00B62278 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09477C51EBCA03A00B62278 /* ViewController.swift */; };
 		A09477C91EBCA03A00B62278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A09477C71EBCA03A00B62278 /* Main.storyboard */; };
 		A09477CB1EBCA03A00B62278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A09477CA1EBCA03A00B62278 /* Assets.xcassets */; };
 		A09477CE1EBCA03A00B62278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */; };
@@ -39,11 +47,19 @@
 
 /* Begin PBXFileReference section */
 		2D9627E07E4FC512667784A6 /* Pods-SoTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.debug.xcconfig"; sourceTree = "<group>"; };
+		2F0F662C1EC077E60019034F /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInViewController.swift; path = Controllers/LogInViewController.swift; sourceTree = "<group>"; };
+		2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverPasswordViewController.swift; sourceTree = "<group>"; };
+		2F0F66CA1EC1CA400019034F /* MusicCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicCollectionViewCell.swift; sourceTree = "<group>"; };
+		2F0F66D01EC1CA860019034F /* MusicCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicCollectionViewController.swift; sourceTree = "<group>"; };
+		2F0F66D31EC1CB1C0019034F /* MusicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewController.swift; sourceTree = "<group>"; };
+		2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicSplitViewController.swift; sourceTree = "<group>"; };
+		2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusicViews.storyboard; sourceTree = "<group>"; };
+		2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
 		606381C2A33886FCBAE26F58 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 		726495C053F085FDC806A67F /* Pods-SoTubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeTests/Pods-SoTubeTests.release.xcconfig"; sourceTree = "<group>"; };
 		A09477C01EBCA03A00B62278 /* SoTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09477C31EBCA03A00B62278 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A09477C51EBCA03A00B62278 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A09477C81EBCA03A00B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A09477CA1EBCA03A00B62278 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A09477CD1EBCA03A00B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,6 +107,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F0F66301EC0781B0019034F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2F0F662C1EC077E60019034F /* LogInViewController.swift */,
+				2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */,
+				2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */,
+				2F0F66D21EC1CABB0019034F /* DisplayMusicControllers */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		2F0F66831EC1BF910019034F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		2F0F66D21EC1CABB0019034F /* DisplayMusicControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */,
+				2F0F66D01EC1CA860019034F /* MusicCollectionViewController.swift */,
+				2F0F66CA1EC1CA400019034F /* MusicCollectionViewCell.swift */,
+				2F0F66D31EC1CB1C0019034F /* MusicTableViewController.swift */,
+				2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */,
+			);
+			name = DisplayMusicControllers;
+			sourceTree = "<group>";
+		};
+		2F0F66D91EC1CC320019034F /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
+				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
+				A09477C71EBCA03A00B62278 /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		2F0F66DA1EC1CC8F0019034F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A09477C31EBCA03A00B62278 /* AppDelegate.swift */,
+				A09477CA1EBCA03A00B62278 /* Assets.xcassets */,
+				A0ADCB791EBCA4C800C82CC9 /* GoogleService-Info.plist */,
+				A09477CF1EBCA03A00B62278 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		931173615AF3B4AB05B64803 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,13 +196,10 @@
 		A09477C21EBCA03A00B62278 /* SoTube */ = {
 			isa = PBXGroup;
 			children = (
-				A09477C31EBCA03A00B62278 /* AppDelegate.swift */,
-				A09477C51EBCA03A00B62278 /* ViewController.swift */,
-				A09477C71EBCA03A00B62278 /* Main.storyboard */,
-				A09477CA1EBCA03A00B62278 /* Assets.xcassets */,
-				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
-				A0ADCB791EBCA4C800C82CC9 /* GoogleService-Info.plist */,
-				A09477CF1EBCA03A00B62278 /* Info.plist */,
+				2F0F66DA1EC1CC8F0019034F /* Supporting Files */,
+				2F0F66831EC1BF910019034F /* Views */,
+				2F0F66301EC0781B0019034F /* Controllers */,
+				2F0F66D91EC1CC320019034F /* Storyboards */,
 			);
 			path = SoTube;
 			sourceTree = "<group>";
@@ -288,6 +352,7 @@
 				A0ADCB7A1EBCA4C800C82CC9 /* GoogleService-Info.plist in Resources */,
 				A09477CB1EBCA03A00B62278 /* Assets.xcassets in Resources */,
 				A09477C91EBCA03A00B62278 /* Main.storyboard in Resources */,
+				2F0F66DE1EC1CE3F0019034F /* MusicViews.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,8 +515,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A09477C61EBCA03A00B62278 /* ViewController.swift in Sources */,
+				2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */,
+				2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */,
+				2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */,
+				2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */,
+				2F0F66321EC079340019034F /* RecoverPasswordViewController.swift in Sources */,
+				2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */,
 				A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */,
+				2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */,
+				2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +676,7 @@
 			baseConfigurationReference = 2D9627E07E4FC512667784A6 /* Pods-SoTube.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SoTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NVMetTalent.SoTube;
@@ -617,6 +690,7 @@
 			baseConfigurationReference = 606381C2A33886FCBAE26F58 /* Pods-SoTube.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SoTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NVMetTalent.SoTube;
