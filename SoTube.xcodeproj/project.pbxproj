@@ -248,19 +248,16 @@
 		A09477C21EBCA03A00B62278 /* SoTube */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				2F0F66DA1EC1CC8F0019034F /* Supporting Files */,
 				2F0F66831EC1BF910019034F /* Views */,
 				2F0F66301EC0781B0019034F /* Controllers */,
 				2F0F66D91EC1CC320019034F /* Storyboards */,
-=======
 				A03E69A31EC1CC4700F12FA9 /* Stroryboards */,
 				A03E69931EC1BE5500F12FA9 /* Views */,
 				A03E69921EC1BE2900F12FA9 /* Controllers */,
 				A0ADCB811EC07C6A00C82CC9 /* Extensions */,
 				A03E69A71EC1DCCF00F12FA9 /* Recourses */,
 				A03E69A41EC1CC8A00F12FA9 /* Supporting Files */,
->>>>>>> jonathan
 			);
 			path = SoTube;
 			sourceTree = "<group>";
@@ -422,11 +419,8 @@
 				A09477CB1EBCA03A00B62278 /* Assets.xcassets in Resources */,
 				A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */,
 				A09477C91EBCA03A00B62278 /* Main.storyboard in Resources */,
-<<<<<<< HEAD
 				2F0F66DE1EC1CE3F0019034F /* MusicViews.storyboard in Resources */,
-=======
 				A03E699A1EC1C41A00F12FA9 /* MyMusic.storyboard in Resources */,
->>>>>>> jonathan
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,17 +583,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */,
 				2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */,
 				2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */,
 				2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */,
 				2F0F66321EC079340019034F /* RecoverPasswordViewController.swift in Sources */,
 				2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */,
-=======
 				A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */,
 				A03E69911EC1BE2000F12FA9 /* MyMusicViewController.swift in Sources */,
->>>>>>> jonathan
 				A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */,
 				2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */,
 				2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */,
