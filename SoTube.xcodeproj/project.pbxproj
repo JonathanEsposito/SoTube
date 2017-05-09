@@ -118,19 +118,13 @@
 		2F0F66301EC0781B0019034F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A03E69901EC1BE2000F12FA9 /* MyMusicViewController.swift */,
 				2F0F662C1EC077E60019034F /* LogInViewController.swift */,
 				2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */,
 				2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */,
 				2F0F66D21EC1CABB0019034F /* DisplayMusicControllers */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		2F0F66831EC1BF910019034F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Views;
 			sourceTree = "<group>";
 		};
 		2F0F66D21EC1CABB0019034F /* DisplayMusicControllers */ = {
@@ -148,22 +142,12 @@
 		2F0F66D91EC1CC320019034F /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
-				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
 				A09477C71EBCA03A00B62278 /* Main.storyboard */,
+				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
+				A03E69991EC1C41A00F12FA9 /* MyMusic.storyboard */,
+				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
 			);
 			name = Storyboards;
-			sourceTree = "<group>";
-		};
-		2F0F66DA1EC1CC8F0019034F /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A09477C31EBCA03A00B62278 /* AppDelegate.swift */,
-				A09477CA1EBCA03A00B62278 /* Assets.xcassets */,
-				A0ADCB791EBCA4C800C82CC9 /* GoogleService-Info.plist */,
-				A09477CF1EBCA03A00B62278 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		931173615AF3B4AB05B64803 /* Pods */ = {
@@ -179,30 +163,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A03E69921EC1BE2900F12FA9 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				A03E69901EC1BE2000F12FA9 /* MyMusicViewController.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		A03E69931EC1BE5500F12FA9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		A03E69A31EC1CC4700F12FA9 /* Stroryboards */ = {
-			isa = PBXGroup;
-			children = (
-				A09477C71EBCA03A00B62278 /* Main.storyboard */,
-				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
-				A03E69991EC1C41A00F12FA9 /* MyMusic.storyboard */,
-			);
-			name = Stroryboards;
 			sourceTree = "<group>";
 		};
 		A03E69A41EC1CC8A00F12FA9 /* Supporting Files */ = {
@@ -248,13 +214,9 @@
 		A09477C21EBCA03A00B62278 /* SoTube */ = {
 			isa = PBXGroup;
 			children = (
-				2F0F66DA1EC1CC8F0019034F /* Supporting Files */,
-				2F0F66831EC1BF910019034F /* Views */,
-				2F0F66301EC0781B0019034F /* Controllers */,
 				2F0F66D91EC1CC320019034F /* Storyboards */,
-				A03E69A31EC1CC4700F12FA9 /* Stroryboards */,
+				2F0F66301EC0781B0019034F /* Controllers */,
 				A03E69931EC1BE5500F12FA9 /* Views */,
-				A03E69921EC1BE2900F12FA9 /* Controllers */,
 				A0ADCB811EC07C6A00C82CC9 /* Extensions */,
 				A03E69A71EC1DCCF00F12FA9 /* Recourses */,
 				A03E69A41EC1CC8A00F12FA9 /* Supporting Files */,
