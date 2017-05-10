@@ -144,8 +144,8 @@
 		2F0F66D91EC1CC320019034F /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				A09477C71EBCA03A00B62278 /* Main.storyboard */,
 				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
+				A09477C71EBCA03A00B62278 /* Main.storyboard */,
 				A03E69991EC1C41A00F12FA9 /* MyMusic.storyboard */,
 				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
 				2F7029931EC31ACC002B8395 /* Album.storyboard */,
