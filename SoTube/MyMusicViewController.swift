@@ -10,12 +10,29 @@ import UIKit
 
 class MyMusicViewController: UIViewController {
     
+    var navigationBar = UINavigationBar()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("boe")
         navigationBarSetup()
         
-        // Do any additional setup after loading the view.
+        // Get all constraints in current view
+        let constraints = self.view.constraints
+        
+        // filter constraints for all constraints on topLayoutGuide exept the one on our navigationBar
+        let constraintsOnTopLayoutGuide = constraints.filter {
+            if let secondItem = $0.secondItem as? UILayoutSupport, secondItem === self.topLayoutGuide {
+                if let firstItem = $0.firstItem as? UINavigationBar, firstItem === navigationBar {
+                    return false
+                } else {
+                    return true
+                }
+            }
+            return false
+        }
+        
+        constraintsOnTopLayoutGuide.forEach { $0.constant += 44 }
     }
     
     override func didReceiveMemoryWarning() {
@@ -134,7 +151,7 @@ class MyMusicViewController: UIViewController {
     // Set up navigation bar
     func navigationBarSetup() {
         
-        let navBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 64))
+        navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 64))
         let navItem = UINavigationItem(title: "")
         let library = UIBarButtonItem(title: self.title ?? "", style: UIBarButtonItemStyle.plain, target: nil, action: #selector(displayLibraryAs(_:)))
         let sort = UIBarButtonItem(title: "Sort by", style: UIBarButtonItemStyle.plain, target: nil, action: #selector(displaySortMenu(_:)))
@@ -143,21 +160,21 @@ class MyMusicViewController: UIViewController {
         navItem.leftBarButtonItem = library
         navItem.rightBarButtonItem = sort
         
-        navBar.setItems([navItem], animated: false)
+        navigationBar.setItems([navItem], animated: false)
         
-        self.view.addSubview(navBar)
+        self.view.addSubview(navigationBar)
         
         // Remove background and shadow
-        navBar.setBackgroundImage(UIImage(), for: .default)
-        navBar.shadowImage = UIImage()
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
         
         // Autolayout: Set navigationbar to top of view
-        navBar.translatesAutoresizingMaskIntoConstraints = false
+        navigationBar.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: navBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: navBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: navBar, attribute: .top, relatedBy: .equal, toItem: topLayoutGuide, attribute: .bottom, multiplier: 1.0, constant: -20.0).isActive = true
-        NSLayoutConstraint(item: navBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 64.0).isActive = true
+        NSLayoutConstraint(item: navigationBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: navigationBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
+        NSLayoutConstraint(item: navigationBar, attribute: .top, relatedBy: .equal, toItem: topLayoutGuide, attribute: .bottom, multiplier: 1.0, constant: -20.0).isActive = true
+        NSLayoutConstraint(item: navigationBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 64.0).isActive = true
         
     }
 }
