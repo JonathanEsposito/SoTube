@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Utv-LH-ZYT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AQ1-4s-Awt">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,18 +23,15 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="AQ1-4s-Awt" kind="relationship" relationship="rootViewController" id="6BJ-04-j2J"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LdO-CK-gmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-875.625" y="464.78873239436621"/>
         </scene>
-        <!--My Music View Controller-->
+        <!--Albums-->
         <scene sceneID="QUY-fN-dHf">
             <objects>
-                <viewController id="AQ1-4s-Awt" customClass="MyMusicViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Albums" id="AQ1-4s-Awt" customClass="MyMusicViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="scn-Uk-DEB"/>
                         <viewControllerLayoutGuide type="bottom" id="F9K-NT-jdK"/>
@@ -44,18 +41,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VlX-07-ffY">
-                        <barButtonItem key="leftBarButtonItem" title="Library" id="aB2-dr-kQE">
-                            <connections>
-                                <action selector="displayLibraryAs:" destination="AQ1-4s-Awt" id="Pvb-ch-yy8"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="MXm-zs-JL8"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="VlX-07-ffY"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6CK-f9-uCx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-22" y="465"/>
+            <point key="canvasLocation" x="154" y="421"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
