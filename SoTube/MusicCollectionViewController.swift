@@ -12,12 +12,16 @@ private let reuseIdentifier = "MusicCell"
 
 class MusicCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    var data = ["a"]
+    
     
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var musicCollectionView: UICollectionView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -28,7 +32,7 @@ class MusicCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 20
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

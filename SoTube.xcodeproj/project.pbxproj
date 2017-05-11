@@ -17,6 +17,7 @@
 		2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */; };
 		2F0F66DE1EC1CE3F0019034F /* MusicViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */; };
 		2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */; };
+		2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7029931EC31ACC002B8395 /* Album.storyboard */; };
 		486AD1AADA1121E7657201DB /* Pods_SoTubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */; };
 		8DD367DE4ADB1638B8C1254D /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */; };
 		A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */; };
@@ -60,6 +61,7 @@
 		2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicSplitViewController.swift; sourceTree = "<group>"; };
 		2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusicViews.storyboard; sourceTree = "<group>"; };
 		2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
+		2F7029931EC31ACC002B8395 /* Album.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Album.storyboard; sourceTree = "<group>"; };
 		606381C2A33886FCBAE26F58 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 		726495C053F085FDC806A67F /* Pods-SoTubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeTests/Pods-SoTubeTests.release.xcconfig"; sourceTree = "<group>"; };
 		A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MinimizedPlayer.xib; path = Views/MinimizedPlayer.xib; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
 				A03E69991EC1C41A00F12FA9 /* MyMusic.storyboard */,
 				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
+				2F7029931EC31ACC002B8395 /* Album.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */,
 				A09477CE1EBCA03A00B62278 /* LaunchScreen.storyboard in Resources */,
 				A0ADCB7A1EBCA4C800C82CC9 /* GoogleService-Info.plist in Resources */,
 				A09477CB1EBCA03A00B62278 /* Assets.xcassets in Resources */,

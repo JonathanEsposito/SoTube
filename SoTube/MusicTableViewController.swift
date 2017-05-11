@@ -11,6 +11,7 @@ import UIKit
 class MusicTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let reuseIdentifier = "MusicCell"
+    let dummmyData = ["a", "b", "c", "d"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,14 +77,60 @@ class MusicTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     */
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        var destinationvc = segue.destination
+        if let navcon = destinationvc as? UINavigationController {
+            destinationvc = navcon.visibleViewController ?? destinationvc
+        }
+        if let musicCollectionVC = destinationvc as? MusicCollectionViewController {
+            musicCollectionVC.data = self.dummmyData
+        }
     }
-    */
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

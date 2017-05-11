@@ -18,13 +18,13 @@
             <objects>
                 <splitViewController id="iNv-pm-VVn" customClass="MusicSplitViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
-                        <segue destination="sNS-Ps-mkV" kind="relationship" relationship="detailViewController" id="ro9-n9-s9L"/>
-                        <segue destination="Lgd-8h-QTh" kind="relationship" relationship="masterViewController" id="14E-MG-xZY"/>
+                        <segue destination="Ijx-a7-6e9" kind="relationship" relationship="masterViewController" id="14E-MG-xZY"/>
+                        <segue destination="xOE-Qz-jlz" kind="relationship" relationship="detailViewController" id="3VL-KF-cd5"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jli-xV-FlH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1420" y="413"/>
+            <point key="canvasLocation" x="-1419" y="76"/>
         </scene>
         <!--Music Table View Controller-->
         <scene sceneID="7Md-qe-xfT">
@@ -136,21 +136,21 @@
                                                         <mask key="constraints">
                                                             <exclude reference="MYu-uJ-U9t"/>
                                                             <exclude reference="bOd-Ha-Dtq"/>
-                                                            <exclude reference="vEN-OD-QbJ"/>
                                                             <exclude reference="lhu-pZ-v8J"/>
+                                                            <exclude reference="vEN-OD-QbJ"/>
                                                             <exclude reference="Qa4-th-6Yv"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <mask key="constraints">
                                                             <include reference="MYu-uJ-U9t"/>
-                                                            <exclude reference="w1e-ub-HkU"/>
                                                             <include reference="bOd-Ha-Dtq"/>
-                                                            <include reference="vEN-OD-QbJ"/>
+                                                            <exclude reference="w1e-ub-HkU"/>
                                                             <exclude reference="PEO-Ls-SDq"/>
-                                                            <exclude reference="vVJ-ze-7f2"/>
                                                             <exclude reference="Xc5-tF-YQk"/>
                                                             <include reference="lhu-pZ-v8J"/>
+                                                            <include reference="vEN-OD-QbJ"/>
+                                                            <exclude reference="vVJ-ze-7f2"/>
                                                             <include reference="Qa4-th-6Yv"/>
                                                         </mask>
                                                     </variation>
@@ -223,15 +223,16 @@
                             <constraint firstAttribute="trailing" secondItem="WGl-wT-pru" secondAttribute="trailing" id="zmL-Mg-FnG"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="EqJ-wp-Ywc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IXl-Nm-qIA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="570" y="79"/>
+            <point key="canvasLocation" x="1624" y="77"/>
         </scene>
         <!--Music Collection View Controller-->
         <scene sceneID="uZN-S7-62J">
             <objects>
-                <viewController id="sNS-Ps-mkV" customClass="MusicCollectionViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="sNS-Ps-mkV" customClass="MusicCollectionViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Q8v-9a-Agc"/>
                         <viewControllerLayoutGuide type="bottom" id="HHn-sv-jBK"/>
@@ -241,7 +242,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OdS-Ax-ssm">
-                                <rect key="frame" x="0.0" y="28" width="320" height="540"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="496"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sqB-NK-v0f">
                                     <size key="itemSize" width="100" height="140"/>
@@ -310,13 +311,15 @@
                             <constraint firstItem="HHn-sv-jBK" firstAttribute="top" secondItem="OdS-Ax-ssm" secondAttribute="bottom" id="vpL-NO-hbf"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aW1-LF-jJ1"/>
                     <connections>
                         <outlet property="collectionViewFlowLayout" destination="sqB-NK-v0f" id="TeY-Zb-Nhk"/>
+                        <outlet property="musicCollectionView" destination="OdS-Ax-ssm" id="brx-s2-OgU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pun-mQ-YLB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-368" y="839"/>
+            <point key="canvasLocation" x="624" y="863"/>
         </scene>
         <!--Music Collection View Controller-->
         <scene sceneID="wfi-jP-g7a">
@@ -353,6 +356,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtistName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsS-rI-wC4">
+                                                    <rect key="frame" x="0.0" y="121" width="100" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="princeCover" translatesAutoresizingMaskIntoConstraints="NO" id="BNU-li-tQB">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                     <constraints>
@@ -364,12 +373,6 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtistName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsS-rI-wC4">
-                                                    <rect key="frame" x="0.0" y="121" width="100" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                         </view>
                                         <constraints>
@@ -406,12 +409,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D1g-BJ-iVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="570" y="839"/>
+            <point key="canvasLocation" x="1624" y="862"/>
         </scene>
-        <!--Music Table View Controller-->
+        <!--Genre-->
         <scene sceneID="6J1-Rr-BAT">
             <objects>
-                <viewController id="Lgd-8h-QTh" customClass="MusicTableViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Lgd-8h-QTh" customClass="MusicTableViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nkn-4m-kU3"/>
                         <viewControllerLayoutGuide type="bottom" id="ryS-j9-YYA"/>
@@ -421,7 +424,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="os8-zA-jCT">
-                                <rect key="frame" x="16" y="20" width="304" height="548"/>
+                                <rect key="frame" x="16" y="64" width="304" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MusicCell" rowHeight="70" id="nwa-bO-BiX" customClass="MusicTableViewCell" customModule="SoTube" customModuleProvider="target">
@@ -516,23 +519,23 @@
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="lEY-um-JEV"/>
                                                             <exclude reference="E39-e4-qcY"/>
-                                                            <exclude reference="xjl-x5-FZN"/>
+                                                            <exclude reference="lEY-um-JEV"/>
                                                             <exclude reference="OtC-L8-lcQ"/>
+                                                            <exclude reference="xjl-x5-FZN"/>
                                                             <exclude reference="jaC-J9-fdp"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <mask key="constraints">
-                                                            <include reference="lEY-um-JEV"/>
-                                                            <exclude reference="TeK-F3-szh"/>
                                                             <include reference="E39-e4-qcY"/>
-                                                            <include reference="xjl-x5-FZN"/>
+                                                            <exclude reference="TeK-F3-szh"/>
+                                                            <include reference="lEY-um-JEV"/>
                                                             <exclude reference="J17-zr-31D"/>
-                                                            <exclude reference="g62-nt-GEX"/>
-                                                            <exclude reference="cSV-Ee-qIb"/>
                                                             <include reference="OtC-L8-lcQ"/>
+                                                            <exclude reference="cSV-Ee-qIb"/>
+                                                            <exclude reference="g62-nt-GEX"/>
+                                                            <include reference="xjl-x5-FZN"/>
                                                             <include reference="jaC-J9-fdp"/>
                                                         </mask>
                                                     </variation>
@@ -588,6 +591,7 @@
                                             <outlet property="ratingLabel" destination="ZFb-mL-ECl" id="QXZ-TN-hUF"/>
                                             <outlet property="timeLabel" destination="MLp-5a-Zla" id="XYs-dl-otR"/>
                                             <outlet property="titelLabel" destination="Hv6-bH-XNk" id="jhi-iO-5NW"/>
+                                            <segue destination="xOE-Qz-jlz" kind="showDetail" identifier="segue" id="RlX-kh-0wj"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -605,13 +609,53 @@
                             <constraint firstItem="os8-zA-jCT" firstAttribute="leading" secondItem="cHR-xR-02K" secondAttribute="leadingMargin" id="p66-Os-xZC"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Genre" id="7I2-DI-nKR"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csy-VS-nft" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-369" y="78"/>
+            <point key="canvasLocation" x="628.125" y="77.112676056338032"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cbI-B3-Pu3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ijx-a7-6e9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RkT-pk-Dcw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Lgd-8h-QTh" kind="relationship" relationship="rootViewController" id="Poy-7g-NtG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TZ6-Yl-KMu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-369.375" y="77.112676056338032"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kbT-oA-GfZ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xOE-Qz-jlz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="haS-eL-ZJW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sNS-Ps-mkV" kind="relationship" relationship="rootViewController" id="aFW-Ym-fLY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E5m-eo-FP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-369" y="862"/>
         </scene>
     </scenes>
     <resources>
         <image name="princeCover" width="500" height="428"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="3VL-KF-cd5"/>
+    </inferredMetricsTieBreakers>
 </document>

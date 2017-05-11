@@ -8,19 +8,25 @@
 
 import UIKit
 
-class MusicSplitViewController: UISplitViewController {
+class MusicSplitViewController: UISplitViewController, UISplitViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.delegate = self
+        self.preferredDisplayMode = .allVisible
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    func splitViewController(
+        _ splitViewController: UISplitViewController,
+        collapseSecondary secondaryViewController: UIViewController,
+        onto primaryViewController: UIViewController) -> Bool {
+        // Return true to prevent UIKit from applying its default behavior
+        return true
+    }
 
     /*
     // MARK: - Navigation
