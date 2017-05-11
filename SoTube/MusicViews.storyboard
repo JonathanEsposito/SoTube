@@ -632,7 +632,6 @@
         <!--Navigation Controller-->
         <scene sceneID="cbI-B3-Pu3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TZ6-Yl-KMu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ijx-a7-6e9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RkT-pk-Dcw">
@@ -644,13 +643,13 @@
                         <segue destination="Lgd-8h-QTh" kind="relationship" relationship="rootViewController" id="Poy-7g-NtG"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TZ6-Yl-KMu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-369.375" y="77.112676056338032"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kbT-oA-GfZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E5m-eo-FP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xOE-Qz-jlz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="haS-eL-ZJW">
@@ -662,6 +661,7 @@
                         <segue destination="sNS-Ps-mkV" kind="relationship" relationship="rootViewController" id="aFW-Ym-fLY"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E5m-eo-FP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-369" y="862"/>
         </scene>

@@ -23,6 +23,7 @@
 		A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */; };
 		A03E69911EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E69901EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift */; };
 		A05F929B1EC48B4D00F62432 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F929A1EC48B4D00F62432 /* TabBarViewController.swift */; };
+		A05F92A11EC4ADCD00F62432 /* MusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A05F929F1EC4ADCD00F62432 /* MusicPlayer.storyboard */; };
 		A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09477C31EBCA03A00B62278 /* AppDelegate.swift */; };
 		A09477C91EBCA03A00B62278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A09477C71EBCA03A00B62278 /* Main.storyboard */; };
 		A09477CB1EBCA03A00B62278 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A09477CA1EBCA03A00B62278 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MinimizedPlayer.xib; path = Views/MinimizedPlayer.xib; sourceTree = "<group>"; };
 		A03E69901EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMusicTabBarViewController.swift; sourceTree = "<group>"; };
 		A05F929A1EC48B4D00F62432 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		A05F92A01EC4ADCD00F62432 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MusicPlayer.storyboard; sourceTree = "<group>"; };
 		A09477C01EBCA03A00B62278 /* SoTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09477C31EBCA03A00B62278 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A09477C81EBCA03A00B62278 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				A09477C71EBCA03A00B62278 /* Main.storyboard */,
 				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
 				2F7029931EC31ACC002B8395 /* Album.storyboard */,
+				A05F929F1EC4ADCD00F62432 /* MusicPlayer.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */,
 				A09477CE1EBCA03A00B62278 /* LaunchScreen.storyboard in Resources */,
 				A0ADCB7A1EBCA4C800C82CC9 /* GoogleService-Info.plist in Resources */,
+				A05F92A11EC4ADCD00F62432 /* MusicPlayer.storyboard in Resources */,
 				A09477CB1EBCA03A00B62278 /* Assets.xcassets in Resources */,
 				A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */,
 				A09477C91EBCA03A00B62278 /* Main.storyboard in Resources */,
@@ -603,6 +607,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A05F929F1EC4ADCD00F62432 /* MusicPlayer.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A05F92A01EC4ADCD00F62432 /* Base */,
+			);
+			name = MusicPlayer.storyboard;
+			sourceTree = "<group>";
+		};
 		A09477C71EBCA03A00B62278 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
