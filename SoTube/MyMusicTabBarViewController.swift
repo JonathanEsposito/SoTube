@@ -9,12 +9,23 @@
 import UIKit
 
 class MyMusicTabBarViewController: TabBarViewController {
-    
+    // MARK: - Properties
     var navigationBar = UINavigationBar()
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         print("boe")
+        
+        if let _ = navigationController?.navigationBar {
+            // Set navigation controller background and shadow
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+            
+            // Set navigation title
+            self.navigationItem.title = self.title
+        }
+        
         navigationBarSetup()
         
         // Get all constraints in current view
@@ -35,13 +46,16 @@ class MyMusicTabBarViewController: TabBarViewController {
         constraintsOnTopLayoutGuide.forEach { $0.constant += 44 }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
+    }
     
-    /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -49,8 +63,9 @@ class MyMusicTabBarViewController: TabBarViewController {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
-     */
+ 
     
+    // MARK: - IBActions
     @IBAction func displayLibraryAs(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -65,7 +80,7 @@ class MyMusicTabBarViewController: TabBarViewController {
         
         let showAlbums = UIAlertAction(title: "Albums", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Albums")
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AlbumsVC") {
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AlbumsNavCont") {
                 UIApplication.shared.keyWindow?.rootViewController = viewController
                 self.dismiss(animated: true, completion: nil)
             }
@@ -74,12 +89,16 @@ class MyMusicTabBarViewController: TabBarViewController {
         
         let showArtists = UIAlertAction(title: "Artists", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Artists")
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") {
+            if let splitViewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") as? MusicSplitViewController {
                 // TODO: Set destination viewController to artist or genre
                 // TODO: Set master vc title
+                if let navigationController = splitViewController.masterViewController as? UINavigationController {
+                    navigationController.visibleViewController?.title = "Artists"
+                } else {
+                    splitViewController.masterViewController?.title = "Artists"
+                }
                 
-                
-                UIApplication.shared.keyWindow?.rootViewController = viewController
+                UIApplication.shared.keyWindow?.rootViewController = splitViewController
                 self.dismiss(animated: true, completion: nil)
             }
         })
@@ -87,12 +106,17 @@ class MyMusicTabBarViewController: TabBarViewController {
         
         let showGenres = UIAlertAction(title: "Genres", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Genres")
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") {
+            if let splitViewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") as? MusicSplitViewController {
                 // TODO: Set destination viewController to artist or genre
                 // TODO: Set master vc title
+                if let navigationController = splitViewController.masterViewController as? UINavigationController {
+                    navigationController.visibleViewController?.title = "Genres"
+                } else {
+                    splitViewController.masterViewController?.title = "Genres"
+                }
                 
                 
-                UIApplication.shared.keyWindow?.rootViewController = viewController
+                UIApplication.shared.keyWindow?.rootViewController = splitViewController
                 self.dismiss(animated: true, completion: nil)
             }
         })
@@ -159,15 +183,15 @@ class MyMusicTabBarViewController: TabBarViewController {
     }
     
     
-    
+    // MARK: - Private Methods
     
     // Set up navigation bar
-    func navigationBarSetup() {
+    private func navigationBarSetup() {
         
         navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 64))
         let navItem = UINavigationItem(title: "")
         let library = UIBarButtonItem(title: self.title ?? "", style: UIBarButtonItemStyle.plain, target: nil, action: #selector(displayLibraryAs(_:)))
-        let sort = UIBarButtonItem(title: "Sort by", style: UIBarButtonItemStyle.plain, target: nil, action: #selector(displaySortMenu(_:)))
+        let sort = UIBarButtonItem(title: "Sort", style: UIBarButtonItemStyle.plain, target: nil, action: #selector(displaySortMenu(_:)))
         //        let search = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
         
         navItem.leftBarButtonItem = library

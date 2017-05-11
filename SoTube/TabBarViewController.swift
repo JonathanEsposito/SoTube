@@ -9,16 +9,52 @@
 import UIKit
 
 class TabBarViewController: UIViewController, UITabBarDelegate {
-
-
+    // MARK: - Properties
     var selectedTabBarItemWithTitle = "My music"
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set up all tabbar related navigations
         tabBarSetup()
-        }
+    }
     
+    // MARK: - TabBarDelegate
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        //This method will be called when user changes tab.
+        guard let tabBarItemTitle = item.title else {
+            print("item has no title")
+            return
+        }
+        
+        switch tabBarItemTitle {
+        case "Account":
+            print("Account")
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AccountVC") as? TabBarViewController {
+                print("will navigate")
+                
+                viewController.selectedTabBarItemWithTitle = tabBarItemTitle
+                UIApplication.shared.keyWindow?.rootViewController = viewController
+                self.dismiss(animated: true, completion: nil)
+            }
+        case "My music":
+            print("My music")
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AlbumsVC") as? TabBarViewController {
+                if selectedTabBarItemWithTitle != tabBar.selectedItem?.title {
+                    viewController.selectedTabBarItemWithTitle = tabBarItemTitle
+                    UIApplication.shared.keyWindow?.rootViewController = viewController
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        case "Store":
+            print("Store")
+            selectedTabBarItemWithTitle = tabBarItemTitle
+        default:
+            break
+        }
+    }
+    
+    // MARK: - Private Methodes
     private func tabBarSetup() {
         
         // Create tab bar
@@ -66,39 +102,5 @@ class TabBarViewController: UIViewController, UITabBarDelegate {
         // select right tab bar item
         let selectedTab = tabBar.items!.filter({ $0.title == self.selectedTabBarItemWithTitle })
         tabBar.selectedItem = selectedTab.first
-    }
-    
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        //This method will be called when user changes tab.
-        guard let tabBarItemTitle = item.title else {
-            print("item has no title")
-            return
-        }
-        
-        switch tabBarItemTitle {
-        case "Account":
-            print("Account")
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AccountVC") as? TabBarViewController {
-                print("will navigate")
-                
-                viewController.selectedTabBarItemWithTitle = tabBarItemTitle
-                UIApplication.shared.keyWindow?.rootViewController = viewController
-                self.dismiss(animated: true, completion: nil)
-            }
-        case "My music":
-            print("My music")
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AlbumsVC") as? TabBarViewController {
-                if selectedTabBarItemWithTitle != tabBar.selectedItem?.title {
-                    viewController.selectedTabBarItemWithTitle = tabBarItemTitle
-                    UIApplication.shared.keyWindow?.rootViewController = viewController
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }
-        case "Store":
-            print("Store")
-            selectedTabBarItemWithTitle = tabBarItemTitle
-        default:
-            break
-        }
     }
 }

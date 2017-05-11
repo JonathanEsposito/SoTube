@@ -39,3 +39,13 @@ class MusicSplitViewController: UISplitViewController, UISplitViewControllerDele
     */
 
 }
+
+extension MusicSplitViewController {
+    var masterViewController: UIViewController? {
+        return self.viewControllers.first
+    }
+    
+    var detailViewController: UIViewController? {
+        return self.viewControllers.count > 1 ? self.viewControllers[1] : nil
+    }
+}
