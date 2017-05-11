@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyMusicViewController: UIViewController {
+class NavigationAndTabBarViewController: TabBarViewController {
     
     var navigationBar = UINavigationBar()
     

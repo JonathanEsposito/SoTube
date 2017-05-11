@@ -9,29 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My music-->
-        <scene sceneID="oqN-Cd-bci">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Utv-LH-ZYT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My music" id="SnO-1U-3X3"/>
-                    <toolbarItems/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics">
-                        <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
-                    </simulatedTabBarMetrics>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="u0J-Pj-Ag0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LdO-CK-gmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-875.625" y="464.78873239436621"/>
-        </scene>
         <!--Albums-->
         <scene sceneID="QUY-fN-dHf">
             <objects>
-                <viewController title="Albums" id="AQ1-4s-Awt" customClass="MyMusicViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Albums" id="AQ1-4s-Awt" customClass="NavigationAndTabBarViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="scn-Uk-DEB"/>
                         <viewControllerLayoutGuide type="bottom" id="F9K-NT-jdK"/>
