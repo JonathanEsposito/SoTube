@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "MusicCell"
 
-class MusicCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MusicCollectionViewController: MyMusicTabBarViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var data = ["a"]
     

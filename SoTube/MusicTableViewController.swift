@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MusicTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate, UITableViewDataSource {
     
     let reuseIdentifier = "MusicCell"
     let dummmyData = ["a", "b", "c", "d"]

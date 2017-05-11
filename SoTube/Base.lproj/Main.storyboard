@@ -498,10 +498,10 @@
             </objects>
             <point key="canvasLocation" x="-1688" y="473"/>
         </scene>
-        <!--MyMusic-->
+        <!--MusicViews-->
         <scene sceneID="OIS-fL-MHW">
             <objects>
-                <viewControllerPlaceholder storyboardName="MyMusic" id="y0s-Q6-Wfe" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="MusicViews" id="y0s-Q6-Wfe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="z9H-cA-78M"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8A5-bz-DkD" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iNv-pm-VVn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="72q-Kw-4tZ">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,7 +16,7 @@
         <!--Music Split View Controller-->
         <scene sceneID="QKt-Gn-Wj8">
             <objects>
-                <splitViewController id="iNv-pm-VVn" customClass="MusicSplitViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="MusicSplitView" id="iNv-pm-VVn" customClass="MusicSplitViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="Ijx-a7-6e9" kind="relationship" relationship="masterViewController" id="14E-MG-xZY"/>
                         <segue destination="xOE-Qz-jlz" kind="relationship" relationship="detailViewController" id="3VL-KF-cd5"/>
@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-1419" y="76"/>
         </scene>
-        <!--Music Table View Controller-->
+        <!--Songs-->
         <scene sceneID="7Md-qe-xfT">
             <objects>
-                <viewController id="7dh-bN-aFn" customClass="MusicTableViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SongsVC" title="Songs" id="7dh-bN-aFn" customClass="MusicTableViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nJq-2O-z5t"/>
                         <viewControllerLayoutGuide type="bottom" id="RIl-K0-Igh"/>
@@ -295,6 +295,9 @@
                                             <constraint firstItem="5hi-pm-A8X" firstAttribute="width" secondItem="Gft-3B-non" secondAttribute="width" id="ucU-8M-BOk"/>
                                         </constraints>
                                         <size key="customSize" width="100" height="150"/>
+                                        <connections>
+                                            <segue destination="hNG-ZF-AaJ" kind="show" id="bjR-d5-DPi"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -321,10 +324,10 @@
             </objects>
             <point key="canvasLocation" x="624" y="863"/>
         </scene>
-        <!--Music Collection View Controller-->
+        <!--Albums-->
         <scene sceneID="wfi-jP-g7a">
             <objects>
-                <viewController id="72q-Kw-4tZ" customClass="MusicCollectionViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AlbumsVC" title="Albums" id="72q-Kw-4tZ" customClass="MusicCollectionViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="m1b-Je-cRr"/>
                         <viewControllerLayoutGuide type="bottom" id="ubT-pj-GiB"/>
@@ -387,6 +390,9 @@
                                             <constraint firstItem="EsS-rI-wC4" firstAttribute="top" secondItem="2h1-LN-8WS" secondAttribute="bottom" constant="1" id="xGP-6y-KU7"/>
                                         </constraints>
                                         <size key="customSize" width="100" height="150"/>
+                                        <connections>
+                                            <segue destination="hNG-ZF-AaJ" kind="show" id="NyJ-pI-Uow"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -411,10 +417,18 @@
             </objects>
             <point key="canvasLocation" x="1624" y="862"/>
         </scene>
-        <!--Genre-->
+        <!--Album-->
+        <scene sceneID="BS0-wu-W0J">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Album" id="hNG-ZF-AaJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mIN-Dl-znW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1087" y="1485"/>
+        </scene>
+        <!--Title-->
         <scene sceneID="6J1-Rr-BAT">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Lgd-8h-QTh" customClass="MusicTableViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Title" automaticallyAdjustsScrollViewInsets="NO" id="Lgd-8h-QTh" customClass="MusicTableViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nkn-4m-kU3"/>
                         <viewControllerLayoutGuide type="bottom" id="ryS-j9-YYA"/>
@@ -618,6 +632,7 @@
         <!--Navigation Controller-->
         <scene sceneID="cbI-B3-Pu3">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TZ6-Yl-KMu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ijx-a7-6e9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RkT-pk-Dcw">
@@ -629,13 +644,13 @@
                         <segue destination="Lgd-8h-QTh" kind="relationship" relationship="rootViewController" id="Poy-7g-NtG"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TZ6-Yl-KMu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-369.375" y="77.112676056338032"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kbT-oA-GfZ">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E5m-eo-FP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xOE-Qz-jlz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="haS-eL-ZJW">
@@ -647,7 +662,6 @@
                         <segue destination="sNS-Ps-mkV" kind="relationship" relationship="rootViewController" id="aFW-Ym-fLY"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E5m-eo-FP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-369" y="862"/>
         </scene>
@@ -656,6 +670,7 @@
         <image name="princeCover" width="500" height="428"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3VL-KF-cd5"/>
+        <segue reference="RlX-kh-0wj"/>
+        <segue reference="bjR-d5-DPi"/>
     </inferredMetricsTieBreakers>
 </document>

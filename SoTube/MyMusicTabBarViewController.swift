@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NavigationAndTabBarViewController: TabBarViewController {
+class MyMusicTabBarViewController: TabBarViewController {
     
     var navigationBar = UINavigationBar()
     
@@ -62,6 +62,7 @@ class NavigationAndTabBarViewController: TabBarViewController {
             }
         })
         alertController.addAction(showSongs)
+        
         let showAlbums = UIAlertAction(title: "Albums", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Albums")
             if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AlbumsVC") {
@@ -70,22 +71,33 @@ class NavigationAndTabBarViewController: TabBarViewController {
             }
         })
         alertController.addAction(showAlbums)
+        
         let showArtists = UIAlertAction(title: "Artists", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Artists")
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ArtistsVC") {
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") {
+                // TODO: Set destination viewController to artist or genre
+                // TODO: Set master vc title
+                
+                
                 UIApplication.shared.keyWindow?.rootViewController = viewController
                 self.dismiss(animated: true, completion: nil)
             }
         })
         alertController.addAction(showArtists)
+        
         let showGenres = UIAlertAction(title: "Genres", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Genres")
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "GenresVC") {
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") {
+                // TODO: Set destination viewController to artist or genre
+                // TODO: Set master vc title
+                
+                
                 UIApplication.shared.keyWindow?.rootViewController = viewController
                 self.dismiss(animated: true, completion: nil)
             }
         })
         alertController.addAction(showGenres)
+        
         let cancelAction = UIAlertAction(title: "cancel", style: UIAlertActionStyle.cancel/*.default*/, handler: {(alert :UIAlertAction!) in
             print("Cancel button tapped")
         })
@@ -94,6 +106,7 @@ class NavigationAndTabBarViewController: TabBarViewController {
         
         alertController.popoverPresentationController?.barButtonItem = sender
         alertController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.up
+        
         present(alertController, animated: true, completion: nil)
     }
     
