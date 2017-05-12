@@ -232,6 +232,14 @@
                                             <outlet property="titelLabel" destination="nQz-J1-WiT" id="de0-uI-A0b"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StacticCell" id="G60-W9-UC5">
+                                        <rect key="frame" x="0.0" y="98" width="394" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G60-W9-UC5" id="8SS-7b-Ylv">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="69.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="7dh-bN-aFn" id="5Cu-P8-obl"/>
@@ -366,7 +374,7 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y1M-3S-dN0">
                                     <size key="itemSize" width="100" height="140"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="50"/>
                                     <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
@@ -419,6 +427,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="18p-Yx-mcc">
+                                    <rect key="frame" x="0.0" y="150" width="414" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="72q-Kw-4tZ" id="3r2-Va-tgf"/>
                                     <outlet property="delegate" destination="72q-Kw-4tZ" id="gZI-Xa-wcG"/>
@@ -505,6 +517,14 @@
                                             <segue destination="xOE-Qz-jlz" kind="showDetail" identifier="segue" id="RlX-kh-0wj"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StacticCell" id="VqR-4r-un7">
+                                        <rect key="frame" x="0.0" y="72" width="394" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VqR-4r-un7" id="Lb0-c6-9PZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Lgd-8h-QTh" id="lqt-YI-H6D"/>
@@ -589,7 +609,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RlX-kh-0wj"/>
-        <segue reference="bjR-d5-DPi"/>
+        <segue reference="NyJ-pI-Uow"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>

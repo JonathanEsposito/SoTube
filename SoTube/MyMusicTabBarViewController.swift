@@ -147,14 +147,7 @@ class MyMusicTabBarViewController: TabBarViewController {
             //            }
         })
         alertController.addAction(showSongs)
-        let showAlbums = UIAlertAction(title: "Album", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
-            print("Album")
-            //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AlbumsVC") {
-            //                UIApplication.shared.keyWindow?.rootViewController = viewController
-            //                self.dismiss(animated: true, completion: nil)
-            //            }
-        })
-        alertController.addAction(showAlbums)
+
         let showArtists = UIAlertAction(title: "Artist", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Artist")
             //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ArtistsVC") {
@@ -163,6 +156,7 @@ class MyMusicTabBarViewController: TabBarViewController {
             //            }
         })
         alertController.addAction(showArtists)
+        
         let showGenres = UIAlertAction(title: "Year", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Year")
             //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "GenresVC") {
@@ -171,6 +165,7 @@ class MyMusicTabBarViewController: TabBarViewController {
             //            }
         })
         alertController.addAction(showGenres)
+        
         let cancelAction = UIAlertAction(title: "cancel", style: UIAlertActionStyle.cancel/*.default*/, handler: {(alert :UIAlertAction!) in
             print("Cancel button tapped")
         })
@@ -195,7 +190,9 @@ class MyMusicTabBarViewController: TabBarViewController {
         //        let search = UIBarButtonItem(barButtonSystemItem: .search, target: nil, action: nil)
         
         navItem.leftBarButtonItem = library
-        navItem.rightBarButtonItem = sort
+        if self.title == "Albums" || self.title == "Songs" {
+            navItem.rightBarButtonItem = sort
+        }
         
         navigationBar.setItems([navItem], animated: false)
         

@@ -9,11 +9,11 @@
 import UIKit
 
 class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableViewDelegate, UITableViewDataSource {
-    
+    // MARK: - Properties
     @IBOutlet weak var musicTableView: UITableView!
-    let reuseIdentifier = "MusicCell"
     let dummmyData = ["a", "b", "c", "d"]
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,28 +24,37 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    
     // MARK: - TableView
     // MARK: DataSource
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 20
+        if section == 0 {
+            return 20
+        }
+        return 1 // for static content return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? MusicSplitViewMasterTableViewCell else {
-            fatalError("not the right Cell")
-        }
+        var cell: UITableViewCell!
         
-        if self.title == "Genres" {
-            cell.nameLabel.text = "Genre Name"
-        } else if self.title == "Artists" {
-            cell.nameLabel.text = "Artist Name"
+        if indexPath.section == 0 {
+            guard let musicCell = tableView.dequeueReusableCell(withIdentifier: "MusicCell", for: indexPath) as? MusicSplitViewMasterTableViewCell else {
+                fatalError("not the right Cell")
+            }
+            
+            if self.title == "Genres" {
+                musicCell.nameLabel.text = "Genre Name"
+            } else if self.title == "Artists" {
+                musicCell.nameLabel.text = "Artist Name"
+            }
+            
+            cell = musicCell
+            
+        } else if indexPath.section == 1 {
+            cell = tableView.dequeueReusableCell(withIdentifier: "StacticCell", for: indexPath)
         }
         
         return cell
