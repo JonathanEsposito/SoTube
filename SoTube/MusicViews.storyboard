@@ -55,7 +55,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="princeCover" translatesAutoresizingMaskIntoConstraints="NO" id="muQ-X0-zW8">
-                                                    <rect key="frame" x="0.0" y="5" width="59.666666666666664" height="59.666666666666671"/>
+                                                    <rect key="frame" x="0.0" y="5" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="muQ-X0-zW8" secondAttribute="height" multiplier="1:1" id="vaq-uU-z5T"/>
                                                     </constraints>
@@ -66,7 +66,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9:59:59" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8n-vb-seN">
-                                                    <rect key="frame" x="590" y="23" width="73" height="24"/>
+                                                    <rect key="frame" x="268" y="23" width="73" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="73" id="Ssi-yk-c4S"/>
                                                     </constraints>
@@ -106,10 +106,10 @@
                                                     </variation>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yif-rR-2i1">
-                                                    <rect key="frame" x="75" y="0.0" width="266" height="69.666666666666671"/>
+                                                    <rect key="frame" x="75" y="0.0" width="266" height="70"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heel lange titel hier" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQz-J1-WiT">
-                                                            <rect key="frame" x="0.0" y="16.666666666666664" width="138.33333333333334" height="17.999999999999993"/>
+                                                            <rect key="frame" x="0.0" y="17" width="138.33333333333334" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -118,7 +118,7 @@
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64f-6h-XxC">
-                                                            <rect key="frame" x="0.0" y="34.666666666666664" width="34.666666666666671" height="18"/>
+                                                            <rect key="frame" x="0.0" y="35" width="34.666666666666671" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -127,7 +127,7 @@
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="album" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5x-3O-XWj">
-                                                            <rect key="frame" x="49.666666666666679" y="34.666666666666664" width="79.333333333333314" height="18"/>
+                                                            <rect key="frame" x="49.666666666666664" y="35" width="79.666666666666686" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -198,8 +198,8 @@
                                                     <exclude reference="xXV-qg-yJj"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="Bpu-S3-Nx9"/>
                                                     <exclude reference="V3i-nT-MoZ"/>
+                                                    <exclude reference="Bpu-S3-Nx9"/>
                                                     <exclude reference="JtE-mb-Ids"/>
                                                     <exclude reference="XYS-qy-rfb"/>
                                                 </mask>
@@ -209,10 +209,10 @@
                                                     <exclude reference="A8n-vb-seN"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="Bpu-S3-Nx9"/>
-                                                    <exclude reference="Vog-lo-J0F"/>
                                                     <exclude reference="Hws-N6-G1J"/>
                                                     <exclude reference="nUQ-bw-B5b"/>
+                                                    <include reference="Bpu-S3-Nx9"/>
+                                                    <exclude reference="Vog-lo-J0F"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
@@ -220,9 +220,9 @@
                                                     <include reference="xXV-qg-yJj"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="Bpu-S3-Nx9"/>
                                                     <include reference="V3i-nT-MoZ"/>
                                                     <exclude reference="nUQ-bw-B5b"/>
+                                                    <exclude reference="Bpu-S3-Nx9"/>
                                                     <include reference="JtE-mb-Ids"/>
                                                     <include reference="XYS-qy-rfb"/>
                                                 </mask>
@@ -492,7 +492,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="princeCover" translatesAutoresizingMaskIntoConstraints="NO" id="ohU-LE-Qmv">
-                                                    <rect key="frame" x="0.0" y="4.6666666666666679" width="34" height="34.333333333333329"/>
+                                                    <rect key="frame" x="0.0" y="5" width="34" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="ohU-LE-Qmv" secondAttribute="height" multiplier="1:1" id="1rv-mc-99O"/>
                                                         <constraint firstAttribute="width" constant="34" id="dli-SG-QJy"/>
@@ -504,7 +504,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre/Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAJ-1V-glO">
-                                                    <rect key="frame" x="49" y="11.333333333333336" width="143" height="21"/>
+                                                    <rect key="frame" x="49" y="11" width="143" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
