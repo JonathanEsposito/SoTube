@@ -68,6 +68,11 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <exclude reference="Ssi-yk-c4S"/>
+                                                        </mask>
+                                                    </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aw-kx-6Eb">
                                                     <rect key="frame" x="356" y="20" width="30" height="30"/>
@@ -84,6 +89,16 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="rzW-OB-I5f"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <mask key="constraints">
+                                                            <include reference="rzW-OB-I5f"/>
+                                                        </mask>
+                                                    </variation>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yif-rR-2i1">
                                                     <rect key="frame" x="75" y="0.0" width="266" height="69.666666666666671"/>
@@ -179,6 +194,9 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="Bpu-S3-Nx9"/>
+                                                    <exclude reference="JtE-mb-Ids"/>
+                                                    <exclude reference="XYS-qy-rfb"/>
+                                                    <exclude reference="V3i-nT-MoZ"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -187,6 +205,9 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <include reference="Bpu-S3-Nx9"/>
+                                                    <exclude reference="Vog-lo-J0F"/>
+                                                    <exclude reference="Hws-N6-G1J"/>
+                                                    <exclude reference="nUQ-bw-B5b"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
@@ -195,6 +216,9 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="Bpu-S3-Nx9"/>
+                                                    <include reference="JtE-mb-Ids"/>
+                                                    <include reference="XYS-qy-rfb"/>
+                                                    <include reference="V3i-nT-MoZ"/>
                                                     <exclude reference="nUQ-bw-B5b"/>
                                                 </mask>
                                             </variation>
@@ -497,6 +521,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7I2-DI-nKR"/>
+                    <connections>
+                        <outlet property="musicTableView" destination="os8-zA-jCT" id="2k0-2O-Jbg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csy-VS-nft" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -562,7 +589,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RlX-kh-0wj"/>
-        <segue reference="NyJ-pI-Uow"/>
+        <segue reference="bjR-d5-DPi"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>

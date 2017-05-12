@@ -10,6 +10,7 @@ import UIKit
 
 class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var musicTableView: UITableView!
     let reuseIdentifier = "MusicCell"
     let dummmyData = ["a", "b", "c", "d"]
 
@@ -51,7 +52,7 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
     }
     
     // MARK: Delegate
-    
+
     
     // MARK: - Navigation
     
@@ -62,7 +63,19 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
         }
         if let musicCollectionVC = destinationvc as? MusicSplitViewDetailViewController {
             musicCollectionVC.data = self.dummmyData
+            destinationvc.navigationItem.title = selectedName ?? ""
         }
+        
+        
+    }
+    
+    var selectedName: String? {
+        if let selectedIndexPath = musicTableView.indexPathForSelectedRow {
+            if let selectedCell = musicTableView.cellForRow(at: selectedIndexPath) as? MusicSplitViewMasterTableViewCell {
+                return selectedCell.nameLabel.text
+            }
+        }
+        return nil
     }
 
 }
