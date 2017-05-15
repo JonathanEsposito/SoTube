@@ -18,6 +18,10 @@
 		2F0F66DE1EC1CE3F0019034F /* MusicViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */; };
 		2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */; };
 		2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7029931EC31ACC002B8395 /* Album.storyboard */; };
+		2FEC9C861EC9C2A800324AE1 /* PayPalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C851EC9C2A800324AE1 /* PayPalModel.swift */; };
+		2FEC9C881EC9C2B300324AE1 /* PayPalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C871EC9C2B300324AE1 /* PayPalViewModel.swift */; };
+		2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */; };
+		2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */; };
 		486AD1AADA1121E7657201DB /* Pods_SoTubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */; };
 		8DD367DE4ADB1638B8C1254D /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */; };
 		A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */; };
@@ -62,6 +66,11 @@
 		2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusicViews.storyboard; sourceTree = "<group>"; };
 		2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
 		2F7029931EC31ACC002B8395 /* Album.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Album.storyboard; sourceTree = "<group>"; };
+		2FEC9C851EC9C2A800324AE1 /* PayPalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PayPalModel.swift; path = "../../Documents/Paypal SDK test/Paypal SDK test/PayPalModel.swift"; sourceTree = "<group>"; };
+		2FEC9C871EC9C2B300324AE1 /* PayPalViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PayPalViewModel.swift; path = "../../Documents/Paypal SDK test/Paypal SDK test/PayPalViewModel.swift"; sourceTree = "<group>"; };
+		2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Payment.storyboard; sourceTree = "<group>"; };
+		2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentViewController.swift; path = Controllers/PaymentViewController.swift; sourceTree = "<group>"; };
+		2FEC9C911EC9C75A00324AE1 /* SoTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoTube-Bridging-Header.h"; sourceTree = "<group>"; };
 		606381C2A33886FCBAE26F58 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 		726495C053F085FDC806A67F /* Pods-SoTubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeTests/Pods-SoTubeTests.release.xcconfig"; sourceTree = "<group>"; };
 		A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MinimizedPlayer.xib; path = Views/MinimizedPlayer.xib; sourceTree = "<group>"; };
@@ -124,6 +133,8 @@
 				2F0F662C1EC077E60019034F /* LogInViewController.swift */,
 				2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */,
 				2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */,
+				2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */,
+				2FEC9C891EC9C2F600324AE1 /* Models */,
 				2F0F66D21EC1CABB0019034F /* DisplayMusicControllers */,
 			);
 			name = Controllers;
@@ -149,8 +160,27 @@
 				A03E69991EC1C41A00F12FA9 /* MyMusic.storyboard */,
 				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
 				2F7029931EC31ACC002B8395 /* Album.storyboard */,
+				2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */,
+				2FEC9C911EC9C75A00324AE1 /* SoTube-Bridging-Header.h */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		2FEC9C891EC9C2F600324AE1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2FEC9C8A1EC9C30A00324AE1 /* PaymentModel */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		2FEC9C8A1EC9C30A00324AE1 /* PaymentModel */ = {
+			isa = PBXGroup;
+			children = (
+				2FEC9C871EC9C2B300324AE1 /* PayPalViewModel.swift */,
+				2FEC9C851EC9C2A800324AE1 /* PayPalModel.swift */,
+			);
+			name = PaymentModel;
 			sourceTree = "<group>";
 		};
 		931173615AF3B4AB05B64803 /* Pods */ = {
@@ -340,6 +370,7 @@
 				TargetAttributes = {
 					A09477BF1EBCA03A00B62278 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					A09477D31EBCA03A00B62278 = {
@@ -379,6 +410,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */,
 				2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */,
 				A09477CE1EBCA03A00B62278 /* LaunchScreen.storyboard in Resources */,
 				A0ADCB7A1EBCA4C800C82CC9 /* GoogleService-Info.plist in Resources */,
@@ -553,13 +585,16 @@
 				2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */,
 				2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */,
 				2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */,
+				2FEC9C861EC9C2A800324AE1 /* PayPalModel.swift in Sources */,
 				2F0F66321EC079340019034F /* RecoverPasswordViewController.swift in Sources */,
 				2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */,
+				2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */,
 				A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */,
 				A03E69911EC1BE2000F12FA9 /* MyMusicViewController.swift in Sources */,
 				A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */,
 				2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */,
 				2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */,
+				2FEC9C881EC9C2B300324AE1 /* PayPalViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,11 +747,14 @@
 			baseConfigurationReference = 2D9627E07E4FC512667784A6 /* Pods-SoTube.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SoTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NVMetTalent.SoTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoTube/SoTube-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -726,11 +764,13 @@
 			baseConfigurationReference = 606381C2A33886FCBAE26F58 /* Pods-SoTube.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SoTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NVMetTalent.SoTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoTube/SoTube-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
