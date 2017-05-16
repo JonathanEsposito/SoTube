@@ -18,6 +18,12 @@
 		2F0F66DE1EC1CE3F0019034F /* MusicViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */; };
 		2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */; };
 		2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7029931EC31ACC002B8395 /* Album.storyboard */; };
+		2FC986B01ECAD76000B037CE /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986AF1ECAD76000B037CE /* AccountViewController.swift */; };
+		2FC986B61ECAE1DB00B037CE /* PaymentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986B51ECAE1DB00B037CE /* PaymentCollectionViewCell.swift */; };
+		2FC986B81ECAE82A00B037CE /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC986B71ECAE82A00B037CE /* Account.storyboard */; };
+		2FC986BA1ECB025E00B037CE /* PurchaseHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */; };
+		2FC986BC1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */; };
+		2FC986C01ECB2B9500B037CE /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986BF1ECB2B9500B037CE /* ChangePasswordViewController.swift */; };
 		2FEC9C861EC9C2A800324AE1 /* PayPalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C851EC9C2A800324AE1 /* PayPalModel.swift */; };
 		2FEC9C881EC9C2B300324AE1 /* PayPalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C871EC9C2B300324AE1 /* PayPalViewModel.swift */; };
 		2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */; };
@@ -70,6 +76,12 @@
 		2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusicViews.storyboard; sourceTree = "<group>"; };
 		2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
 		2F7029931EC31ACC002B8395 /* Album.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Album.storyboard; sourceTree = "<group>"; };
+		2FC986AF1ECAD76000B037CE /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = Controllers/AccountViewController.swift; sourceTree = "<group>"; };
+		2FC986B51ECAE1DB00B037CE /* PaymentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentCollectionViewCell.swift; path = Controllers/PaymentCollectionViewCell.swift; sourceTree = "<group>"; };
+		2FC986B71ECAE82A00B037CE /* Account.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
+		2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryViewController.swift; sourceTree = "<group>"; };
+		2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		2FC986BF1ECB2B9500B037CE /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		2FEC9C851EC9C2A800324AE1 /* PayPalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PayPalModel.swift; path = "../../Documents/Paypal SDK test/Paypal SDK test/PayPalModel.swift"; sourceTree = "<group>"; };
 		2FEC9C871EC9C2B300324AE1 /* PayPalViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PayPalViewModel.swift; path = "../../Documents/Paypal SDK test/Paypal SDK test/PayPalViewModel.swift"; sourceTree = "<group>"; };
 		2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Payment.storyboard; sourceTree = "<group>"; };
@@ -137,13 +149,18 @@
 		2F0F66301EC0781B0019034F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A05F929C1EC48B5700F62432 /* Navigation */,
-				2F0F66D21EC1CABB0019034F /* DisplayMusicControllers */,
 				2FEC9C911EC9C75A00324AE1 /* SoTube-Bridging-Header.h */,
 				2F0F662C1EC077E60019034F /* LogInViewController.swift */,
 				2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */,
 				2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */,
+				2FC986AF1ECAD76000B037CE /* AccountViewController.swift */,
+				2FC986BF1ECB2B9500B037CE /* ChangePasswordViewController.swift */,
 				2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */,
+				2FC986B51ECAE1DB00B037CE /* PaymentCollectionViewCell.swift */,
+				2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */,
+				2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */,
+				2F0F66D21EC1CABB0019034F /* DisplayMusicControllers */,
+				A05F929C1EC48B5700F62432 /* Navigation */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -171,6 +188,7 @@
 				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
 				2F7029931EC31ACC002B8395 /* Album.storyboard */,
 				2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */,
+				2FC986B71ECAE82A00B037CE /* Account.storyboard */,
 				A05F929F1EC4ADCD00F62432 /* MusicPlayer.storyboard */,
 			);
 			name = Storyboards;
@@ -432,6 +450,7 @@
 			files = (
 				2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */,
 				2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */,
+				2FC986B81ECAE82A00B037CE /* Account.storyboard in Resources */,
 				A09477CE1EBCA03A00B62278 /* LaunchScreen.storyboard in Resources */,
 				A0ADCB7A1EBCA4C800C82CC9 /* GoogleService-Info.plist in Resources */,
 				A05F92A11EC4ADCD00F62432 /* MusicPlayer.storyboard in Resources */,
@@ -602,23 +621,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */,
+				2FC986BC1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift in Sources */,
 				2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */,
 				2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */,
 				2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */,
 				2FEC9C861EC9C2A800324AE1 /* PayPalModel.swift in Sources */,
 				A05F929B1EC48B4D00F62432 /* TabBarViewController.swift in Sources */,
 				A05F92A71EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift in Sources */,
+				2FC986B61ECAE1DB00B037CE /* PaymentCollectionViewCell.swift in Sources */,
 				2F0F66321EC079340019034F /* RecoverPasswordViewController.swift in Sources */,
 				2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */,
 				2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */,
 				A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */,
 				A03E69911EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift in Sources */,
+				2FC986BA1ECB025E00B037CE /* PurchaseHistoryViewController.swift in Sources */,
+				2FC986B01ECAD76000B037CE /* AccountViewController.swift in Sources */,
 				A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */,
 				2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */,
 				A05F92A31EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift in Sources */,
 				A05F92A51EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift in Sources */,
 				2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */,
 				2FEC9C881EC9C2B300324AE1 /* PayPalViewModel.swift in Sources */,
+				2FC986C01ECB2B9500B037CE /* ChangePasswordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

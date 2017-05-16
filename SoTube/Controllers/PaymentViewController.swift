@@ -8,16 +8,26 @@
 
 import UIKit
 
-class PaymentViewController: UIViewController {
 
+protocol paymentDelegate {
+    var paymentViewModel: PaymentViewModel {get}
+}
+
+
+class PaymentViewController: UIViewController, paymentDelegate {
+    
     let paymentViewModel = PaymentViewModel()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+
     @IBAction func buySoCoin(_ sender: UIButton) {
-        let paymentVC = paymentViewModel.giveTransactionVC(forProduct: "SoCoins", amount: Int(sender.title(for: .normal)!)!, inCurrency: .euro, withSku: nil)
+        buySoCoin(amount: Int(sender.title(for: .normal)!)!)
+    }
+}
+
+extension paymentDelegate where Self: UIViewController {
+
+    func buySoCoin(amount: Int) {
+        
+        let paymentVC = paymentViewModel.giveTransactionVC(forProduct: "SoCoins", amount: amount, inCurrency: .euro, withSku: nil)
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
