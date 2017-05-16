@@ -14,7 +14,7 @@
         <!--Music Player View Controller-->
         <scene sceneID="gW6-y1-dlY">
             <objects>
-                <viewController id="fFf-Nn-7cb" customClass="MusicPlayerViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MusicPlayer" id="fFf-Nn-7cb" customClass="MusicPlayerViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="adb-DT-R9F"/>
                         <viewControllerLayoutGuide type="bottom" id="yVI-qe-pnr"/>
@@ -61,11 +61,23 @@
                                         <items>
                                             <barButtonItem title="Buy" id="h4W-Mf-uP4"/>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="5Go-4h-F0u"/>
-                                            <barButtonItem systemItem="rewind" id="Gzg-87-U0k"/>
+                                            <barButtonItem systemItem="rewind" id="Gzg-87-U0k">
+                                                <connections>
+                                                    <action selector="fastBackward:" destination="fFf-Nn-7cb" id="0gA-Er-kEx"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="YsM-zX-3s7"/>
-                                            <barButtonItem systemItem="play" id="uzv-QH-yUu"/>
+                                            <barButtonItem systemItem="pause" id="uzv-QH-yUu">
+                                                <connections>
+                                                    <action selector="pauseButton:" destination="fFf-Nn-7cb" id="rWF-kG-MPE"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="ehO-lv-cn1"/>
-                                            <barButtonItem systemItem="fastForward" id="gF9-Wu-bmj"/>
+                                            <barButtonItem systemItem="fastForward" id="gF9-Wu-bmj">
+                                                <connections>
+                                                    <action selector="fastForward:" destination="fFf-Nn-7cb" id="VaS-pX-UGe"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="N03-Tz-kyU"/>
                                             <barButtonItem systemItem="action" id="s0K-Im-1s2"/>
                                         </items>
@@ -125,6 +137,9 @@
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jxm-SJ-fSl">
                                 <rect key="frame" x="-2" y="399" width="418" height="31"/>
+                                <connections>
+                                    <action selector="slide:" destination="fFf-Nn-7cb" eventType="valueChanged" id="b8Y-Cf-Nfu"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-2:47" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwU-jM-5uY">
                                 <rect key="frame" x="370" y="424" width="34" height="16"/>
@@ -138,6 +153,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="un7-cN-g3F">
+                                <rect key="frame" x="15" y="25" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="AzS-Cr-yWe"/>
+                                    <constraint firstAttribute="width" secondItem="un7-cN-g3F" secondAttribute="height" multiplier="1:1" id="E99-03-KPh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="▼">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissView:" destination="fFf-Nn-7cb" eventType="touchUpInside" id="sTe-fk-BbJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -150,7 +179,9 @@
                             <constraint firstItem="oE4-zU-TJc" firstAttribute="leading" secondItem="jxm-SJ-fSl" secondAttribute="leading" constant="10" id="91P-jh-oGT"/>
                             <constraint firstItem="jxm-SJ-fSl" firstAttribute="centerX" secondItem="rrg-7h-aOZ" secondAttribute="centerX" id="Aq2-Yr-qWa"/>
                             <constraint firstItem="TJk-e7-Ha5" firstAttribute="top" secondItem="adb-DT-R9F" secondAttribute="bottom" constant="-20" id="BJS-jZ-GLK"/>
+                            <constraint firstItem="un7-cN-g3F" firstAttribute="top" secondItem="PDX-jz-Z4f" secondAttribute="top" constant="25" id="GCS-XY-h9e"/>
                             <constraint firstAttribute="trailing" secondItem="jxm-SJ-fSl" secondAttribute="trailing" id="LSv-Id-bdH"/>
+                            <constraint firstItem="un7-cN-g3F" firstAttribute="leading" secondItem="PDX-jz-Z4f" secondAttribute="leading" constant="15" id="O3r-4H-pdK"/>
                             <constraint firstItem="CwU-jM-5uY" firstAttribute="top" secondItem="jxm-SJ-fSl" secondAttribute="bottom" constant="-5" id="OLk-mD-a5v"/>
                             <constraint firstItem="PDX-jz-Z4f" firstAttribute="leading" secondItem="ONu-Tk-Emi" secondAttribute="trailing" constant="-31" id="PU6-7K-pcR"/>
                             <constraint firstItem="CwU-jM-5uY" firstAttribute="trailing" secondItem="jxm-SJ-fSl" secondAttribute="trailing" constant="-10" id="ToZ-1A-A3f"/>
@@ -169,36 +200,44 @@
                             <constraint firstItem="TJk-e7-Ha5" firstAttribute="top" secondItem="PDX-jz-Z4f" secondAttribute="bottom" id="wr9-Kd-RhW"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="ONu-Tk-Emi"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="6Qa-tF-4iS"/>
-                                <exclude reference="54M-TK-vJf"/>
-                                <exclude reference="BJS-jZ-GLK"/>
                                 <exclude reference="1Up-hL-hLn"/>
                                 <exclude reference="UwI-px-DVB"/>
                                 <exclude reference="img-jk-4Ul"/>
+                                <exclude reference="54M-TK-vJf"/>
+                                <exclude reference="BJS-jZ-GLK"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
                                 <include reference="6Qa-tF-4iS"/>
                                 <exclude reference="hzk-ee-STU"/>
-                                <include reference="54M-TK-vJf"/>
-                                <include reference="BJS-jZ-GLK"/>
-                                <exclude reference="tuq-5u-Zgl"/>
-                                <exclude reference="wr9-Kd-RhW"/>
                                 <include reference="1Up-hL-hLn"/>
                                 <exclude reference="Aq2-Yr-qWa"/>
                                 <include reference="UwI-px-DVB"/>
                                 <exclude reference="img-jk-4Ul"/>
                                 <exclude reference="kYn-cI-whH"/>
+                                <include reference="54M-TK-vJf"/>
+                                <include reference="BJS-jZ-GLK"/>
+                                <exclude reference="tuq-5u-Zgl"/>
+                                <exclude reference="wr9-Kd-RhW"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="controllersView" destination="TJk-e7-Ha5" id="KeB-Bl-eXm"/>
                         <outlet property="coverImageView" destination="PDX-jz-Z4f" id="1M3-HQ-ASY"/>
-                        <outlet property="musicPlayerToolbar" destination="qK0-5F-mrX" id="JdQ-Tb-qzs"/>
-                        <outlet property="musicProgressSlider" destination="jxm-SJ-fSl" id="wD2-Zr-jby"/>
+                        <outlet property="currentTimeLabel" destination="oE4-zU-TJc" id="hkK-Jo-qv2"/>
+                        <outlet property="fastBackwardButton" destination="Gzg-87-U0k" id="U2s-Sd-Hyr"/>
+                        <outlet property="fastForwardButton" destination="gF9-Wu-bmj" id="zZ3-0O-CMb"/>
+                        <outlet property="musicPlayButton" destination="uzv-QH-yUu" id="xmR-wP-UVv"/>
+                        <outlet property="progressSlider" destination="jxm-SJ-fSl" id="TiH-mD-pZb"/>
+                        <outlet property="timeLeftLabel" destination="CwU-jM-5uY" id="KcI-FH-BGk"/>
+                        <outlet property="toolbar" destination="qK0-5F-mrX" id="3ZE-dO-RN6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uko-PY-2nc" userLabel="First Responder" sceneMemberID="firstResponder"/>

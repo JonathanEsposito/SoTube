@@ -1,6 +1,6 @@
 //
-//  SoTubeAVAudioPlayer.swift
-//  SoTube
+//  AVAudioPlayerModel.swift
+//  Audio Player
 //
 //  Created by .jsber on 15/05/17.
 //  Copyright © 2017 NV Met Talent. All rights reserved.
@@ -9,10 +9,10 @@
 import AVFoundation
 
 class AVAudioPlayerModel: MusicPlayerModel {
-    private let player = AVAudioPlayer()
+    private var player = AVAudioPlayer()
     
-    var isNotPlaying: Bool {
-        return !player.isPlaying
+    var isPlaying: Bool {
+        return player.isPlaying
     }
     
     var currentTime: TimeInterval {
@@ -21,6 +21,12 @@ class AVAudioPlayerModel: MusicPlayerModel {
     
     var duration: TimeInterval {
         return player.duration
+    }
+    
+    func play(contentOf url: URL) throws {
+        player = try AVAudioPlayer(contentsOf: url)
+        player.prepareToPlay()
+        player.play()
     }
     
     func stop() {
@@ -37,6 +43,7 @@ class AVAudioPlayerModel: MusicPlayerModel {
     }
     
     func play() {
+        player.prepareToPlay()
         player.play()
     }
 }

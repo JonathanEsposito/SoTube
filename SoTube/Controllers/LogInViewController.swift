@@ -8,8 +8,12 @@
 
 import UIKit
 
+// Declare MusicPlayer
+var musicPlayer = MusicPlayer()
+
 class LogInViewController: UIViewController {
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,7 +24,6 @@ class LogInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
