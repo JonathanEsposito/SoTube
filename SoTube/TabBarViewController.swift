@@ -216,14 +216,12 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         
         regularConstraints.append(contentsOf: [
             musicProgressView.leadingAnchor.constraint(equalTo: self.rightTabBar.leadingAnchor, constant: 20),
-            musicProgressView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            musicProgressView.trailingAnchor.constraint(equalTo: self.rightTabBar.trailingAnchor, constant: 0),
             musicProgressView.bottomAnchor.constraint(equalTo: self.rightTabBar.bottomAnchor),
             musicProgressView.heightAnchor.constraint(equalToConstant: 5)
             ])
         
         updateAudioProgressView()
-        
-        setUpdater()
     }
     
     func updateMiniPlayer() {
@@ -247,6 +245,7 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
             }
         }
         self.traitCollectionDidChange(nil)
+        setUpdater()
     }
     
     func updateAudioProgressView() {
