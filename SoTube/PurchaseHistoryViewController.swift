@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PurchaseHistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource {
 
     
     var musicHistory = ["test", "test", "test", "test"]

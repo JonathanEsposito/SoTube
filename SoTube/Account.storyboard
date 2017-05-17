@@ -55,7 +55,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Change password"/>
                                 <connections>
-                                    <segue destination="GdX-mZ-7xY" kind="show" id="SJE-9G-yRL"/>
+                                    <segue destination="GdX-mZ-7xY" kind="presentation" id="SJE-9G-yRL"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="sfW-dH-KWz">
@@ -75,7 +75,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="paymentCell" id="bbo-kd-Ptm" customClass="PaymentCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="20" width="50" height="50"/>
+                                        <rect key="frame" x="10" y="18" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -281,7 +281,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Jle-zA-MTP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MaW-NR-9Sy" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AccountFirstNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="MaW-NR-9Sy" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jdm-SZ-OX0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

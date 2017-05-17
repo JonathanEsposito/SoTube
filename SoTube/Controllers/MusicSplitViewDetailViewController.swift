@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MusicSplitViewDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MusicSplitViewDetailViewController: TabBarViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     // MARK: - Properties
     var data = ["a"]
     let reuseIdentifier = "MusicCell"

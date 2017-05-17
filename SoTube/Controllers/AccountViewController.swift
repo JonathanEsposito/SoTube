@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, paymentDelegate {
+class AccountViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, paymentDelegate {
 
     let reuseIdentifier = "paymentCell"
     let paymentViewModel = PaymentViewModel()

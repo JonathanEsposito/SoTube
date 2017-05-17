@@ -8,9 +8,11 @@
 
 import UIKit
 
+var selectedTabBarItemWithTitle = "My music"
+
 class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDelegate {
     // MARK: - Properties
-    var selectedTabBarItemWithTitle = "My music"
+//    var selectedTabBarItemWithTitle = "My music"
     var updater: CADisplayLink! = nil
     
     let musicProgressView = UIProgressView()
@@ -93,18 +95,20 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         switch tabBarItemTitle {
         case "Account":
             print("Account")
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AccountVC") as? TabBarViewController {
-                print("will navigate")
-                
-                viewController.selectedTabBarItemWithTitle = tabBarItemTitle
-                UIApplication.shared.keyWindow?.rootViewController = viewController
-                self.dismiss(animated: true, completion: nil)
+            let storyboard = UIStoryboard(name: "Account", bundle: nil)
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "AccountFirstNavigationController") as? UINavigationController else {
+                print("Couldn't find account navigation controller")
+                return
             }
+            selectedTabBarItemWithTitle = tabBarItemTitle
+            UIApplication.shared.keyWindow?.rootViewController = navigationController
+            self.dismiss(animated: true, completion: nil)
         case "My music":
             print("My music")
-            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AlbumsVC") as? TabBarViewController {
+            let storyboard = UIStoryboard(name: "MusicViews", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(withIdentifier: "AlbumsVC") as? TabBarViewController {
                 if selectedTabBarItemWithTitle != tabBar.selectedItem?.title {
-                    viewController.selectedTabBarItemWithTitle = tabBarItemTitle
+                    selectedTabBarItemWithTitle = tabBarItemTitle
                     UIApplication.shared.keyWindow?.rootViewController = viewController
                     self.dismiss(animated: true, completion: nil)
                 }
@@ -136,11 +140,6 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         // Autolayout: Set navigationbar to top of view
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         
-//        NSLayoutConstraint(item: tabBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: tabBar, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 200).isActive = true
-//        NSLayoutConstraint(item: tabBar, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: tabBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 50.0).isActive = true
-        
         tabBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         tabBar.widthAnchor.constraint(equalToConstant: 200).isActive = true
         tabBar.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -155,11 +154,6 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         // AutoLayout
         rightTabBar.translatesAutoresizingMaskIntoConstraints = false
         
-//        NSLayoutConstraint(item: leftTabBar, attribute: .leading, relatedBy: .equal, toItem: tabBar, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: leftTabBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: leftTabBar, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: leftTabBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 50.0).isActive = true
-        
         rightTabBar.leadingAnchor.constraint(equalTo: tabBar.trailingAnchor).isActive = true
         rightTabBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         rightTabBar.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -173,7 +167,7 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         tabBar.delegate = weakSelf
         
         // select right tab bar item
-        let selectedTab = tabBar.items!.filter({ $0.title == self.selectedTabBarItemWithTitle })
+        let selectedTab = tabBar.items!.filter({ $0.title == selectedTabBarItemWithTitle })
         tabBar.selectedItem = selectedTab.first
     }
     
@@ -189,11 +183,6 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         
         // Autolayout
         miniPlayer.translatesAutoresizingMaskIntoConstraints = false
-        
-//        NSLayoutConstraint(item: player, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: player, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: player, attribute: .bottom, relatedBy: .equal, toItem: bottomLayoutGuide, attribute: .top, multiplier: 1.0, constant: -50.0).isActive = true
-//        NSLayoutConstraint(item: player, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 44.0).isActive = true
         
         compactConstraints.append(contentsOf: [
             miniPlayer.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -214,14 +203,8 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         musicProgressView.setProgress(0, animated: false)
         self.view.insertSubview(musicProgressView, aboveSubview: miniPlayer)
         
-        
         // AutoLayout
         musicProgressView.translatesAutoresizingMaskIntoConstraints = false
-        
-//        NSLayoutConstraint(item: musicProgressView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: musicProgressView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
-//        NSLayoutConstraint(item: musicProgressView, attribute: .bottom, relatedBy: .equal, toItem: bottomLayoutGuide, attribute: .top, multiplier: 1.0, constant: -50.0).isActive = true
-//        NSLayoutConstraint(item: musicProgressView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 2.0).isActive = true
         
         compactConstraints.append(contentsOf: [
             musicProgressView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -233,7 +216,6 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         regularConstraints.append(contentsOf: [
             musicProgressView.leadingAnchor.constraint(equalTo: self.rightTabBar.leadingAnchor, constant: 20),
             musicProgressView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-//            musicProgressView.topAnchor.constraint(equalTo: self.rightTabBar.topAnchor, constant: 0),
             musicProgressView.bottomAnchor.constraint(equalTo: self.rightTabBar.bottomAnchor),
             musicProgressView.heightAnchor.constraint(equalToConstant: 5)
             ])
