@@ -198,10 +198,10 @@
                                                     <exclude reference="xXV-qg-yJj"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="V3i-nT-MoZ"/>
                                                     <exclude reference="Bpu-S3-Nx9"/>
                                                     <exclude reference="JtE-mb-Ids"/>
                                                     <exclude reference="XYS-qy-rfb"/>
-                                                    <exclude reference="V3i-nT-MoZ"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -209,10 +209,10 @@
                                                     <exclude reference="A8n-vb-seN"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="Bpu-S3-Nx9"/>
-                                                    <exclude reference="Vog-lo-J0F"/>
                                                     <exclude reference="Hws-N6-G1J"/>
                                                     <exclude reference="nUQ-bw-B5b"/>
+                                                    <include reference="Bpu-S3-Nx9"/>
+                                                    <exclude reference="Vog-lo-J0F"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
@@ -220,11 +220,11 @@
                                                     <include reference="xXV-qg-yJj"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="V3i-nT-MoZ"/>
+                                                    <exclude reference="nUQ-bw-B5b"/>
                                                     <exclude reference="Bpu-S3-Nx9"/>
                                                     <include reference="JtE-mb-Ids"/>
                                                     <include reference="XYS-qy-rfb"/>
-                                                    <include reference="V3i-nT-MoZ"/>
-                                                    <exclude reference="nUQ-bw-B5b"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

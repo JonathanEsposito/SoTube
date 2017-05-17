@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		179F5B7FC5530639808E0596 /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */; };
 		22AEF9D662FE869E806435F1 /* Pods_SoTubeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE00E31D6BDA723D74E74335 /* Pods_SoTubeUITests.framework */; };
 		2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F662C1EC077E60019034F /* LogInViewController.swift */; };
 		2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */; };
@@ -29,7 +30,6 @@
 		2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */; };
 		2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */; };
 		486AD1AADA1121E7657201DB /* Pods_SoTubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */; };
-		8DD367DE4ADB1638B8C1254D /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */; };
 		A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03227E11ECAF7060041197B /* MinimizedPlayer.swift */; };
 		A03227E91ECB0D980041197B /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03227E31ECB0D980041197B /* 1.mp3 */; };
 		A03227EA1ECB0D980041197B /* 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03227E41ECB0D980041197B /* 2.mp3 */; };
@@ -147,7 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DD367DE4ADB1638B8C1254D /* Pods_SoTube.framework in Frameworks */,
+				179F5B7FC5530639808E0596 /* Pods_SoTube.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
