@@ -9,35 +9,42 @@
 import UIKit
 
 class MusicCollectionViewController: MyMusicTabBarViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    // MARK: - Properties
+    @IBOutlet weak var albumsCollectionViewFlowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var albumsCollectionView: UICollectionView!
+    @IBOutlet weak var albumsCollectionViewFooter: UICollectionReusableView!
+    
     
     var data = ["a"]
-    let reuseIdentifier = "MusicCell"
     
-    
-    @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
-    @IBOutlet weak var musicCollectionView: UICollectionView!
-    
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    
     }
     
+    // MARK: - Constraints Size Classes
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateFooterHeight()
+    }
+    
+    // MARK: - Collection viewDidLoad
+    // MARK: DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return 20//data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicCell", for: indexPath)
         
         return cell
     }
     
+    // MARK: DelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
         let availableWidth = collectionView.frame.width
         var widthPerItem: CGFloat
@@ -46,7 +53,7 @@ class MusicCollectionViewController: MyMusicTabBarViewController, UICollectionVi
         if availableWidth <= 375 {
             //For iPhone 7 or smaller
             let itemsPerRow: CGFloat = 2
-            widthPerItem = availableWidth / itemsPerRow - collectionViewFlowLayout.sectionInset.left - collectionViewFlowLayout.minimumInteritemSpacing / 2
+            widthPerItem = availableWidth / itemsPerRow - albumsCollectionViewFlowLayout.sectionInset.left - albumsCollectionViewFlowLayout.minimumInteritemSpacing / 2
         } else {
             //For anything bigger than iPhone 7
             //107.5 because we want to fit 3 into an iPhone 7+ screen
@@ -57,4 +64,26 @@ class MusicCollectionViewController: MyMusicTabBarViewController, UICollectionVi
         return CGSize(width: widthPerItem, height: heightPerItem)
     }
     
+    // MARK: - Private Methods
+    private func updateFooterHeight() {
+        let newHeight: CGFloat
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            if musicPlayer.hasSong {
+                newHeight = 94
+            } else {
+                newHeight = 50
+            }
+        } else {
+            newHeight = 50
+        }
+        
+        albumsCollectionViewFlowLayout.footerReferenceSize.height = newHeight
+        
+        // Reset tableview contentsize height
+//        let lastTableViewSubviewYPosition = albumsCollectionViewFooter.frame.origin.y
+//        let lastTableViewSubviewHeight = albumsCollectionViewFooter.bounds.height
+//        let newHeight = lastTableViewSubviewYPosition + lastTableViewSubviewHeight
+//        albumsCollectionView.contentSize = CGSize(width: albumsCollectionView.contentSize.width, height: newHeight)
+//        albumsCollectionView.contentSize.height = 300
+    }
 }

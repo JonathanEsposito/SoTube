@@ -84,12 +84,6 @@
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <color key="barTintColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </toolbar>
@@ -191,7 +185,6 @@
                             <constraint firstAttribute="trailing" secondItem="TJk-e7-Ha5" secondAttribute="trailing" id="VTx-hW-ceJ"/>
                             <constraint firstItem="PDX-jz-Z4f" firstAttribute="top" secondItem="ONu-Tk-Emi" secondAttribute="bottom" constant="-37" id="YPw-mP-uUW"/>
                             <constraint firstAttribute="trailing" secondItem="PDX-jz-Z4f" secondAttribute="trailing" id="hzk-ee-STU"/>
-                            <constraint firstItem="jxm-SJ-fSl" firstAttribute="top" secondItem="1Dr-hY-BVO" secondAttribute="bottom" constant="5" id="img-jk-4Ul"/>
                             <constraint firstItem="jxm-SJ-fSl" firstAttribute="centerY" secondItem="PDX-jz-Z4f" secondAttribute="bottom" id="kYn-cI-whH"/>
                             <constraint firstItem="YYy-hP-Jqb" firstAttribute="centerX" secondItem="PDX-jz-Z4f" secondAttribute="centerX" id="pFa-TF-tCm"/>
                             <constraint firstItem="PDX-jz-Z4f" firstAttribute="top" secondItem="adb-DT-R9F" secondAttribute="bottom" constant="-20" id="sBP-gd-dhS"/>
@@ -207,7 +200,6 @@
                                 <exclude reference="6Qa-tF-4iS"/>
                                 <exclude reference="1Up-hL-hLn"/>
                                 <exclude reference="UwI-px-DVB"/>
-                                <exclude reference="img-jk-4Ul"/>
                                 <exclude reference="54M-TK-vJf"/>
                                 <exclude reference="BJS-jZ-GLK"/>
                             </mask>
@@ -219,7 +211,6 @@
                                 <include reference="1Up-hL-hLn"/>
                                 <exclude reference="Aq2-Yr-qWa"/>
                                 <include reference="UwI-px-DVB"/>
-                                <exclude reference="img-jk-4Ul"/>
                                 <exclude reference="kYn-cI-whH"/>
                                 <include reference="54M-TK-vJf"/>
                                 <include reference="BJS-jZ-GLK"/>

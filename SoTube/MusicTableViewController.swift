@@ -12,6 +12,8 @@ class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate
     // MARK: - Properties
     let reuseIdentifier = "MusicCell"
     let dummmyData = ["a", "b", "c", "d"]
+    @IBOutlet weak var tableFooterView: UIView!
+    @IBOutlet weak var songTableView: UITableView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -24,12 +26,38 @@ class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateFooterHeight()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let headerView = songTableView.tableFooterView {
+            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            var headerFrame = headerView.frame
+            
+            //Comparison necessary to avoid infinite loop
+            if height != headerFrame.size.height {
+                headerFrame.size.height = height
+                headerView.frame = headerFrame
+                songTableView.tableFooterView = headerView
+            }
+        }
+    }
+    
+    // MARK: - Constraints Size Classes
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateFooterHeight()
+    }
     
     // MARK: - TableView
     // MARK: DataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,24 +66,33 @@ class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
-        
+        print("cell created")
         return cell
     }
     
     // MARK: Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
         let path: String! = Bundle.main.resourcePath?.appending("/\(indexPath.row).mp3")
         let songURL = URL(fileURLWithPath: path)
         musicPlayer.play(contentOf: songURL)
         
-//        let storyboard = UIStoryboard(name: "MusicPlayer", bundle: nil)
-//        guard let controller = storyboard.instantiateViewController(withIdentifier: "MusicPlayer") as? MusicPlayerViewController else {
-//            print("MusicPlayer not found")
-//            return
-//        }
-//        present(controller, animated: true, completion: nil)
-        self.setupMinimizedPlayer()
+        self.updateMiniPlayer()
+
+        updateFooterHeight()
+        print(musicPlayer.hasSong)
     }
+    
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return
+//    }
+//    
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        return
+//    }
+    
+    
+    
     
     /*
      // Override to support conditional editing of the table view.
@@ -102,5 +139,50 @@ class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate
         if let musicCollectionVC = destinationvc as? MusicCollectionViewController {
             musicCollectionVC.data = self.dummmyData
         }
+    }
+    
+    // Private Methods
+    private func updateFooterHeight() {
+        let height: CGFloat
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            if musicPlayer.hasSong {
+                height = 94
+            } else {
+                height = 50
+            }
+        } else {
+            height = 50
+        }
+        songTableView.tableFooterView?.frame.size.height = height
+        
+        // Reset tableview contentsize height
+        let lastTableViewSubviewYPosition = songTableView.tableFooterView?.frame.origin.y
+        let lastTableViewSubviewHeight = songTableView.tableFooterView?.bounds.height
+        let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
+        songTableView.contentSize = CGSize(width: songTableView.contentSize.width, height: newHeight)
+        
+        
+//        tableFooterView.frame.size.height = height
+        
+//        print(songTableView.tableFooterView)
+//        songTableView.tableFooterView?.heightAnchor.constraint(equalToConstant: 94)
+//        songTableView.tableFooterView?.backgroundColor = UIColor.green
+////        songTableView.
+//        songTableView.setNeedsLayout()
+//        songTableView.tableFooterView?.setNeedsLayout()
+//        songTableView.layoutIfNeeded()
+//        songTableView.tableFooterView?.layoutIfNeeded()
+//        songTableView.subviews.last
+        
+//        tableFooterView.setNeedsLayout()
+//        tableFooterView.layoutIfNeeded()
+//        let rect = CGRect(x: tableFooterView.frame.origin.x, y: tableFooterView.frame.origin.y, width: tableFooterView.bounds.width
+//            , height: height)
+//        print(tableFooterView.bounds.height)
+        
+//        tableFooterView.draw(rect)
+//        songTableView.reloadData()
+//        songTableView.rectForRow(at: IndexPath(row: 0, section: 1))
+        
     }
 }

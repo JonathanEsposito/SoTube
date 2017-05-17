@@ -18,10 +18,11 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: - Constraints Size Classes
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateFooterHeight()
     }
     
     // MARK: - TableView
@@ -74,6 +75,27 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
             }
         }
         return nil
+    }
+    
+    // MARK: - Private Methods
+    private func updateFooterHeight() {
+        let height: CGFloat
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            if musicPlayer.hasSong {
+                height = 94
+            } else {
+                height = 50
+            }
+        } else {
+            height = 50
+        }
+        musicTableView.tableFooterView?.frame.size.height = height
+        
+        // Reset tableview contentsize height
+//        let lastTableViewSubviewYPosition = musicTableView.tableFooterView?.frame.origin.y
+//        let lastTableViewSubviewHeight = musicTableView.tableFooterView?.bounds.height
+//        let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
+//        musicTableView.contentSize = CGSize(width: musicTableView.contentSize.width, height: newHeight)
     }
 
 }
