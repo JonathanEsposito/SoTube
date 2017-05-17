@@ -13,7 +13,7 @@ class MusicSplitViewDetailViewController: UIViewController, UICollectionViewDele
     var data = ["a"]
     let reuseIdentifier = "MusicCell"
 
-    @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var musicCollectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var musicCollectionView: UICollectionView!
     
     //MARK: - Lifecycle
@@ -25,6 +25,12 @@ class MusicSplitViewDetailViewController: UIViewController, UICollectionViewDele
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
+    // MARK: - Constraints Size Classes
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateFooterHeight()
+    }
+    
     // MARK: - CollectionView
     // MARK: DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -32,7 +38,7 @@ class MusicSplitViewDetailViewController: UIViewController, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -50,7 +56,7 @@ class MusicSplitViewDetailViewController: UIViewController, UICollectionViewDele
         if availableWidth <= 375 {
             //For iPhone 7 or smaller
             let itemsPerRow: CGFloat = 2
-            widthPerItem = availableWidth / itemsPerRow - collectionViewFlowLayout.sectionInset.left - collectionViewFlowLayout.minimumInteritemSpacing / 2
+            widthPerItem = availableWidth / itemsPerRow - musicCollectionViewFlowLayout.sectionInset.left - musicCollectionViewFlowLayout.minimumInteritemSpacing / 2
         } else {
             //For anything bigger than iPhone 7
             //107.5 because we want to fit 3 into an iPhone 7+ screen
@@ -59,5 +65,21 @@ class MusicSplitViewDetailViewController: UIViewController, UICollectionViewDele
         
         heightPerItem = widthPerItem + 50
         return CGSize(width: widthPerItem, height: heightPerItem)
+    }
+    
+    // MARK: - Private Methods
+    private func updateFooterHeight() {
+        let newHeight: CGFloat
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            if musicPlayer.hasSong {
+                newHeight = 94
+            } else {
+                newHeight = 50
+            }
+        } else {
+            newHeight = 50
+        }
+        
+        musicCollectionViewFlowLayout.footerReferenceSize.height = newHeight
     }
 }

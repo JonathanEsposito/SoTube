@@ -205,10 +205,15 @@ class MyMusicTabBarViewController: TabBarViewController {
         // Autolayout: Set navigationbar to top of view
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint(item: navigationBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: navigationBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
-        NSLayoutConstraint(item: navigationBar, attribute: .top, relatedBy: .equal, toItem: topLayoutGuide, attribute: .bottom, multiplier: 1.0, constant: -20.0).isActive = true
-        NSLayoutConstraint(item: navigationBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 64.0).isActive = true
+//        NSLayoutConstraint(item: navigationBar, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0.0).isActive = true
+//        NSLayoutConstraint(item: navigationBar, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0.0).isActive = true
+//        NSLayoutConstraint(item: navigationBar, attribute: .top, relatedBy: .equal, toItem: topLayoutGuide, attribute: .bottom, multiplier: 1.0, constant: -20.0).isActive = true
+//        NSLayoutConstraint(item: navigationBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 64.0).isActive = true
+        
+        navigationBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        navigationBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        navigationBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        navigationBar.heightAnchor.constraint(equalToConstant: 64).isActive = true
         
     }
 }

@@ -18,10 +18,11 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    // MARK: - Constraints Size Classes
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateFooterHeight()
     }
     
     // MARK: - TableView
@@ -31,30 +32,19 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
             return 20
-        }
-        return 1 // for static content return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell!
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MusicCell", for: indexPath) as? MusicSplitViewMasterTableViewCell else {
+            fatalError("not the right Cell")
+        }
         
-        if indexPath.section == 0 {
-            guard let musicCell = tableView.dequeueReusableCell(withIdentifier: "MusicCell", for: indexPath) as? MusicSplitViewMasterTableViewCell else {
-                fatalError("not the right Cell")
-            }
-            
-            if self.title == "Genres" {
-                musicCell.nameLabel.text = "Genre Name"
-            } else if self.title == "Artists" {
-                musicCell.nameLabel.text = "Artist Name"
-            }
-            
-            cell = musicCell
-            
-        } else if indexPath.section == 1 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "StacticCell", for: indexPath)
+        if self.title == "Genres" {
+            cell.nameLabel.text = "Genre Name"
+        } else if self.title == "Artists" {
+            cell.nameLabel.text = "Artist Name"
         }
         
         return cell
@@ -85,6 +75,27 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
             }
         }
         return nil
+    }
+    
+    // MARK: - Private Methods
+    private func updateFooterHeight() {
+        let height: CGFloat
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            if musicPlayer.hasSong {
+                height = 94
+            } else {
+                height = 50
+            }
+        } else {
+            height = 50
+        }
+        musicTableView.tableFooterView?.frame.size.height = height
+        
+        // Reset tableview contentsize height
+//        let lastTableViewSubviewYPosition = musicTableView.tableFooterView?.frame.origin.y
+//        let lastTableViewSubviewHeight = musicTableView.tableFooterView?.bounds.height
+//        let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
+//        musicTableView.contentSize = CGSize(width: musicTableView.contentSize.width, height: newHeight)
     }
 
 }
