@@ -25,18 +25,10 @@
 		2FC986BA1ECB025E00B037CE /* PurchaseHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */; };
 		2FC986BC1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */; };
 		2FC986C01ECB2B9500B037CE /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986BF1ECB2B9500B037CE /* ChangePasswordViewController.swift */; };
-		2FCB097B1ECC23BA0058849E /* PayPalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB09791ECC23BA0058849E /* PayPalModel.swift */; };
-		2FCB097C1ECC23BA0058849E /* PayPalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB097A1ECC23BA0058849E /* PayPalViewModel.swift */; };
 		2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */; };
 		2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */; };
 		486AD1AADA1121E7657201DB /* Pods_SoTubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */; };
 		A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03227E11ECAF7060041197B /* MinimizedPlayer.swift */; };
-		A03227E91ECB0D980041197B /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03227E31ECB0D980041197B /* 1.mp3 */; };
-		A03227EA1ECB0D980041197B /* 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03227E41ECB0D980041197B /* 2.mp3 */; };
-		A03227EB1ECB0D980041197B /* 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03227E51ECB0D980041197B /* 3.mp3 */; };
-		A03227EC1ECB0D980041197B /* 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03227E61ECB0D980041197B /* 4.mp3 */; };
-		A03227ED1ECB0D980041197B /* 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03227E71ECB0D980041197B /* 5.mp3 */; };
-		A03227EE1ECB0D980041197B /* 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A03227E81ECB0D980041197B /* 6.mp3 */; };
 		A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */; };
 		A03E69911EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E69901EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift */; };
 		A05F929B1EC48B4D00F62432 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F929A1EC48B4D00F62432 /* TabBarViewController.swift */; };
@@ -51,12 +43,20 @@
 		A09477CE1EBCA03A00B62278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */; };
 		A09477D91EBCA03A00B62278 /* SoTubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09477D81EBCA03A00B62278 /* SoTubeTests.swift */; };
 		A09477E41EBCA03A00B62278 /* SoTubeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09477E31EBCA03A00B62278 /* SoTubeUITests.swift */; };
+		A0A29F5A1ECC2B1000E06D95 /* AVAudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F591ECC2B1000E06D95 /* AVAudioPlayerModel.swift */; };
+		A0A29F5C1ECC2B1E00E06D95 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F5B1ECC2B1E00E06D95 /* MusicPlayer.swift */; };
+		A0A29F5F1ECC2B5800E06D95 /* PayPalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F5D1ECC2B5800E06D95 /* PayPalModel.swift */; };
+		A0A29F601ECC2B5800E06D95 /* PayPalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F5E1ECC2B5800E06D95 /* PayPalViewModel.swift */; };
+		A0A29F681ECC2BA800E06D95 /* 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F611ECC2BA800E06D95 /* 0.mp3 */; };
+		A0A29F691ECC2BA800E06D95 /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F621ECC2BA800E06D95 /* 1.mp3 */; };
+		A0A29F6A1ECC2BA800E06D95 /* 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F631ECC2BA800E06D95 /* 2.mp3 */; };
+		A0A29F6B1ECC2BA800E06D95 /* 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F641ECC2BA800E06D95 /* 3.mp3 */; };
+		A0A29F6C1ECC2BA800E06D95 /* 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F651ECC2BA800E06D95 /* 4.mp3 */; };
+		A0A29F6D1ECC2BA800E06D95 /* 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F661ECC2BA800E06D95 /* 5.mp3 */; };
+		A0A29F6E1ECC2BA800E06D95 /* 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F671ECC2BA800E06D95 /* 6.mp3 */; };
 		A0ADCB7A1EBCA4C800C82CC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0ADCB791EBCA4C800C82CC9 /* GoogleService-Info.plist */; };
 		A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */; };
 		A0D814D81EC970B90094DEC7 /* UIViewLoadingFromXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */; };
-		A0D814DA1EC97F320094DEC7 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D814D91EC97F320094DEC7 /* MusicPlayer.swift */; };
-		A0D814DD1EC9806F0094DEC7 /* AVAudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D814DC1EC9806F0094DEC7 /* AVAudioPlayerModel.swift */; };
-		A0D814F91EC9BF990094DEC7 /* 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0D814F81EC9BF990094DEC7 /* 0.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,20 +94,12 @@
 		2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryViewController.swift; sourceTree = "<group>"; };
 		2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		2FC986BF1ECB2B9500B037CE /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
-		2FCB09791ECC23BA0058849E /* PayPalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPalModel.swift; sourceTree = "<group>"; };
-		2FCB097A1ECC23BA0058849E /* PayPalViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayPalViewModel.swift; sourceTree = "<group>"; };
 		2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Payment.storyboard; sourceTree = "<group>"; };
 		2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentViewController.swift; path = Controllers/PaymentViewController.swift; sourceTree = "<group>"; };
 		2FEC9C911EC9C75A00324AE1 /* SoTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoTube-Bridging-Header.h"; sourceTree = "<group>"; };
 		606381C2A33886FCBAE26F58 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 		726495C053F085FDC806A67F /* Pods-SoTubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeTests/Pods-SoTubeTests.release.xcconfig"; sourceTree = "<group>"; };
 		A03227E11ECAF7060041197B /* MinimizedPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimizedPlayer.swift; sourceTree = "<group>"; };
-		A03227E31ECB0D980041197B /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
-		A03227E41ECB0D980041197B /* 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 2.mp3; sourceTree = "<group>"; };
-		A03227E51ECB0D980041197B /* 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3.mp3; sourceTree = "<group>"; };
-		A03227E61ECB0D980041197B /* 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 4.mp3; sourceTree = "<group>"; };
-		A03227E71ECB0D980041197B /* 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 5.mp3; sourceTree = "<group>"; };
-		A03227E81ECB0D980041197B /* 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 6.mp3; sourceTree = "<group>"; };
 		A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MinimizedPlayer.xib; path = Views/MinimizedPlayer.xib; sourceTree = "<group>"; };
 		A03E69901EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMusicTabBarViewController.swift; sourceTree = "<group>"; };
 		A05F929A1EC48B4D00F62432 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -128,12 +120,20 @@
 		A09477DF1EBCA03A00B62278 /* SoTubeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoTubeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09477E31EBCA03A00B62278 /* SoTubeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoTubeUITests.swift; sourceTree = "<group>"; };
 		A09477E51EBCA03A00B62278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0A29F591ECC2B1000E06D95 /* AVAudioPlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVAudioPlayerModel.swift; path = Models/MusicPlayer/AVAudioPlayerModel.swift; sourceTree = "<group>"; };
+		A0A29F5B1ECC2B1E00E06D95 /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicPlayer.swift; path = Models/MusicPlayer/MusicPlayer.swift; sourceTree = "<group>"; };
+		A0A29F5D1ECC2B5800E06D95 /* PayPalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PayPalModel.swift; path = Models/PaymentModel/PayPalModel.swift; sourceTree = "<group>"; };
+		A0A29F5E1ECC2B5800E06D95 /* PayPalViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PayPalViewModel.swift; path = Models/PaymentModel/PayPalViewModel.swift; sourceTree = "<group>"; };
+		A0A29F611ECC2BA800E06D95 /* 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 0.mp3; path = Resources/0.mp3; sourceTree = "<group>"; };
+		A0A29F621ECC2BA800E06D95 /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 1.mp3; path = Resources/1.mp3; sourceTree = "<group>"; };
+		A0A29F631ECC2BA800E06D95 /* 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 2.mp3; path = Resources/2.mp3; sourceTree = "<group>"; };
+		A0A29F641ECC2BA800E06D95 /* 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 3.mp3; path = Resources/3.mp3; sourceTree = "<group>"; };
+		A0A29F651ECC2BA800E06D95 /* 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 4.mp3; path = Resources/4.mp3; sourceTree = "<group>"; };
+		A0A29F661ECC2BA800E06D95 /* 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 5.mp3; path = Resources/5.mp3; sourceTree = "<group>"; };
+		A0A29F671ECC2BA800E06D95 /* 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 6.mp3; path = Resources/6.mp3; sourceTree = "<group>"; };
 		A0ADCB791EBCA4C800C82CC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = Extentions/UIViewExtensions.swift; sourceTree = "<group>"; };
 		A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewLoadingFromXib.swift; path = Extentions/UIViewLoadingFromXib.swift; sourceTree = "<group>"; };
-		A0D814D91EC97F320094DEC7 /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
-		A0D814DC1EC9806F0094DEC7 /* AVAudioPlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVAudioPlayerModel.swift; path = Model/AVAudioPlayerModel.swift; sourceTree = "<group>"; };
-		A0D814F81EC9BF990094DEC7 /* 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 0.mp3; sourceTree = "<group>"; };
 		BB40F82D7C5E0F469983EEB9 /* Pods-SoTubeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeUITests/Pods-SoTubeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE00E31D6BDA723D74E74335 /* Pods_SoTubeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTubeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,22 +174,11 @@
 			isa = PBXGroup;
 			children = (
 				2FEC9C911EC9C75A00324AE1 /* SoTube-Bridging-Header.h */,
-				2F0F662C1EC077E60019034F /* LogInViewController.swift */,
-				2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */,
-				2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */,
-				2FC986AF1ECAD76000B037CE /* AccountViewController.swift */,
-				2FC986BF1ECB2B9500B037CE /* ChangePasswordViewController.swift */,
-				2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */,
-				2FC986B51ECAE1DB00B037CE /* PaymentCollectionViewCell.swift */,
-				2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */,
-				2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */,
-				2F0F66D21EC1CABB0019034F /* DisplayMusicControllers */,
-				A05F929C1EC48B5700F62432 /* Navigation */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		2F0F66D21EC1CABB0019034F /* DisplayMusicControllers */ = {
+		2F0F66D21EC1CABB0019034F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */,
@@ -200,29 +189,22 @@
 				2F0F66CA1EC1CA400019034F /* MusicCollectionViewCell.swift */,
 				2F0F66D31EC1CB1C0019034F /* MusicTableViewController.swift */,
 				2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */,
-				A05F92A81EC58E9A00F62432 /* MusicPlayerViewController.swift */,
 			);
-			name = DisplayMusicControllers;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
-		2F0F66D91EC1CC320019034F /* Storyboards */ = {
+		2F0F66D91EC1CC320019034F /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
-				A09477C71EBCA03A00B62278 /* Main.storyboard */,
-				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
-				2F7029931EC31ACC002B8395 /* Album.storyboard */,
-				2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */,
-				2FC986B71ECAE82A00B037CE /* Account.storyboard */,
-				A05F929F1EC4ADCD00F62432 /* MusicPlayer.storyboard */,
+				A0A29F751ECC2D0600E06D95 /* Storyboards */,
+				A0A29F781ECC2DA300E06D95 /* Controllers */,
 			);
-			name = Storyboards;
+			name = Main;
 			sourceTree = "<group>";
 		};
 		2FEC9C891EC9C2F600324AE1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A0D814FA1EC9C31A0094DEC7 /* MusicPlayer */,
 				2FEC9C8A1EC9C30A00324AE1 /* PaymentModel */,
 			);
 			name = Models;
@@ -231,8 +213,8 @@
 		2FEC9C8A1EC9C30A00324AE1 /* PaymentModel */ = {
 			isa = PBXGroup;
 			children = (
-				2FCB09791ECC23BA0058849E /* PayPalModel.swift */,
-				2FCB097A1ECC23BA0058849E /* PayPalViewModel.swift */,
+				A0A29F5D1ECC2B5800E06D95 /* PayPalModel.swift */,
+				A0A29F5E1ECC2B5800E06D95 /* PayPalViewModel.swift */,
 			);
 			name = PaymentModel;
 			sourceTree = "<group>";
@@ -272,13 +254,13 @@
 		A03E69A71EC1DCCF00F12FA9 /* Recourses */ = {
 			isa = PBXGroup;
 			children = (
-				A03227E31ECB0D980041197B /* 1.mp3 */,
-				A03227E41ECB0D980041197B /* 2.mp3 */,
-				A03227E51ECB0D980041197B /* 3.mp3 */,
-				A03227E61ECB0D980041197B /* 4.mp3 */,
-				A03227E71ECB0D980041197B /* 5.mp3 */,
-				A03227E81ECB0D980041197B /* 6.mp3 */,
-				A0D814F81EC9BF990094DEC7 /* 0.mp3 */,
+				A0A29F611ECC2BA800E06D95 /* 0.mp3 */,
+				A0A29F621ECC2BA800E06D95 /* 1.mp3 */,
+				A0A29F631ECC2BA800E06D95 /* 2.mp3 */,
+				A0A29F641ECC2BA800E06D95 /* 3.mp3 */,
+				A0A29F651ECC2BA800E06D95 /* 4.mp3 */,
+				A0A29F661ECC2BA800E06D95 /* 5.mp3 */,
+				A0A29F671ECC2BA800E06D95 /* 6.mp3 */,
 				A09477CA1EBCA03A00B62278 /* Assets.xcassets */,
 			);
 			name = Recourses;
@@ -318,8 +300,13 @@
 		A09477C21EBCA03A00B62278 /* SoTube */ = {
 			isa = PBXGroup;
 			children = (
-				2F0F66D91EC1CC320019034F /* Storyboards */,
+				2F0F66D91EC1CC320019034F /* Main */,
+				A0A29F6F1ECC2BDF00E06D95 /* MusicViews */,
+				A0A29F701ECC2C5000E06D95 /* MusicPlayer */,
+				A0A29F741ECC2CCE00E06D95 /* Account */,
+				A0A29F761ECC2D6A00E06D95 /* Payment */,
 				2F0F66301EC0781B0019034F /* Controllers */,
+				A05F929C1EC48B5700F62432 /* Navigation */,
 				2FEC9C891EC9C2F600324AE1 /* Models */,
 				A03E69931EC1BE5500F12FA9 /* Views */,
 				A0ADCB811EC07C6A00C82CC9 /* Extensions */,
@@ -347,6 +334,123 @@
 			path = SoTubeUITests;
 			sourceTree = "<group>";
 		};
+		A0A29F6F1ECC2BDF00E06D95 /* MusicViews */ = {
+			isa = PBXGroup;
+			children = (
+				A0A29F731ECC2CB000E06D95 /* Storyboards */,
+				2F0F66D21EC1CABB0019034F /* Controllers */,
+			);
+			name = MusicViews;
+			sourceTree = "<group>";
+		};
+		A0A29F701ECC2C5000E06D95 /* MusicPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				A0A29F711ECC2C8C00E06D95 /* Storyboards */,
+				A0A29F721ECC2CA100E06D95 /* Controllers */,
+				A0D814FA1EC9C31A0094DEC7 /* Models */,
+			);
+			name = MusicPlayer;
+			sourceTree = "<group>";
+		};
+		A0A29F711ECC2C8C00E06D95 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A05F929F1EC4ADCD00F62432 /* MusicPlayer.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		A0A29F721ECC2CA100E06D95 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A05F92A81EC58E9A00F62432 /* MusicPlayerViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A0A29F731ECC2CB000E06D95 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
+				2F7029931EC31ACC002B8395 /* Album.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		A0A29F741ECC2CCE00E06D95 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				A0A29F771ECC2D8400E06D95 /* Storyboards */,
+				A0A29F791ECC2DD400E06D95 /* Controllers */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		A0A29F751ECC2D0600E06D95 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
+				A09477C71EBCA03A00B62278 /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		A0A29F761ECC2D6A00E06D95 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				A0A29F7B1ECC2E6800E06D95 /* Storyboards */,
+				A0A29F7A1ECC2E5E00E06D95 /* Controllers */,
+			);
+			name = Payment;
+			sourceTree = "<group>";
+		};
+		A0A29F771ECC2D8400E06D95 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2FC986B71ECAE82A00B037CE /* Account.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		A0A29F781ECC2DA300E06D95 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2F0F662C1EC077E60019034F /* LogInViewController.swift */,
+				2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A0A29F791ECC2DD400E06D95 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */,
+				2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */,
+				2FC986AF1ECAD76000B037CE /* AccountViewController.swift */,
+				2FC986B51ECAE1DB00B037CE /* PaymentCollectionViewCell.swift */,
+				2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */,
+				2FC986BF1ECB2B9500B037CE /* ChangePasswordViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A0A29F7A1ECC2E5E00E06D95 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A0A29F7B1ECC2E6800E06D95 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		A0ADCB811EC07C6A00C82CC9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,13 +460,13 @@
 			name = Extensions;
 			sourceTree = "<group>";
 		};
-		A0D814FA1EC9C31A0094DEC7 /* MusicPlayer */ = {
+		A0D814FA1EC9C31A0094DEC7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A0D814DC1EC9806F0094DEC7 /* AVAudioPlayerModel.swift */,
-				A0D814D91EC97F320094DEC7 /* MusicPlayer.swift */,
+				A0A29F591ECC2B1000E06D95 /* AVAudioPlayerModel.swift */,
+				A0A29F5B1ECC2B1E00E06D95 /* MusicPlayer.swift */,
 			);
-			name = MusicPlayer;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		AB9BC1CBB75D52922E20C4DB /* Frameworks */ = {
@@ -492,22 +596,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0A29F691ECC2BA800E06D95 /* 1.mp3 in Resources */,
+				A0A29F681ECC2BA800E06D95 /* 0.mp3 in Resources */,
 				2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */,
-				A03227ED1ECB0D980041197B /* 5.mp3 in Resources */,
-				A03227EA1ECB0D980041197B /* 2.mp3 in Resources */,
+				A0A29F6C1ECC2BA800E06D95 /* 4.mp3 in Resources */,
+				A0A29F6A1ECC2BA800E06D95 /* 2.mp3 in Resources */,
 				2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */,
 				2FC986B81ECAE82A00B037CE /* Account.storyboard in Resources */,
 				A09477CE1EBCA03A00B62278 /* LaunchScreen.storyboard in Resources */,
+				A0A29F6D1ECC2BA800E06D95 /* 5.mp3 in Resources */,
 				A0ADCB7A1EBCA4C800C82CC9 /* GoogleService-Info.plist in Resources */,
-				A0D814F91EC9BF990094DEC7 /* 0.mp3 in Resources */,
-				A03227E91ECB0D980041197B /* 1.mp3 in Resources */,
-				A03227EC1ECB0D980041197B /* 4.mp3 in Resources */,
-				A03227EB1ECB0D980041197B /* 3.mp3 in Resources */,
-				A03227EE1ECB0D980041197B /* 6.mp3 in Resources */,
+				A0A29F6B1ECC2BA800E06D95 /* 3.mp3 in Resources */,
 				A05F92A11EC4ADCD00F62432 /* MusicPlayer.storyboard in Resources */,
 				A09477CB1EBCA03A00B62278 /* Assets.xcassets in Resources */,
 				A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */,
 				A09477C91EBCA03A00B62278 /* Main.storyboard in Resources */,
+				A0A29F6E1ECC2BA800E06D95 /* 6.mp3 in Resources */,
 				2F0F66DE1EC1CE3F0019034F /* MusicViews.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -673,21 +777,22 @@
 			files = (
 				2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */,
 				2FC986BC1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift in Sources */,
+				A0A29F5C1ECC2B1E00E06D95 /* MusicPlayer.swift in Sources */,
 				2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */,
 				2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */,
-				2FCB097B1ECC23BA0058849E /* PayPalModel.swift in Sources */,
+				A0A29F5A1ECC2B1000E06D95 /* AVAudioPlayerModel.swift in Sources */,
 				A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */,
 				2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */,
 				A05F929B1EC48B4D00F62432 /* TabBarViewController.swift in Sources */,
 				A05F92A71EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift in Sources */,
+				A0A29F5F1ECC2B5800E06D95 /* PayPalModel.swift in Sources */,
+				A0A29F601ECC2B5800E06D95 /* PayPalViewModel.swift in Sources */,
 				2FC986B61ECAE1DB00B037CE /* PaymentCollectionViewCell.swift in Sources */,
 				2F0F66321EC079340019034F /* RecoverPasswordViewController.swift in Sources */,
 				A05F92A91EC58E9A00F62432 /* MusicPlayerViewController.swift in Sources */,
-				A0D814DD1EC9806F0094DEC7 /* AVAudioPlayerModel.swift in Sources */,
 				2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */,
 				2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */,
 				A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */,
-				2FCB097C1ECC23BA0058849E /* PayPalViewModel.swift in Sources */,
 				A03E69911EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift in Sources */,
 				2FC986BA1ECB025E00B037CE /* PurchaseHistoryViewController.swift in Sources */,
 				2FC986B01ECAD76000B037CE /* AccountViewController.swift in Sources */,
@@ -695,7 +800,6 @@
 				2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */,
 				A0D814D81EC970B90094DEC7 /* UIViewLoadingFromXib.swift in Sources */,
 				A05F92A31EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift in Sources */,
-				A0D814DA1EC97F320094DEC7 /* MusicPlayer.swift in Sources */,
 				A05F92A51EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift in Sources */,
 				2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */,
 				2FC986C01ECB2B9500B037CE /* ChangePasswordViewController.swift in Sources */,
