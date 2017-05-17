@@ -106,13 +106,14 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         case "My music":
             print("My music")
             let storyboard = UIStoryboard(name: "MusicViews", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(withIdentifier: "AlbumsVC") as? TabBarViewController {
+            if let viewController = storyboard.instantiateViewController(withIdentifier: "AlbumsNavCont") as? UINavigationController {
                 if selectedTabBarItemWithTitle != tabBar.selectedItem?.title {
                     selectedTabBarItemWithTitle = tabBarItemTitle
                     UIApplication.shared.keyWindow?.rootViewController = viewController
                     self.dismiss(animated: true, completion: nil)
                 }
-            }
+            } else { print("no AlbumsNavCont") }
+            
         case "Store":
             print("Store")
             selectedTabBarItemWithTitle = tabBarItemTitle
@@ -127,9 +128,9 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         // Create tab bar
         tabBar = UITabBar(frame: CGRect(x: 0, y: self.view.bounds.height - 50, width: self.view.bounds.width, height: 50))
         
-        let tabOneBarItem = UITabBarItem(title: "Account", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(named: "selectedImage.png"))
-        let tabTwoBarItem = UITabBarItem(title: "My music", image: UIImage(named: "defaultImage2.png"), selectedImage: UIImage(named:"selectedImage2.png"))
-        let tabThreeBarItem = UITabBarItem(title: "Store", image: UIImage(named: "defaultImage3.png"), selectedImage: UIImage(named:"selectedImage3.png"))
+        let tabOneBarItem = UITabBarItem(title: "Account", image: UIImage(named: "accountButton"), selectedImage: UIImage(named: "accountButton"))
+        let tabTwoBarItem = UITabBarItem(title: "My music", image: UIImage(named: "musicButton"), selectedImage: UIImage(named:"musicButton"))
+        let tabThreeBarItem = UITabBarItem(title: "Store", image: UIImage(named: "shopButton"), selectedImage: UIImage(named:"shopButton"))
         
         // Add all tab bar items to our tab bar
         tabBar.setItems([tabOneBarItem, tabTwoBarItem, tabThreeBarItem], animated: false)

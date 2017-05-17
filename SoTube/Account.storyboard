@@ -55,7 +55,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Change password"/>
                                 <connections>
-                                    <segue destination="GdX-mZ-7xY" kind="presentation" id="SJE-9G-yRL"/>
+                                    <segue destination="GdX-mZ-7xY" kind="show" id="SJE-9G-yRL"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="sfW-dH-KWz">
