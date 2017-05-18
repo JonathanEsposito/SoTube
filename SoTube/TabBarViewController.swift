@@ -116,7 +116,11 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
             
         case "Store":
             print("Store")
+            let storyboard = UIStoryboard(name: "Store", bundle: nil)
+            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "storeNavCont") as? UINavigationController else { print("Couldn't find account navigation controller"); return }
             selectedTabBarItemWithTitle = tabBarItemTitle
+            UIApplication.shared.keyWindow?.rootViewController = navigationController
+            self.dismiss(animated: true, completion: nil)
         default:
             break
         }

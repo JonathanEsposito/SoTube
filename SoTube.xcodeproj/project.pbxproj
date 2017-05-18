@@ -54,6 +54,12 @@
 		A0A29F6C1ECC2BA800E06D95 /* 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F651ECC2BA800E06D95 /* 4.mp3 */; };
 		A0A29F6D1ECC2BA800E06D95 /* 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F661ECC2BA800E06D95 /* 5.mp3 */; };
 		A0A29F6E1ECC2BA800E06D95 /* 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F671ECC2BA800E06D95 /* 6.mp3 */; };
+		A0A29F971ECD92CD00E06D95 /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F961ECD92CD00E06D95 /* FirebaseModel.swift */; };
+		A0A29F9A1ECDB8E800E06D95 /* DatabaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F991ECDB8E800E06D95 /* DatabaseViewModel.swift */; };
+		A0A29F9D1ECDEAD100E06D95 /* Store.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F9C1ECDEAD100E06D95 /* Store.storyboard */; };
+		A0A29F9F1ECDEF9A00E06D95 /* StoreOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F9E1ECDEF9A00E06D95 /* StoreOverviewViewController.swift */; };
+		A0A29FA11ECDEFB100E06D95 /* StoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */; };
+		A0A29FA31ECDF71E00E06D95 /* StoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */; };
 		A0ADCB7A1EBCA4C800C82CC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0ADCB791EBCA4C800C82CC9 /* GoogleService-Info.plist */; };
 		A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */; };
 		A0D814D81EC970B90094DEC7 /* UIViewLoadingFromXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */; };
@@ -131,6 +137,12 @@
 		A0A29F651ECC2BA800E06D95 /* 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 4.mp3; path = Resources/4.mp3; sourceTree = "<group>"; };
 		A0A29F661ECC2BA800E06D95 /* 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 5.mp3; path = Resources/5.mp3; sourceTree = "<group>"; };
 		A0A29F671ECC2BA800E06D95 /* 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 6.mp3; path = Resources/6.mp3; sourceTree = "<group>"; };
+		A0A29F961ECD92CD00E06D95 /* FirebaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
+		A0A29F991ECDB8E800E06D95 /* DatabaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseViewModel.swift; sourceTree = "<group>"; };
+		A0A29F9C1ECDEAD100E06D95 /* Store.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Store.storyboard; sourceTree = "<group>"; };
+		A0A29F9E1ECDEF9A00E06D95 /* StoreOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreOverviewViewController.swift; path = Controllers/StoreOverviewViewController.swift; sourceTree = "<group>"; };
+		A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDetailViewController.swift; sourceTree = "<group>"; };
+		A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCollectionViewCell.swift; sourceTree = "<group>"; };
 		A0ADCB791EBCA4C800C82CC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = Extentions/UIViewExtensions.swift; sourceTree = "<group>"; };
 		A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewLoadingFromXib.swift; path = Extentions/UIViewLoadingFromXib.swift; sourceTree = "<group>"; };
@@ -205,6 +217,7 @@
 		2FEC9C891EC9C2F600324AE1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A0A29F981ECDB39D00E06D95 /* database */,
 				2FEC9C8A1EC9C30A00324AE1 /* PaymentModel */,
 			);
 			name = Models;
@@ -303,6 +316,7 @@
 				2F0F66D91EC1CC320019034F /* Main */,
 				A0A29F6F1ECC2BDF00E06D95 /* MusicViews */,
 				A0A29F701ECC2C5000E06D95 /* MusicPlayer */,
+				A0A29F9B1ECDEABA00E06D95 /* Store */,
 				A0A29F741ECC2CCE00E06D95 /* Account */,
 				A0A29F761ECC2D6A00E06D95 /* Payment */,
 				2F0F66301EC0781B0019034F /* Controllers */,
@@ -449,6 +463,26 @@
 				2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		A0A29F981ECDB39D00E06D95 /* database */ = {
+			isa = PBXGroup;
+			children = (
+				A0A29F961ECD92CD00E06D95 /* FirebaseModel.swift */,
+				A0A29F991ECDB8E800E06D95 /* DatabaseViewModel.swift */,
+			);
+			name = database;
+			sourceTree = "<group>";
+		};
+		A0A29F9B1ECDEABA00E06D95 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				A0A29F9C1ECDEAD100E06D95 /* Store.storyboard */,
+				A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */,
+				A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */,
+				A0A29F9E1ECDEF9A00E06D95 /* StoreOverviewViewController.swift */,
+			);
+			name = Store;
 			sourceTree = "<group>";
 		};
 		A0ADCB811EC07C6A00C82CC9 /* Extensions */ = {
@@ -602,6 +636,7 @@
 				A0A29F6C1ECC2BA800E06D95 /* 4.mp3 in Resources */,
 				A0A29F6A1ECC2BA800E06D95 /* 2.mp3 in Resources */,
 				2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */,
+				A0A29F9D1ECDEAD100E06D95 /* Store.storyboard in Resources */,
 				2FC986B81ECAE82A00B037CE /* Account.storyboard in Resources */,
 				A09477CE1EBCA03A00B62278 /* LaunchScreen.storyboard in Resources */,
 				A0A29F6D1ECC2BA800E06D95 /* 5.mp3 in Resources */,
@@ -781,7 +816,9 @@
 				2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */,
 				2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */,
 				A0A29F5A1ECC2B1000E06D95 /* AVAudioPlayerModel.swift in Sources */,
+				A0A29F971ECD92CD00E06D95 /* FirebaseModel.swift in Sources */,
 				A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */,
+				A0A29F9F1ECDEF9A00E06D95 /* StoreOverviewViewController.swift in Sources */,
 				2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */,
 				A05F929B1EC48B4D00F62432 /* TabBarViewController.swift in Sources */,
 				A05F92A71EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift in Sources */,
@@ -789,6 +826,8 @@
 				A0A29F601ECC2B5800E06D95 /* PayPalViewModel.swift in Sources */,
 				2FC986B61ECAE1DB00B037CE /* PaymentCollectionViewCell.swift in Sources */,
 				2F0F66321EC079340019034F /* RecoverPasswordViewController.swift in Sources */,
+				A0A29FA31ECDF71E00E06D95 /* StoreCollectionViewCell.swift in Sources */,
+				A0A29F9A1ECDB8E800E06D95 /* DatabaseViewModel.swift in Sources */,
 				A05F92A91EC58E9A00F62432 /* MusicPlayerViewController.swift in Sources */,
 				2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */,
 				2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */,
@@ -797,6 +836,7 @@
 				2FC986BA1ECB025E00B037CE /* PurchaseHistoryViewController.swift in Sources */,
 				2FC986B01ECAD76000B037CE /* AccountViewController.swift in Sources */,
 				A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */,
+				A0A29FA11ECDEFB100E06D95 /* StoreDetailViewController.swift in Sources */,
 				2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */,
 				A0D814D81EC970B90094DEC7 /* UIViewLoadingFromXib.swift in Sources */,
 				A05F92A31EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift in Sources */,

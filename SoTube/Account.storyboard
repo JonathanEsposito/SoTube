@@ -122,7 +122,9 @@
                             <constraint firstItem="3Eb-Xi-OHD" firstAttribute="top" secondItem="sfW-dH-KWz" secondAttribute="bottom" id="sGc-Or-bQJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Account" id="Y27-xg-j0p"/>
+                    <navigationItem key="navigationItem" title="Account" id="Y27-xg-j0p">
+                        <barButtonItem key="rightBarButtonItem" title="Log out" id="M8E-KN-aR5"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionViewFlowLayout" destination="qiA-bD-oHR" id="qUB-ag-xNy"/>
                         <outlet property="newUsernameTextField" destination="DHo-Nk-Rtx" id="i6d-T3-KWD"/>
