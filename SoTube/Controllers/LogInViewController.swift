@@ -16,7 +16,7 @@ class LogInViewController: UIViewController, DatabaseDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     
     var database = DatabaseViewModel()
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,12 +50,27 @@ class LogInViewController: UIViewController, DatabaseDelegate {
             return
         }
         
-        if database.succesfullLogin(withEmail: emailAddress, password: password) {
+        database.login(withEmail: emailAddress, password: password, onCompletion: {
+            
+            // Dismiss the keyboard
             self.view.endEditing(true)
             
-            // Perform segue
-            self.performSegue(withIdentifier: "login", sender: nil)
-        }
+            // check if user already has any songs
+            self.database.checkUserHasSongs { userHasSongs in
+                // Perform segue
+                if !userHasSongs {
+                    print("lets go to the store")
+                    let storyboard = UIStoryboard(name: "Store", bundle: nil)
+                    guard let navigationController = storyboard.instantiateViewController(withIdentifier: "storeNavCont") as? UINavigationController else { print("Couldn't find account navigation controller"); return }
+                    selectedTabBarItemWithTitle = "Store"
+                    UIApplication.shared.keyWindow?.rootViewController = navigationController
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    print("go to my music")
+                    self.performSegue(withIdentifier: "login", sender: nil)
+                }
+            }
+        })
     }
     
     @IBAction func requestPasswordReset(_ sender: UIButton) {

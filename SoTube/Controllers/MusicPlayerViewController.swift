@@ -57,6 +57,7 @@ class MusicPlayerViewController: UIViewController {
          ****/
         updater = CADisplayLink(target: self, selector: #selector(updateAudioProgressView))
         updater.preferredFramesPerSecond = 1
+//        print((updater.targetTimestamp - updater.timestamp))
         updater.add(to: .current, forMode: .commonModes)
         
         // Set Playbuttons

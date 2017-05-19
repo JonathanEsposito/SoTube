@@ -12,13 +12,14 @@ var selectedTabBarItemWithTitle = "My music"
 
 class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDelegate {
     // MARK: - Properties
-//    var selectedTabBarItemWithTitle = "My music"
     var updater: CADisplayLink! = nil
     
     let musicProgressView = UIProgressView()
     var miniPlayer: MinimizedPlayer! = nil
     var tabBar = UITabBar()
     var rightTabBar = UITabBar()
+    
+    var database = DatabaseViewModel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

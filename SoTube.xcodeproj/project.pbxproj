@@ -217,7 +217,7 @@
 		2FEC9C891EC9C2F600324AE1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A0A29F981ECDB39D00E06D95 /* database */,
+				A0A29F981ECDB39D00E06D95 /* Database */,
 				2FEC9C8A1EC9C30A00324AE1 /* PaymentModel */,
 			);
 			name = Models;
@@ -465,13 +465,13 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		A0A29F981ECDB39D00E06D95 /* database */ = {
+		A0A29F981ECDB39D00E06D95 /* Database */ = {
 			isa = PBXGroup;
 			children = (
 				A0A29F961ECD92CD00E06D95 /* FirebaseModel.swift */,
 				A0A29F991ECDB8E800E06D95 /* DatabaseViewModel.swift */,
 			);
-			name = database;
+			name = Database;
 			sourceTree = "<group>";
 		};
 		A0A29F9B1ECDEABA00E06D95 /* Store */ = {

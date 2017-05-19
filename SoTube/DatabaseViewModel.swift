@@ -9,9 +9,10 @@
 import Foundation
 
 protocol DatabaseModel {
-    func succesfullLogin(withEmail email: String, password: String, delegate: DatabaseDelegate) -> Bool
+    func login(withEmail email: String, password: String, delegate: DatabaseDelegate, onCompletion: (() -> ())?)
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String, delegate: DatabaseDelegate)
     func resetPassword(forEmail email: String, delegate: DatabaseDelegate)
+    func checkForSongs(onCompetion: @escaping (Bool) -> ())
 }
 
 protocol DatabaseDelegate {
@@ -23,15 +24,16 @@ class DatabaseViewModel {
     var databaseModel: DatabaseModel = Firebase()
     var delegate: DatabaseDelegate?
     
-    func succesfullLogin(withEmail email: String, password: String) -> Bool {
+    func checkUserHasSongs(onCompetion completionHandler: @escaping (Bool) -> () ) {
+        databaseModel.checkForSongs(onCompetion: completionHandler)
+    }
+    
+    func login(withEmail email: String, password: String, onCompletion completionHandler: (() -> ())? ) {
         guard let delegate = delegate else {
             fatalError("DatabaseDelegate not yet set!")
         }
         
-        if databaseModel.succesfullLogin(withEmail: email, password: password, delegate: delegate) {
-            return true
-        }
-        return false
+        databaseModel.login(withEmail: email, password: password, delegate: delegate, onCompletion: completionHandler)
     }
     
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String) {

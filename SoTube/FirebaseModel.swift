@@ -10,9 +10,8 @@ import Foundation
 import Firebase
 
 class Firebase: DatabaseModel {
-    
-    func succesfullLogin(withEmail email: String, password: String, delegate: DatabaseDelegate) -> Bool {
-        var succesfullLogin = false
+
+    func login(withEmail email: String, password: String, delegate: DatabaseDelegate, onCompletion completionHandler:  (() -> ())? ) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             if let error = error {
                 delegate.showAlert(withTitle: "Login Error", message: error.localizedDescription, actions: nil)
@@ -32,9 +31,12 @@ class Firebase: DatabaseModel {
                 return
             }
             
-            succesfullLogin = true
+            
+            // On completion
+            if let completionHandler = completionHandler {
+                completionHandler()
+            }
         })
-        return succesfullLogin
     }
     
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String, delegate: DatabaseDelegate) {
@@ -63,6 +65,23 @@ class Firebase: DatabaseModel {
             })
             
             delegate.showAlert(withTitle: "Email Verification", message: "We've just sent a confirmation email to \(emailAddress). Please check your inbox and click the verification link in that email to complete registration.", actions:  [dismissDelegateAction])
+        
+            /****
+             * Add user to database
+             ****/
+            // Setting the users reference
+            let usersReference = FIRDatabase.database().reference(withPath: "users")
+            
+            // Create User in database
+            if let currentUser = user {
+                let currentUserReference = usersReference.child(currentUser.uid)
+                let propertiesChild = currentUserReference.child("properties")
+                let userNameChild = propertiesChild.child("username")
+                userNameChild.setValue(userName)
+                
+                let coinsChild = propertiesChild.child("coins")
+                coinsChild.setValue(200)
+            }
         })
     }
     
@@ -75,4 +94,36 @@ class Firebase: DatabaseModel {
             }
         }
     }
+    
+    func checkForSongs(onCompetion completionHandler: @escaping (Bool) -> () ) {
+        guard let userID = FIRAuth.auth()?.currentUser?.uid else {
+            print("user not loged in")
+            completionHandler(false)
+            return
+        }
+        
+        let userReference = FIRDatabase.database().reference(withPath: "users")
+        userReference.child(userID).child("songs").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            if snapshot.exists() {
+            
+            if let value = snapshot.value as? NSDictionary {
+                print(value)
+                let songCount = value.count
+                
+                if songCount > 0 {
+                    completionHandler(true)
+                } else {
+                    completionHandler(false)
+                }
+            }
+            } else {
+                completionHandler(false)
+            }
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+
 }
