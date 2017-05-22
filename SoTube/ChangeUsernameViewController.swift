@@ -14,7 +14,7 @@ class ChangeUsernameViewController: UIViewController {
     override init(nibName: String?, bundle: Bundle?) {
         super.init(nibName: nibName, bundle: bundle)
         self.modalPresentationStyle = .custom
-        self.transitioningDelegate = self
+//        self.transitioningDelegate = self
     }
     
     convenience init() {
