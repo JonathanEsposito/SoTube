@@ -11,7 +11,6 @@
 		22AEF9D662FE869E806435F1 /* Pods_SoTubeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE00E31D6BDA723D74E74335 /* Pods_SoTubeUITests.framework */; };
 		2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F662C1EC077E60019034F /* LogInViewController.swift */; };
 		2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */; };
-		2F0F66321EC079340019034F /* RecoverPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */; };
 		2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66CA1EC1CA400019034F /* MusicCollectionViewCell.swift */; };
 		2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D01EC1CA860019034F /* MusicCollectionViewController.swift */; };
 		2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D31EC1CB1C0019034F /* MusicTableViewController.swift */; };
@@ -24,13 +23,14 @@
 		2FC986B81ECAE82A00B037CE /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC986B71ECAE82A00B037CE /* Account.storyboard */; };
 		2FC986BA1ECB025E00B037CE /* PurchaseHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */; };
 		2FC986BC1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */; };
-		2FC986C01ECB2B9500B037CE /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986BF1ECB2B9500B037CE /* ChangePasswordViewController.swift */; };
 		2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */; };
 		2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */; };
 		486AD1AADA1121E7657201DB /* Pods_SoTubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */; };
 		A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03227E11ECAF7060041197B /* MinimizedPlayer.swift */; };
 		A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */; };
 		A03E69911EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E69901EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift */; };
+		A057302B1ED2D383008EC7B0 /* ChangeUsername.xib in Resources */ = {isa = PBXBuildFile; fileRef = A057302A1ED2D383008EC7B0 /* ChangeUsername.xib */; };
+		A057302D1ED2D54E008EC7B0 /* ChangeUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A057302C1ED2D54E008EC7B0 /* ChangeUsernameViewController.swift */; };
 		A05F929B1EC48B4D00F62432 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F929A1EC48B4D00F62432 /* TabBarViewController.swift */; };
 		A05F92A11EC4ADCD00F62432 /* MusicPlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A05F929F1EC4ADCD00F62432 /* MusicPlayer.storyboard */; };
 		A05F92A31EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F92A21EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift */; };
@@ -86,7 +86,6 @@
 		2D9627E07E4FC512667784A6 /* Pods-SoTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.debug.xcconfig"; sourceTree = "<group>"; };
 		2F0F662C1EC077E60019034F /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInViewController.swift; path = Controllers/LogInViewController.swift; sourceTree = "<group>"; };
 		2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
-		2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverPasswordViewController.swift; sourceTree = "<group>"; };
 		2F0F66CA1EC1CA400019034F /* MusicCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicCollectionViewCell.swift; sourceTree = "<group>"; };
 		2F0F66D01EC1CA860019034F /* MusicCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicCollectionViewController.swift; sourceTree = "<group>"; };
 		2F0F66D31EC1CB1C0019034F /* MusicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +98,6 @@
 		2FC986B71ECAE82A00B037CE /* Account.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
 		2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryViewController.swift; sourceTree = "<group>"; };
 		2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryTableViewCell.swift; sourceTree = "<group>"; };
-		2FC986BF1ECB2B9500B037CE /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Payment.storyboard; sourceTree = "<group>"; };
 		2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentViewController.swift; path = Controllers/PaymentViewController.swift; sourceTree = "<group>"; };
 		2FEC9C911EC9C75A00324AE1 /* SoTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoTube-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -108,6 +106,8 @@
 		A03227E11ECAF7060041197B /* MinimizedPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimizedPlayer.swift; sourceTree = "<group>"; };
 		A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MinimizedPlayer.xib; path = Views/MinimizedPlayer.xib; sourceTree = "<group>"; };
 		A03E69901EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMusicTabBarViewController.swift; sourceTree = "<group>"; };
+		A057302A1ED2D383008EC7B0 /* ChangeUsername.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangeUsername.xib; path = Views/ChangeUsername.xib; sourceTree = "<group>"; };
+		A057302C1ED2D54E008EC7B0 /* ChangeUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeUsernameViewController.swift; sourceTree = "<group>"; };
 		A05F929A1EC48B4D00F62432 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		A05F92A01EC4ADCD00F62432 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MusicPlayer.storyboard; sourceTree = "<group>"; };
 		A05F92A21EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicSplitViewDetailViewController.swift; path = Controllers/MusicSplitViewDetailViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +249,8 @@
 			isa = PBXGroup;
 			children = (
 				A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */,
+				A057302A1ED2D383008EC7B0 /* ChangeUsername.xib */,
+				A057302C1ED2D54E008EC7B0 /* ChangeUsernameViewController.swift */,
 				A03227E11ECAF7060041197B /* MinimizedPlayer.swift */,
 			);
 			name = Views;
@@ -439,12 +441,10 @@
 		A0A29F791ECC2DD400E06D95 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */,
-				2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */,
 				2FC986AF1ECAD76000B037CE /* AccountViewController.swift */,
+				2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */,
 				2FC986B51ECAE1DB00B037CE /* PaymentCollectionViewCell.swift */,
-				2F0F66311EC079340019034F /* RecoverPasswordViewController.swift */,
-				2FC986BF1ECB2B9500B037CE /* ChangePasswordViewController.swift */,
+				2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -478,9 +478,9 @@
 			isa = PBXGroup;
 			children = (
 				A0A29F9C1ECDEAD100E06D95 /* Store.storyboard */,
-				A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */,
-				A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */,
 				A0A29F9E1ECDEF9A00E06D95 /* StoreOverviewViewController.swift */,
+				A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */,
+				A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -630,6 +630,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A057302B1ED2D383008EC7B0 /* ChangeUsername.xib in Resources */,
 				A0A29F691ECC2BA800E06D95 /* 1.mp3 in Resources */,
 				A0A29F681ECC2BA800E06D95 /* 0.mp3 in Resources */,
 				2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */,
@@ -820,12 +821,12 @@
 				A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */,
 				A0A29F9F1ECDEF9A00E06D95 /* StoreOverviewViewController.swift in Sources */,
 				2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */,
+				A057302D1ED2D54E008EC7B0 /* ChangeUsernameViewController.swift in Sources */,
 				A05F929B1EC48B4D00F62432 /* TabBarViewController.swift in Sources */,
 				A05F92A71EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift in Sources */,
 				A0A29F5F1ECC2B5800E06D95 /* PayPalModel.swift in Sources */,
 				A0A29F601ECC2B5800E06D95 /* PayPalViewModel.swift in Sources */,
 				2FC986B61ECAE1DB00B037CE /* PaymentCollectionViewCell.swift in Sources */,
-				2F0F66321EC079340019034F /* RecoverPasswordViewController.swift in Sources */,
 				A0A29FA31ECDF71E00E06D95 /* StoreCollectionViewCell.swift in Sources */,
 				A0A29F9A1ECDB8E800E06D95 /* DatabaseViewModel.swift in Sources */,
 				A05F92A91EC58E9A00F62432 /* MusicPlayerViewController.swift in Sources */,
@@ -842,7 +843,6 @@
 				A05F92A31EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift in Sources */,
 				A05F92A51EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift in Sources */,
 				2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */,
-				2FC986C01ECB2B9500B037CE /* ChangePasswordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

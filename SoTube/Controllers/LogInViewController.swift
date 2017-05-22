@@ -25,6 +25,11 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         database.delegate = weakSelf
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        emailAddressTextField.text = ""
+        passwordTextField.text = ""
+    }
+    
     // MARK: - DatabaseDelegate
     func showAlert(withTitle title: String, message: String, actions: [UIAlertAction]? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -67,6 +72,7 @@ class LogInViewController: UIViewController, DatabaseDelegate {
                     self.dismiss(animated: true, completion: nil)
                 } else {
                     print("go to my music")
+                    selectedTabBarItemWithTitle = "My music"
                     self.performSegue(withIdentifier: "login", sender: nil)
                 }
             }
@@ -78,8 +84,8 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         alertController.addTextField { (emailTextField) in
             emailTextField.placeholder = "Email Address"
         }
-        let okAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(okAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
         let resetAction = UIAlertAction(title: "Reset", style: .default) { [weak self] _ in
             guard let emailTextField = alertController.textFields?.first,
             let email = emailTextField.text

@@ -14,6 +14,7 @@ class CreateAccountViewController: UIViewController, DatabaseDelegate {
     @IBOutlet weak var emailAddressTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var verifyPasswordTextField: UITextField!
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     var database = DatabaseViewModel()
     
@@ -23,6 +24,10 @@ class CreateAccountViewController: UIViewController, DatabaseDelegate {
         // Do any additional setup after loading the view.
         weak var weakSelf = self
         database.delegate = weakSelf
+        
+        // Set navigation controller background and shadow
+        self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationBar.shadowImage = UIImage()
     }
     
     // MARK: - DatabaseDelegate
@@ -48,7 +53,7 @@ class CreateAccountViewController: UIViewController, DatabaseDelegate {
         }
         
         guard passwordTextField.text == verifyPasswordTextField.text else {
-            self.showAlert(withTitle: "Passwordverification failed!", message: "Your Password and verify password are not the same")
+            self.showAlert(withTitle: "Passwordconfirmation failed!", message: "Your Password and verify password are not the same")
             verifyPasswordTextField.text = nil
             return
         }
@@ -59,11 +64,4 @@ class CreateAccountViewController: UIViewController, DatabaseDelegate {
     @IBAction func backToLogin(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    private func createAccount() {
-        
-    }
-    
-   
-
 }

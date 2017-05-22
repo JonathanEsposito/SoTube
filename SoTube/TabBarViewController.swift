@@ -8,7 +8,7 @@
 
 import UIKit
 
-var selectedTabBarItemWithTitle = "My music"
+var selectedTabBarItemWithTitle = "Store"
 
 class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDelegate {
     // MARK: - Properties
