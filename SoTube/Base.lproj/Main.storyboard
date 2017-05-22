@@ -16,7 +16,7 @@
         <!--LoginViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="LoginViewController" customClass="LogInViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="BYZ-38-t0r" userLabel="LoginViewController" customClass="LogInViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -25,6 +25,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="8y9-nw-wDz">
+                                <rect key="frame" x="86" y="105" width="148" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="203" id="H3x-6y-Ls7"/>
+                                    <constraint firstAttribute="width" secondItem="8y9-nw-wDz" secondAttribute="height" multiplier="630:317" id="vs4-gJ-vxH"/>
+                                </constraints>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SoTubeBackground" translatesAutoresizingMaskIntoConstraints="NO" id="LDW-Ne-mx7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
@@ -161,16 +168,25 @@
                                     <segue destination="f1q-97-IAx" kind="show" identifier="loginAsGuest" id="LTX-wn-8lg"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="8y9-nw-wDz">
-                                <rect key="frame" x="86" y="105" width="148" height="74"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Cxh-0e-9F6">
+                                <rect key="frame" x="120.5" y="280" width="80" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.59876077589999999" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="203" id="H3x-6y-Ls7"/>
-                                    <constraint firstAttribute="width" secondItem="8y9-nw-wDz" secondAttribute="height" multiplier="630:317" id="vs4-gJ-vxH"/>
+                                    <constraint firstAttribute="height" constant="80" id="2bY-Mj-r7L"/>
+                                    <constraint firstAttribute="width" constant="80" id="oFb-3M-SNN"/>
                                 </constraints>
-                            </imageView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="13"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Cxh-0e-9F6" firstAttribute="leading" secondItem="T7S-5V-Bbz" secondAttribute="trailing" constant="-29.5" id="4fa-7n-kR1"/>
+                            <constraint firstItem="Cxh-0e-9F6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5i3-NF-eZc"/>
+                            <constraint firstItem="Cxh-0e-9F6" firstAttribute="centerY" secondItem="vUp-52-3By" secondAttribute="centerY" id="5yn-5b-tDH"/>
                             <constraint firstItem="JZv-Jo-jKL" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6Q1-ML-Xqr"/>
                             <constraint firstItem="8y9-nw-wDz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="J9I-pi-hI3"/>
                             <constraint firstItem="8y9-nw-wDz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="70" id="MBN-SV-ibk"/>
@@ -188,6 +204,7 @@
                     </view>
                     <connections>
                         <outlet property="emailAddressTextField" destination="PUB-ke-K4J" id="XnJ-x5-3Zi"/>
+                        <outlet property="loginActivityIndicatorView" destination="Cxh-0e-9F6" id="snr-80-vo3"/>
                         <outlet property="passwordTextField" destination="s8O-hD-OYR" id="Dh5-Pu-DIW"/>
                         <segue destination="y0s-Q6-Wfe" kind="show" identifier="login" id="bm0-QX-LyR"/>
                     </connections>

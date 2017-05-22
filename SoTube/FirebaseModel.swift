@@ -19,7 +19,6 @@ class Firebase: DatabaseModel {
             }
             
             guard let currentUser = user, currentUser.isEmailVerified else {
-                
                 let actions = [
                     UIAlertAction(title: "Resent email", style: .default, handler: { (action) in
                         user?.sendEmailVerification(completion: nil)
@@ -31,12 +30,15 @@ class Firebase: DatabaseModel {
                 return
             }
             
-            
             // On completion
             if let completionHandler = completionHandler {
                 completionHandler()
             }
         })
+    }
+    
+    func signOut() throws {
+        try FIRAuth.auth()?.signOut()
     }
     
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String, delegate: DatabaseDelegate) {
@@ -95,7 +97,7 @@ class Firebase: DatabaseModel {
         }
     }
     
-    func checkForSongs(onCompetion completionHandler: @escaping (Bool) -> () ) {
+    func checkForSongs(onCompletion completionHandler: @escaping (Bool) -> () ) {
         guard let userID = FIRAuth.auth()?.currentUser?.uid else {
             print("user not loged in")
             completionHandler(false)
@@ -131,7 +133,6 @@ class Firebase: DatabaseModel {
             print("User not logged in")
             return
         }
-        let userID = currentUser.uid
         let userEmail = currentUser.email ?? ""
         let userUsername = currentUser.displayName ?? ""
         
@@ -140,16 +141,24 @@ class Firebase: DatabaseModel {
         completionHandler(userProfile)
     }
     
-    func changeUsername(to newUsername: String, onCompletion completionHandler: @escaping () -> ()) {
+    func changeUsername(to newUsername: String, onCompletion completionHandler: @escaping (Error?) -> ()) {
         if let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest() {
             changeRequest.displayName = newUsername
-            changeRequest.commitChanges(completion: { (error) in
-                if let error = error {
-                    print("Failed to change the display name: \(error.localizedDescription)")
-                }
-                completionHandler()
-            })
+            changeRequest.commitChanges(completion: completionHandler)
         }
     }
-
+    
+    func change(_ currentPassword: String, with newPassword: String, for email: String, on delegate: userInfoDelegate, onCompletion completionHandler: @escaping (Error?) -> ()) {
+        // reauthenticate
+        let user = FIRAuth.auth()?.currentUser
+        
+        let credential = FIREmailPasswordAuthProvider.credential(withEmail: email, password: currentPassword)
+        user?.reauthenticate(with: credential) { error in
+            if let error = error {
+                completionHandler(error)
+            } else {
+                user?.updatePassword(newPassword, completion: completionHandler)
+            }
+        }
+    }
 }

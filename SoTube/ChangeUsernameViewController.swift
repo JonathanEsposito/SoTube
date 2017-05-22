@@ -8,11 +8,6 @@
 
 import UIKit
 
-protocol usernameDelegate {
-    weak var reloadUserInfoActivityIndicatorView: UIActivityIndicatorView! { get }
-    func updateTextFields()
-}
-
 class ChangeUsernameViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet weak var currentUsernameTextField: UITextField!
@@ -23,7 +18,7 @@ class ChangeUsernameViewController: UIViewController {
     let transitioner = CAVTransitioner()
     var username: String?
     var database: DatabaseViewModel?
-    var delegate: usernameDelegate?
+    var delegate: userInfoDelegate?
     
     // MARK: - Initialization
     override init(nibName: String?, bundle: Bundle?) {
@@ -61,14 +56,17 @@ class ChangeUsernameViewController: UIViewController {
             return
         }
         
-        database?.set(newUsername) {
-            self.delegate?.updateTextFields()
-        }
-        
         self.delegate?.reloadUserInfoActivityIndicatorView.startAnimating()
-        self.delegate?.reloadUserInfoActivityIndicatorView.isHidden = false
         
-        self.presentingViewController?.dismiss(animated: true)
+        database?.changeUsername(to: newUsername) { error in
+            if let error = error {
+                self.delegate?.reloadUserInfoActivityIndicatorView.stopAnimating()
+                self.showAlert(withTitle: "Username error", message: "Failed to change the display name: \(error.localizedDescription)")
+            } else {
+                self.delegate?.updateTextFields()
+                self.presentingViewController?.dismiss(animated: true)
+            }
+        }
     }
     
     

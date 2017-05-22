@@ -187,7 +187,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Y27-xg-j0p">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="M8E-KN-aR5"/>
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="M8E-KN-aR5">
+                            <connections>
+                                <action selector="signOut:" destination="P25-XC-Owc" id="I8v-JJ-Qqe"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionViewFlowLayout" destination="qiA-bD-oHR" id="qUB-ag-xNy"/>

@@ -14,15 +14,30 @@ var musicPlayer = MusicPlayer()
 class LogInViewController: UIViewController, DatabaseDelegate {
     @IBOutlet weak var emailAddressTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginActivityIndicatorView: UIActivityIndicatorView!
+    
+    // UserDefaults
+    let kuserDefaultsEmailKey = "userEmail"
+    let kuserDefaultsPasswordKey = "userPassword"
+    let userDefaults = UserDefaults.standard
     
     var database = DatabaseViewModel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Set database delegate
         weak var weakSelf = self
         database.delegate = weakSelf
+        
+        // If a login object is being saved to UserDefaults, use this object to log in and do the segue
+        if userDefaults.object(forKey: kuserDefaultsEmailKey) != nil,
+            userDefaults.object(forKey: kuserDefaultsPasswordKey) != nil {
+            // Get credentials from UserDefaults
+            let (emailAddress, password) = loadSavedLogin()
+            // Perform login
+            self.login(withEmail: emailAddress, password: password)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,29 +69,30 @@ class LogInViewController: UIViewController, DatabaseDelegate {
             showAlert(withTitle: "Login Error", message: "Both email and password must be filled out")
             return
         }
+        self.login(withEmail: emailAddress, password: password)
         
-        database.login(withEmail: emailAddress, password: password, onCompletion: {
-            
-            // Dismiss the keyboard
-            self.view.endEditing(true)
-            
-            // check if user already has any songs
-            self.database.checkUserHasSongs { userHasSongs in
-                // Perform segue
-                if !userHasSongs {
-                    print("lets go to the store")
-                    let storyboard = UIStoryboard(name: "Store", bundle: nil)
-                    guard let navigationController = storyboard.instantiateViewController(withIdentifier: "storeNavCont") as? UINavigationController else { print("Couldn't find account navigation controller"); return }
-                    selectedTabBarItemWithTitle = "Store"
-                    UIApplication.shared.keyWindow?.rootViewController = navigationController
-                    self.dismiss(animated: true, completion: nil)
-                } else {
-                    print("go to my music")
-                    selectedTabBarItemWithTitle = "My music"
-                    self.performSegue(withIdentifier: "login", sender: nil)
-                }
-            }
-        })
+//        database.login(withEmail: emailAddress, password: password, onCompletion: {
+//            
+//            // Dismiss the keyboard
+//            self.view.endEditing(true)
+//            
+//            // check if user already has any songs
+//            self.database.checkUserHasSongs { userHasSongs in
+//                // Perform segue
+//                if !userHasSongs {
+//                    print("lets go to the store")
+//                    let storyboard = UIStoryboard(name: "Store", bundle: nil)
+//                    guard let navigationController = storyboard.instantiateViewController(withIdentifier: "storeNavCont") as? UINavigationController else { print("Couldn't find account navigation controller"); return }
+//                    selectedTabBarItemWithTitle = "Store"
+//                    UIApplication.shared.keyWindow?.rootViewController = navigationController
+//                    self.dismiss(animated: true, completion: nil)
+//                } else {
+//                    print("go to my music")
+//                    selectedTabBarItemWithTitle = "My music"
+//                    self.performSegue(withIdentifier: "login", sender: nil)
+//                }
+//            }
+//        })
     }
     
     @IBAction func requestPasswordReset(_ sender: UIButton) {
@@ -95,5 +111,47 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         alertController.addAction(resetAction)
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: - Private Methodes
+    private func login(withEmail emailAddress: String, password: String) {
+        database.login(withEmail: emailAddress, password: password, onCompletion: {
+            self.loginActivityIndicatorView.startAnimating()
+            // Dismiss the keyboard
+            self.view.endEditing(true)
+            
+            // check if user already has any songs
+            self.database.checkUserHasSongs { userHasSongs in
+                self.loginActivityIndicatorView.stopAnimating()
+                // Perform segue
+                if !userHasSongs {
+                    print("lets go to the store")
+                    let storyboard = UIStoryboard(name: "Store", bundle: nil)
+                    guard let navigationController = storyboard.instantiateViewController(withIdentifier: "storeNavCont") as? UINavigationController else { print("Couldn't find account navigation controller"); return }
+                    selectedTabBarItemWithTitle = "Store"
+                    UIApplication.shared.keyWindow?.rootViewController = navigationController
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    print("Go to my music")
+                    selectedTabBarItemWithTitle = "My music"
+                    self.performSegue(withIdentifier: "login", sender: nil)
+                }
+            }
+            
+            // If new user, save credentials to user defaults
+            self.saveLoginToUserDefaults(email: emailAddress, password: password)
+        })
+    }
+    
+    private func saveLoginToUserDefaults(email: String, password: String) {
+        userDefaults.set(email, forKey: kuserDefaultsEmailKey)
+        userDefaults.set(password, forKey: kuserDefaultsPasswordKey)
+        userDefaults.synchronize()
+    }
+    
+    private func loadSavedLogin() -> (String, String) {
+        let userEmail = userDefaults.object(forKey: kuserDefaultsEmailKey) as! String
+        let userPassword = userDefaults.object(forKey: kuserDefaultsPasswordKey) as! String
+        return (userEmail, userPassword)
     }
 }

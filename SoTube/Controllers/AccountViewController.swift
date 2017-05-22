@@ -8,12 +8,17 @@
 
 import UIKit
 
-class AccountViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, paymentDelegate, usernameDelegate {
+class AccountViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, paymentDelegate, userInfoDelegate {
     // MARK: - Properties
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var reloadUserInfoActivityIndicatorView: UIActivityIndicatorView!
+    
+    // UserDefaults
+    let kuserDefaultsEmailKey = "userEmail"
+    let kuserDefaultsPasswordKey = "userPassword"
+    let userDefaults = UserDefaults.standard
     
     let reuseIdentifier = "paymentCell"
     let paymentViewModel = PaymentViewModel()
@@ -74,14 +79,38 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     
     // MARK: - UsernameDelegate
     func updateTextFields() {
-        reloadUserInfoActivityIndicatorView.stopAnimating()
         database.getCurrentUserProfile { profile in
+            reloadUserInfoActivityIndicatorView.stopAnimating()
             self.usernameTextField.text = profile.username
             self.emailTextField.text = profile.email
         }
     }
     
+    func updateUserDefaults(password: String?, orEmail email: String?) {
+        if let password = password {
+            userDefaults.set(password, forKey: kuserDefaultsPasswordKey)
+        }
+        
+        if let email = email {
+            userDefaults.set(email, forKey: kuserDefaultsEmailKey)
+        }
+        
+        userDefaults.synchronize()
+    }
+    
     // MARK: - IBActions
+    @IBAction func signOut(_ sender: UIBarButtonItem) {
+        database.signOut {
+            userDefaults.removeObject(forKey: kuserDefaultsEmailKey)
+            userDefaults.removeObject(forKey: kuserDefaultsPasswordKey)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+            UIApplication.shared.keyWindow?.rootViewController = loginViewController
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     @IBAction func changeUsername(_ sender: UIButton) {
         let vc = ChangeUsernameViewController()
         vc.username = usernameTextField.text
@@ -96,10 +125,9 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
         vc.database = self.database
         weak var weakSelf = self
         vc.delegate = weakSelf
+        vc.email = emailTextField.text
         self.present(vc, animated: true)
     }
-
-    
     
     // MARK: - Private Methods
     func showAlert(withTitle title: String, message: String, actions: [UIAlertAction]? = nil) {

@@ -10,11 +10,14 @@ import Foundation
 
 protocol DatabaseModel {
     func login(withEmail email: String, password: String, delegate: DatabaseDelegate, onCompletion: (() -> ())?)
+    func signOut() throws
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String, delegate: DatabaseDelegate)
     func resetPassword(forEmail email: String, delegate: DatabaseDelegate)
-    func checkForSongs(onCompetion: @escaping (Bool) -> ())
+    func checkForSongs(onCompletion: @escaping (Bool) -> ())
     func getCurrentUserProfile(onCompletion: (Profile) -> ())
-    func changeUsername(to: String, onCompletion: @escaping () -> ())
+    func changeUsername(to: String, onCompletion: @escaping (Error?) -> ())
+    func change(_ currentPassword: String, with newPassword: String, for email: String, on delegate: userInfoDelegate, onCompletion completionHandler: @escaping (Error?) -> ())
+//    func reauthenticate(withPassword: String, email: String, onCompletion: (Error?) -> ())
 }
 
 protocol DatabaseDelegate {
@@ -26,8 +29,8 @@ class DatabaseViewModel {
     var databaseModel: DatabaseModel = Firebase()
     var delegate: DatabaseDelegate?
     
-    func checkUserHasSongs(onCompetion completionHandler: @escaping (Bool) -> () ) {
-        databaseModel.checkForSongs(onCompetion: completionHandler)
+    func checkUserHasSongs(onCompletion completionHandler: @escaping (Bool) -> () ) {
+        databaseModel.checkForSongs(onCompletion: completionHandler)
     }
     
     func login(withEmail email: String, password: String, onCompletion completionHandler: (() -> ())? ) {
@@ -56,7 +59,21 @@ class DatabaseViewModel {
         databaseModel.getCurrentUserProfile(onCompletion: completionHandler)
     }
     
-    func set(_ newUsername: String, onCompletion completionHandler: @escaping () -> ()) {
+    func changeUsername(to newUsername: String, onCompletion completionHandler: @escaping (Error?) -> ()) {
         databaseModel.changeUsername(to: newUsername, onCompletion: completionHandler)
+    }
+    
+    func change(_ currentPassword: String, with newPassword: String, for email: String, on delegate: userInfoDelegate, onCompletion completionHandler: @escaping (Error?) -> ()) {
+        databaseModel.change(currentPassword, with: newPassword, for: email, on: delegate, onCompletion: completionHandler)
+    }
+    
+    func signOut(onCompletion completionHandler: () -> ()) {
+        do {
+            try databaseModel.signOut()
+        } catch {
+            delegate?.showAlert(withTitle: "Problem signing off", message: error.localizedDescription, actions: nil)
+            return
+        }
+        completionHandler()
     }
 }
