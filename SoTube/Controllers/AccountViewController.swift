@@ -8,10 +8,12 @@
 
 import UIKit
 
-class AccountViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, paymentDelegate {
+class AccountViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, paymentDelegate, usernameDelegate {
     // MARK: - Properties
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var reloadUserInfoActivityIndicatorView: UIActivityIndicatorView!
     
     let reuseIdentifier = "paymentCell"
     let paymentViewModel = PaymentViewModel()
@@ -21,24 +23,25 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         pricePerAmount = paymentViewModel.pricePerAmount
         buyAmounts = pricePerAmount!.keys.sorted(by: <)
         
         // Set navigation controller background and shadow
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // set username, email and "password"
+        updateTextFields()
     }
     
 
     // MARK: UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         return 1
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return buyAmounts?.count ?? 0
     }
     
@@ -69,47 +72,34 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
         return CGSize(width: widthPerItem, height: heightPerItem)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // MARK: - UsernameDelegate
+    func updateTextFields() {
+        reloadUserInfoActivityIndicatorView.stopAnimating()
+        database.getCurrentUserProfile { profile in
+            self.usernameTextField.text = profile.username
+            self.emailTextField.text = profile.email
+        }
+    }
     
     // MARK: - IBActions
     @IBAction func changeUsername(_ sender: UIButton) {
-//        let alertController = UIAlertController(title: "Change Username", message: "", preferredStyle: .alert)
-//        
-//        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "resetPasswordVC")
-//        
-//        alertController.addChildViewController(viewController!)
-////        alertController.addTextField { (oldUsernameTextField) in
-////            oldUsernameTextField.placeholder = "Current username"
-////        }
-////        alertController.addTextField { (newUsernameTextField) in
-////            newUsernameTextField.placeholder = "New username"
-////        }
-////        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-////        alertController.addAction(cancelAction)
-////        let changeAction = UIAlertAction(title: "Change", style: .default) { [weak self] _ in
-////            guard let oldUsernameTextField = alertController.textFields?.first, let oldUsername = oldUsernameTextField.text else {
-////                print("Old username not set")
-////                return
-////            }
-////            guard let newUsernameTextField = alertController.textFields?.last, let newUsername = newUsernameTextField.text else {
-////                print("New username not set")
-////                return
-////            }
-////            print("changes made :D")
-////        }
-////        alertController.addAction(changeAction)
-//        present(alertController, animated: true, completion: nil)
         let vc = ChangeUsernameViewController()
+        vc.username = usernameTextField.text
+        vc.database = self.database
+        weak var weakSelf = self
+        vc.delegate = weakSelf
         self.present(vc, animated: true)
     }
+    
+    @IBAction func changePassword(_ sender: UIButton) {
+        let vc = ChangePasswordViewController()
+        vc.database = self.database
+        weak var weakSelf = self
+        vc.delegate = weakSelf
+        self.present(vc, animated: true)
+    }
+
+    
     
     // MARK: - Private Methods
     func showAlert(withTitle title: String, message: String, actions: [UIAlertAction]? = nil) {

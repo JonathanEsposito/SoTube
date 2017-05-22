@@ -125,5 +125,31 @@ class Firebase: DatabaseModel {
             print(error.localizedDescription)
         }
     }
+    
+    func getCurrentUserProfile(onCompletion completionHandler: (Profile) -> ()) {
+        guard let currentUser = FIRAuth.auth()?.currentUser else {
+            print("User not logged in")
+            return
+        }
+        let userID = currentUser.uid
+        let userEmail = currentUser.email ?? ""
+        let userUsername = currentUser.displayName ?? ""
+        
+        let userProfile = Profile(username: userUsername, email: userEmail)
+        
+        completionHandler(userProfile)
+    }
+    
+    func changeUsername(to newUsername: String, onCompletion completionHandler: @escaping () -> ()) {
+        if let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest() {
+            changeRequest.displayName = newUsername
+            changeRequest.commitChanges(completion: { (error) in
+                if let error = error {
+                    print("Failed to change the display name: \(error.localizedDescription)")
+                }
+                completionHandler()
+            })
+        }
+    }
 
 }

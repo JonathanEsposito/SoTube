@@ -90,7 +90,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jck-Qj-Avh">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jck-Qj-Avh">
                                         <rect key="frame" x="8" y="90" width="272" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -112,6 +112,9 @@
                                             <constraint firstAttribute="width" constant="50" id="jRc-li-fxG"/>
                                         </constraints>
                                         <state key="normal" title="Edit"/>
+                                        <connections>
+                                            <action selector="changePassword:" destination="P25-XC-Owc" eventType="touchUpInside" id="tz8-fV-AkL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -141,11 +144,26 @@
                                     <segue destination="ztz-SK-Aiy" kind="show" identifier="showPurchaseHistoryVC" id="gUN-rI-T82"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="0l1-Db-HBN">
+                                <rect key="frame" x="120.5" y="414.5" width="80" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.59876077589999999" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="nEd-ag-Y37"/>
+                                    <constraint firstAttribute="width" secondItem="0l1-Db-HBN" secondAttribute="height" multiplier="1:1" id="zug-iz-146"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="13"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3Eb-Xi-OHD" firstAttribute="height" secondItem="1iq-tg-vfU" secondAttribute="height" multiplier="0.25" id="4YU-o7-j9F"/>
+                            <constraint firstItem="0l1-Db-HBN" firstAttribute="centerY" secondItem="dgB-Oc-xPx" secondAttribute="centerY" id="B43-9x-Nbq"/>
                             <constraint firstAttribute="trailing" secondItem="3Eb-Xi-OHD" secondAttribute="trailing" id="BD4-6T-3I0"/>
+                            <constraint firstItem="0l1-Db-HBN" firstAttribute="centerX" secondItem="dgB-Oc-xPx" secondAttribute="centerX" id="Btj-9m-heZ"/>
                             <constraint firstItem="3Eb-Xi-OHD" firstAttribute="leading" secondItem="1iq-tg-vfU" secondAttribute="leading" id="FOT-Jl-lDE"/>
                             <constraint firstItem="sfW-dH-KWz" firstAttribute="top" secondItem="zhm-Vo-jj5" secondAttribute="bottom" constant="-44" id="FwT-Nx-zjS"/>
                             <constraint firstItem="sfW-dH-KWz" firstAttribute="centerY" secondItem="1iq-tg-vfU" secondAttribute="centerY" multiplier="0.5" id="Ilf-mM-dBi"/>
@@ -173,66 +191,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionViewFlowLayout" destination="qiA-bD-oHR" id="qUB-ag-xNy"/>
+                        <outlet property="emailTextField" destination="UPW-yv-bYf" id="8Yw-xz-w0J"/>
+                        <outlet property="reloadUserInfoActivityIndicatorView" destination="0l1-Db-HBN" id="s2S-HH-k5e"/>
                         <outlet property="usernameTextField" destination="DHo-Nk-Rtx" id="ufJ-cp-ba1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cck-Mc-8u1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="532.5" y="85.563380281690144"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="BBz-ze-lgG">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JXy-dQ-Nlt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="resetPasswordVC" id="GdX-mZ-7xY" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1FH-qp-YOb"/>
-                        <viewControllerLayoutGuide type="bottom" id="XOo-AL-OhT"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="cew-QJ-bMK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat new pasword" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xP8-Ie-lNl">
-                                <rect key="frame" x="0.0" y="228" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Old password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Ct-kb-pB1">
-                                <rect key="frame" x="0.0" y="276" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="syZ-wK-eTH">
-                                <rect key="frame" x="0.0" y="182" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DzC-qY-Oak">
-                                <rect key="frame" x="120" y="337" width="74" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="savePasswordButton:" destination="GdX-mZ-7xY" eventType="touchUpInside" id="grP-OV-CUf"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="newPasswordTextField" destination="syZ-wK-eTH" id="8Gx-cf-dOY"/>
-                        <outlet property="oldPasswordTextField" destination="1Ct-kb-pB1" id="baZ-Wa-K2m"/>
-                        <outlet property="repeatNewPasswordTextField" destination="xP8-Ie-lNl" id="ino-XD-zEN"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="532.5" y="863.02816901408448"/>
         </scene>
         <!--Purchase History View Controller-->
         <scene sceneID="DjB-VF-fkT">

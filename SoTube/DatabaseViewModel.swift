@@ -13,6 +13,8 @@ protocol DatabaseModel {
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String, delegate: DatabaseDelegate)
     func resetPassword(forEmail email: String, delegate: DatabaseDelegate)
     func checkForSongs(onCompetion: @escaping (Bool) -> ())
+    func getCurrentUserProfile(onCompletion: (Profile) -> ())
+    func changeUsername(to: String, onCompletion: @escaping () -> ())
 }
 
 protocol DatabaseDelegate {
@@ -48,5 +50,13 @@ class DatabaseViewModel {
             fatalError("DatabaseDelegate not yet set!")
         }
         databaseModel.resetPassword(forEmail: email, delegate: delegate)
+    }
+    
+    func getCurrentUserProfile(onCompletion completionHandler: (Profile) -> ()) {
+        databaseModel.getCurrentUserProfile(onCompletion: completionHandler)
+    }
+    
+    func set(_ newUsername: String, onCompletion completionHandler: @escaping () -> ()) {
+        databaseModel.changeUsername(to: newUsername, onCompletion: completionHandler)
     }
 }

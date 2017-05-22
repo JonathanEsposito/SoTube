@@ -122,8 +122,9 @@ class MusicPlayerViewController: UIViewController {
         timeLeftLabel.text = musicPlayer.timeLeft
         
         // set pause to play
-        let buttonIndex = toolbar.items?.index(where: { $0 == (musicPlayButton ?? pauseButton) })
-        toolbar.items![buttonIndex!] = playButton
+        if let buttonIndex = toolbar.items?.index(where: { $0 == (musicPlayButton ?? pauseButton) }) {
+            toolbar.items![buttonIndex] = playButton
+        }
     }
     
     func updateAudioProgressView() {
