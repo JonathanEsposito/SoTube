@@ -542,8 +542,11 @@
 			children = (
 				A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */,
 				A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */,
-				A057303E1ED332D3008EC7B0 /* UIViewBorderLeftTopRightBottom.swift */,
+<<<<<<< HEAD
 				2F804E751ED4377800E6A7B4 /* UIImageExtensions.swift */,
+=======
+				A057303E1ED332D3008EC7B0 /* UIViewBorderLeftTopRightBottom.swift */,
+>>>>>>> jonathan
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -899,8 +902,11 @@
 				A057303F1ED332D3008EC7B0 /* UIViewBorderLeftTopRightBottom.swift in Sources */,
 				A05730411ED385F5008EC7B0 /* userInfoDelegate.swift in Sources */,
 				2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */,
-				A057303D1ED33088008EC7B0 /* ChangePasswordViewController.swift in Sources */,
+<<<<<<< HEAD
 				2F804E701ED433DB00E6A7B4 /* Album.swift in Sources */,
+=======
+				A057303D1ED33088008EC7B0 /* ChangePasswordViewController.swift in Sources */,
+>>>>>>> jonathan
 				A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */,
 				A03E69911EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift in Sources */,
 				2FCDF2871ECC80D000095FF4 /* AVPlayerModel.swift in Sources */,

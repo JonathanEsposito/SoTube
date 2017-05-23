@@ -1,5 +1,5 @@
 //
-//  ChangeUsernameViewController.swift
+//  ChangePasswordViewController.swift
 //  SoTube
 //
 //  Created by .jsber on 22/05/17.
@@ -8,18 +8,19 @@
 
 import UIKit
 
-class ChangeUsernameViewController: UIViewController {
+class ChangePasswordViewController: UIViewController {
     // MARK: - Properties
-    @IBOutlet weak var currentUsernameTextField: UITextField!
-    @IBOutlet weak var newUsernameTextField: UITextField!
+    @IBOutlet weak var currentPasswordTextField: UITextField!
+    @IBOutlet weak var newPasswordTextField: UITextField!
+    @IBOutlet weak var confirmationPasswordTextField: UITextField!
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var changeActivityIndicatorView: UIActivityIndicatorView!
     
     let transitioner = CAVTransitioner()
-    var username: String?
     var database: DatabaseViewModel?
     var delegate: userInfoDelegate?
+    var email: String?
     
     // MARK: - Initialization
     override init(nibName: String?, bundle: Bundle?) {
@@ -29,7 +30,8 @@ class ChangeUsernameViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        buttonsView.addBorder(side: .top, thickness: 1, color: UIColor.groupTableViewBackground)
+        super.viewDidLoad()
+        buttonsView?.addBorder(side: .top, thickness: 1, color: UIColor.groupTableViewBackground)
         cancelButton.addBorder(side: .right, thickness: 1, color: UIColor.groupTableViewBackground)
     }
     
@@ -47,33 +49,45 @@ class ChangeUsernameViewController: UIViewController {
         self.presentingViewController?.dismiss(animated: true)
     }
     
-    @IBAction func changeAction(_ sender: UIButton) {
-        self.changeActivityIndicatorView.startAnimating()
-        guard let currentUsername = currentUsernameTextField.text, username == currentUsername else {
+    @IBAction func changePassword(_ sender: UIButton) {
+        changeActivityIndicatorView.startAnimating()
+        guard let currentPassword = currentPasswordTextField.text, currentPassword != "" else {
             self.changeActivityIndicatorView.stopAnimating()
-            showAlert(withTitle: "Username error", message: "Current username is not correctly filled out!")
+            self.showAlert(withTitle: "Password error", message: "Please fill out the current password first.")
             return
         }
         
-        guard let newUsername = newUsernameTextField.text, username != "" else {
+        guard let newPassword = self.newPasswordTextField.text, newPassword != "",
+            let confirmationPassword = self.confirmationPasswordTextField.text, confirmationPassword != "",
+            newPassword == confirmationPassword else {
+                self.changeActivityIndicatorView.stopAnimating()
+                self.showAlert(withTitle: "Password error", message: "The confirmation password is not the same as the new password. Please try agian.")
+                return
+        }
+        
+        guard let email = self.email else {
             self.changeActivityIndicatorView.stopAnimating()
-            showAlert(withTitle: "Username error", message: "Please choose a new username")
+            print("Email not passed?")
             return
         }
         
-        database?.changeUsername(to: newUsername) { error in
+        
+        
+        // change password
+        database?.change(currentPassword, with: newPassword, for: email, on: delegate!) { error in
             self.changeActivityIndicatorView.stopAnimating()
             if let error = error {
                 self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
-                self.showAlert(withTitle: "Username error", message: "Failed to change the display name: \(error.localizedDescription)")
+                self.showAlert(withTitle: "Error reauthenticating user" , message: error.localizedDescription)
             } else {
+                // do something
+                self.delegate?.updateUserDefaults(password: newPassword, orEmail: nil)
                 self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.startAnimating() }
                 self.delegate?.updateTextFields()
                 self.presentingViewController?.dismiss(animated: true)
             }
         }
     }
-    
     
     // MARK: - Private Methods
     func showAlert(withTitle title: String, message: String, actions: [UIAlertAction]? = nil) {
@@ -86,4 +100,5 @@ class ChangeUsernameViewController: UIViewController {
         }
         present(alertController, animated: true, completion: nil)
     }
+    
 }

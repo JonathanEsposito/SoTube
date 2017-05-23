@@ -19,7 +19,6 @@ class Firebase: DatabaseModel {
             }
             
             guard let currentUser = user, currentUser.isEmailVerified else {
-                
                 let actions = [
                     UIAlertAction(title: "Resent email", style: .default, handler: { (action) in
                         user?.sendEmailVerification(completion: nil)
@@ -31,12 +30,15 @@ class Firebase: DatabaseModel {
                 return
             }
             
-            
             // On completion
             if let completionHandler = completionHandler {
                 completionHandler()
             }
         })
+    }
+    
+    func signOut() throws {
+        try FIRAuth.auth()?.signOut()
     }
     
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String, delegate: DatabaseDelegate) {
@@ -76,9 +78,6 @@ class Firebase: DatabaseModel {
             if let currentUser = user {
                 let currentUserReference = usersReference.child(currentUser.uid)
                 let propertiesChild = currentUserReference.child("properties")
-                let userNameChild = propertiesChild.child("username")
-                userNameChild.setValue(userName)
-                
                 let coinsChild = propertiesChild.child("coins")
                 coinsChild.setValue(200)
             }
@@ -95,7 +94,7 @@ class Firebase: DatabaseModel {
         }
     }
     
-    func checkForSongs(onCompetion completionHandler: @escaping (Bool) -> () ) {
+    func checkForSongs(onCompletion completionHandler: @escaping (Bool) -> () ) {
         guard let userID = FIRAuth.auth()?.currentUser?.uid else {
             print("user not loged in")
             completionHandler(false)
@@ -125,5 +124,64 @@ class Firebase: DatabaseModel {
             print(error.localizedDescription)
         }
     }
-
+    
+    func getCurrentUserProfile(onCompletion completionHandler: @escaping (Profile) -> ()) {
+        guard let currentUser = FIRAuth.auth()?.currentUser else {
+            print("User not logged in")
+            return
+        }
+        
+        let userEmail = currentUser.email ?? ""
+        let userUsername = currentUser.displayName ?? ""
+        let userID = currentUser.uid
+        
+        let userReference = FIRDatabase.database().reference(withPath: "users")
+        userReference.child(userID).child("properties").child("coins").observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot.value)
+            let amountOfCoins = snapshot.value as? Int
+            
+            let userProfile = Profile(username: userUsername, email: userEmail, amountOfCoins: amountOfCoins ?? 0, amountOfSongs: 0)
+            
+            completionHandler(userProfile)
+        })
+    }
+    
+    func changeUsername(to newUsername: String, onCompletion completionHandler: @escaping (Error?) -> ()) {
+        if let changeRequest = FIRAuth.auth()?.currentUser?.profileChangeRequest() {
+            changeRequest.displayName = newUsername
+            changeRequest.commitChanges(completion: completionHandler)
+        }
+    }
+    
+    func change(_ currentPassword: String, with newPassword: String, for email: String, on delegate: userInfoDelegate, onCompletion completionHandler: @escaping (Error?) -> ()) {
+        // reauthenticate
+        let user = FIRAuth.auth()?.currentUser
+        
+        let credential = FIREmailPasswordAuthProvider.credential(withEmail: email, password: currentPassword)
+        user?.reauthenticate(with: credential) { error in
+            if let error = error {
+                completionHandler(error)
+            } else {
+                user?.updatePassword(newPassword, completion: completionHandler)
+            }
+        }
+    }
+    
+    func updateCoins(with addedCoins: Int, onCompletion completionHandler: @escaping ()->()) {
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let userReference = FIRDatabase.database().reference(withPath: "users")
+            userReference.child(userID).child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
+                print(snapshot.value)
+                if let currentAmount = snapshot.value as? Int {
+                    let newTotal = currentAmount + addedCoins
+                    userReference.child(userID).child("properties").updateChildValues(["coins" : newTotal])
+                    completionHandler()
+                }
+            })
+        } else {
+            print("user not logged in")
+        }
+        
+        
+    }
 }

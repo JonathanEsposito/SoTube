@@ -25,13 +25,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <!-- <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="8y9-nw-wDz">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="8y9-nw-wDz">
                                 <rect key="frame" x="86" y="105" width="148" height="74"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="203" id="H3x-6y-Ls7"/>
                                     <constraint firstAttribute="width" secondItem="8y9-nw-wDz" secondAttribute="height" multiplier="630:317" id="vs4-gJ-vxH"/>
                                 </constraints>
-                            </imageView> -->
+                            </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SoTubeBackground" translatesAutoresizingMaskIntoConstraints="NO" id="LDW-Ne-mx7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
@@ -168,6 +168,7 @@
                                     <segue destination="f1q-97-IAx" kind="show" identifier="loginAsGuest" id="LTX-wn-8lg"/>
                                 </connections>
                             </button>
+<<<<<<< HEAD
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="8y9-nw-wDz">
                                 <rect key="frame" x="86" y="105" width="148" height="74"/>
                                 <gestureRecognizers/>
@@ -179,6 +180,7 @@
                                     <outletCollection property="gestureRecognizers" destination="Aiq-if-hY6" appends="YES" id="exv-cG-avD"/>
                                 </connections>
                             </imageView>
+=======
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Cxh-0e-9F6">
                                 <rect key="frame" x="210" y="312" width="20" height="20"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -188,6 +190,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </activityIndicatorView>
+>>>>>>> jonathan
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>

@@ -31,9 +31,10 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         weak var weakSelf = self
         database.delegate = weakSelf
         
+<<<<<<< HEAD
         spotifyModel.setUpLogin()
         
-        
+=======
         // If a login object is being saved to UserDefaults, use this object to log in and do the segue
         if userDefaults.object(forKey: kuserDefaultsEmailKey) != nil,
             userDefaults.object(forKey: kuserDefaultsPasswordKey) != nil {
@@ -42,6 +43,7 @@ class LogInViewController: UIViewController, DatabaseDelegate {
             // Perform login
             self.login(withEmail: emailAddress, password: password)
         }
+>>>>>>> jonathan
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,15 +136,15 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         userDefaults.synchronize()
     }
     
-    @IBAction func spotifyLogIn(_ sender: UITapGestureRecognizer) {
-        spotifyModel.spotifyLogin()
-        spotifyModel.getFeaturedPlaylists(amount: 10, withOffset: 0, OnCompletion: {playlists in print(playlists)})
-    }
-    
-    
     private func loadSavedLogin() -> (String, String) {
         let userEmail = userDefaults.object(forKey: kuserDefaultsEmailKey) as! String
         let userPassword = userDefaults.object(forKey: kuserDefaultsPasswordKey) as! String
         return (userEmail, userPassword)
     }
+    
+    @IBAction func spotifyLogIn(_ sender: UITapGestureRecognizer) {
+        spotifyModel.spotifyLogin()
+        spotifyModel.getFeaturedPlaylists(amount: 10, withOffset: 0, OnCompletion: {playlists in print(playlists)})
+    }
+    
 }

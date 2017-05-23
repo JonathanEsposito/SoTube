@@ -8,44 +8,61 @@
 
 import UIKit
 
-class AccountViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, paymentDelegate {
+class AccountViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, paymentDelegate, userInfoDelegate {
     // MARK: - Properties
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet var reloadUserInfoActivityIndicatorViewCollection: [UIActivityIndicatorView]!
+    @IBOutlet weak var amountOfCoinsLabel: UILabel!
+    @IBOutlet weak var amountOfSongsLabel: UILabel!
+    
+    // UserDefaults
+    let kuserDefaultsEmailKey = "userEmail"
+    let kuserDefaultsPasswordKey = "userPassword"
+    let userDefaults = UserDefaults.standard
     
     let reuseIdentifier = "paymentCell"
     let paymentViewModel = PaymentViewModel()
     var pricePerAmount: [Int: Double]?
     var buyAmounts: [Int]?
     
+    var database = DatabaseViewModel()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         pricePerAmount = paymentViewModel.pricePerAmount
         buyAmounts = pricePerAmount!.keys.sorted(by: <)
         
         // Set navigation controller background and shadow
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // set username, email and "password"
+        updateTextFields()
     }
     
 
     // MARK: UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         return 1
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return buyAmounts?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PaymentCollectionViewCell
         if let amount = buyAmounts?[indexPath.row] {
-            cell.amountLabel.text = String(amount)
+            cell.amountLabel.text = "\(amount) SoCoins"
+            cell.coinImageView.image = UIImage(named: "coin")
+        
+            if let price = paymentViewModel.pricePerAmount[amount] {
+                cell.priceLabel.text = "\(price) €"
+            }
         }
         return cell
     }
@@ -53,9 +70,17 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let amount = buyAmounts?[indexPath.row]
-        buySoCoin(amount: amount!)
+        buySoCoin(amount: amount!) { amount in
+            self.database.updateCoins(with: amount) {
+                // update coins count
+                let currentAmount = Int(self.amountOfCoinsLabel.text ?? "0")
+                let amountOfCoins = (currentAmount ?? 0) + amount
+                self.amountOfCoinsLabel.text = "\(amountOfCoins)"
+            }
+        }
     }
     
+    // MARK: FlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        let availableWidth = collectionView.frame.width
         let availableHeight = collectionView.frame.height
@@ -69,45 +94,57 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
         return CGSize(width: widthPerItem, height: heightPerItem)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // MARK: - UsernameDelegate
+    func updateTextFields() {
+        self.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.startAnimating() }
+        database.getCurrentUserProfile { profile in
+            self.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
+            self.usernameTextField.text = profile.username
+            self.emailTextField.text = profile.email
+            self.amountOfCoinsLabel.text = "\(profile.amountOfCoins)"
+        }
+    }
+    
+    func updateUserDefaults(password: String?, orEmail email: String?) {
+        if let password = password {
+            userDefaults.set(password, forKey: kuserDefaultsPasswordKey)
+        }
+        
+        if let email = email {
+            userDefaults.set(email, forKey: kuserDefaultsEmailKey)
+        }
+        
+        userDefaults.synchronize()
+    }
     
     // MARK: - IBActions
+    @IBAction func signOut(_ sender: UIBarButtonItem) {
+        database.signOut {
+            userDefaults.removeObject(forKey: kuserDefaultsEmailKey)
+            userDefaults.removeObject(forKey: kuserDefaultsPasswordKey)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+            UIApplication.shared.keyWindow?.rootViewController = loginViewController
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     @IBAction func changeUsername(_ sender: UIButton) {
-//        let alertController = UIAlertController(title: "Change Username", message: "", preferredStyle: .alert)
-//        
-//        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "resetPasswordVC")
-//        
-//        alertController.addChildViewController(viewController!)
-////        alertController.addTextField { (oldUsernameTextField) in
-////            oldUsernameTextField.placeholder = "Current username"
-////        }
-////        alertController.addTextField { (newUsernameTextField) in
-////            newUsernameTextField.placeholder = "New username"
-////        }
-////        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-////        alertController.addAction(cancelAction)
-////        let changeAction = UIAlertAction(title: "Change", style: .default) { [weak self] _ in
-////            guard let oldUsernameTextField = alertController.textFields?.first, let oldUsername = oldUsernameTextField.text else {
-////                print("Old username not set")
-////                return
-////            }
-////            guard let newUsernameTextField = alertController.textFields?.last, let newUsername = newUsernameTextField.text else {
-////                print("New username not set")
-////                return
-////            }
-////            print("changes made :D")
-////        }
-////        alertController.addAction(changeAction)
-//        present(alertController, animated: true, completion: nil)
         let vc = ChangeUsernameViewController()
+        vc.username = usernameTextField.text
+        vc.database = self.database
+        weak var weakSelf = self
+        vc.delegate = weakSelf
+        self.present(vc, animated: true)
+    }
+    
+    @IBAction func changePassword(_ sender: UIButton) {
+        let vc = ChangePasswordViewController()
+        vc.database = self.database
+        weak var weakSelf = self
+        vc.delegate = weakSelf
+        vc.email = emailTextField.text
         self.present(vc, animated: true)
     }
     

@@ -19,7 +19,7 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
     var tabBar = UITabBar()
     var rightTabBar = UITabBar()
     
-    var database = DatabaseViewModel()
+//    var database = DatabaseViewModel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

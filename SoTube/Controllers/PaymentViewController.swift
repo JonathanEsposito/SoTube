@@ -19,15 +19,15 @@ class PaymentViewController: UIViewController, paymentDelegate {
     let paymentViewModel = PaymentViewModel()
 
     @IBAction func buySoCoin(_ sender: UIButton) {
-        buySoCoin(amount: Int(sender.title(for: .normal)!)!)
+        buySoCoin(amount: Int(sender.title(for: .normal)!)!, onCompletion: {_ in})
     }
 }
 
 extension paymentDelegate where Self: UIViewController {
 
-    func buySoCoin(amount: Int) {
+    func buySoCoin(amount: Int, onCompletion completionHandler: @escaping (Int)->()) {
         
-        let paymentVC = paymentViewModel.giveTransactionVC(forProduct: "SoCoins", amount: amount, inCurrency: .euro, withSku: nil)
+        let paymentVC = paymentViewModel.giveTransactionVC(forProduct: "SoCoins", amount: amount, inCurrency: .euro, withSku: nil, onCompletion: completionHandler)
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
