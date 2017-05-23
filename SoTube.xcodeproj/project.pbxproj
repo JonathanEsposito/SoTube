@@ -52,7 +52,7 @@
 		A0A29F5A1ECC2B1000E06D95 /* AVAudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F591ECC2B1000E06D95 /* AVAudioPlayerModel.swift */; };
 		A0A29F5C1ECC2B1E00E06D95 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F5B1ECC2B1E00E06D95 /* MusicPlayer.swift */; };
 		A0A29F5F1ECC2B5800E06D95 /* PayPalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F5D1ECC2B5800E06D95 /* PayPalModel.swift */; };
-		A0A29F601ECC2B5800E06D95 /* PayPalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F5E1ECC2B5800E06D95 /* PayPalViewModel.swift */; };
+		A0A29F601ECC2B5800E06D95 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F5E1ECC2B5800E06D95 /* PaymentViewModel.swift */; };
 		A0A29F681ECC2BA800E06D95 /* 0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F611ECC2BA800E06D95 /* 0.mp3 */; };
 		A0A29F691ECC2BA800E06D95 /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F621ECC2BA800E06D95 /* 1.mp3 */; };
 		A0A29F6A1ECC2BA800E06D95 /* 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A0A29F631ECC2BA800E06D95 /* 2.mp3 */; };
@@ -143,7 +143,7 @@
 		A0A29F591ECC2B1000E06D95 /* AVAudioPlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVAudioPlayerModel.swift; path = Models/MusicPlayer/AVAudioPlayerModel.swift; sourceTree = "<group>"; };
 		A0A29F5B1ECC2B1E00E06D95 /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicPlayer.swift; path = Models/MusicPlayer/MusicPlayer.swift; sourceTree = "<group>"; };
 		A0A29F5D1ECC2B5800E06D95 /* PayPalModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PayPalModel.swift; path = Models/PaymentModel/PayPalModel.swift; sourceTree = "<group>"; };
-		A0A29F5E1ECC2B5800E06D95 /* PayPalViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PayPalViewModel.swift; path = Models/PaymentModel/PayPalViewModel.swift; sourceTree = "<group>"; };
+		A0A29F5E1ECC2B5800E06D95 /* PaymentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentViewModel.swift; path = Models/PaymentModel/PaymentViewModel.swift; sourceTree = "<group>"; };
 		A0A29F611ECC2BA800E06D95 /* 0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 0.mp3; path = Resources/0.mp3; sourceTree = "<group>"; };
 		A0A29F621ECC2BA800E06D95 /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 1.mp3; path = Resources/1.mp3; sourceTree = "<group>"; };
 		A0A29F631ECC2BA800E06D95 /* 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 2.mp3; path = Resources/2.mp3; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				A0A29F5D1ECC2B5800E06D95 /* PayPalModel.swift */,
-				A0A29F5E1ECC2B5800E06D95 /* PayPalViewModel.swift */,
+				A0A29F5E1ECC2B5800E06D95 /* PaymentViewModel.swift */,
 			);
 			name = PaymentModel;
 			sourceTree = "<group>";
@@ -847,7 +847,7 @@
 				A05F929B1EC48B4D00F62432 /* TabBarViewController.swift in Sources */,
 				A05F92A71EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift in Sources */,
 				A0A29F5F1ECC2B5800E06D95 /* PayPalModel.swift in Sources */,
-				A0A29F601ECC2B5800E06D95 /* PayPalViewModel.swift in Sources */,
+				A0A29F601ECC2B5800E06D95 /* PaymentViewModel.swift in Sources */,
 				2FC986B61ECAE1DB00B037CE /* PaymentCollectionViewCell.swift in Sources */,
 				A0A29FA31ECDF71E00E06D95 /* StoreCollectionViewCell.swift in Sources */,
 				A0A29F9A1ECDB8E800E06D95 /* DatabaseViewModel.swift in Sources */,

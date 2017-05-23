@@ -9,7 +9,7 @@
 import UIKit
 
 class PaymentCollectionViewCell: UICollectionViewCell {
-    
+    @IBOutlet weak var coinImageView: UIImageView!
     @IBOutlet weak var amountLabel: UILabel!
-    
+    @IBOutlet weak var priceLabel: UILabel!
 }

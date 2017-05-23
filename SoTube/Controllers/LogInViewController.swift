@@ -57,9 +57,10 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "loginAsUser" {
-            
+        if segue.identifier == "loginAsGuest" {
+            selectedTabBarItemWithTitle = "Store"
         }
     }
     
@@ -70,29 +71,6 @@ class LogInViewController: UIViewController, DatabaseDelegate {
             return
         }
         self.login(withEmail: emailAddress, password: password)
-        
-//        database.login(withEmail: emailAddress, password: password, onCompletion: {
-//            
-//            // Dismiss the keyboard
-//            self.view.endEditing(true)
-//            
-//            // check if user already has any songs
-//            self.database.checkUserHasSongs { userHasSongs in
-//                // Perform segue
-//                if !userHasSongs {
-//                    print("lets go to the store")
-//                    let storyboard = UIStoryboard(name: "Store", bundle: nil)
-//                    guard let navigationController = storyboard.instantiateViewController(withIdentifier: "storeNavCont") as? UINavigationController else { print("Couldn't find account navigation controller"); return }
-//                    selectedTabBarItemWithTitle = "Store"
-//                    UIApplication.shared.keyWindow?.rootViewController = navigationController
-//                    self.dismiss(animated: true, completion: nil)
-//                } else {
-//                    print("go to my music")
-//                    selectedTabBarItemWithTitle = "My music"
-//                    self.performSegue(withIdentifier: "login", sender: nil)
-//                }
-//            }
-//        })
     }
     
     @IBAction func requestPasswordReset(_ sender: UIButton) {
@@ -115,6 +93,9 @@ class LogInViewController: UIViewController, DatabaseDelegate {
     
     // MARK: - Private Methodes
     private func login(withEmail emailAddress: String, password: String) {
+        // activityindicator should start here. Check stop actions first!!!
+//        self.loginActivityIndicatorView.startAnimating()
+        
         database.login(withEmail: emailAddress, password: password, onCompletion: {
             self.loginActivityIndicatorView.startAnimating()
             // Dismiss the keyboard

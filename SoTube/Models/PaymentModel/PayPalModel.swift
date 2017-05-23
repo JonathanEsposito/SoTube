@@ -8,6 +8,8 @@
 
 class PayPalModel: NSObject, PayPalPaymentDelegate {
     
+    var onPaymentCompleted: ((Int) -> ())?
+    
     var environment:String = PayPalEnvironmentNoNetwork {
         willSet(newEnvironment) {
             if (newEnvironment != environment) {
@@ -62,7 +64,6 @@ class PayPalModel: NSObject, PayPalPaymentDelegate {
         } else {
             print("Payment not processable: \(payment)")
             return nil
-            
         }
     }
     
@@ -79,6 +80,14 @@ class PayPalModel: NSObject, PayPalPaymentDelegate {
         print("PayPal Payment Success !")
         paymentViewController.dismiss(animated: true, completion: { () -> Void in
             // send completed confirmaion to your server
+            
+            if let onPaymentCompleted = self.onPaymentCompleted {
+                let description = completedPayment.shortDescription
+                let element = description.components(separatedBy: " ")
+                if let firstElement = element.first, let amount = Int(firstElement) {
+                    onPaymentCompleted(amount)
+                }
+            }
         })
     }
     

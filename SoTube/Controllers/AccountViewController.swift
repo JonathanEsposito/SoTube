@@ -13,7 +13,9 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var reloadUserInfoActivityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet var reloadUserInfoActivityIndicatorViewCollection: [UIActivityIndicatorView]!
+    @IBOutlet weak var amountOfCoinsLabel: UILabel!
+    @IBOutlet weak var amountOfSongsLabel: UILabel!
     
     // UserDefaults
     let kuserDefaultsEmailKey = "userEmail"
@@ -24,6 +26,8 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     let paymentViewModel = PaymentViewModel()
     var pricePerAmount: [Int: Double]?
     var buyAmounts: [Int]?
+    
+    var database = DatabaseViewModel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -53,7 +57,12 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PaymentCollectionViewCell
         if let amount = buyAmounts?[indexPath.row] {
-            cell.amountLabel.text = String(amount)
+            cell.amountLabel.text = "\(amount) SoCoins"
+//            cell.coinImageView.image = UIImage(named: "\(amount)")
+        
+            if let price = paymentViewModel.pricePerAmount[amount] {
+                cell.priceLabel.text = "\(price) €"
+            }
         }
         return cell
     }
@@ -61,9 +70,17 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let amount = buyAmounts?[indexPath.row]
-        buySoCoin(amount: amount!)
+        buySoCoin(amount: amount!) { amount in
+            self.database.updateCoins(with: amount) {
+                // update coins count
+                let currentAmount = Int(self.amountOfCoinsLabel.text ?? "0")
+                let amountOfCoins = (currentAmount ?? 0) + amount
+                self.amountOfCoinsLabel.text = "\(amountOfCoins)"
+            }
+        }
     }
     
+    // MARK: FlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        let availableWidth = collectionView.frame.width
         let availableHeight = collectionView.frame.height
@@ -79,10 +96,12 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     
     // MARK: - UsernameDelegate
     func updateTextFields() {
+        self.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.startAnimating() }
         database.getCurrentUserProfile { profile in
-            reloadUserInfoActivityIndicatorView.stopAnimating()
+            self.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
             self.usernameTextField.text = profile.username
             self.emailTextField.text = profile.email
+            self.amountOfCoinsLabel.text = "\(profile.amountOfCoins)"
         }
     }
     

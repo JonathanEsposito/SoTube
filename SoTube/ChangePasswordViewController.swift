@@ -15,6 +15,7 @@ class ChangePasswordViewController: UIViewController {
     @IBOutlet weak var confirmationPasswordTextField: UITextField!
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var changeActivityIndicatorView: UIActivityIndicatorView!
     
     let transitioner = CAVTransitioner()
     var database: DatabaseViewModel?
@@ -44,37 +45,44 @@ class ChangePasswordViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func doDismiss(_ sender: UIButton) {
+        self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
         self.presentingViewController?.dismiss(animated: true)
     }
     
     @IBAction func changePassword(_ sender: UIButton) {
+        changeActivityIndicatorView.startAnimating()
         guard let currentPassword = currentPasswordTextField.text, currentPassword != "" else {
-            showAlert(withTitle: "Password error", message: "Please fill out the current password first.")
+            self.changeActivityIndicatorView.stopAnimating()
+            self.showAlert(withTitle: "Password error", message: "Please fill out the current password first.")
             return
         }
         
         guard let newPassword = self.newPasswordTextField.text, newPassword != "",
             let confirmationPassword = self.confirmationPasswordTextField.text, confirmationPassword != "",
             newPassword == confirmationPassword else {
+                self.changeActivityIndicatorView.stopAnimating()
                 self.showAlert(withTitle: "Password error", message: "The confirmation password is not the same as the new password. Please try agian.")
                 return
         }
         
         guard let email = self.email else {
+            self.changeActivityIndicatorView.stopAnimating()
             print("Email not passed?")
             return
         }
         
-        self.delegate?.reloadUserInfoActivityIndicatorView.startAnimating()
+        
         
         // change password
         database?.change(currentPassword, with: newPassword, for: email, on: delegate!) { error in
+            self.changeActivityIndicatorView.stopAnimating()
             if let error = error {
+                self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
                 self.showAlert(withTitle: "Error reauthenticating user" , message: error.localizedDescription)
-                self.delegate?.reloadUserInfoActivityIndicatorView.stopAnimating()
             } else {
                 // do something
                 self.delegate?.updateUserDefaults(password: newPassword, orEmail: nil)
+                self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.startAnimating() }
                 self.delegate?.updateTextFields()
                 self.presentingViewController?.dismiss(animated: true)
             }

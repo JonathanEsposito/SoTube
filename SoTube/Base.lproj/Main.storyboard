@@ -168,13 +168,9 @@
                                     <segue destination="f1q-97-IAx" kind="show" identifier="loginAsGuest" id="LTX-wn-8lg"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Cxh-0e-9F6">
-                                <rect key="frame" x="120.5" y="280" width="80" height="80"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.59876077589999999" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="2bY-Mj-r7L"/>
-                                    <constraint firstAttribute="width" constant="80" id="oFb-3M-SNN"/>
-                                </constraints>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Cxh-0e-9F6">
+                                <rect key="frame" x="210" y="312" width="20" height="20"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="13"/>
@@ -184,13 +180,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Cxh-0e-9F6" firstAttribute="leading" secondItem="T7S-5V-Bbz" secondAttribute="trailing" constant="-29.5" id="4fa-7n-kR1"/>
-                            <constraint firstItem="Cxh-0e-9F6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5i3-NF-eZc"/>
-                            <constraint firstItem="Cxh-0e-9F6" firstAttribute="centerY" secondItem="vUp-52-3By" secondAttribute="centerY" id="5yn-5b-tDH"/>
+                            <constraint firstItem="Cxh-0e-9F6" firstAttribute="centerY" secondItem="vUp-52-3By" secondAttribute="centerY" constant="2" id="5yn-5b-tDH"/>
                             <constraint firstItem="JZv-Jo-jKL" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6Q1-ML-Xqr"/>
                             <constraint firstItem="8y9-nw-wDz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="J9I-pi-hI3"/>
                             <constraint firstItem="8y9-nw-wDz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="70" id="MBN-SV-ibk"/>
                             <constraint firstItem="JZv-Jo-jKL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" priority="750" id="Rgg-Ii-NhQ"/>
+                            <constraint firstItem="Cxh-0e-9F6" firstAttribute="centerX" secondItem="vUp-52-3By" secondAttribute="centerX" constant="60" id="THq-AG-Q21"/>
                             <constraint firstItem="LDW-Ne-mx7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="g8o-mt-K2O"/>
                             <constraint firstItem="JZv-Jo-jKL" firstAttribute="top" secondItem="8y9-nw-wDz" secondAttribute="bottom" id="hzs-l6-4AS"/>
                             <constraint firstItem="JZv-Jo-jKL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jOn-Nl-3J6"/>

@@ -14,6 +14,7 @@ class ChangeUsernameViewController: UIViewController {
     @IBOutlet weak var newUsernameTextField: UITextField!
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var changeActivityIndicatorView: UIActivityIndicatorView!
     
     let transitioner = CAVTransitioner()
     var username: String?
@@ -42,27 +43,31 @@ class ChangeUsernameViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func doDismiss(_ sender: UIButton) {
+        self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
         self.presentingViewController?.dismiss(animated: true)
     }
     
     @IBAction func changeAction(_ sender: UIButton) {
+        self.changeActivityIndicatorView.startAnimating()
         guard let currentUsername = currentUsernameTextField.text, username == currentUsername else {
+            self.changeActivityIndicatorView.stopAnimating()
             showAlert(withTitle: "Username error", message: "Current username is not correctly filled out!")
             return
         }
         
         guard let newUsername = newUsernameTextField.text, username != "" else {
+            self.changeActivityIndicatorView.stopAnimating()
             showAlert(withTitle: "Username error", message: "Please choose a new username")
             return
         }
         
-        self.delegate?.reloadUserInfoActivityIndicatorView.startAnimating()
-        
         database?.changeUsername(to: newUsername) { error in
+            self.changeActivityIndicatorView.stopAnimating()
             if let error = error {
-                self.delegate?.reloadUserInfoActivityIndicatorView.stopAnimating()
+                self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
                 self.showAlert(withTitle: "Username error", message: "Failed to change the display name: \(error.localizedDescription)")
             } else {
+                self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.startAnimating() }
                 self.delegate?.updateTextFields()
                 self.presentingViewController?.dismiss(animated: true)
             }

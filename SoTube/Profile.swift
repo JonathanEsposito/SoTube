@@ -11,4 +11,6 @@ import Foundation
 struct Profile {
     var username: String
     var email: String
+    var amountOfCoins: Int
+    var amountOfSongs: Int
 }

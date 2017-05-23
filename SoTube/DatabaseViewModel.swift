@@ -14,10 +14,10 @@ protocol DatabaseModel {
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String, delegate: DatabaseDelegate)
     func resetPassword(forEmail email: String, delegate: DatabaseDelegate)
     func checkForSongs(onCompletion: @escaping (Bool) -> ())
-    func getCurrentUserProfile(onCompletion: (Profile) -> ())
+    func getCurrentUserProfile(onCompletion: @escaping (Profile) -> ())
     func changeUsername(to: String, onCompletion: @escaping (Error?) -> ())
     func change(_ currentPassword: String, with newPassword: String, for email: String, on delegate: userInfoDelegate, onCompletion completionHandler: @escaping (Error?) -> ())
-//    func reauthenticate(withPassword: String, email: String, onCompletion: (Error?) -> ())
+    func updateCoins(with: Int, onCompletion: @escaping ()->())
 }
 
 protocol DatabaseDelegate {
@@ -55,7 +55,7 @@ class DatabaseViewModel {
         databaseModel.resetPassword(forEmail: email, delegate: delegate)
     }
     
-    func getCurrentUserProfile(onCompletion completionHandler: (Profile) -> ()) {
+    func getCurrentUserProfile(onCompletion completionHandler: @escaping (Profile) -> ()) {
         databaseModel.getCurrentUserProfile(onCompletion: completionHandler)
     }
     
@@ -75,5 +75,9 @@ class DatabaseViewModel {
             return
         }
         completionHandler()
+    }
+    
+    func updateCoins(with addedCoins: Int, onCompletion completionHandler: @escaping ()->()) {
+        databaseModel.updateCoins(with: addedCoins, onCompletion: completionHandler)
     }
 }

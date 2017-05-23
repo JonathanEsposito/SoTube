@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="buttonsView" destination="mSJ-sC-mw5" id="l4u-rZ-D5Y"/>
                 <outlet property="cancelButton" destination="EQY-8x-Obl" id="TRp-sO-Nd0"/>
+                <outlet property="changeActivityIndicatorView" destination="rgo-5p-rsb" id="We9-ng-LyZ"/>
                 <outlet property="currentUsernameTextField" destination="99x-1T-iyU" id="vd4-mY-m0a"/>
                 <outlet property="newUsernameTextField" destination="nNe-Vn-qgq" id="SkY-Ji-byM"/>
                 <outlet property="view" destination="iN0-l3-epB" id="4J5-Ff-jOX"/>
@@ -62,6 +63,10 @@
                                 <action selector="changeAction:" destination="-1" eventType="touchUpInside" id="6WQ-LO-8it"/>
                             </connections>
                         </button>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="rgo-5p-rsb">
+                            <rect key="frame" x="217.5" y="9" width="20" height="20"/>
+                            <color key="color" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -69,11 +74,13 @@
                         <constraint firstAttribute="bottom" secondItem="EQY-8x-Obl" secondAttribute="bottom" id="3MO-RX-BrN"/>
                         <constraint firstItem="EQY-8x-Obl" firstAttribute="top" secondItem="mSJ-sC-mw5" secondAttribute="top" id="Amj-JJ-LrT"/>
                         <constraint firstItem="4A0-6L-w9J" firstAttribute="leading" secondItem="mSJ-sC-mw5" secondAttribute="centerX" id="ECs-Ko-k0p"/>
+                        <constraint firstItem="rgo-5p-rsb" firstAttribute="centerX" secondItem="4A0-6L-w9J" secondAttribute="centerX" constant="40" id="G6F-hX-v9Y"/>
                         <constraint firstAttribute="bottom" secondItem="4A0-6L-w9J" secondAttribute="bottom" id="Qx5-06-eKl"/>
                         <constraint firstItem="EQY-8x-Obl" firstAttribute="trailing" secondItem="mSJ-sC-mw5" secondAttribute="centerX" id="SDE-PO-whT"/>
                         <constraint firstAttribute="trailing" secondItem="4A0-6L-w9J" secondAttribute="trailing" id="iR0-6R-YfS"/>
                         <constraint firstAttribute="height" constant="38" id="kIA-hm-PU3"/>
                         <constraint firstItem="EQY-8x-Obl" firstAttribute="leading" secondItem="mSJ-sC-mw5" secondAttribute="leading" id="rQc-dc-6Ab"/>
+                        <constraint firstItem="rgo-5p-rsb" firstAttribute="centerY" secondItem="4A0-6L-w9J" secondAttribute="centerY" id="uHq-UA-atv"/>
                     </constraints>
                 </view>
             </subviews>

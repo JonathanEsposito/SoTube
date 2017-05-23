@@ -9,7 +9,7 @@
 import UIKit
 
 protocol userInfoDelegate {
-    weak var reloadUserInfoActivityIndicatorView: UIActivityIndicatorView! { get }
+    var reloadUserInfoActivityIndicatorViewCollection: [UIActivityIndicatorView]! { get }
     func updateTextFields()
     func updateUserDefaults(password: String?, orEmail email: String?)
 }

@@ -78,9 +78,6 @@ class Firebase: DatabaseModel {
             if let currentUser = user {
                 let currentUserReference = usersReference.child(currentUser.uid)
                 let propertiesChild = currentUserReference.child("properties")
-                let userNameChild = propertiesChild.child("username")
-                userNameChild.setValue(userName)
-                
                 let coinsChild = propertiesChild.child("coins")
                 coinsChild.setValue(200)
             }
@@ -128,17 +125,25 @@ class Firebase: DatabaseModel {
         }
     }
     
-    func getCurrentUserProfile(onCompletion completionHandler: (Profile) -> ()) {
+    func getCurrentUserProfile(onCompletion completionHandler: @escaping (Profile) -> ()) {
         guard let currentUser = FIRAuth.auth()?.currentUser else {
             print("User not logged in")
             return
         }
+        
         let userEmail = currentUser.email ?? ""
         let userUsername = currentUser.displayName ?? ""
+        let userID = currentUser.uid
         
-        let userProfile = Profile(username: userUsername, email: userEmail)
-        
-        completionHandler(userProfile)
+        let userReference = FIRDatabase.database().reference(withPath: "users")
+        userReference.child(userID).child("properties").child("coins").observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot.value)
+            let amountOfCoins = snapshot.value as? Int
+            
+            let userProfile = Profile(username: userUsername, email: userEmail, amountOfCoins: amountOfCoins ?? 0, amountOfSongs: 0)
+            
+            completionHandler(userProfile)
+        })
     }
     
     func changeUsername(to newUsername: String, onCompletion completionHandler: @escaping (Error?) -> ()) {
@@ -160,5 +165,23 @@ class Firebase: DatabaseModel {
                 user?.updatePassword(newPassword, completion: completionHandler)
             }
         }
+    }
+    
+    func updateCoins(with addedCoins: Int, onCompletion completionHandler: @escaping ()->()) {
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let userReference = FIRDatabase.database().reference(withPath: "users")
+            userReference.child(userID).child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
+                print(snapshot.value)
+                if let currentAmount = snapshot.value as? Int {
+                    let newTotal = currentAmount + addedCoins
+                    userReference.child(userID).child("properties").updateChildValues(["coins" : newTotal])
+                    completionHandler()
+                }
+            })
+        } else {
+            print("user not logged in")
+        }
+        
+        
     }
 }
