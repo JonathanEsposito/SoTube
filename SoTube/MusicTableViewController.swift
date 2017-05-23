@@ -75,7 +75,7 @@ class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate
         print(indexPath)
         let path: String! = Bundle.main.resourcePath?.appending("/\(indexPath.row).mp3")
         let songURL = URL(fileURLWithPath: path)
-        musicPlayer.play(contentOf: songURL)
+        musicPlayer.play(contentOf: String(describing: songURL))
         
         self.updateMiniPlayer()
 

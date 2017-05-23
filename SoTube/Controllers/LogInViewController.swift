@@ -16,6 +16,7 @@ class LogInViewController: UIViewController, DatabaseDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     
     var database = DatabaseViewModel()
+    var spotifyModel = SpotifyModel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -23,6 +24,9 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         // Do any additional setup after loading the view.
         weak var weakSelf = self
         database.delegate = weakSelf
+        
+        spotifyModel.setUpLogin()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,4 +100,10 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    @IBAction func spotifyLogIn(_ sender: UITapGestureRecognizer) {
+        spotifyModel.spotifyLogin()
+        spotifyModel.getFeaturedPlaylists(amount: 10, withOffset: 0, OnCompletion: {playlists in print(playlists)})
+    }
+    
 }

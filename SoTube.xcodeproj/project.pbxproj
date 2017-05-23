@@ -16,7 +16,16 @@
 		2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */; };
 		2F0F66DE1EC1CE3F0019034F /* MusicViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */; };
 		2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */; };
+		2F5283691ED2E4A60034BB17 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5283661ED2E4A60034BB17 /* SpotifyAudioPlayback.framework */; };
+		2F52836A1ED2E4A60034BB17 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5283671ED2E4A60034BB17 /* SpotifyAuthentication.framework */; };
+		2F52836B1ED2E4A60034BB17 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5283681ED2E4A60034BB17 /* SpotifyMetadata.framework */; };
+		2F52836D1ED2E4DD0034BB17 /* SPTPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F52836C1ED2E4DD0034BB17 /* SPTPlayerModel.swift */; };
+		2F52836F1ED300B30034BB17 /* SpotifyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F52836E1ED300B30034BB17 /* SpotifyModel.swift */; };
 		2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7029931EC31ACC002B8395 /* Album.storyboard */; };
+		2F804E701ED433DB00E6A7B4 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F804E6F1ED433DB00E6A7B4 /* Album.swift */; };
+		2F804E721ED433F500E6A7B4 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F804E711ED433F500E6A7B4 /* Playlist.swift */; };
+		2F804E741ED4340400E6A7B4 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F804E731ED4340400E6A7B4 /* Category.swift */; };
+		2F804E761ED4377800E6A7B4 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F804E751ED4377800E6A7B4 /* UIImageExtensions.swift */; };
 		2FC986B01ECAD76000B037CE /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986AF1ECAD76000B037CE /* AccountViewController.swift */; };
 		2FC986B61ECAE1DB00B037CE /* PaymentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986B51ECAE1DB00B037CE /* PaymentCollectionViewCell.swift */; };
 		2FC986B81ECAE82A00B037CE /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC986B71ECAE82A00B037CE /* Account.storyboard */; };
@@ -93,7 +102,16 @@
 		2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicSplitViewController.swift; sourceTree = "<group>"; };
 		2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusicViews.storyboard; sourceTree = "<group>"; };
 		2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
+		2F5283661ED2E4A60034BB17 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
+		2F5283671ED2E4A60034BB17 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
+		2F5283681ED2E4A60034BB17 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
+		2F52836C1ED2E4DD0034BB17 /* SPTPlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPTPlayerModel.swift; sourceTree = "<group>"; };
+		2F52836E1ED300B30034BB17 /* SpotifyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyModel.swift; sourceTree = "<group>"; };
 		2F7029931EC31ACC002B8395 /* Album.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Album.storyboard; sourceTree = "<group>"; };
+		2F804E6F1ED433DB00E6A7B4 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		2F804E711ED433F500E6A7B4 /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
+		2F804E731ED4340400E6A7B4 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		2F804E751ED4377800E6A7B4 /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		2FC986AF1ECAD76000B037CE /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = Controllers/AccountViewController.swift; sourceTree = "<group>"; };
 		2FC986B51ECAE1DB00B037CE /* PaymentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentCollectionViewCell.swift; path = Controllers/PaymentCollectionViewCell.swift; sourceTree = "<group>"; };
 		2FC986B71ECAE82A00B037CE /* Account.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Account.storyboard; sourceTree = "<group>"; };
@@ -162,6 +180,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAD332C2D683670C2E3B77E5 /* Pods_SoTube.framework in Frameworks */,
+				2F52836B1ED2E4A60034BB17 /* SpotifyMetadata.framework in Frameworks */,
+				2F52836A1ED2E4A60034BB17 /* SpotifyAuthentication.framework in Frameworks */,
+				2F5283691ED2E4A60034BB17 /* SpotifyAudioPlayback.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,10 +231,22 @@
 		2F0F66D91EC1CC320019034F /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				2F5283701ED303DC0034BB17 /* Models */,
 				A0A29F751ECC2D0600E06D95 /* Storyboards */,
 				A0A29F781ECC2DA300E06D95 /* Controllers */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		2F5283701ED303DC0034BB17 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2F52836E1ED300B30034BB17 /* SpotifyModel.swift */,
+				2F804E6F1ED433DB00E6A7B4 /* Album.swift */,
+				2F804E731ED4340400E6A7B4 /* Category.swift */,
+				2F804E711ED433F500E6A7B4 /* Playlist.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		2FEC9C891EC9C2F600324AE1 /* Models */ = {
@@ -492,6 +525,7 @@
 			children = (
 				A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */,
 				A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */,
+				2F804E751ED4377800E6A7B4 /* UIImageExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -500,6 +534,7 @@
 			isa = PBXGroup;
 			children = (
 				A0A29F591ECC2B1000E06D95 /* AVAudioPlayerModel.swift */,
+				2F52836C1ED2E4DD0034BB17 /* SPTPlayerModel.swift */,
 				2FCDF2861ECC80D000095FF4 /* AVPlayerModel.swift */,
 				A0A29F5B1ECC2B1E00E06D95 /* MusicPlayer.swift */,
 			);
@@ -509,6 +544,9 @@
 		AB9BC1CBB75D52922E20C4DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F5283661ED2E4A60034BB17 /* SpotifyAudioPlayback.framework */,
+				2F5283671ED2E4A60034BB17 /* SpotifyAuthentication.framework */,
+				2F5283681ED2E4A60034BB17 /* SpotifyMetadata.framework */,
 				D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */,
 				F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */,
 				CE00E31D6BDA723D74E74335 /* Pods_SoTubeUITests.framework */,
@@ -816,6 +854,7 @@
 			files = (
 				2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */,
 				2FC986BC1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift in Sources */,
+				2F804E721ED433F500E6A7B4 /* Playlist.swift in Sources */,
 				A0A29F5C1ECC2B1E00E06D95 /* MusicPlayer.swift in Sources */,
 				2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */,
 				2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */,
@@ -826,15 +865,20 @@
 				2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */,
 				A057302D1ED2D54E008EC7B0 /* ChangeUsernameViewController.swift in Sources */,
 				A05F929B1EC48B4D00F62432 /* TabBarViewController.swift in Sources */,
+				2F52836F1ED300B30034BB17 /* SpotifyModel.swift in Sources */,
 				A05F92A71EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift in Sources */,
 				A0A29F5F1ECC2B5800E06D95 /* PayPalModel.swift in Sources */,
 				A0A29F601ECC2B5800E06D95 /* PayPalViewModel.swift in Sources */,
 				2FC986B61ECAE1DB00B037CE /* PaymentCollectionViewCell.swift in Sources */,
+				2F804E761ED4377800E6A7B4 /* UIImageExtensions.swift in Sources */,
+				2F52836D1ED2E4DD0034BB17 /* SPTPlayerModel.swift in Sources */,
 				A0A29FA31ECDF71E00E06D95 /* StoreCollectionViewCell.swift in Sources */,
 				A0A29F9A1ECDB8E800E06D95 /* DatabaseViewModel.swift in Sources */,
+				2F804E741ED4340400E6A7B4 /* Category.swift in Sources */,
 				A05F92A91EC58E9A00F62432 /* MusicPlayerViewController.swift in Sources */,
 				2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */,
 				2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */,
+				2F804E701ED433DB00E6A7B4 /* Album.swift in Sources */,
 				A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */,
 				A03E69911EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift in Sources */,
 				2FCDF2871ECC80D000095FF4 /* AVPlayerModel.swift in Sources */,
@@ -1009,6 +1053,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SoTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NVMetTalent.SoTube;
@@ -1026,6 +1074,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SoTube/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.NVMetTalent.SoTube;

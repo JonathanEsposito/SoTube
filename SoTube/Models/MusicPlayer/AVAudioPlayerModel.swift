@@ -23,8 +23,8 @@ class AVAudioPlayerModel: MusicPlayerModel {
         return player.duration
     }
     
-    func play(contentOf url: URL) throws {
-        player = try AVAudioPlayer(contentsOf: url)
+    func play(contentOf url: String) throws {
+        player = try AVAudioPlayer(contentsOf: URL(string: url)!)
         player.prepareToPlay()
         player.play()
     }

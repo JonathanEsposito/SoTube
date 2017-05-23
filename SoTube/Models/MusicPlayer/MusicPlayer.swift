@@ -14,7 +14,7 @@ protocol MusicPlayerModel {
     var currentTime: TimeInterval { get }
     var duration: TimeInterval { get }
     
-    func play(contentOf: URL) throws
+    func play(contentOf: String) throws
     func stop()
     func setCurrentTime(to: TimeInterval)
     func pause()
@@ -97,8 +97,8 @@ class MusicPlayer: NSObject {
         }
     }
     
-    func play(contentOf url: URL) {
-        song = url
+    func play(contentOf url: String) {
+        song = URL(string: url)
         do {
             try player.play(contentOf: url)
         } catch {
