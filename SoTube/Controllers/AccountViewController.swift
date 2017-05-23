@@ -58,7 +58,7 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PaymentCollectionViewCell
         if let amount = buyAmounts?[indexPath.row] {
             cell.amountLabel.text = "\(amount) SoCoins"
-//            cell.coinImageView.image = UIImage(named: "\(amount)")
+            cell.coinImageView.image = UIImage(named: "coin")
         
             if let price = paymentViewModel.pricePerAmount[amount] {
                 cell.priceLabel.text = "\(price) €"
