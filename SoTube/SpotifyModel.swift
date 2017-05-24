@@ -68,9 +68,7 @@ class SpotifyModel {
         urlSession.dataTask(with: urlRequest!) { data, response, error in
             if let jsonData = data,
                 let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary {
-//                print(feed)
                 let albums = feed.value(forKeyPath: "albums.items") as! NSArray
-//                print(albums)
                 var albumArray = [Album]()
                 for album in albums {
                     let dictionary = album as! NSDictionary
@@ -100,14 +98,15 @@ class SpotifyModel {
                 for category in categories {
                     let dictionary = category as! NSDictionary
                     let name =  dictionary.value(forKeyPath: "name") as! String
+                    let id = dictionary.value(forKeyPath: "id") as! String
                     let coverUrls = dictionary.value(forKeyPath: "icons.url") as! [String]
                     let url = dictionary.value(forKeyPath: "href") as! String
-                    let category = Category(named: name, withCoverUrl: coverUrls.first!, withUrl: url)
+                    let category = Category(named: name,withId: id, withCoverUrl: coverUrls.first!, withUrl: url)
                     categoryArray.append(category)
                 }
                 completionHandler(categoryArray)
             }
-            }.resume()
+        }.resume()
     }
     
     func getFeaturedPlaylists(amount: Int, withOffset offset: Int, OnCompletion completionHandler: @escaping ([Playlist])->()) {
@@ -118,7 +117,7 @@ class SpotifyModel {
         urlSession.dataTask(with: urlRequest!) { data, response, error in
             if let jsonData = data,
                 let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary {
-
+                
                 let playlists = feed.value(forKeyPath: "playlists.items") as! NSArray
                 var playlistArray = [Playlist]()
                 for playlist in playlists {
@@ -126,7 +125,96 @@ class SpotifyModel {
                     let name =  dictionary.value(forKeyPath: "name") as! String
                     let coverUrls = dictionary.value(forKeyPath: "images.url") as! [String]
                     let id = dictionary.value(forKeyPath: "id") as! String
-                    let playlist = Playlist(named: name, withCoverUrl: coverUrls.first!, withId: id)
+                    let owner = dictionary.value(forKeyPath: "owner.id") as! String
+                    let playlist = Playlist(named: name, withCoverUrl: coverUrls.first!, withId: id, fromOwner: owner)
+                    playlistArray.append(playlist)
+                }
+                completionHandler(playlistArray)
+            }
+        }.resume()
+    }
+    
+    func getTracks(from album: Album, OnCompletion completionHandler: @escaping ([Track])->()) {
+        let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/albums/\(album.id)/tracks")
+        
+        let urlSession = URLSession.shared
+        
+        urlSession.dataTask(with: urlRequest!) { data, response, error in
+            if let jsonData = data,
+                let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary {
+                
+                let tracks = feed.value(forKeyPath: "items") as! NSArray
+                var trackArray = [Track]()
+                for track in tracks {
+                    let dictionary = track as! NSDictionary
+                    let id = dictionary.value(forKeyPath: "id") as! String
+                    let name = dictionary.value(forKeyPath: "name") as! String
+                    let trackNumber = dictionary.value(forKeyPath: "track_number") as! Int
+                    let discNumber = dictionary.value(forKeyPath: "disc_number") as! Int
+                    let duration = dictionary.value(forKeyPath: "duration_ms") as! Int
+                    let coverUrl = album.coverUrl
+                    let artistName = dictionary.value(forKeyPath: "artists.name") as! [String]
+                    let artistId = dictionary.value(forKeyPath: "artists.id") as! [String]
+                    let albumName = album.name
+                    let albumId = album.id
+                    let track = Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl, artistName: artistName.first!, artistId: artistId.first!, albumName: albumName, albumId: albumId)
+                    trackArray.append(track)
+                }
+                completionHandler(trackArray)
+            }
+        }.resume()
+    }
+    
+    func getTracks(from playlist: Playlist, OnCompletion completionHandler: @escaping ([Track])->()) {
+        let userId = "spotify"
+        let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/users/\(userId)/playlists/\(playlist.id)/tracks")
+        
+        let urlSession = URLSession.shared
+        
+        urlSession.dataTask(with: urlRequest!) { data, response, error in
+            if let jsonData = data,
+                let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary {
+                
+                let tracks = feed.value(forKeyPath: "items.track") as! NSArray
+                var trackArray = [Track]()
+                for track in tracks {
+                    let dictionary = track as! NSDictionary
+                    let id = dictionary.value(forKeyPath: "id") as! String
+                    let name = dictionary.value(forKeyPath: "name") as! String
+                    let trackNumber = dictionary.value(forKeyPath: "track_number") as! Int
+                    let discNumber = dictionary.value(forKeyPath: "disc_number") as! Int
+                    let duration = dictionary.value(forKeyPath: "duration_ms") as! Int
+                    let coverUrl = dictionary.value(forKeyPath: "album.images.url") as! [String]
+                    let artistName = dictionary.value(forKeyPath: "artists.name") as! [String]
+                    let artistId = dictionary.value(forKeyPath: "artists.id") as! [String]
+                    let albumName = dictionary.value(forKeyPath: "album.name") as! String
+                    let albumId = dictionary.value(forKeyPath: "album.id") as! String
+                    let track = Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl.first!, artistName: artistName.first!, artistId: artistId.first!, albumName: albumName, albumId: albumId)
+                    trackArray.append(track)
+                }
+                completionHandler(trackArray)
+            }
+            }.resume()
+    }
+    
+    func getPlaylist(from category: Category, OnCompletion completionHandler: @escaping ([Playlist])->()) {
+        let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/browse/categories/\(category.id)/playlists")
+        
+        let urlSession = URLSession.shared
+        
+        urlSession.dataTask(with: urlRequest!) { data, response, error in
+            if let jsonData = data,
+                let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary {
+                
+                let playlists = feed.value(forKeyPath: "playlists.items") as! NSArray
+                var playlistArray = [Playlist]()
+                for playlist in playlists {
+                    let dictionary = playlist as! NSDictionary
+                    let name = dictionary.value(forKeyPath: "name") as! String
+                    let coverUrl = dictionary.value(forKeyPath: "images.url") as! [String]
+                    let id = dictionary.value(forKeyPath: "id") as! String
+                    let owner = dictionary.value(forKeyPath: "owner.id") as! String
+                    let playlist = Playlist(named: name, withCoverUrl: coverUrl.first!, withId: id, fromOwner: owner)
                     playlistArray.append(playlist)
                 }
                 completionHandler(playlistArray)
@@ -134,7 +222,9 @@ class SpotifyModel {
             }.resume()
     }
     
-    private func getSpotifyString(ofType stringType: StringType, forItemType itemType: itemType, andID id: String) -> String {
+    
+    
+    func getSpotifyString(ofType stringType: StringType, forItemType itemType: itemType, andID id: String) -> String {
         switch stringType {
         case .hrefString:
             return "https://api.spotify.com/v1/\(itemType)/\(id)"
@@ -182,7 +272,7 @@ class SpotifyModel {
 
     private func getURLRequest(forUrl url: String) -> URLRequest? {
         
-        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQAQIWRj_q4gUjo0i4VDUhawwp8ThZM7wjSOTMwmYDCZ6zQx2-tKa8geWOjvz5gy1AK7oO8F-jDwgPOl_9gMI-ocZDS3_kbUWsRQts8SqVmOkBVvqBixeDoF0uRnsmD_ypniIgcVYhChwOzYJQ", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQCC78K1VHySHwPuICU1yxFkBMLZOlWV2JA0ZH2WyL7YsG5s-8dYpJK_WpcZm2u4TVZWC7_4V8u_qo53TTe6pzB05cEhtL0nPmDVXP2abz3m2K1keUd5KCoSKoMIw0BZONp72qaegK2vow", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         
         return urlRequest
     }

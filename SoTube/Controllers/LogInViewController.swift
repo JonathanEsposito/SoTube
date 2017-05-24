@@ -86,7 +86,7 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         alertController.addAction(cancelAction)
         let resetAction = UIAlertAction(title: "Reset", style: .default) { [weak self] _ in
             guard let emailTextField = alertController.textFields?.first,
-            let email = emailTextField.text
+                let email = emailTextField.text
                 else { return }
             self?.database.resetPassword(forEmail: email)
         }
@@ -95,10 +95,14 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func spotifyLogIn(_ sender: UITapGestureRecognizer) {
+        spotifyModel.spotifyLogin()
+    }
+    
     // MARK: - Private Methodes
     private func login(withEmail emailAddress: String, password: String) {
         // activityindicator should start here. Check stop actions first!!!
-//        self.loginActivityIndicatorView.startAnimating()
+        //        self.loginActivityIndicatorView.startAnimating()
         
         database.login(withEmail: emailAddress, password: password, onCompletion: {
             self.loginActivityIndicatorView.startAnimating()
@@ -133,12 +137,6 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         userDefaults.set(password, forKey: kuserDefaultsPasswordKey)
         userDefaults.synchronize()
     }
-    
-    @IBAction func spotifyLogIn(_ sender: UITapGestureRecognizer) {
-        spotifyModel.spotifyLogin()
-        spotifyModel.getFeaturedPlaylists(amount: 10, withOffset: 0, OnCompletion: {playlists in print(playlists)})
-    }
-    
     
     private func loadSavedLogin() -> (String, String) {
         let userEmail = userDefaults.object(forKey: kuserDefaultsEmailKey) as! String

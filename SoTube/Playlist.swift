@@ -10,10 +10,13 @@ struct Playlist {
     let name: String
     let coverUrl: String
     let id: String
+    let owner: String
+    var tracks: [Track]?
     
-    init(named name: String, withCoverUrl coverUrl: String, withId id: String) {
+    init(named name: String, withCoverUrl coverUrl: String, withId id: String, fromOwner owner: String) {
         self.name = name
         self.id = id
         self.coverUrl = coverUrl
+        self.owner = owner
     }
 }

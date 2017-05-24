@@ -16,11 +16,31 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
     @IBOutlet weak var featuredPlaylistsFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var categoriesFlowLayout: UICollectionViewFlowLayout!
+    
+    let spotifyModel = SpotifyModel()
+    let player = SPTPlayerModel()
+    var newReleases: [Album] = []
+    var featuredPlaylists: [Playlist] = []
+    var categories: [Category] = []
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        spotifyModel.getNewReleases(amount: 50, withOffset: 0, OnCompletion: {albums in
+            self.newReleases = albums
+            self.newReleasesCollectionView.reloadData()
+        })
+        spotifyModel.getFeaturedPlaylists(amount: 50, withOffset: 0, OnCompletion: {playlists in
+            self.featuredPlaylists = playlists
+            self.featuredPlaylistsCollectionView.reloadData()
+        })
+        spotifyModel.getCategories(amount: 50, withOffset: 0, OnCompletion: {categories in
+            self.categories = categories
+            self.categoriesCollectionView.reloadData()
+            
+        })
         
     }
 
@@ -36,26 +56,61 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20//data.count
+        
+        switch collectionView {
+        case newReleasesCollectionView:
+            return newReleases.count
+        case featuredPlaylistsCollectionView:
+            return featuredPlaylists.count
+        case categoriesCollectionView:
+            return categories.count
+        default:
+            return 0
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cell = UICollectionViewCell()
         
+        var cell: StoreCollectionViewCell?
+        
+
         if collectionView === newReleasesCollectionView {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath) as? StoreCollectionViewCell
+            cell?.nameLabel.text = newReleases[indexPath.row].name
+            cell?.coverImageView.image(fromLink: newReleases[indexPath.row].coverUrl)
         }
         
         if collectionView === featuredPlaylistsCollectionView {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath) as? StoreCollectionViewCell
+            cell?.nameLabel.text = featuredPlaylists[indexPath.row].name
+            cell?.coverImageView.image(fromLink: featuredPlaylists[indexPath.row].coverUrl)
         }
         
         if collectionView === categoriesCollectionView {
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath)
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath) as? StoreCollectionViewCell
+            cell?.nameLabel.text = categories[indexPath.row].name
+            cell?.coverImageView.image(fromLink: categories[indexPath.row].coverUrl)
         }
         
-        return cell
+        self.reloadInputViews()
+        return cell!
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if collectionView === newReleasesCollectionView {
+//            try? player.play(contentOf: spotifyModel.getSpotifyString(ofType: .playString, forItemType: .albums, andID: newReleases[indexPath.row].id))
+//        }
+//        
+//        if collectionView === featuredPlaylistsCollectionView {
+//
+//        }
+//        
+//        if collectionView === categoriesCollectionView {
+//            
+//        }
+//    }
+    
     
     // MARK: DelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {

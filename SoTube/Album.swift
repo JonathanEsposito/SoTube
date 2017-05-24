@@ -11,6 +11,7 @@ struct Album {
     let artist: String
     let coverUrl: String
     let id: String
+    var tracks: [Track]?
     
     init(named name: String, fromArtist artist: String, withCoverUrl coverUrl: String, withId id: String) {
         self.name = name
