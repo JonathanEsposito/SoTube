@@ -17,7 +17,10 @@ protocol DatabaseModel {
     func getCurrentUserProfile(onCompletion: @escaping (Profile) -> ())
     func changeUsername(to: String, onCompletion: @escaping (Error?) -> ())
     func change(_ currentPassword: String, with newPassword: String, for email: String, on delegate: userInfoDelegate, onCompletion completionHandler: @escaping (Error?) -> ())
-    func updateCoins(with: Int, onCompletion: @escaping ()->())
+    func updateCoins(with: CoinPurchase, onCompletion: @escaping ()->())
+    func getCoinHistory(onCompletion completionHandler: @escaping ([CoinPurchase])->())
+    func getMusicHistory(onCompletion completionHandler: @escaping ([Track])->())
+    func buy(_ musicPurchase: Track, withCoins coins: Int, onCompletion: ()->())
 }
 
 protocol DatabaseDelegate {
@@ -77,7 +80,19 @@ class DatabaseViewModel {
         completionHandler()
     }
     
-    func updateCoins(with addedCoins: Int, onCompletion completionHandler: @escaping ()->()) {
-        databaseModel.updateCoins(with: addedCoins, onCompletion: completionHandler)
+    func updateCoins(with coinPurchase: CoinPurchase, onCompletion completionHandler: @escaping ()->()) {
+        databaseModel.updateCoins(with: coinPurchase, onCompletion: completionHandler)
+    }
+    
+    func getCoinHistory(onCompletion completionHandler: @escaping ([CoinPurchase])->()) {
+        databaseModel.getCoinHistory(onCompletion: completionHandler)
+    }
+    
+    func getMusicHistory(onCompletion completionHandler: @escaping ([Track])->()) {
+        databaseModel.getMusicHistory(onCompletion: completionHandler)
+    }
+    
+    func buy(_ musicPurchase: Track, withCoins coins: Int, onCompletion completionHandler: ()->()) {
+        databaseModel.buy(musicPurchase, withCoins: coins, onCompletion: completionHandler)
     }
 }

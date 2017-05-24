@@ -9,8 +9,8 @@
 import Foundation
 
 struct Profile {
-    var username: String
-    var email: String
-    var amountOfCoins: Int
-    var amountOfSongs: Int
+    let username: String
+    let email: String
+    let amountOfCoins: Int
+    let amountOfSongs: Int
 }
