@@ -167,21 +167,90 @@ class Firebase: DatabaseModel {
         }
     }
     
-    func updateCoins(with addedCoins: Int, onCompletion completionHandler: @escaping ()->()) {
+    func updateCoins(with coinPurchase: CoinPurchase, onCompletion completionHandler: @escaping ()->()) {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userReference = FIRDatabase.database().reference(withPath: "users")
-            userReference.child(userID).child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
+            userReference.child("\(userID)/properties/coins").observeSingleEvent(of: .value, with: { snapshot in
                 print(snapshot.value)
                 if let currentAmount = snapshot.value as? Int {
-                    let newTotal = currentAmount + addedCoins
-                    userReference.child(userID).child("properties").updateChildValues(["coins" : newTotal])
+                    let newTotal = currentAmount + coinPurchase.amount
+                    userReference.child("\(userID)/properties/coins").setValue(newTotal) //.updateChildValues([ : newTotal])
                     completionHandler()
+                }
+            })
+            
+            let coinsHistoryChild = userReference.child("\(userID)/properties/coinsHistory")
+            print(coinPurchase.date)
+            print(coinPurchase.date.timeIntervalSinceReferenceDate)
+            print(coinPurchase.keyDate)
+            coinsHistoryChild.updateChildValues(coinPurchase.dictionary)
+        } else {
+            print("user not logged in")
+        }
+    }
+    
+    func getCoinHistory(onCompletion completionHandler: @escaping ([CoinPurchase])->()) {
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let userCoinHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/properties/coinsHistory")
+            userCoinHistoryRef.observeSingleEvent(of: .value, with: { snapshot in
+                if let purchaseDictionary = snapshot.value as? [String : [String : Double]] {
+                    var coinPurchases: [CoinPurchase] = []
+                    purchaseDictionary.forEach {
+                        let dateString = $0.key
+                        guard let amountString = $0.value.keys.first else {fatalError("Database error")}
+                        guard let price = $0.value.values.first else {fatalError("Database error")}
+                        
+                        if let date = Int(dateString), let amount = Int(amountString) {
+                            print("time: \(time), amount: \(amount), price: \(round(price * 100) / 100)")
+                            coinPurchases.append(CoinPurchase(amount: amount, price: price, databaseTime: date))
+                        }
+                    }
+                    completionHandler(coinPurchases)
                 }
             })
         } else {
             print("user not logged in")
         }
-        
-        
+    }
+    
+    func buy(_ musicPurchase: Track, withCoins coins: Int, onCompletion completionHandler: ()->()) {
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let userMusicHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/properties/musicHistory")
+            userMusicHistoryRef.updateChildValues(musicPurchase.dictionary)
+        } else {
+            print("user not logged in")
+        }
+    }
+    
+    func getMusicHistory(onCompletion completionHandler: @escaping ([Track])->()) {
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let userMusicHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/songs")
+            userMusicHistoryRef.observeSingleEvent(of: .value, with: { snapshot in
+                if let purchaseDictionary = snapshot.value as? [String : [String : String]] {
+                    print(purchaseDictionary)
+                    var musicPurchases: [Track] = []
+                    purchaseDictionary.forEach {
+                        print($0)
+                        guard let id = String($0.key) else {fatalError("Database error")}
+                        guard let name = $0.value["name"] else {fatalError("Database error")}
+                        guard let trackNumberString = $0.value["trackNumber"], let trackNumber = Int(trackNumberString) else {fatalError("Database error")}
+                        guard let discNumberString = $0.value["discNumber"], let discNumber = Int(discNumberString) else {fatalError("Database error")}
+                        guard let durationString = $0.value["duration"], let duration = Int(durationString) else {fatalError("Database error")}
+                        guard let coverUrl = $0.value["coverUrl"] else {fatalError("Database error")}
+                        guard let artistName = $0.value["artistName"] else {fatalError("Database error")}
+                        guard let artistId = $0.value["artistId"] else {fatalError("Database error")}
+                        guard let albumName = $0.value["albumName"] else {fatalError("Database error")}
+                        guard let albumId = $0.value["albumId"] else {fatalError("Database error")}
+                        guard let dateOfPurchaseString = $0.value["dateOfPurchase"], let dateOfPurchase = TimeInterval(dateOfPurchaseString) else {fatalError("Database error")}
+                        guard let priceInCoinsString = $0.value["priceInCoins"], let priceInCoins = Int(priceInCoinsString) else {fatalError("Database error")}
+                        
+                        musicPurchases.append(Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl, artistName: artistName, artistId: artistId, albumName: albumName, albumId: albumId, databaseDate: dateOfPurchase, priceInCoins: priceInCoins))
+                    }
+                    completionHandler(musicPurchases)
+                }
+            })
+        } else {
+            print("user not logged in")
+        }
     }
 }

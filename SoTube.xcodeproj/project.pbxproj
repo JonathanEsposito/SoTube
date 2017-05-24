@@ -23,7 +23,6 @@
 		2F52836F1ED300B30034BB17 /* SpotifyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F52836E1ED300B30034BB17 /* SpotifyModel.swift */; };
 		2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F7029931EC31ACC002B8395 /* Album.storyboard */; };
 		2F7120091ED563C100DD96FA /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7120081ED563C100DD96FA /* Track.swift */; };
-		2F71200B1ED5B58000DD96FA /* UIImageViewLoadFromUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F71200A1ED5B58000DD96FA /* UIImageViewLoadFromUrl.swift */; };
 		2F804E701ED433DB00E6A7B4 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F804E6F1ED433DB00E6A7B4 /* Album.swift */; };
 		2F804E721ED433F500E6A7B4 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F804E711ED433F500E6A7B4 /* Playlist.swift */; };
 		2F804E741ED4340400E6A7B4 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F804E731ED4340400E6A7B4 /* Category.swift */; };
@@ -39,6 +38,8 @@
 		A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03227E11ECAF7060041197B /* MinimizedPlayer.swift */; };
 		A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */; };
 		A03E69911EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E69901EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift */; };
+		A0429A5A1ED5450C0088F71F /* CoinPurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0429A591ED5450C0088F71F /* CoinPurchase.swift */; };
+		A0429A5E1ED5C8A70088F71F /* UIImageViewLoadFromUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0429A5D1ED5C8A70088F71F /* UIImageViewLoadFromUrl.swift */; };
 		A057302B1ED2D383008EC7B0 /* ChangeUsernameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A057302A1ED2D383008EC7B0 /* ChangeUsernameViewController.xib */; };
 		A057302D1ED2D54E008EC7B0 /* ChangeUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A057302C1ED2D54E008EC7B0 /* ChangeUsernameViewController.swift */; };
 		A057302F1ED2E546008EC7B0 /* CustomAlertViewTransitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A057302E1ED2E546008EC7B0 /* CustomAlertViewTransitioner.swift */; };
@@ -116,7 +117,6 @@
 		2F52836E1ED300B30034BB17 /* SpotifyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyModel.swift; sourceTree = "<group>"; };
 		2F7029931EC31ACC002B8395 /* Album.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Album.storyboard; sourceTree = "<group>"; };
 		2F7120081ED563C100DD96FA /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
-		2F71200A1ED5B58000DD96FA /* UIImageViewLoadFromUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewLoadFromUrl.swift; sourceTree = "<group>"; };
 		2F804E6F1ED433DB00E6A7B4 /* Album.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		2F804E711ED433F500E6A7B4 /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		2F804E731ED4340400E6A7B4 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -134,6 +134,8 @@
 		A03227E11ECAF7060041197B /* MinimizedPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimizedPlayer.swift; sourceTree = "<group>"; };
 		A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MinimizedPlayer.xib; path = Views/MinimizedPlayer.xib; sourceTree = "<group>"; };
 		A03E69901EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMusicTabBarViewController.swift; sourceTree = "<group>"; };
+		A0429A591ED5450C0088F71F /* CoinPurchase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoinPurchase.swift; path = Models/CoinPurchase.swift; sourceTree = "<group>"; };
+		A0429A5D1ED5C8A70088F71F /* UIImageViewLoadFromUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageViewLoadFromUrl.swift; path = Extentions/UIImageViewLoadFromUrl.swift; sourceTree = "<group>"; };
 		A057302A1ED2D383008EC7B0 /* ChangeUsernameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChangeUsernameViewController.xib; path = Views/ChangeUsernameViewController.xib; sourceTree = "<group>"; };
 		A057302C1ED2D54E008EC7B0 /* ChangeUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeUsernameViewController.swift; sourceTree = "<group>"; };
 		A057302E1ED2E546008EC7B0 /* CustomAlertViewTransitioner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAlertViewTransitioner.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				A05730381ED2F9C8008EC7B0 /* Profile.swift */,
 				A0A29F981ECDB39D00E06D95 /* Database */,
 				2FEC9C8A1EC9C30A00324AE1 /* PaymentModel */,
+				A0429A591ED5450C0088F71F /* CoinPurchase.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -497,8 +500,8 @@
 			isa = PBXGroup;
 			children = (
 				2FC986AF1ECAD76000B037CE /* AccountViewController.swift */,
-				2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */,
 				2FC986B51ECAE1DB00B037CE /* PaymentCollectionViewCell.swift */,
+				2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */,
 				2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */,
 			);
 			name = Controllers;
@@ -546,7 +549,7 @@
 				A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */,
 				A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */,
 				A057303E1ED332D3008EC7B0 /* UIViewBorderLeftTopRightBottom.swift */,
-				2F71200A1ED5B58000DD96FA /* UIImageViewLoadFromUrl.swift */,
+				A0429A5D1ED5C8A70088F71F /* UIImageViewLoadFromUrl.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -879,10 +882,10 @@
 				2F804E721ED433F500E6A7B4 /* Playlist.swift in Sources */,
 				A0A29F5C1ECC2B1E00E06D95 /* MusicPlayer.swift in Sources */,
 				2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */,
+				A0429A5E1ED5C8A70088F71F /* UIImageViewLoadFromUrl.swift in Sources */,
 				2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */,
 				A0A29F5A1ECC2B1000E06D95 /* AVAudioPlayerModel.swift in Sources */,
 				A0A29F971ECD92CD00E06D95 /* FirebaseModel.swift in Sources */,
-				2F71200B1ED5B58000DD96FA /* UIImageViewLoadFromUrl.swift in Sources */,
 				A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */,
 				A0A29F9F1ECDEF9A00E06D95 /* StoreOverviewViewController.swift in Sources */,
 				2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */,
@@ -895,6 +898,7 @@
 				2FC986B61ECAE1DB00B037CE /* PaymentCollectionViewCell.swift in Sources */,
 				2F52836D1ED2E4DD0034BB17 /* SPTPlayerModel.swift in Sources */,
 				A0A29FA31ECDF71E00E06D95 /* StoreCollectionViewCell.swift in Sources */,
+				A0429A5A1ED5450C0088F71F /* CoinPurchase.swift in Sources */,
 				A0A29F9A1ECDB8E800E06D95 /* DatabaseViewModel.swift in Sources */,
 				2F804E741ED4340400E6A7B4 /* Category.swift in Sources */,
 				A05F92A91EC58E9A00F62432 /* MusicPlayerViewController.swift in Sources */,

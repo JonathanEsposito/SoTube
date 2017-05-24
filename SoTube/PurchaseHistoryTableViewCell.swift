@@ -11,6 +11,7 @@ import UIKit
 class PurchaseHistoryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var productImageView: UIImageView!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var productLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     

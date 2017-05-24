@@ -71,11 +71,14 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let amount = buyAmounts?[indexPath.row]
         buySoCoin(amount: amount!) { amount in
-            self.database.updateCoins(with: amount) {
-                // update coins count
-                let currentAmount = Int(self.amountOfCoinsLabel.text ?? "0")
-                let amountOfCoins = (currentAmount ?? 0) + amount
-                self.amountOfCoinsLabel.text = "\(amountOfCoins)"
+            if let price = self.pricePerAmount?[amount] {
+                let coinPurchase = CoinPurchase(amount: amount, price: price)
+                self.database.updateCoins(with: coinPurchase) {
+                    // update coins count
+                    let currentAmount = Int(self.amountOfCoinsLabel.text ?? "0")
+                    let amountOfCoins = (currentAmount ?? 0) + amount
+                    self.amountOfCoinsLabel.text = "\(amountOfCoins)"
+                }
             }
         }
     }
