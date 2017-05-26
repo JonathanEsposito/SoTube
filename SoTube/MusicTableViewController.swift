@@ -148,7 +148,7 @@ class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate
             if musicPlayer.hasSong {
                 height = 94
             } else {
-                height = 50
+                height = 50 
             }
         } else {
             height = 50
@@ -160,29 +160,5 @@ class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate
         let lastTableViewSubviewHeight = songTableView.tableFooterView?.bounds.height
         let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
         songTableView.contentSize = CGSize(width: songTableView.contentSize.width, height: newHeight)
-        
-        
-//        tableFooterView.frame.size.height = height
-        
-//        print(songTableView.tableFooterView)
-//        songTableView.tableFooterView?.heightAnchor.constraint(equalToConstant: 94)
-//        songTableView.tableFooterView?.backgroundColor = UIColor.green
-////        songTableView.
-//        songTableView.setNeedsLayout()
-//        songTableView.tableFooterView?.setNeedsLayout()
-//        songTableView.layoutIfNeeded()
-//        songTableView.tableFooterView?.layoutIfNeeded()
-//        songTableView.subviews.last
-        
-//        tableFooterView.setNeedsLayout()
-//        tableFooterView.layoutIfNeeded()
-//        let rect = CGRect(x: tableFooterView.frame.origin.x, y: tableFooterView.frame.origin.y, width: tableFooterView.bounds.width
-//            , height: height)
-//        print(tableFooterView.bounds.height)
-        
-//        tableFooterView.draw(rect)
-//        songTableView.reloadData()
-//        songTableView.rectForRow(at: IndexPath(row: 0, section: 1))
-        
     }
 }
