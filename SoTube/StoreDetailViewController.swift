@@ -12,14 +12,19 @@ import UIKit
 class StoreDetailViewController: TabBarViewController {
     @IBOutlet weak var musicCollectionView: UICollectionView!
     @IBOutlet weak var musicFlowLayout: UICollectionViewFlowLayout!
-    
-    var collection: [Any]?
+
+    var collection: [Any]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.musicCollectionView.reloadData()
+            }
+        }
+    }
     let spotifyModel = SpotifyModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        musicCollectionView.reloadData()
     }
 
     // MARK: - Collection viewDidLoad

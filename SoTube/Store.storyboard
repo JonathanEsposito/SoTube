@@ -589,6 +589,10 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Trj-Q6-V5g" id="9hd-Yj-Jux"/>
+                                    <outlet property="delegate" destination="Trj-Q6-V5g" id="KwQ-vY-lg4"/>
+                                </connections>
                             </collectionView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="evk-20-5jv">
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
@@ -599,6 +603,7 @@
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="leading" secondItem="evk-20-5jv" secondAttribute="leading" id="4xY-np-0M3"/>
                             <constraint firstItem="t0e-vI-JBT" firstAttribute="top" secondItem="6cA-Qp-ySY" secondAttribute="bottom" id="GoZ-KF-eoW"/>
@@ -610,7 +615,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="musicCollectionView" destination="6cA-Qp-ySY" id="r67-78-UWz"/>
+                        <outlet property="musicCollectionView" destination="6cA-Qp-ySY" id="RDf-76-2uq"/>
                         <outlet property="musicFlowLayout" destination="VGJ-7t-WZ5" id="fqt-dg-NN5"/>
                         <segue destination="Eie-Gp-ljj" kind="show" identifier="showPlaylistsInCategorySegue" id="CfO-2q-R4N"/>
                         <segue destination="X3s-2j-1Xy" kind="show" identifier="showAlbumSegue" id="oju-xK-3sO"/>
@@ -928,6 +933,10 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Eie-Gp-ljj" id="HWm-KR-8Kg"/>
+                                    <outlet property="delegate" destination="Eie-Gp-ljj" id="zl2-nu-Yan"/>
+                                </connections>
                             </collectionView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="2hu-KF-BcQ">
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
@@ -949,7 +958,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="musicCollectionView" destination="qku-yk-lag" id="W3n-XA-waT"/>
+                        <outlet property="musicCollectionView" destination="qku-yk-lag" id="TTw-g5-GMZ"/>
                         <outlet property="musicFlowLayout" destination="BWZ-eV-H5j" id="yX6-lj-Vja"/>
                         <segue destination="X3s-2j-1Xy" kind="show" identifier="showAlbumSegue" id="8NI-q0-8nq"/>
                     </connections>
@@ -963,9 +972,9 @@
         <image name="princeCover" width="500" height="428"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3i5-2I-NYy"/>
-        <segue reference="wLk-Sp-PeE"/>
         <segue reference="azh-SU-ZUt"/>
+        <segue reference="oju-xK-3sO"/>
+        <segue reference="CfO-2q-R4N"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>

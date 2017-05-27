@@ -159,10 +159,8 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         if segue.identifier == "showNewReleasesSegue" {
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.newReleases
-                destinationVC.musicCollectionView.reloadData()
                 spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {albums in
                     destinationVC.collection!.append(albums)
-                    destinationVC.musicCollectionView.reloadData()
                 })
             }
         }
@@ -171,7 +169,6 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
                 destinationVC.collection = self.featuredPlaylists
                 spotifyModel.getFeaturedPlaylists(amount: 40, withOffset: 10, OnCompletion: {playlists in
                     destinationVC.collection!.append(playlists)
-                    destinationVC.musicCollectionView.reloadData()
                 })
             }
         }
@@ -180,7 +177,6 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
                 destinationVC.collection = self.categories
                 spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {categories in
                     destinationVC.collection!.append(categories)
-                    destinationVC.musicCollectionView.reloadData()
                 })
             }
         }
