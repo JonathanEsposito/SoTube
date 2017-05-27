@@ -17,7 +17,7 @@ class SpotifyModel {
     }
     
     enum itemType {
-        case albums, tracks, artists
+        case albums, tracks, artists, album, track, artist
     }
     
     
@@ -59,7 +59,23 @@ class SpotifyModel {
     
     //MARK: - Music Retrieval Fuctions
     
-    
+    func getCoverUrl(forArtistID artistID: String, OnCompletion completionHandler: @escaping (String)->()) {
+        let urlRequest = getURLRequest(forUrl: getSpotifyString(ofType: .hrefString, forItemType: .artist, andID: artistID))
+        
+        let urlSession = URLSession.shared
+        
+        urlSession.dataTask(with: urlRequest!) { data, response, error in
+            var coverUrl = ""
+            if let jsonData = data,
+                let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary {
+                let coverUrls = feed.value(forKeyPath: "images.url") as! [String]
+                coverUrl = coverUrls.first!
+            }
+            completionHandler(coverUrl)
+            }.resume()
+    }
+
+
     func getNewReleases(amount: Int, withOffset offset: Int, OnCompletion completionHandler: @escaping ([Album])->()) {
         let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/browse/new-releases?offset=\(offset)&limit=\(amount)")
         
@@ -272,7 +288,7 @@ class SpotifyModel {
 
     private func getURLRequest(forUrl url: String) -> URLRequest? {
         
-        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQDK_3jk76dU5s9peoXttQawVicD4Cf7SNFCcjD7vGBxem89ktF4QBR-XrMmnNXnKnGX-lNN5PGkKKYypoZ8hn7pAHTQU0zbHMWwkqXkTscF8hXZX5QhftS0Kft9rqZGbZFfRjuBnOn7F71wHQ", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQB4Dcn3R8AMS8CoqT7EGXoYllXa18BiCo_F3kLghQJ3trV2OsCAE0RNiuHUP9c-6PMbAxrYWH9BsoZef_78iftHFZVPA_AoDIltgjpmgr9_xeB8piGUGrXGBiuF9MmmNJXaNh1Od1QMtA", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         
         return urlRequest
     }

@@ -28,15 +28,15 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        spotifyModel.getNewReleases(amount: 50, withOffset: 0, OnCompletion: {albums in
+        spotifyModel.getNewReleases(amount: 10, withOffset: 0, OnCompletion: {albums in
             self.newReleases = albums
             self.newReleasesCollectionView.reloadData()
         })
-        spotifyModel.getFeaturedPlaylists(amount: 50, withOffset: 0, OnCompletion: {playlists in
+        spotifyModel.getFeaturedPlaylists(amount: 10, withOffset: 0, OnCompletion: {playlists in
             self.featuredPlaylists = playlists
             self.featuredPlaylistsCollectionView.reloadData()
         })
-        spotifyModel.getCategories(amount: 50, withOffset: 0, OnCompletion: {categories in
+        spotifyModel.getCategories(amount: 10, withOffset: 0, OnCompletion: {categories in
             self.categories = categories
             self.categoriesCollectionView.reloadData()
             
@@ -97,19 +97,19 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         return cell!
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if collectionView === newReleasesCollectionView {
-//            try? player.play(contentOf: spotifyModel.getSpotifyString(ofType: .playString, forItemType: .albums, andID: newReleases[indexPath.row].id))
-//        }
-//        
-//        if collectionView === featuredPlaylistsCollectionView {
-//
-//        }
-//        
-//        if collectionView === categoriesCollectionView {
-//            
-//        }
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    //        if collectionView === newReleasesCollectionView {
+    //            try? player.play(contentOf: spotifyModel.getSpotifyString(ofType: .playString, forItemType: .albums, andID: newReleases[indexPath.row].id))
+    //        }
+    //
+    //        if collectionView === featuredPlaylistsCollectionView {
+    //
+    //        }
+    //
+    //        if collectionView === categoriesCollectionView {
+    //
+    //        }
+    //    }
     
     
     // MARK: DelegateFlowLayout
@@ -151,15 +151,74 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         widthPerItem = heightPerItem - 20
         return CGSize(width: widthPerItem, height: heightPerItem)
     }
-
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let destinationVC = segue.destination
+        if segue.identifier == "showNewReleasesSegue" {
+            if let destinationVC = destinationVC as? StoreDetailViewController {
+                destinationVC.collection = self.newReleases
+                destinationVC.musicCollectionView.reloadData()
+                spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {albums in
+                    destinationVC.collection!.append(albums)
+                    destinationVC.musicCollectionView.reloadData()
+                })
+            }
+        }
+        if segue.identifier == "showFeaturedPlaylistsSegue" {
+            if let destinationVC = destinationVC as? StoreDetailViewController {
+                destinationVC.collection = self.featuredPlaylists
+                spotifyModel.getFeaturedPlaylists(amount: 40, withOffset: 10, OnCompletion: {playlists in
+                    destinationVC.collection!.append(playlists)
+                    destinationVC.musicCollectionView.reloadData()
+                })
+            }
+        }
+        if segue.identifier == "showCategoriesSegue" {
+            if let destinationVC = destinationVC as? StoreDetailViewController {
+                destinationVC.collection = self.categories
+                spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {categories in
+                    destinationVC.collection!.append(categories)
+                    destinationVC.musicCollectionView.reloadData()
+                })
+            }
+        }
+        if segue.identifier == "showAlbumSegue" {
+            if let destinationVC = destinationVC as? StoreAlbumViewController {
+                let indexPaths = newReleasesCollectionView.indexPathsForSelectedItems
+                destinationVC.album = self.newReleases[indexPaths!.first!.row]
+            }
+        }
+        if segue.identifier == "showPlaylistsSegue" {
+            if let destinationVC = destinationVC as? StoreAlbumViewController {
+                let indexPaths = featuredPlaylistsCollectionView.indexPathsForSelectedItems
+                destinationVC.playlist = self.featuredPlaylists[indexPaths!.first!.row]
+            }
+        }
+        if segue.identifier == "showPlaylistsInCategorySegue" {
+            if let destinationVC = destinationVC as? StoreDetailViewController {
+               let indexPaths = categoriesCollectionView.indexPathsForSelectedItems
+                spotifyModel.getPlaylist(from: self.categories[indexPaths!.first!.row], OnCompletion: {playlists in
+                destinationVC.collection = playlists
+                })
+            }
+        }
     }
-    */
-
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView === newReleasesCollectionView {
+            performSegue(withIdentifier: "showAlbumSegue", sender: nil)
+        }
+        if collectionView === featuredPlaylistsCollectionView {
+            performSegue(withIdentifier: "showPlaylistsSegue", sender: nil)
+        }
+        if collectionView === categoriesCollectionView {
+            performSegue(withIdentifier: "showPlaylistsInCategorySegue", sender: nil)
+        }
+    }
 }
+
+
+
+

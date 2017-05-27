@@ -81,6 +81,8 @@
 		A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */; };
 		A0D814D81EC970B90094DEC7 /* UIViewLoadingFromXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */; };
 		AAD332C2D683670C2E3B77E5 /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */; };
+		E955702D1ED8AE1B00B6F432 /* StoreCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E955702C1ED8AE1B00B6F432 /* StoreCategoryViewController.swift */; };
+		E955702F1ED8AF7700B6F432 /* StoreAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E955702E1ED8AF7700B6F432 /* StoreAlbumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +188,8 @@
 		CE00E31D6BDA723D74E74335 /* Pods_SoTubeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTubeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA2687859902B7E8525CD38 /* Pods-SoTubeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeUITests/Pods-SoTubeUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E955702C1ED8AE1B00B6F432 /* StoreCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCategoryViewController.swift; sourceTree = "<group>"; };
+		E955702E1ED8AF7700B6F432 /* StoreAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreAlbumViewController.swift; sourceTree = "<group>"; };
 		F2760E79BB7A2B6DC5E2F7B6 /* Pods-SoTubeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeTests/Pods-SoTubeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTubeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -259,8 +263,8 @@
 			children = (
 				2F52836E1ED300B30034BB17 /* SpotifyModel.swift */,
 				2F804E6F1ED433DB00E6A7B4 /* Album.swift */,
-				2F804E731ED4340400E6A7B4 /* Category.swift */,
 				2F804E711ED433F500E6A7B4 /* Playlist.swift */,
+				2F804E731ED4340400E6A7B4 /* Category.swift */,
 				2F7120081ED563C100DD96FA /* Track.swift */,
 			);
 			name = Models;
@@ -539,6 +543,8 @@
 				A0A29F9E1ECDEF9A00E06D95 /* StoreOverviewViewController.swift */,
 				A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */,
 				A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */,
+				E955702E1ED8AF7700B6F432 /* StoreAlbumViewController.swift */,
+				E955702C1ED8AE1B00B6F432 /* StoreCategoryViewController.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -879,6 +885,7 @@
 			files = (
 				2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */,
 				2FC986BC1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift in Sources */,
+				E955702D1ED8AE1B00B6F432 /* StoreCategoryViewController.swift in Sources */,
 				2F804E721ED433F500E6A7B4 /* Playlist.swift in Sources */,
 				A0A29F5C1ECC2B1E00E06D95 /* MusicPlayer.swift in Sources */,
 				2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */,
@@ -914,6 +921,7 @@
 				2FC986BA1ECB025E00B037CE /* PurchaseHistoryViewController.swift in Sources */,
 				2FC986B01ECAD76000B037CE /* AccountViewController.swift in Sources */,
 				A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */,
+				E955702F1ED8AF7700B6F432 /* StoreAlbumViewController.swift in Sources */,
 				A0A29FA11ECDEFB100E06D95 /* StoreDetailViewController.swift in Sources */,
 				2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */,
 				A0D814D81EC970B90094DEC7 /* UIViewLoadingFromXib.swift in Sources */,
