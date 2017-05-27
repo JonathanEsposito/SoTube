@@ -8,17 +8,25 @@
 
 import UIKit
 
-class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate, UITableViewDataSource {
+class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Properties
-    let reuseIdentifier = "MusicCell"
-    let dummmyData = ["a", "b", "c", "d"]
     @IBOutlet weak var tableFooterView: UIView!
     @IBOutlet weak var songTableView: UITableView!
+
+    let database = DatabaseViewModel()
+    var tracks: [Track] = [] {
+        didSet {
+            songTableView.reloadData()
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        database.getTracks { tracks in
+            self.tracks = tracks
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -57,16 +65,26 @@ class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate
     // MARK: DataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return tracks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as? TrackTableViewCell else {
+            fatalError("The dequeued cell is not an instance of StaticAlbumTableViewCell.")
+        }
+        let track = tracks[indexPath.row]
         print("cell created")
+        cell.albumImageView.image(fromLink: track.coverUrl)
+        cell.titelLabel.text = track.name
+        cell.albumLabel.text = track.albumName
+        cell.artistLabel.text = track.artistName
+        cell.timeLabel.text = string(fromIntInMiliSec: track.duration)
+        
+        
         return cell
     }
     
@@ -136,8 +154,8 @@ class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate
         if let navcon = destinationvc as? UINavigationController {
             destinationvc = navcon.visibleViewController ?? destinationvc
         }
-        if let musicCollectionVC = destinationvc as? MusicCollectionViewController {
-            musicCollectionVC.data = self.dummmyData
+        if let musicCollectionVC = destinationvc as? AlbumsCollectionViewController {
+//            musicCollectionVC.data = self.dummmyData
         }
     }
     
@@ -160,5 +178,20 @@ class MusicTableViewController: MyMusicTabBarViewController, UITableViewDelegate
         let lastTableViewSubviewHeight = songTableView.tableFooterView?.bounds.height
         let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
         songTableView.contentSize = CGSize(width: songTableView.contentSize.width, height: newHeight)
+    }
+    
+    private func string(fromIntInMiliSec timeMS: Int) -> String {
+        
+        let time = timeMS / 1000
+        
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+        
+        if hours == 0 {
+            return String(format: "%0.1d:%0.2d",minutes,seconds)
+        } else {
+            return String(format: "%0.1d:%0.2d:%0.2d",hours,minutes,seconds)
+        }
     }
 }

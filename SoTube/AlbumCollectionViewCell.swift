@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MusicCollectionViewCell: UICollectionViewCell {
+class AlbumCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

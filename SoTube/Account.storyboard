@@ -309,14 +309,14 @@
                                 <exclude reference="ApR-Ld-ycQ"/>
                                 <exclude reference="RcT-VU-k7Q"/>
                                 <exclude reference="ZdB-zs-Hal"/>
-                                <exclude reference="Xfk-i7-rET"/>
                                 <exclude reference="cgJ-GW-Wnf"/>
+                                <exclude reference="Xfk-i7-rET"/>
                                 <exclude reference="0J8-Bh-a0l"/>
                                 <exclude reference="ACE-uP-Ujv"/>
                                 <exclude reference="ilT-0E-mTt"/>
-                                <exclude reference="qkE-r5-6nX"/>
                                 <exclude reference="453-7q-p6E"/>
                                 <exclude reference="YRx-p0-ZB3"/>
+                                <exclude reference="qkE-r5-6nX"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -326,20 +326,20 @@
                                 <exclude reference="SF6-og-EH1"/>
                                 <exclude reference="ZdB-zs-Hal"/>
                                 <exclude reference="mx6-va-R6f"/>
-                                <include reference="Xfk-i7-rET"/>
-                                <exclude reference="eay-mt-LK3"/>
                                 <exclude reference="4YU-o7-j9F"/>
                                 <exclude reference="BD4-6T-3I0"/>
                                 <include reference="cgJ-GW-Wnf"/>
+                                <include reference="Xfk-i7-rET"/>
+                                <exclude reference="eay-mt-LK3"/>
                                 <include reference="0J8-Bh-a0l"/>
                                 <include reference="ACE-uP-Ujv"/>
                                 <exclude reference="QcJ-B4-PC1"/>
                                 <include reference="ilT-0E-mTt"/>
-                                <include reference="qkE-r5-6nX"/>
                                 <exclude reference="453-7q-p6E"/>
                                 <exclude reference="5Lu-9E-gtY"/>
                                 <exclude reference="6pT-gs-UXp"/>
                                 <include reference="YRx-p0-ZB3"/>
+                                <include reference="qkE-r5-6nX"/>
                             </mask>
                         </variation>
                     </view>
@@ -407,17 +407,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vR-qZ-DXu">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Product" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vR-qZ-DXu">
                                                     <rect key="frame" x="125" y="5" width="226" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99,99 €" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ8-RQ-r7O">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="99,99 €" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQ8-RQ-r7O">
                                                     <rect key="frame" x="361" y="5" width="45" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="45" id="qmI-xX-4WQ"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

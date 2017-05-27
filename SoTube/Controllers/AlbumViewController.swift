@@ -23,8 +23,9 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     var averageCoverImageColor: UIColor?
     
     var musicSource = SpotifyModel()
+    var database = DatabaseViewModel()
+    
     var album: Album?
-
     var totalAlbumDuration: Int?
     var totalAmountOfSongs: Int?
     var tracks: [Track] = [] {
@@ -37,7 +38,6 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         album = Album(named: "Global Warming", fromArtist: "Pitbull", withCoverUrl: "https://i.scdn.co/image/3edb3f970f4a3af9ef922efd18cdb4dabaf85ced", withId: "4aawyAB9vmqN3uQ7FjRGTy")
         
-        
         super.viewDidLoad()
         // get tracks from music source
         if let album = album {
@@ -49,7 +49,7 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             
             musicSource.getTracks(from: album, OnCompletion: { tracks in
                 self.tracks = tracks
-                self.album?.tracks = tracks
+                self.album?.trackIds = tracks.map { $0.id }
                 print(tracks)
                 
                 self.totalAmountOfSongs = tracks.count
@@ -203,6 +203,15 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
         guard let row = tracksTableView.indexPath(for: cell)?.row else { return }
         print(row)
         // user row as index to get song form array
+        
+        let track = tracks[row]
+        database.buy(track, withCoins: 5, onCompletion: { error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("track bought :D")
+            }
+        })
     }
 
     /*

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MusicCollectionViewController: MyMusicTabBarViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class AlbumsCollectionViewController: MyMusicTabBarViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     // MARK: - Properties
     @IBOutlet weak var albumsCollectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var albumsCollectionView: UICollectionView!
@@ -39,7 +39,7 @@ class MusicCollectionViewController: MyMusicTabBarViewController, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlbumCell", for: indexPath)
         
         return cell
     }
@@ -78,12 +78,5 @@ class MusicCollectionViewController: MyMusicTabBarViewController, UICollectionVi
         }
         
         albumsCollectionViewFlowLayout.footerReferenceSize.height = newHeight
-        
-        // Reset tableview contentsize height
-//        let lastTableViewSubviewYPosition = albumsCollectionViewFooter.frame.origin.y
-//        let lastTableViewSubviewHeight = albumsCollectionViewFooter.bounds.height
-//        let newHeight = lastTableViewSubviewYPosition + lastTableViewSubviewHeight
-//        albumsCollectionView.contentSize = CGSize(width: albumsCollectionView.contentSize.width, height: newHeight)
-//        albumsCollectionView.contentSize.height = 300
     }
 }

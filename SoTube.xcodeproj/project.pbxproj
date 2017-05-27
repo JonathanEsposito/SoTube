@@ -10,12 +10,12 @@
 		22AEF9D662FE869E806435F1 /* Pods_SoTubeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE00E31D6BDA723D74E74335 /* Pods_SoTubeUITests.framework */; };
 		2F0F662D1EC077E60019034F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F662C1EC077E60019034F /* LogInViewController.swift */; };
 		2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */; };
-		2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66CA1EC1CA400019034F /* MusicCollectionViewCell.swift */; };
-		2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D01EC1CA860019034F /* MusicCollectionViewController.swift */; };
-		2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D31EC1CB1C0019034F /* MusicTableViewController.swift */; };
+		2F0F66CC1EC1CA400019034F /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66CA1EC1CA400019034F /* AlbumCollectionViewCell.swift */; };
+		2F0F66D11EC1CA860019034F /* AlbumsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D01EC1CA860019034F /* AlbumsCollectionViewController.swift */; };
+		2F0F66D41EC1CB1C0019034F /* TracksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D31EC1CB1C0019034F /* TracksTableViewController.swift */; };
 		2F0F66D81EC1CBB30019034F /* MusicSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */; };
 		2F0F66DE1EC1CE3F0019034F /* MusicViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */; };
-		2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */; };
+		2F0F66E01EC1D8830019034F /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0F66DF1EC1D8830019034F /* TrackTableViewCell.swift */; };
 		2F5283691ED2E4A60034BB17 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5283661ED2E4A60034BB17 /* SpotifyAudioPlayback.framework */; };
 		2F52836A1ED2E4A60034BB17 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5283671ED2E4A60034BB17 /* SpotifyAuthentication.framework */; };
 		2F52836B1ED2E4A60034BB17 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F5283681ED2E4A60034BB17 /* SpotifyMetadata.framework */; };
@@ -55,6 +55,7 @@
 		A05F92A51EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F92A41EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift */; };
 		A05F92A71EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F92A61EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift */; };
 		A05F92A91EC58E9A00F62432 /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F92A81EC58E9A00F62432 /* MusicPlayerViewController.swift */; };
+		A06BE0BF1ED9B6C100767F91 /* SpotifyModelTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BE0BE1ED9B6C100767F91 /* SpotifyModelTwo.swift */; };
 		A07775CF1ED86A8200E09D76 /* StaticAlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07775CE1ED86A8200E09D76 /* StaticAlbumTableViewCell.swift */; };
 		A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09477C31EBCA03A00B62278 /* AppDelegate.swift */; };
 		A09477C91EBCA03A00B62278 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A09477C71EBCA03A00B62278 /* Main.storyboard */; };
@@ -108,12 +109,12 @@
 		2D9627E07E4FC512667784A6 /* Pods-SoTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.debug.xcconfig"; sourceTree = "<group>"; };
 		2F0F662C1EC077E60019034F /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInViewController.swift; path = Controllers/LogInViewController.swift; sourceTree = "<group>"; };
 		2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
-		2F0F66CA1EC1CA400019034F /* MusicCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicCollectionViewCell.swift; sourceTree = "<group>"; };
-		2F0F66D01EC1CA860019034F /* MusicCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicCollectionViewController.swift; sourceTree = "<group>"; };
-		2F0F66D31EC1CB1C0019034F /* MusicTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewController.swift; sourceTree = "<group>"; };
+		2F0F66CA1EC1CA400019034F /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
+		2F0F66D01EC1CA860019034F /* AlbumsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsCollectionViewController.swift; sourceTree = "<group>"; };
+		2F0F66D31EC1CB1C0019034F /* TracksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksTableViewController.swift; sourceTree = "<group>"; };
 		2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicSplitViewController.swift; sourceTree = "<group>"; };
 		2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MusicViews.storyboard; sourceTree = "<group>"; };
-		2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
+		2F0F66DF1EC1D8830019034F /* TrackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
 		2F5283661ED2E4A60034BB17 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		2F5283671ED2E4A60034BB17 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
 		2F5283681ED2E4A60034BB17 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
@@ -155,6 +156,7 @@
 		A05F92A41EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicSplitViewMasterViewController.swift; path = Controllers/MusicSplitViewMasterViewController.swift; sourceTree = "<group>"; };
 		A05F92A61EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicSplitViewMasterTableViewCell.swift; path = Controllers/MusicSplitViewMasterTableViewCell.swift; sourceTree = "<group>"; };
 		A05F92A81EC58E9A00F62432 /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicPlayerViewController.swift; path = Controllers/MusicPlayerViewController.swift; sourceTree = "<group>"; };
+		A06BE0BE1ED9B6C100767F91 /* SpotifyModelTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyModelTwo.swift; sourceTree = "<group>"; };
 		A07775CE1ED86A8200E09D76 /* StaticAlbumTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticAlbumTableViewCell.swift; sourceTree = "<group>"; };
 		A09477C01EBCA03A00B62278 /* SoTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09477C31EBCA03A00B62278 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -244,10 +246,10 @@
 				A05F92A41EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift */,
 				A05F92A61EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift */,
 				A05F92A21EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift */,
-				2F0F66D01EC1CA860019034F /* MusicCollectionViewController.swift */,
-				2F0F66CA1EC1CA400019034F /* MusicCollectionViewCell.swift */,
-				2F0F66D31EC1CB1C0019034F /* MusicTableViewController.swift */,
-				2F0F66DF1EC1D8830019034F /* MusicTableViewCell.swift */,
+				2F0F66D01EC1CA860019034F /* AlbumsCollectionViewController.swift */,
+				2F0F66CA1EC1CA400019034F /* AlbumCollectionViewCell.swift */,
+				2F0F66D31EC1CB1C0019034F /* TracksTableViewController.swift */,
+				2F0F66DF1EC1D8830019034F /* TrackTableViewCell.swift */,
 				A0429A611ED5E0650088F71F /* AlbumViewController.swift */,
 				A07775CE1ED86A8200E09D76 /* StaticAlbumTableViewCell.swift */,
 				A0DB26F61ED841560054C9A5 /* AlbumTrackTableViewCell.swift */,
@@ -269,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				2F52836E1ED300B30034BB17 /* SpotifyModel.swift */,
+				A06BE0BE1ED9B6C100767F91 /* SpotifyModelTwo.swift */,
 				2F804E6F1ED433DB00E6A7B4 /* Album.swift */,
 				2F804E731ED4340400E6A7B4 /* Category.swift */,
 				2F804E711ED433F500E6A7B4 /* Playlist.swift */,
@@ -893,9 +896,9 @@
 				2FC986BC1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift in Sources */,
 				2F804E721ED433F500E6A7B4 /* Playlist.swift in Sources */,
 				A0A29F5C1ECC2B1E00E06D95 /* MusicPlayer.swift in Sources */,
-				2F0F66CC1EC1CA400019034F /* MusicCollectionViewCell.swift in Sources */,
+				2F0F66CC1EC1CA400019034F /* AlbumCollectionViewCell.swift in Sources */,
 				A0429A5E1ED5C8A70088F71F /* UIImageViewLoadFromUrl.swift in Sources */,
-				2F0F66D11EC1CA860019034F /* MusicCollectionViewController.swift in Sources */,
+				2F0F66D11EC1CA860019034F /* AlbumsCollectionViewController.swift in Sources */,
 				A0A29F5A1ECC2B1000E06D95 /* AVAudioPlayerModel.swift in Sources */,
 				A0A29F971ECD92CD00E06D95 /* FirebaseModel.swift in Sources */,
 				A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */,
@@ -922,6 +925,7 @@
 				A0DB26F51ED833320054C9A5 /* UIImageAverigeColor.swift in Sources */,
 				A05730411ED385F5008EC7B0 /* userInfoDelegate.swift in Sources */,
 				2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */,
+				A06BE0BF1ED9B6C100767F91 /* SpotifyModelTwo.swift in Sources */,
 				A057303D1ED33088008EC7B0 /* ChangePasswordViewController.swift in Sources */,
 				2F804E701ED433DB00E6A7B4 /* Album.swift in Sources */,
 				A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */,
@@ -931,14 +935,14 @@
 				2FC986B01ECAD76000B037CE /* AccountViewController.swift in Sources */,
 				A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */,
 				A0A29FA11ECDEFB100E06D95 /* StoreDetailViewController.swift in Sources */,
-				2F0F66D41EC1CB1C0019034F /* MusicTableViewController.swift in Sources */,
+				2F0F66D41EC1CB1C0019034F /* TracksTableViewController.swift in Sources */,
 				A0D814D81EC970B90094DEC7 /* UIViewLoadingFromXib.swift in Sources */,
 				A05F92A31EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift in Sources */,
 				A05730391ED2F9C8008EC7B0 /* Profile.swift in Sources */,
 				2F7120091ED563C100DD96FA /* Track.swift in Sources */,
 				A05F92A51EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift in Sources */,
 				A057302F1ED2E546008EC7B0 /* CustomAlertViewTransitioner.swift in Sources */,
-				2F0F66E01EC1D8830019034F /* MusicTableViewCell.swift in Sources */,
+				2F0F66E01EC1D8830019034F /* TrackTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

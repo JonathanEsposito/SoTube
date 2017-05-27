@@ -10,7 +10,6 @@ import Foundation
 import Firebase
 
 class Firebase: DatabaseModel {
-
     func login(withEmail email: String, password: String, delegate: DatabaseDelegate, onCompletion completionHandler:  (() -> ())? ) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             if let error = error {
@@ -169,17 +168,17 @@ class Firebase: DatabaseModel {
     
     func updateCoins(with coinPurchase: CoinPurchase, onCompletion completionHandler: @escaping ()->()) {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
-            let userReference = FIRDatabase.database().reference(withPath: "users")
-            userReference.child("\(userID)/properties/coins").observeSingleEvent(of: .value, with: { snapshot in
+            let userReference = FIRDatabase.database().reference(withPath: "users\(userID)")
+            userReference.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
                 print(snapshot.value)
                 if let currentAmount = snapshot.value as? Int {
                     let newTotal = currentAmount + coinPurchase.amount
-                    userReference.child("\(userID)/properties/coins").setValue(newTotal) //.updateChildValues([ : newTotal])
+                    userReference.child("properties/coins").setValue(newTotal) //.updateChildValues([ : newTotal])
                     completionHandler()
                 }
             })
             
-            let coinsHistoryChild = userReference.child("\(userID)/properties/coinsHistory")
+            let coinsHistoryChild = userReference.child("properties/coinsHistory")
             print(coinPurchase.date)
             print(coinPurchase.date.timeIntervalSinceReferenceDate)
             print(coinPurchase.keyDate)
@@ -213,16 +212,31 @@ class Firebase: DatabaseModel {
         }
     }
     
-    func buy(_ musicPurchase: Track, withCoins coins: Int, onCompletion completionHandler: ()->()) {
+    func buy(_ track: Track, withCoins coins: Int, onCompletion completionHandler: (Error?)->()) {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
-            let userMusicHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/properties/musicHistory")
-            userMusicHistoryRef.updateChildValues(musicPurchase.dictionary)
+            let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
+            
+            // updateCoins
+            userRef.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
+                if let currentAmount = snapshot.value as? Int {
+                    let newTotal = currentAmount - coins
+                    userRef.child("properties/coins").setValue(newTotal)
+                }
+            })
+            
+            userRef.child("songs").updateChildValues(track.dictionary)
+            userRef.child("albums").updateChildValues(track.albumDictionary)
+            userRef.child("albums/\(track.albumId)/trackIds").updateChildValues(["\(track.id)" : true])
+            userRef.child("artists").updateChildValues(track.artistDictionary)
+            userRef.child("artists/\(track.artistId)/albumIds").updateChildValues(["\(track.id)" : true])
+            
+            completionHandler(nil)
         } else {
-            print("user not logged in")
+            completionHandler(DatabaseError.notLoggedIn)
         }
     }
     
-    func getMusicHistory(onCompletion completionHandler: @escaping ([Track])->()) {
+    func getTracks(onCompletion completionHandler: @escaping ([Track])->()) {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userMusicHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/songs")
             userMusicHistoryRef.observeSingleEvent(of: .value, with: { snapshot in
@@ -251,6 +265,17 @@ class Firebase: DatabaseModel {
             })
         } else {
             print("user not logged in")
+        }
+    }
+    
+    func getCoins(onCompletion completionHandler: @escaping (Int) -> ()) {
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
+            userRef.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
+                if let currentAmount = snapshot.value as? Int {
+                    completionHandler(currentAmount)
+                }
+            })
         }
     }
 }
