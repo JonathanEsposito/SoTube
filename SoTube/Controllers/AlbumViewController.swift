@@ -18,15 +18,13 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     
     let backgroundViewGradientLayer = CAGradientLayer()
     let firstStaticCellGradientLayer = CAGradientLayer()
-    var scaledAlbumCoverImageViewHeight: CGFloat?
     
     var firstStaticCellPortretHeight: CGFloat?
     var averageCoverImageColor: UIColor?
     
     var musicSource = SpotifyModel()
     var album: Album?
-    
-    
+
     var totalAlbumDuration: Int?
     var totalAmountOfSongs: Int?
     var tracks: [Track] = [] {
@@ -76,16 +74,14 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
         
         // do stuff when we are in compact width, regural height sizeClass
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-//            if scaledAlbumCoverImageViewHeight == nil {
-                // Scale original AlbumCoverImageView height to new height (7:6) and remove the navigation bar height
-                scaledAlbumCoverImageViewHeight = albumCoverImageView.bounds.height - (albumCoverImageView.bounds.height / 7)
-//            }
-            
+            // Scale original AlbumCoverImageView height to new height (7:6) and remove the navigation bar height
+            let scaledAlbumCoverImageViewHeight = albumCoverImageView.bounds.height - (albumCoverImageView.bounds.height / 7)
+
             // Set backgroundView gradient
             let clearColor = UIColor.clear.cgColor
             // Fist time called, there might not be an image yet so use white, otherwise use avergeColor
             let averageCoverImageCGColor = averageCoverImageColor?.cgColor ?? UIColor.white.cgColor
-            let relativeAlbumCoverImageViewBottom = scaledAlbumCoverImageViewHeight! / view.bounds.height
+            let relativeAlbumCoverImageViewBottom = scaledAlbumCoverImageViewHeight / view.bounds.height
             
             backgroundViewGradientLayer.frame = self.backgroundView.bounds
             backgroundViewGradientLayer.colors = [clearColor, averageCoverImageCGColor]
@@ -157,14 +153,14 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             staticCell.totalAmountOfSongsLabel.text = "\(totalAmountOfSongs ?? 0)"
             staticCell.totalAlbumDurationLabel.text = string(fromIntInMiliSec: totalAlbumDuration ?? 0)
             
-            
-            
-            let clearColor = UIColor.clear.cgColor
-            let whiteColor = UIColor.white.withAlphaComponent(0.75).cgColor
-            firstStaticCellGradientLayer.frame = staticCell.bounds
-            firstStaticCellGradientLayer.colors = [clearColor, whiteColor]
-            firstStaticCellGradientLayer.locations = [0.4, 0.95]
-            staticCell.layer.insertSublayer(firstStaticCellGradientLayer, at: 0)//addSublayer(firstStaticCellGradientLayer)
+            if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+                let clearColor = UIColor.clear.cgColor
+                let whiteColor = UIColor.white.withAlphaComponent(0.75).cgColor
+                firstStaticCellGradientLayer.frame = staticCell.bounds
+                firstStaticCellGradientLayer.colors = [clearColor, whiteColor]
+                firstStaticCellGradientLayer.locations = [0.4, 0.95]
+                staticCell.layer.insertSublayer(firstStaticCellGradientLayer, at: 0)
+            }
             cell = staticCell
             
         } else if (indexPath.section == 1) {
