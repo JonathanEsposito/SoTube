@@ -235,14 +235,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F0F66301EC0781B0019034F /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				2FEC9C911EC9C75A00324AE1 /* SoTube-Bridging-Header.h */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		2F0F66D21EC1CABB0019034F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,8 +256,10 @@
 		2F0F66D91EC1CC320019034F /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				A0A29F751ECC2D0600E06D95 /* Storyboards */,
-				A0A29F781ECC2DA300E06D95 /* Controllers */,
+				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
+				A09477C71EBCA03A00B62278 /* Main.storyboard */,
+				2F0F662C1EC077E60019034F /* LogInViewController.swift */,
+				2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -323,6 +317,7 @@
 		A03E69A41EC1CC8A00F12FA9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2FEC9C911EC9C75A00324AE1 /* SoTube-Bridging-Header.h */,
 				A09477C31EBCA03A00B62278 /* AppDelegate.swift */,
 				A0ADCB791EBCA4C800C82CC9 /* GoogleService-Info.plist */,
 				A09477CF1EBCA03A00B62278 /* Info.plist */,
@@ -385,7 +380,6 @@
 				A0A29F701ECC2C5000E06D95 /* MusicPlayer */,
 				A0A29F9B1ECDEABA00E06D95 /* Store */,
 				A0A29F761ECC2D6A00E06D95 /* Payment */,
-				2F0F66301EC0781B0019034F /* Controllers */,
 				A05F929C1EC48B5700F62432 /* Navigation */,
 				2FEC9C891EC9C2F600324AE1 /* Models */,
 				A03E69931EC1BE5500F12FA9 /* Views */,
@@ -426,27 +420,11 @@
 		A0A29F701ECC2C5000E06D95 /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				A0A29F711ECC2C8C00E06D95 /* Storyboards */,
-				A0A29F721ECC2CA100E06D95 /* Controllers */,
+				A05F929F1EC4ADCD00F62432 /* MusicPlayer.storyboard */,
+				A05F92A81EC58E9A00F62432 /* MusicPlayerViewController.swift */,
 				A0D814FA1EC9C31A0094DEC7 /* Models */,
 			);
 			name = MusicPlayer;
-			sourceTree = "<group>";
-		};
-		A0A29F711ECC2C8C00E06D95 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				A05F929F1EC4ADCD00F62432 /* MusicPlayer.storyboard */,
-			);
-			name = Storyboards;
-			sourceTree = "<group>";
-		};
-		A0A29F721ECC2CA100E06D95 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				A05F92A81EC58E9A00F62432 /* MusicPlayerViewController.swift */,
-			);
-			name = Controllers;
 			sourceTree = "<group>";
 		};
 		A0A29F731ECC2CB000E06D95 /* Storyboards */ = {
@@ -461,72 +439,22 @@
 		A0A29F741ECC2CCE00E06D95 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				A0A29F771ECC2D8400E06D95 /* Storyboards */,
-				A0A29F791ECC2DD400E06D95 /* Controllers */,
-			);
-			name = Account;
-			sourceTree = "<group>";
-		};
-		A0A29F751ECC2D0600E06D95 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				A09477CC1EBCA03A00B62278 /* LaunchScreen.storyboard */,
-				A09477C71EBCA03A00B62278 /* Main.storyboard */,
-			);
-			name = Storyboards;
-			sourceTree = "<group>";
-		};
-		A0A29F761ECC2D6A00E06D95 /* Payment */ = {
-			isa = PBXGroup;
-			children = (
-				A0A29F7B1ECC2E6800E06D95 /* Storyboards */,
-				A0A29F7A1ECC2E5E00E06D95 /* Controllers */,
-			);
-			name = Payment;
-			sourceTree = "<group>";
-		};
-		A0A29F771ECC2D8400E06D95 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
 				2FC986B71ECAE82A00B037CE /* Account.storyboard */,
-			);
-			name = Storyboards;
-			sourceTree = "<group>";
-		};
-		A0A29F781ECC2DA300E06D95 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				2F0F662C1EC077E60019034F /* LogInViewController.swift */,
-				2F0F662E1EC077FC0019034F /* CreateAccountViewController.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		A0A29F791ECC2DD400E06D95 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
 				2FC986AF1ECAD76000B037CE /* AccountViewController.swift */,
 				2FC986B51ECAE1DB00B037CE /* PaymentCollectionViewCell.swift */,
 				2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */,
 				2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */,
 			);
-			name = Controllers;
+			name = Account;
 			sourceTree = "<group>";
 		};
-		A0A29F7A1ECC2E5E00E06D95 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		A0A29F7B1ECC2E6800E06D95 /* Storyboards */ = {
+		A0A29F761ECC2D6A00E06D95 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
 				2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */,
+				2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */,
 			);
-			name = Storyboards;
+			name = Payment;
 			sourceTree = "<group>";
 		};
 		A0A29F981ECDB39D00E06D95 /* Database */ = {
