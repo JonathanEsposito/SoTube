@@ -250,7 +250,7 @@
 				2F52836E1ED300B30034BB17 /* SpotifyModel.swift */,
 				A05730381ED2F9C8008EC7B0 /* Profile.swift */,
 				A0429A591ED5450C0088F71F /* CoinPurchase.swift */,
-				A0A6D20F1EDB1A630036572B /* Music */,
+				A0A6D20F1EDB1A630036572B /* MusicObjects */,
 				A0A29F981ECDB39D00E06D95 /* Database */,
 			);
 			name = Models;
@@ -451,7 +451,7 @@
 			name = Store;
 			sourceTree = "<group>";
 		};
-		A0A6D20F1EDB1A630036572B /* Music */ = {
+		A0A6D20F1EDB1A630036572B /* MusicObjects */ = {
 			isa = PBXGroup;
 			children = (
 				2F804E6F1ED433DB00E6A7B4 /* Album.swift */,
@@ -460,7 +460,7 @@
 				2F7120081ED563C100DD96FA /* Track.swift */,
 				A06BE0C01ED9E68800767F91 /* Artist.swift */,
 			);
-			name = Music;
+			name = MusicObjects;
 			sourceTree = "<group>";
 		};
 		A0ADCB811EC07C6A00C82CC9 /* Extensions */ = {
