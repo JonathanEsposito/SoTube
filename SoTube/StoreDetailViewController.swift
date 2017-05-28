@@ -14,17 +14,17 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
     @IBOutlet weak var musicFlowLayout: UICollectionViewFlowLayout!
     
     
-    var albums: [Album] = []
+    var albums: [Album] = [] {
+        didSet {
+            DispatchQueue.main.async {
+//                self.musicCollectionView.insertItems(at: (1...self.albums.count).map({ IndexPath(row: $0, section: 0) }))
+                self.musicCollectionView.reloadData()
+            }
+        }
+    }
     var playlists: [Playlist] = []
     var categories: [Category] = []
     var collection: [Any] = []
-//        {
-//        didSet {
-////            DispatchQueue.main.async {
-//                self.musicCollectionView.reloadData()
-////            }
-//        }
-//    }
     let spotifyModel = SpotifyModel()
 
     override func viewDidLoad() {
@@ -102,8 +102,9 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
                 if let categories = collection as? [Category] {
                     let category = categories[indexPaths!.first!.row]
                     spotifyModel.getPlaylist(from: category, OnCompletion: {playlists in
-                    destinationVC.collection = playlists
+                        destinationVC.collection = playlists
                         destinationVC.navigationItem.title = category.name
+                        destinationVC.musicCollectionView.reloadData()
                     })
                 }
             }

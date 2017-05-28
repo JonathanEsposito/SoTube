@@ -161,9 +161,11 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.newReleases
                 destinationVC.navigationItem.title = "New Releases"
-//                spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {albums in
-//                    destinationVC.collection.append(albums)
-//                })
+                DispatchQueue.main.async {
+                    self.spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {albums in
+                        destinationVC.collection.append(albums)
+                    })
+                }
             }
         }
         if segue.identifier == "showFeaturedPlaylistsSegue" {
@@ -204,7 +206,8 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
                 spotifyModel.getPlaylist(from: category, OnCompletion: {playlists in
                     DispatchQueue.main.async {
                         destinationVC.collection = playlists
-                        
+                        destinationVC.navigationItem.title = category.name
+                        destinationVC.musicCollectionView.reloadData()
                     }
                 })
             }
