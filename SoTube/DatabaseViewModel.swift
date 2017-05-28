@@ -21,9 +21,15 @@ enum DatabaseError: Error {
     }
 }
 
+struct ErrorAlert {
+    let title: String
+    let message: String
+    let actions: [UIAlertAction]?
+}
+
 protocol DatabaseModel {
     // Account stuff
-    func login(withEmail email: String, password: String, delegate: DatabaseDelegate, onCompletion: (() -> ())?)
+    func login(withEmail email: String, password: String, onCompletion: ((ErrorAlert?) -> ())?)
     func signOut() throws
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String, delegate: DatabaseDelegate)
     func resetPassword(forEmail email: String, delegate: DatabaseDelegate)
@@ -57,12 +63,8 @@ class DatabaseViewModel {
         databaseModel.checkForSongs(onCompletion: completionHandler)
     }
     
-    func login(withEmail email: String, password: String, onCompletion completionHandler: (() -> ())? ) {
-        guard let delegate = delegate else {
-            fatalError("DatabaseDelegate not yet set!")
-        }
-        
-        databaseModel.login(withEmail: email, password: password, delegate: delegate, onCompletion: completionHandler)
+    func login(withEmail email: String, password: String, onCompletion completionHandler: ((ErrorAlert?) -> ())? ) {        
+        databaseModel.login(withEmail: email, password: password, onCompletion: completionHandler)
     }
     
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String) {
