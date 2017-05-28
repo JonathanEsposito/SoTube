@@ -60,7 +60,7 @@ class SpotifyModelTwo {
     //MARK: - Music Retrieval Fuctions
     
     func getCoverUrl(forArtistID artistID: String, OnCompletion completionHandler: @escaping (String)->()) {
-        let urlRequest = getURLRequest(forUrl: getSpotifyString(ofType: .hrefString, forItemType: .artist, andID: artistID))
+        let urlRequest = getURLRequest(forUrl: getSpotifyString(ofType: .hrefString, forItemType: .artists, andID: artistID))
         
         let urlSession = URLSession.shared
         
@@ -70,6 +70,8 @@ class SpotifyModelTwo {
                 let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary {
                 let coverUrls = feed.value(forKeyPath: "images.url") as! [String]
                 coverUrl = coverUrls.first!
+            } else {
+                print("error casting json")
             }
             completionHandler(coverUrl)
             }.resume()
@@ -288,7 +290,7 @@ class SpotifyModelTwo {
 
     private func getURLRequest(forUrl url: String) -> URLRequest? {
         
-        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQAQuyZTqiHm9JlRs5Oa0weje-Gpi52lr3LLkkb9OPRe5uq7EkZJyVPuuX5NawRRtmi6UYuHqd2jJ7QJeX-PTFsNrwSVyfUkl1qJAEoJIPePKTDpDX88P3qRMlHj5yeh39rNjUw-ILJhvQh9oQ", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQD_V2mR6AFbJKurUPbknVi5lWNvMk7IvO77vKiSlJu3YjigjTRcmzuYbzpVAda5PC7qbywuV2uvVSkr2rQarT_ihZBAS04plmGUIpJnUpu-vu9LUvHYKNlME_ruyfNlB0H2RmqEjlSlA0pfgw", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         
         return urlRequest
     }

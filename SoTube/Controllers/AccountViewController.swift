@@ -22,7 +22,6 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     let kuserDefaultsPasswordKey = "userPassword"
     let userDefaults = UserDefaults.standard
     
-    let reuseIdentifier = "paymentCell"
     let paymentViewModel = PaymentViewModel()
     var pricePerAmount: [Int: Double]?
     var buyAmounts: [Int]?
@@ -44,8 +43,8 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
         updateTextFields()
     }
     
-
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionView
+    // MARK: DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -55,7 +54,7 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PaymentCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "paymentCell", for: indexPath) as! PaymentCollectionViewCell
         if let amount = buyAmounts?[indexPath.row] {
             cell.amountLabel.text = "\(amount) SoCoins"
             cell.coinImageView.image = UIImage(named: "coin")
@@ -67,13 +66,15 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
         return cell
     }
     
-    // MARK: UICollectionViewDelegate
+    // MARK: Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let amount = buyAmounts?[indexPath.row]
         buySoCoin(amount: amount!) { amount in
             if let price = self.pricePerAmount?[amount] {
                 let coinPurchase = CoinPurchase(amount: amount, price: price)
+                print("I'm buying!!")
                 self.database.updateCoins(with: coinPurchase) {
+                    
                     // update coins count
                     let currentAmount = Int(self.amountOfCoinsLabel.text ?? "0")
                     let amountOfCoins = (currentAmount ?? 0) + amount

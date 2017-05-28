@@ -35,6 +35,9 @@ protocol DatabaseModel {
     func getTracks(onCompletion completionHandler: @escaping ([Track])->())
     func buy(_ track: Track, withCoins coins: Int, onCompletion: (Error?)->())
     func getCoins(onCompletion: @escaping (Int)->())
+    func getAlbums(onCompletion completionHandler: @escaping ([Album])->())
+    func getAlbum(byID id: String, onCompletion completionHandler: @escaping (Album) -> ())
+    func getArtists(onCompletion completionHandler: @escaping ([Artist])->())
 }
 
 protocol DatabaseDelegate {
@@ -112,9 +115,9 @@ class DatabaseViewModel {
             if (currentCoins - coins) > 0 {
                 print("yeey, enough coins")
                 self.musicSource.getCoverUrl(forArtistID: track.artistId) { url in
-                    //        self.musicSource.getCover(forArtist: track.artistId) { url in
+                    print("url: \(url)")
                     var track = track
-                    track.artistImageUrl = "https://i.scdn.co/image/c82dfff224bfb7fe29e0364a5aacc55da29b465b"
+                    track.artistCoverUrl = url
                     track.dateOfPurchase = Date()
                     track.priceInCoins = coins
                     
@@ -124,8 +127,31 @@ class DatabaseViewModel {
                 completionHandler(DatabaseError.notEnoughCoins)
             }
         }
-        
-        
-        
+    }
+    
+    func getAlbums(forArtist artist: Artist, onCompletion completionHandler: @escaping ([Album])->()) {
+        let albumIds = artist.albumIds
+        let albumIdsCount = albumIds.count
+        var albums: [Album] = []
+        albumIds.forEach {
+            databaseModel.getAlbum(byID: $0) { album in
+                print("getAlbum(byID: \(album)")
+                DispatchQueue.main.async {
+                    albums.append(album)
+                    if albums.count >= albumIdsCount {
+                        completionHandler(albums)
+                    }
+                }
+            }
+//            print($0)
+        }
+    }
+    
+    func getAlbums(onCompletion completionHandler: @escaping ([Album])->()) {
+        databaseModel.getAlbums(onCompletion: completionHandler)
+    }
+    
+    func getArtists(onCompletion completionHandler: @escaping ([Artist])->()) {
+        databaseModel.getArtists(onCompletion: completionHandler)
     }
 }

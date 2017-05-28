@@ -10,19 +10,34 @@ import UIKit
 
 class MusicSplitViewDetailViewController: TabBarViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     // MARK: - Properties
-    var data = ["a"]
-    let reuseIdentifier = "MusicCell"
-
-    @IBOutlet weak var musicCollectionViewFlowLayout: UICollectionViewFlowLayout!
-    @IBOutlet weak var musicCollectionView: UICollectionView!
+    @IBOutlet weak var albumsCollectionViewFlowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var albumsCollectionView: UICollectionView!
+    
+    let database = DatabaseViewModel()
+    var genre: String = ""
+    var artist: Artist?
+    
+    var albums: [Album] = [] {
+        didSet {
+            albumsCollectionView.reloadData()
+        }
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Hide Navigation controller background and shadow
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // Get data
+        if let artist = self.artist {
+            database.getAlbums(forArtist: artist) { albums in
+                self.albums = albums
+            }
+        } else {
+            print("By genre it is!")
+        }
     }
     
     // MARK: - Constraints Size Classes
@@ -33,16 +48,19 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
     
     // MARK: - CollectionView
     // MARK: DataSource
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return albums.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicCell", for: indexPath) as? AlbumCollectionViewCell else {
+            fatalError("The dequeued cell is not an instance of AlbumCollectionViewCell.")
+        }
+        
+        let album = albums[indexPath.row]
+        cell.albumCoverImageView.image(fromLink: album.coverUrl)
+        cell.albumNameLabel.text = album.name
+        cell.artistNameLabel.text = album.artist
         
         return cell
     }
@@ -56,7 +74,7 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
         if availableWidth <= 375 {
             //For iPhone 7 or smaller
             let itemsPerRow: CGFloat = 2
-            widthPerItem = availableWidth / itemsPerRow - musicCollectionViewFlowLayout.sectionInset.left - musicCollectionViewFlowLayout.minimumInteritemSpacing / 2
+            widthPerItem = availableWidth / itemsPerRow - albumsCollectionViewFlowLayout.sectionInset.left - albumsCollectionViewFlowLayout.minimumInteritemSpacing / 2
         } else {
             //For anything bigger than iPhone 7
             //107.5 because we want to fit 3 into an iPhone 7+ screen
@@ -65,6 +83,21 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
         
         heightPerItem = widthPerItem + 50
         return CGSize(width: widthPerItem, height: heightPerItem)
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAlbumSegue", let destinationVC = segue.destination as? AlbumViewController {
+            // Get indexpath from sender as cell
+            guard let albumCell = sender as? UICollectionViewCell else { print("wrong sender"); return }
+            guard let indexPath = self.albumsCollectionView.indexPath(for: albumCell) else { print("cell not from this collection"); return }
+            
+            // Get album from array
+            let album = albums[indexPath.row]
+            
+            // Set destinationVC properties
+            destinationVC.album = album
+        }
     }
     
     // MARK: - Private Methods
@@ -80,6 +113,6 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
             newHeight = 50
         }
         
-        musicCollectionViewFlowLayout.footerReferenceSize.height = newHeight
+        albumsCollectionViewFlowLayout.footerReferenceSize.height = newHeight
     }
 }

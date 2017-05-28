@@ -7,17 +7,23 @@
 //
 
 struct Album {
-    let name: String
-    let artist: String
-    let coverUrl: String
     let id: String
+    let name: String
+    let coverUrl: String
+    let artistId: String
+    let artist: String
     var trackIds: [String]
     
-    init(named name: String, fromArtist artist: String, withCoverUrl coverUrl: String, withId id: String, trackIds: [String]? = nil) {
-        self.name = name
-        self.artist = artist
-        self.id = id
+    init(albumId: String, albumName: String, coverUrl: String, artistId: String, artistName: String, trackIds: [String]) {
+        self.id = albumId
+        self.name = albumName
         self.coverUrl = coverUrl
-        self.trackIds = trackIds ?? []
+        self.artistId = artistId
+        self.artist = artistName
+        self.trackIds = trackIds
+    }
+    
+    init(named name: String, fromArtist artist: String, withCoverUrl coverUrl: String, withId id: String) {
+        self.init(albumId: id, albumName: name, coverUrl: coverUrl, artistId: "", artistName: artist, trackIds: [])
     }
 }

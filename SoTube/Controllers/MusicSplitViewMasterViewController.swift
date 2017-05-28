@@ -11,12 +11,22 @@ import UIKit
 class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Properties
     @IBOutlet weak var musicTableView: UITableView!
-    let dummmyData = ["a", "b", "c", "d"]
+    
+    let database = DatabaseViewModel()
+    var genres: [String] = []
+    var artists: [Artist] = [] {
+        didSet {
+            musicTableView.reloadData()
+        }
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        // Get all artists from owned tracks
+        database.getArtists { artists in
+            self.artists = artists
+        }
     }
     
     // MARK: - Constraints Size Classes
@@ -27,16 +37,16 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
     
     // MARK: - TableView
     // MARK: DataSource
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 20
+        if self.title == "Genres"{
+            return genres.count
+        } else if self.title == "Artists" {
+            return artists.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MusicCell", for: indexPath) as? MusicSplitViewMasterTableViewCell else {
             fatalError("not the right Cell")
         }
@@ -44,7 +54,10 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
         if self.title == "Genres" {
             cell.nameLabel.text = "Genre Name"
         } else if self.title == "Artists" {
-            cell.nameLabel.text = "Artist Name"
+            let artist = artists[indexPath.row]
+            
+            cell.itemImageView.image(fromLink: artist.artistCoverUrl)
+            cell.nameLabel.text = artist.artistName
         }
         
         return cell
@@ -54,27 +67,30 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
 
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get indexpath from sender as cell
+        guard let itemCell = sender as? MusicSplitViewMasterTableViewCell else { print("wrong sender"); return }
+        guard let indexPath = self.musicTableView.indexPath(for: itemCell) else { print("cell not from this collection"); return }
+        let index = indexPath.row
+        
+        // If the segue destination is a navigationController, get the embeded viewController from this navigationController
         var destinationvc = segue.destination
-        if let navcon = destinationvc as? UINavigationController {
+        if let navcon = segue.destination as? UINavigationController {
             destinationvc = navcon.visibleViewController ?? destinationvc
         }
+        
+        // Cast destination vc
         if let musicCollectionVC = destinationvc as? MusicSplitViewDetailViewController {
-            musicCollectionVC.data = self.dummmyData
-            destinationvc.navigationItem.title = selectedName ?? ""
-        }
-        
-        
-    }
-    
-    var selectedName: String? {
-        if let selectedIndexPath = musicTableView.indexPathForSelectedRow {
-            if let selectedCell = musicTableView.cellForRow(at: selectedIndexPath) as? MusicSplitViewMasterTableViewCell {
-                return selectedCell.nameLabel.text
+            if self.title == "Genres" {
+                let genre = genres[index]
+                musicCollectionVC.genre = genre
+                musicCollectionVC.navigationItem.title = genre
+            } else if self.title == "Artists" {
+                let artist = artists[index]
+                musicCollectionVC.artist = artist
+                musicCollectionVC.navigationItem.title = artist.artistName
             }
         }
-        return nil
     }
     
     // MARK: - Private Methods
@@ -90,12 +106,5 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
             height = 50
         }
         musicTableView.tableFooterView?.frame.size.height = height
-        
-        // Reset tableview contentsize height
-//        let lastTableViewSubviewYPosition = musicTableView.tableFooterView?.frame.origin.y
-//        let lastTableViewSubviewHeight = musicTableView.tableFooterView?.bounds.height
-//        let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
-//        musicTableView.contentSize = CGSize(width: musicTableView.contentSize.width, height: newHeight)
     }
-
 }

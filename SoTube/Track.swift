@@ -20,7 +20,7 @@ struct Track {
     let albumName: String
     let albumId: String
     
-    var artistImageUrl: String?
+    var artistCoverUrl: String?
     var dateOfPurchase: Date?
     var priceInCoins: Int?
     
@@ -49,22 +49,20 @@ struct Track {
             ]]
     }
     
-    var albumDictionary: [String : [String : Any]] {
-        return [albumId : [
+    var albumDictionary: [String : Any] {
+        return [
             "albumName" : albumName,
             "artistName" : artistName,
             "artistId" : artistId,
-            "coverUrl" : coverUrl,
-            "trackIds" : []
-            ]]
+            "coverUrl" : coverUrl
+            ]
     }
     
-    var artistDictionary: [String : [String : Any]] {
-        return [artistId : [
+    var artistDictionary: [String : Any] {
+        return [
             "artistName" : artistName,
-            "artistImageUrl" : artistImageUrl ?? "",
-            "albumIds" : []
-            ]]
+            "artistCoverUrl" : artistCoverUrl ?? ""
+            ]
     }
     
     init(id: String, name: String, trackNumber: Int, discNumber: Int, duration: Int, coverUrl: String, artistName: String, artistId: String, albumName: String, albumId: String, dateOfPurchase: Date?, priceInCoins: Int?) {

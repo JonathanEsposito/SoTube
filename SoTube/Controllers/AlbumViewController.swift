@@ -36,7 +36,7 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
-        album = Album(named: "Global Warming", fromArtist: "Pitbull", withCoverUrl: "https://i.scdn.co/image/3edb3f970f4a3af9ef922efd18cdb4dabaf85ced", withId: "4aawyAB9vmqN3uQ7FjRGTy")
+//        album = Album(named: "Climate Change", fromArtist: "Pitbull", withCoverUrl: "https://i.scdn.co/image/e1ca3a27d6b2d897ec72425c95685f0475c35be3", withId: "4jtKPpBQ5eneMwEI94f5Y0")
         
         super.viewDidLoad()
         // get tracks from music source
@@ -48,8 +48,13 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             }
             
             musicSource.getTracks(from: album, OnCompletion: { tracks in
-                self.tracks = tracks
-                self.album?.trackIds = tracks.map { $0.id }
+                if self.album!.trackIds.isEmpty {
+                    self.tracks = tracks
+                    self.album?.trackIds = tracks.map { $0.id }
+                } else {
+                    self.tracks = tracks.filter { self.album!.trackIds.contains($0.id) }
+                }
+                
                 print(tracks)
                 
                 self.totalAmountOfSongs = tracks.count

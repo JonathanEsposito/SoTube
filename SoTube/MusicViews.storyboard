@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="inS-mz-fZx">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -35,11 +35,11 @@
                         <viewControllerLayoutGuide type="bottom" id="RIl-K0-Igh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YfV-mI-KB9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WGl-wT-pru">
-                                <rect key="frame" x="16" y="20" width="304" height="548"/>
+                                <rect key="frame" x="16" y="20" width="304" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" multipleTouchEnabled="YES" contentMode="scaleToFill" id="us5-iX-irV">
                                     <rect key="frame" x="0.0" y="98" width="304" height="50"/>
@@ -77,8 +77,8 @@
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="artistartist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64f-6h-XxC">
-                                                            <rect key="frame" x="0.0" y="34.5" width="69.5" height="18"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="artistartistartistartistartistartistartistartistartistartistartistartistartistartistartistartist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64f-6h-XxC">
+                                                            <rect key="frame" x="0.0" y="34.5" width="103.5" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -87,14 +87,14 @@
                                                             </variation>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nBI-B0-SDG" userLabel="Devider Artist Album">
-                                                            <rect key="frame" x="73.5" y="44.5" width="7" height="1"/>
+                                                            <rect key="frame" x="107.5" y="44.5" width="7" height="1"/>
                                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="RoU-os-fBW"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="albumalbumalbumalbumalbumalbumalbumalbumalbumalbumalbumalbumalbumalbumalbum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5x-3O-XWj">
-                                                            <rect key="frame" x="84.5" y="34.5" width="136.5" height="18"/>
+                                                            <rect key="frame" x="118.5" y="34.5" width="102.5" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -130,7 +130,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="★★★★★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXV-qg-yJj">
-                                                    <rect key="frame" x="818" y="23" width="90" height="24"/>
+                                                    <rect key="frame" x="1178" y="23" width="90" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="rzW-OB-I5f"/>
                                                     </constraints>
@@ -247,11 +247,11 @@
                         <viewControllerLayoutGuide type="bottom" id="HHn-sv-jBK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vR2-J7-cIN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OdS-Ax-ssm">
-                                <rect key="frame" x="0.0" y="72" width="320" height="496"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="408"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sqB-NK-v0f">
                                     <size key="itemSize" width="100" height="140"/>
@@ -260,14 +260,14 @@
                                     <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MusicCell" id="Gft-3B-non">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MusicCell" id="Gft-3B-non" customClass="AlbumCollectionViewCell" customModule="SoTube" customModuleProvider="target">
                                         <rect key="frame" x="16" y="0.0" width="100" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEW-sI-kkh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AlbumName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEW-sI-kkh">
                                                     <rect key="frame" x="0.0" y="104" width="100" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -305,7 +305,10 @@
                                         </constraints>
                                         <size key="customSize" width="100" height="150"/>
                                         <connections>
-                                            <segue destination="hNG-ZF-AaJ" kind="show" id="bjR-d5-DPi"/>
+                                            <outlet property="albumCoverImageView" destination="5hi-pm-A8X" id="2C7-uu-EiS"/>
+                                            <outlet property="albumNameLabel" destination="EEW-sI-kkh" id="Yvw-6p-GZw"/>
+                                            <outlet property="artistNameLabel" destination="xGn-LW-plG" id="26w-Yk-pSC"/>
+                                            <segue destination="hNG-ZF-AaJ" kind="show" identifier="showAlbumSegue" id="Yai-hI-usw"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -329,8 +332,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="aW1-LF-jJ1"/>
                     <connections>
-                        <outlet property="musicCollectionView" destination="OdS-Ax-ssm" id="eou-zt-DsQ"/>
-                        <outlet property="musicCollectionViewFlowLayout" destination="sqB-NK-v0f" id="fc2-PT-ML9"/>
+                        <outlet property="albumsCollectionView" destination="OdS-Ax-ssm" id="Ya7-TM-0Yi"/>
+                        <outlet property="albumsCollectionViewFlowLayout" destination="sqB-NK-v0f" id="spt-VB-YjI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pun-mQ-YLB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -346,11 +349,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ubT-pj-GiB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RPp-oj-bSE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1kJ-w5-ebo">
-                                <rect key="frame" x="0.0" y="72" width="320" height="496"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="408"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y1M-3S-dN0">
                                     <size key="itemSize" width="100" height="140"/>
@@ -366,7 +369,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2h1-LN-8WS">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2h1-LN-8WS">
                                                     <rect key="frame" x="0.0" y="104" width="100" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -404,7 +407,10 @@
                                         </constraints>
                                         <size key="customSize" width="100" height="150"/>
                                         <connections>
-                                            <segue destination="hNG-ZF-AaJ" kind="show" id="NyJ-pI-Uow"/>
+                                            <outlet property="albumCoverImageView" destination="BNU-li-tQB" id="wg5-Ja-cVw"/>
+                                            <outlet property="albumNameLabel" destination="2h1-LN-8WS" id="auq-WT-qBZ"/>
+                                            <outlet property="artistNameLabel" destination="EsS-rI-wC4" id="bf9-ud-0Ht"/>
+                                            <segue destination="hNG-ZF-AaJ" kind="show" identifier="showAlbumSegue" id="jEW-Nc-qj6"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -453,11 +459,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ryS-j9-YYA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cHR-xR-02K">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="os8-zA-jCT">
-                                <rect key="frame" x="16" y="64" width="304" height="504"/>
+                                <rect key="frame" x="16" y="64" width="304" height="416"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="s7c-Dz-I8W">
                                     <rect key="frame" x="0.0" y="72" width="304" height="50"/>
@@ -499,7 +505,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="albumImageView" destination="ohU-LE-Qmv" id="6FZ-MJ-QAg"/>
+                                            <outlet property="itemImageView" destination="ohU-LE-Qmv" id="3j8-ia-4ps"/>
                                             <outlet property="nameLabel" destination="FAJ-1V-glO" id="oXC-pF-m11"/>
                                             <segue destination="xOE-Qz-jlz" kind="showDetail" identifier="segue" id="RlX-kh-0wj"/>
                                         </connections>
@@ -588,7 +594,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RlX-kh-0wj"/>
-        <segue reference="bjR-d5-DPi"/>
+        <segue reference="Yai-hI-usw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>
