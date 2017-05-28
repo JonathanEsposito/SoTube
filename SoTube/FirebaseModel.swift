@@ -114,7 +114,7 @@ class Firebase: DatabaseModel {
             if snapshot.exists() {
                 
                 if let value = snapshot.value as? NSDictionary {
-                    print("checkForSongs \(value)")
+//                    print("checkForSongs \(value)")
                     let songCount = value.count
                     
                     if songCount > 0 {
@@ -124,7 +124,7 @@ class Firebase: DatabaseModel {
                     }
                 } else {
                     print("cannot cast snapshot as NSDictionary")
-                    print(snapshot.value)
+//                    print(snapshot.value)
                     completionHandler(false)
                 }
             } else {
@@ -148,7 +148,7 @@ class Firebase: DatabaseModel {
         
         let userReference = FIRDatabase.database().reference(withPath: "users/\(userID)")
         userReference.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
-            print(snapshot.value)
+//            print(snapshot.value)
             let amountOfCoins = snapshot.value as? Int
             
             let userProfile = Profile(username: userUsername, email: userEmail, amountOfCoins: amountOfCoins ?? 0, amountOfSongs: 0)
@@ -208,7 +208,7 @@ class Firebase: DatabaseModel {
 //            })
             
             userReference.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
-                print(snapshot.value)
+//                print(snapshot.value)
                 if let currentAmount = snapshot.value as? Int {
                     let newTotal = currentAmount + coinPurchase.amount
                     userReference.child("properties/coins").setValue(newTotal)
@@ -295,7 +295,7 @@ class Firebase: DatabaseModel {
                         guard let dateOfPurchaseString = $0.value["dateOfPurchase"], let dateOfPurchase = TimeInterval(dateOfPurchaseString) else {fatalError("Database error")}
                         guard let priceInCoinsString = $0.value["priceInCoins"], let priceInCoins = Int(priceInCoinsString) else {fatalError("Database error")}
                         
-                        musicPurchases.append(Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl, artistName: artistName, artistId: artistId, albumName: albumName, albumId: albumId, databaseDate: dateOfPurchase, priceInCoins: priceInCoins))
+                        musicPurchases.append(Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl, artistName: artistName, artistId: artistId, albumName: albumName, albumId: albumId, bought: true, databaseDate: dateOfPurchase, priceInCoins: priceInCoins))
                     }
                     completionHandler(musicPurchases)
                 }
@@ -343,7 +343,7 @@ class Firebase: DatabaseModel {
 //                    print(albumDictionary)
                     var artists: [Artist] = []
                     artistDictionary.forEach {
-                        print($0)
+//                        print($0)
                         let artistId = $0.key
                         guard let artistName = $0.value["artistName"] as? String else {fatalError("Database error")}
                         guard let artistCoverUrl = $0.value["artistCoverUrl"] as? String else {fatalError("Database error")}
@@ -364,8 +364,6 @@ class Firebase: DatabaseModel {
     }
     
     func getAlbums(forArtist artist: Artist, onCompletion completionHandler: @escaping ([Album]) -> ()) {
-        
-        
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
             userRef.child("albums").observeSingleEvent(of: .value, with: { snapshot in
@@ -400,9 +398,9 @@ class Firebase: DatabaseModel {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
             userRef.child("albums/\(id)").observeSingleEvent(of: .value, with: { snapshot in
-                print(snapshot.value)
+//                print(snapshot.value)
                 if let albumDictionary = snapshot.value as? [String : Any] {
-                    print("albumDictionary: \(albumDictionary)")
+//                    print("albumDictionary: \(albumDictionary)")
                     guard let albumName = albumDictionary["albumName"] as? String else {fatalError("Database error")}
                     guard let coverUrl = albumDictionary["coverUrl"] as? String else {fatalError("Database error")}
                     guard let artistId = albumDictionary["artistId"] as? String else {fatalError("Database error")}

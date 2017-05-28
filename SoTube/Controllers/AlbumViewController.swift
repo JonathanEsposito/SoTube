@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, AlbumTrakCellDelegate {
+class StoreAlbumViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, AlbumTrakCellDelegate {
     // MARK: - Properties
     @IBOutlet weak var albumCoverImageView: UIImageView!
     @IBOutlet weak var backgroundView: UIView!
@@ -25,52 +25,98 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     var musicSource = SpotifyModel()
     var database = DatabaseViewModel()
     
+    var playlist: Playlist?
     var album: Album?
     var totalAlbumDuration: Int?
     var totalAmountOfSongs: Int?
+    var myTracks: [Track] = []
     var tracks: [Track] = [] {
         didSet {
             tracksTableView.reloadData()
         }
     }
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
-//        album = Album(named: "Climate Change", fromArtist: "Pitbull", withCoverUrl: "https://i.scdn.co/image/e1ca3a27d6b2d897ec72425c95685f0475c35be3", withId: "4jtKPpBQ5eneMwEI94f5Y0")
+        //        album = Album(named: "Climate Change", fromArtist: "Pitbull", withCoverUrl: "https://i.scdn.co/image/e1ca3a27d6b2d897ec72425c95685f0475c35be3", withId: "4jtKPpBQ5eneMwEI94f5Y0")
         
         super.viewDidLoad()
         // get tracks from music source
         if let album = album {
-            albumCoverImageView.image(fromLink: album.coverUrl) {
+            // Get cover
+            albumCoverImageView.image(fromLink: album.coverUrl, onCompletion: { (image: UIImage) in
                 // set expensive color. If no image is set, user white
-//                averageCoverImageColor = albumCoverImageView.image?.areaAverage() ?? UIColor.white // To slow :s
-                self.averageCoverImageColor = self.albumCoverImageView.image?.averageColor ?? UIColor.white
+                // self.averageCoverImageColor = albumCoverImageView.image?.areaAverage() ?? UIColor.white // To slow :s
+                self.averageCoverImageColor = image.averageColor
+                // gets the primary color // slightly to slow :/ could fix this later if we have time
+                //                image.getColors { colors in
+                //                    DispatchQueue.main.async {
+                //                        self.averageCoverImageColor = colors.primaryColor
+                //                        print(colors.primaryColor)
+                //                    }
+                //                }
+            })
+            
+            // If album tracks is ampty, get tracks from database
+            if album.trackIds.isEmpty {
+                
             }
             
+            
+            // Get Tracks from musicSource
             musicSource.getTracks(from: album, OnCompletion: { tracks in
-                if self.album!.trackIds.isEmpty {
-                    self.tracks = tracks
-                    self.album?.trackIds = tracks.map { $0.id }
-                } else {
-                    self.tracks = tracks.filter { self.album!.trackIds.contains($0.id) }
-                }
-                
-                print(tracks)
-                
-                self.totalAmountOfSongs = tracks.count
-                let totalAlbumDuration = tracks.map {$0.duration}.reduce(0, +)
-                self.totalAlbumDuration = totalAlbumDuration
-                
-                self.landscapeTotalAmountOfSongsLabel.text = "\(tracks.count)"
-                self.landscapeTotalAlbumDurationLabel.text = self.string(fromIntInMiliSec: totalAlbumDuration)
-                
                 DispatchQueue.main.async {
+                    if album.trackIds.isEmpty { // If Album comes from store, load my tracks if any
+                        self.database.getAlbum(byId: album.id) { databaseAlbum in
+                            self.myTracks = tracks.filter { databaseAlbum.trackIds.contains($0.id) }
+                            
+                            print(self.myTracks)
+                        }
+                        self.tracks = tracks
+                    } else {
+                        self.tracks = tracks.filter { self.album!.trackIds.contains($0.id) }
+                    }
+                    
+                    print(tracks)
+                    
+                    self.totalAmountOfSongs = tracks.count
+                    let totalAlbumDuration = tracks.map {$0.duration}.reduce(0, +)
+                    self.totalAlbumDuration = totalAlbumDuration
+                    
+                    self.landscapeTotalAmountOfSongsLabel.text = "\(tracks.count)"
+                    self.landscapeTotalAlbumDurationLabel.text = self.string(fromIntInMiliSec: totalAlbumDuration)
+                    
+                    
                     let indexPath = IndexPath(row: 0, section: 0)
                     self.tracksTableView.beginUpdates()
                     self.tracksTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
                     self.tracksTableView.endUpdates()
                 }
             })
+        } else if let playlist = self.playlist {
+            albumCoverImageView.image(fromLink: playlist.coverUrl) { image in
+                // set expensive color. If no image is set, user white
+                // self.averageCoverImageColor = albumCoverImageView.image?.areaAverage() ?? UIColor.white // To slow :s
+                self.averageCoverImageColor = image.averageColor
+            }
+            
+            musicSource.getTracks(from: playlist) { tracks in
+                DispatchQueue.main.async {
+                    self.tracks = tracks
+                    
+                    self.totalAmountOfSongs = tracks.count
+                    let totalAlbumDuration = tracks.map {$0.duration}.reduce(0, +)
+                    self.totalAlbumDuration = totalAlbumDuration
+                    
+                    self.landscapeTotalAmountOfSongsLabel.text = "\(tracks.count)"
+                    self.landscapeTotalAlbumDurationLabel.text = self.string(fromIntInMiliSec: totalAlbumDuration)
+                    
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    self.tracksTableView.beginUpdates()
+                    self.tracksTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                    self.tracksTableView.endUpdates()
+                }
+            }
         }
     }
     
@@ -81,7 +127,7 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
             // Scale original AlbumCoverImageView height to new height (7:6) and remove the navigation bar height
             let scaledAlbumCoverImageViewHeight = albumCoverImageView.bounds.height - (albumCoverImageView.bounds.height / 7)
-
+            
             // Set backgroundView gradient
             let clearColor = UIColor.clear.cgColor
             // Fist time called, there might not be an image yet so use white, otherwise use avergeColor
@@ -175,7 +221,11 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             
             let track = tracks[indexPath.row]
             
-            trackCell.trackNumberLabel.text = "\(track.trackNumber)"
+            if album != nil { // Hide tracknumbers in playlists
+                trackCell.trackNumberLabel.text = "\(track.trackNumber)"
+            } else {
+                trackCell.trackNumberLabel.text = "\(indexPath.row + 1)"
+            }
             trackCell.trackNameLabel.text = "\(track.name)"
             trackCell.trackDurationLabel.text = string(fromIntInMiliSec: track.duration)
             trackCell.delegate = self
@@ -218,17 +268,17 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             }
         })
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
     
     // Private Methods
     private func updateFooterHeight() {

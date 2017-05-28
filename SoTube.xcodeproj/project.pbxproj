@@ -55,7 +55,6 @@
 		A05F92A51EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F92A41EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift */; };
 		A05F92A71EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F92A61EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift */; };
 		A05F92A91EC58E9A00F62432 /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05F92A81EC58E9A00F62432 /* MusicPlayerViewController.swift */; };
-		A06BE0BF1ED9B6C100767F91 /* SpotifyModelTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BE0BE1ED9B6C100767F91 /* SpotifyModelTwo.swift */; };
 		A06BE0C11ED9E68800767F91 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BE0C01ED9E68800767F91 /* Artist.swift */; };
 		A07775CF1ED86A8200E09D76 /* StaticAlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07775CE1ED86A8200E09D76 /* StaticAlbumTableViewCell.swift */; };
 		A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09477C31EBCA03A00B62278 /* AppDelegate.swift */; };
@@ -81,6 +80,7 @@
 		A0A29F9F1ECDEF9A00E06D95 /* StoreOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29F9E1ECDEF9A00E06D95 /* StoreOverviewViewController.swift */; };
 		A0A29FA11ECDEFB100E06D95 /* StoreDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */; };
 		A0A29FA31ECDF71E00E06D95 /* StoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */; };
+		A0A6D20E1EDAEE500036572B /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6D20D1EDAEE500036572B /* UIImageColors.swift */; };
 		A0ADCB7A1EBCA4C800C82CC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0ADCB791EBCA4C800C82CC9 /* GoogleService-Info.plist */; };
 		A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */; };
 		A0D814D81EC970B90094DEC7 /* UIViewLoadingFromXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */; };
@@ -159,7 +159,6 @@
 		A05F92A41EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicSplitViewMasterViewController.swift; path = Controllers/MusicSplitViewMasterViewController.swift; sourceTree = "<group>"; };
 		A05F92A61EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicSplitViewMasterTableViewCell.swift; path = Controllers/MusicSplitViewMasterTableViewCell.swift; sourceTree = "<group>"; };
 		A05F92A81EC58E9A00F62432 /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicPlayerViewController.swift; path = Controllers/MusicPlayerViewController.swift; sourceTree = "<group>"; };
-		A06BE0BE1ED9B6C100767F91 /* SpotifyModelTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyModelTwo.swift; sourceTree = "<group>"; };
 		A06BE0C01ED9E68800767F91 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Artist.swift; path = Models/Artist.swift; sourceTree = "<group>"; };
 		A07775CE1ED86A8200E09D76 /* StaticAlbumTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticAlbumTableViewCell.swift; sourceTree = "<group>"; };
 		A09477C01EBCA03A00B62278 /* SoTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +190,7 @@
 		A0A29F9E1ECDEF9A00E06D95 /* StoreOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreOverviewViewController.swift; path = Controllers/StoreOverviewViewController.swift; sourceTree = "<group>"; };
 		A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreDetailViewController.swift; sourceTree = "<group>"; };
 		A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCollectionViewCell.swift; sourceTree = "<group>"; };
+		A0A6D20D1EDAEE500036572B /* UIImageColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		A0ADCB791EBCA4C800C82CC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = Extentions/UIViewExtensions.swift; sourceTree = "<group>"; };
 		A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewLoadingFromXib.swift; path = Extentions/UIViewLoadingFromXib.swift; sourceTree = "<group>"; };
@@ -277,7 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				2F52836E1ED300B30034BB17 /* SpotifyModel.swift */,
-				A06BE0BE1ED9B6C100767F91 /* SpotifyModelTwo.swift */,
 				2F804E6F1ED433DB00E6A7B4 /* Album.swift */,
 				2F804E711ED433F500E6A7B4 /* Playlist.swift */,
 				2F804E731ED4340400E6A7B4 /* Category.swift */,
@@ -569,6 +568,7 @@
 		A0ADCB811EC07C6A00C82CC9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A0A6D20D1EDAEE500036572B /* UIImageColors.swift */,
 				A0ADCB7F1EC07C6400C82CC9 /* UIViewExtensions.swift */,
 				A0D814D71EC970B90094DEC7 /* UIViewLoadingFromXib.swift */,
 				A057303E1ED332D3008EC7B0 /* UIViewBorderLeftTopRightBottom.swift */,
@@ -935,8 +935,8 @@
 				A057303F1ED332D3008EC7B0 /* UIViewBorderLeftTopRightBottom.swift in Sources */,
 				A0DB26F51ED833320054C9A5 /* UIImageAverigeColor.swift in Sources */,
 				A05730411ED385F5008EC7B0 /* userInfoDelegate.swift in Sources */,
+				A0A6D20E1EDAEE500036572B /* UIImageColors.swift in Sources */,
 				2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */,
-				A06BE0BF1ED9B6C100767F91 /* SpotifyModelTwo.swift in Sources */,
 				A057303D1ED33088008EC7B0 /* ChangePasswordViewController.swift in Sources */,
 				2F804E701ED433DB00E6A7B4 /* Album.swift in Sources */,
 				A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */,

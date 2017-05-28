@@ -109,7 +109,7 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
             }
         }
         if segue.identifier == "showAlbumSegue" {
-            if let destinationVC = destinationVC as? StoreAlbumViewController {
+            if let destinationVC = destinationVC as? AlbumViewController {
                 if let playlists = collection as? [Playlist] {
                     let playlist = playlists[indexPaths!.first!.row]
                     destinationVC.playlist = playlist

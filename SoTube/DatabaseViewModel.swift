@@ -22,6 +22,7 @@ enum DatabaseError: Error {
 }
 
 protocol DatabaseModel {
+    // Account stuff
     func login(withEmail email: String, password: String, delegate: DatabaseDelegate, onCompletion: (() -> ())?)
     func signOut() throws
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String, delegate: DatabaseDelegate)
@@ -30,10 +31,12 @@ protocol DatabaseModel {
     func getCurrentUserProfile(onCompletion: @escaping (Profile) -> ())
     func changeUsername(to: String, onCompletion: @escaping (Error?) -> ())
     func change(_ currentPassword: String, with newPassword: String, for email: String, on delegate: userInfoDelegate, onCompletion completionHandler: @escaping (Error?) -> ())
+    // Store stuff
     func updateCoins(with: CoinPurchase, onCompletion: @escaping ()->())
     func getCoinHistory(onCompletion completionHandler: @escaping ([CoinPurchase])->())
-    func getTracks(onCompletion completionHandler: @escaping ([Track])->())
     func buy(_ track: Track, withCoins coins: Int, onCompletion: (Error?)->())
+    // Music stuff
+    func getTracks(onCompletion completionHandler: @escaping ([Track])->())
     func getCoins(onCompletion: @escaping (Int)->())
     func getAlbums(onCompletion completionHandler: @escaping ([Album])->())
     func getAlbum(byID id: String, onCompletion completionHandler: @escaping (Album) -> ())
@@ -48,7 +51,7 @@ protocol DatabaseDelegate {
 class DatabaseViewModel {
     var databaseModel: DatabaseModel = Firebase()
     var delegate: DatabaseDelegate?
-    var musicSource = SpotifyModelTwo()
+    var musicSource = SpotifyModel()
     
     func checkUserHasSongs(onCompletion completionHandler: @escaping (Bool) -> () ) {
         databaseModel.checkForSongs(onCompletion: completionHandler)
@@ -116,7 +119,7 @@ class DatabaseViewModel {
                 print("yeey, enough coins")
                 self.musicSource.getCoverUrl(forArtistID: track.artistId) { url in
                     print("url: \(url)")
-                    var track = track
+                    let track = track
                     track.artistCoverUrl = url
                     track.dateOfPurchase = Date()
                     track.priceInCoins = coins
@@ -145,6 +148,10 @@ class DatabaseViewModel {
             }
 //            print($0)
         }
+    }
+    
+    func getAlbum(byId albumId: String, onCompletion completionHandler: @escaping (Album)->()) {
+        databaseModel.getAlbum(byID: albumId, onCompletion: completionHandler)
     }
     
     func getAlbums(onCompletion completionHandler: @escaping ([Album])->()) {

@@ -26,6 +26,11 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Hide Navigation controller background and shadow
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        
         // Do any additional setup after loading the view.
         
         spotifyModel.getNewReleases(amount: 10, withOffset: 0, OnCompletion: {albums in
@@ -96,20 +101,18 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         return cell!
     }
     
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //        if collectionView === newReleasesCollectionView {
-    //            try? player.play(contentOf: spotifyModel.getSpotifyString(ofType: .playString, forItemType: .albums, andID: newReleases[indexPath.row].id))
-    //        }
-    //
-    //        if collectionView === featuredPlaylistsCollectionView {
-    //
-    //        }
-    //
-    //        if collectionView === categoriesCollectionView {
-    //
-    //        }
-    //    }
-    
+    // MARK: Delegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView === newReleasesCollectionView {
+            performSegue(withIdentifier: "showAlbumSegue", sender: nil)
+        }
+        if collectionView === featuredPlaylistsCollectionView {
+            performSegue(withIdentifier: "showPlaylistsSegue", sender: nil)
+        }
+        if collectionView === categoriesCollectionView {
+            performSegue(withIdentifier: "showPlaylistsInCategorySegue", sender: nil)
+        }
+    }
     
     // MARK: DelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -152,7 +155,6 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
     }
     
     // MARK: - Navigation
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination
         if segue.identifier == "showNewReleasesSegue" {
@@ -183,13 +185,13 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
             }
         }
         if segue.identifier == "showAlbumSegue" {
-            if let destinationVC = destinationVC as? StoreAlbumViewController {
+            if let destinationVC = destinationVC as? AlbumViewController {
                 let indexPaths = newReleasesCollectionView.indexPathsForSelectedItems
                 destinationVC.album = self.newReleases[indexPaths!.first!.row]
             }
         }
         if segue.identifier == "showPlaylistsSegue" {
-            if let destinationVC = destinationVC as? StoreAlbumViewController {
+            if let destinationVC = destinationVC as? AlbumViewController {
                 let indexPaths = featuredPlaylistsCollectionView.indexPathsForSelectedItems
                 destinationVC.playlist = self.featuredPlaylists[indexPaths!.first!.row]
             }
@@ -197,22 +199,15 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         if segue.identifier == "showPlaylistsInCategorySegue" {
             if let destinationVC = destinationVC as? StoreDetailViewController {
                let indexPaths = categoriesCollectionView.indexPathsForSelectedItems
-                spotifyModel.getPlaylist(from: self.categories[indexPaths!.first!.row], OnCompletion: {playlists in
-                destinationVC.collection = playlists
+                let category = categories[indexPaths!.first!.row]
+                destinationVC.navigationItem.title = category.name
+                spotifyModel.getPlaylist(from: category, OnCompletion: {playlists in
+                    DispatchQueue.main.async {
+                        destinationVC.collection = playlists
+                        
+                    }
                 })
             }
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView === newReleasesCollectionView {
-            performSegue(withIdentifier: "showAlbumSegue", sender: nil)
-        }
-        if collectionView === featuredPlaylistsCollectionView {
-            performSegue(withIdentifier: "showPlaylistsSegue", sender: nil)
-        }
-        if collectionView === categoriesCollectionView {
-            performSegue(withIdentifier: "showPlaylistsInCategorySegue", sender: nil)
         }
     }
 }

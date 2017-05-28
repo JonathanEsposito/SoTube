@@ -171,12 +171,12 @@
                                                     <exclude reference="xXV-qg-yJj"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="JtE-mb-Ids"/>
-                                                    <exclude reference="XYS-qy-rfb"/>
                                                     <exclude reference="15A-K6-b6Z"/>
                                                     <exclude reference="V3i-nT-MoZ"/>
                                                     <exclude reference="vBH-DJ-vXf"/>
                                                     <exclude reference="ziK-tO-qCT"/>
+                                                    <exclude reference="JtE-mb-Ids"/>
+                                                    <exclude reference="XYS-qy-rfb"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -196,11 +196,11 @@
                                                     <include reference="xXV-qg-yJj"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="JtE-mb-Ids"/>
-                                                    <include reference="XYS-qy-rfb"/>
                                                     <exclude reference="15A-K6-b6Z"/>
                                                     <include reference="V3i-nT-MoZ"/>
                                                     <exclude reference="nUQ-bw-B5b"/>
+                                                    <include reference="JtE-mb-Ids"/>
+                                                    <include reference="XYS-qy-rfb"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

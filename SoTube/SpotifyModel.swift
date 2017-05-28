@@ -30,9 +30,17 @@ class SpotifyModel {
     }
     
     func spotifyLogin() {
-        if UIApplication.shared.openURL(loginUrl!) {
-            if auth.canHandle(auth.redirectURL) {
-                //Error handling
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(loginUrl!, options: [:], completionHandler: { succes in
+                if succes, self.auth.canHandle(self.auth.redirectURL) {
+                    //Error handling
+                }
+            })
+        } else {
+            if UIApplication.shared.openURL(loginUrl!) {
+                if auth.canHandle(auth.redirectURL) {
+                    //Error handling
+                }
             }
         }
     }
@@ -53,14 +61,13 @@ class SpotifyModel {
         auth.clientID        = "5f2b808c91b346ae89a4121ce2eff89f"
         auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
-        
     }
     
     
     //MARK: - Music Retrieval Fuctions
     
     func getCoverUrl(forArtistID artistID: String, OnCompletion completionHandler: @escaping (String)->()) {
-        let urlRequest = getURLRequest(forUrl: getSpotifyString(ofType: .hrefString, forItemType: .artist, andID: artistID))
+        let urlRequest = getURLRequest(forUrl: getSpotifyString(ofType: .hrefString, forItemType: .artists, andID: artistID))
         
         let urlSession = URLSession.shared
         
@@ -288,7 +295,7 @@ class SpotifyModel {
 
     private func getURLRequest(forUrl url: String) -> URLRequest? {
         
-        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQDdTG9K3mrdtdUC0obDb4cy7-ctcHPockY5TE2KqpbilgNCpwwP4kbb5CHw7xOdUK_Lcmbvb0rR6YzmfDAeIglRS8_MGPNTVmrZY6ZJz6lk_OnHlaqmiO4N6q5S4sfWmmtZ94rTvHczB02HvA", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQB0-yY0x6lpOzfBpi2YafZcqoM2HjQqgUGMRfAlVYKTTpz4F4GTRiPWqzetmY3SXq7R_10IuP9Q9bVV-YhD2x4JztPdKifzj5fEjqxrpBiKO6tKwhqt9QyIgeHfoOziLdLovPWlZSxKlDBveQ", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         
         return urlRequest
     }

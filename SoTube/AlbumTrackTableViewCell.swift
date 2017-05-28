@@ -17,6 +17,7 @@ class AlbumTrackTableViewCell: UITableViewCell {
     @IBOutlet weak var trackNumberLabel: UILabel!
     @IBOutlet weak var trackNameLabel: UILabel!
     @IBOutlet weak var trackDurationLabel: UILabel!
+    @IBOutlet weak var buyTrackButton: UIButton!
     
     // MARK: - Delegate
     var delegate: AlbumTrakCellDelegate?

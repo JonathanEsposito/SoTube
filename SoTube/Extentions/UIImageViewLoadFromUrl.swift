@@ -7,7 +7,7 @@
 //
 
 extension UIImageView {
-    func image(fromUrl url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit, onCompletion completionHandler:  (()->())? = nil) {
+    func image(fromUrl url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit, onCompletion completionHandler:  ((UIImage)->())? = nil) {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard
@@ -19,13 +19,13 @@ extension UIImageView {
             DispatchQueue.main.async() { () -> Void in
                 self.image = image
                 if let completionHandler = completionHandler {
-                    completionHandler()
+                    completionHandler(image)
                 }
             }
             }.resume()
     }
     
-    func image(fromLink link: String, contentMode mode: UIViewContentMode = .scaleAspectFit, onCompletion completionHandler:  (()->())? = nil) {
+    func image(fromLink link: String, contentMode mode: UIViewContentMode = .scaleAspectFit, onCompletion completionHandler:  ((UIImage)->())? = nil) {
         guard let url = URL(string: link) else { return }
         image(fromUrl: url, contentMode: mode, onCompletion: completionHandler)
     }

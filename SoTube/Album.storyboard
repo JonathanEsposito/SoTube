@@ -277,6 +277,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="buyTrackButton" destination="K1e-I5-eZo" id="e6a-iZ-CLM"/>
                                             <outlet property="trackDurationLabel" destination="qqX-qp-Nhw" id="38E-U1-ciP"/>
                                             <outlet property="trackNameLabel" destination="89a-r3-Zss" id="GpK-AR-y0J"/>
                                             <outlet property="trackNumberLabel" destination="N25-as-CeP" id="ftb-nI-mtv"/>
@@ -386,7 +387,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ar3-B7-WJp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-13.043478260869566" y="121.46739130434784"/>
+            <point key="canvasLocation" x="156" y="-109"/>
         </scene>
     </scenes>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
