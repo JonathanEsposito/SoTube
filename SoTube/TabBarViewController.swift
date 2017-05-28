@@ -12,6 +12,17 @@ var selectedTabBarItemWithTitle = "Store"
 
 class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDelegate {
     // MARK: - Properties
+    
+    // UserDefaults
+    let kuserDefaultsEmailKey = "userEmail"
+    let kuserDefaultsPasswordKey = "userPassword"
+    let userDefaults = UserDefaults.standard
+    
+    var guestuser: Bool {
+        return userDefaults.object(forKey: kuserDefaultsEmailKey) == nil ||
+        userDefaults.object(forKey: kuserDefaultsPasswordKey) == nil
+    }
+    
     var updater: CADisplayLink! = nil
     
     let musicProgressView = UIProgressView()
@@ -122,6 +133,23 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
             selectedTabBarItemWithTitle = tabBarItemTitle
             UIApplication.shared.keyWindow?.rootViewController = navigationController
             self.dismiss(animated: true, completion: nil)
+        
+        case "Login":
+            print("Login")
+            // Go to login screen
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+            UIApplication.shared.keyWindow?.rootViewController = loginViewController
+            self.dismiss(animated: true, completion: nil)
+            
+        case "Create Account":
+            print("Create Account")
+            // Go to Create Account screen
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let createNewAccountController = storyboard.instantiateViewController(withIdentifier: "createAccountVC")
+            self.present(createNewAccountController, animated: true, completion: nil)
+            tabBar.selectedItem = tabBar.items![0]
+            
         default:
             break
         }
@@ -133,12 +161,19 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         // Create tab bar
         tabBar = UITabBar(frame: CGRect(x: 0, y: self.view.bounds.height - 50, width: self.view.bounds.width, height: 50))
         
-        let tabOneBarItem = UITabBarItem(title: "Account", image: UIImage(named: "accountButton"), selectedImage: UIImage(named: "accountButton"))
-        let tabTwoBarItem = UITabBarItem(title: "My music", image: UIImage(named: "musicButton"), selectedImage: UIImage(named:"musicButton"))
-        let tabThreeBarItem = UITabBarItem(title: "Store", image: UIImage(named: "shopButton"), selectedImage: UIImage(named:"shopButton"))
+        let accountBarItem = UITabBarItem(title: "Account", image: #imageLiteral(resourceName: "accountButton"), selectedImage: #imageLiteral(resourceName: "accountButton"))
+        let myMusicBarItem = UITabBarItem(title: "My music", image: #imageLiteral(resourceName: "musicButton"), selectedImage: #imageLiteral(resourceName: "musicButton"))
+        let storeBarItem = UITabBarItem(title: "Store", image: #imageLiteral(resourceName: "shopButton"), selectedImage: #imageLiteral(resourceName: "shopButton"))
         
-        // Add all tab bar items to our tab bar
-        tabBar.setItems([tabOneBarItem, tabTwoBarItem, tabThreeBarItem], animated: false)
+        let loginBarItem = UITabBarItem(title: "Login", image: #imageLiteral(resourceName: "accountButton"), selectedImage: #imageLiteral(resourceName: "accountButton"))
+        let createAccountBarItem = UITabBarItem(title: "Create Account", image: #imageLiteral(resourceName: "accountButton"), selectedImage: #imageLiteral(resourceName: "accountButton"))
+        
+        if self.guestuser {
+            tabBar.setItems([storeBarItem, loginBarItem, createAccountBarItem], animated: false)
+        } else {
+            // Add all tab bar items to our tab bar
+            tabBar.setItems([accountBarItem, myMusicBarItem, storeBarItem], animated: false)
+        }
         
         // Load tab bar in view
         self.view.addSubview(tabBar)

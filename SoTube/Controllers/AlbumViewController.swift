@@ -270,10 +270,9 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             }
             trackCell.trackNameLabel.text = "\(track.name)"
             trackCell.trackDurationLabel.text = string(fromIntInMiliSec: track.duration)
-            if track.bought {
+            if track.bought || self.guestuser {
                 trackCell.buyTrackButton.isHidden = true
                 trackCell.buyTrackButton.bounds.size.width = 0
-                trackCell.buyTrackButton.setTitle("mine", for: .normal)
             }
             trackCell.delegate = self
             cell = trackCell
@@ -302,52 +301,78 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     
     // MARK: - AlbumTrakCellDelegate
     func buySong(_ cell: AlbumTrackTableViewCell) {
-        guard let index = tracksTableView.indexPath(for: cell)?.row else { return }
-        print(index)
-        // user row as index to get song form array
-        
-        let track = self.tracks[index]
-        database.getCoins { currentCoins in
-            if (currentCoins - coinsPerTrackRate) > 0 {
-                let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nCurrently you have \(currentCoins) SoCoins.\nAfter buying this song you will have \(currentCoins - coinsPerTrackRate) SoCoins left.\n\nDo you want to continue?", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                alertController.addAction(cancelAction)
-                
-                let buyTrackAction = UIAlertAction(title: "Buy this track!", style: .default, handler: { _ in
-                    self.database.buy(track, withCoins: coinsPerTrackRate, onCompletion: { error in
-                        DispatchQueue.main.async {
-                            if let error = error {
-                                print(error.localizedDescription)
-                            } else {
-                                print("track bought :D")
-                                track.bought = true
-                                let indexPath = IndexPath(row: index, section: 1)
-                                self.tracksTableView.reloadRows(at: [indexPath], with: .automatic)
-                                
+        // If there is a logged in user
+        if self.guestuser {
+            let alertController = UIAlertController(title: "SoTunes Store", message: "As a guest you can only preview tracks but not buy track. Do you want to create an account or log in?", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            let creatAccountAction = UIAlertAction(title: "Create new account", style: .default, handler: { _ in
+                // Go to Create Account screen
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let createNewAccountController = storyboard.instantiateViewController(withIdentifier: "createAccountVC")
+                self.present(createNewAccountController, animated: true, completion: nil)
+                //                UIApplication.shared.keyWindow?.rootViewController = createNewAccountController
+                //                self.dismiss(animated: true, completion: nil)
+            })
+            alertController.addAction(creatAccountAction)
+            let loginAction = UIAlertAction(title: "Log in", style: .default, handler: { _ in
+                // Go to login screen
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+                UIApplication.shared.keyWindow?.rootViewController = loginViewController
+                self.dismiss(animated: true, completion: nil)
+            })
+            alertController.addAction(loginAction)
+            
+            present(alertController, animated: true, completion: nil)
+        } else {
+            guard let index = tracksTableView.indexPath(for: cell)?.row else { return }
+            print(index)
+            // user row as index to get song form array
+            
+            let track = self.tracks[index]
+            database.getCoins { currentCoins in
+                if (currentCoins - coinsPerTrackRate) > 0 {
+                    let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nCurrently you have \(currentCoins) SoCoins.\nAfter buying this song you will have \(currentCoins - coinsPerTrackRate) SoCoins left.\n\nDo you want to continue?", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    alertController.addAction(cancelAction)
+                    
+                    let buyTrackAction = UIAlertAction(title: "Buy this track!", style: .default, handler: { _ in
+                        self.database.buy(track, withCoins: coinsPerTrackRate, onCompletion: { error in
+                            DispatchQueue.main.async {
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                } else {
+                                    print("track bought :D")
+                                    track.bought = true
+                                    let indexPath = IndexPath(row: index, section: 1)
+                                    self.tracksTableView.reloadRows(at: [indexPath], with: .automatic)
+                                    
+                                }
                             }
-                        }
+                        })
                     })
-                })
-                alertController.addAction(buyTrackAction)
-                self.present(alertController, animated: true, completion: nil)
-                
-            } else {
-                let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nSadly you currently only have \(currentCoins) SoCoins left.\nWould you want to top up your acount?", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                alertController.addAction(cancelAction)
-                let topUpAccount = UIAlertAction(title: "Topup account", style: .default, handler: { _ in
-                    self.presentTopUpAlertController(onCompletion: { amount in
-                        if let price = self.paymentViewModel.pricePerAmount[amount] {
-                            let coinPurchase = CoinPurchase(amount: amount, price: price)
-                            print("I'm buying!!")
-                            self.database.updateCoins(with: coinPurchase) {
-                                print("bought coins :D")
+                    alertController.addAction(buyTrackAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                } else {
+                    let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nSadly you currently only have \(currentCoins) SoCoins left.\nWould you want to top up your acount?", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    alertController.addAction(cancelAction)
+                    let topUpAccount = UIAlertAction(title: "Topup account", style: .default, handler: { _ in
+                        self.presentTopUpAlertController(onCompletion: { amount in
+                            if let price = self.paymentViewModel.pricePerAmount[amount] {
+                                let coinPurchase = CoinPurchase(amount: amount, price: price)
+                                print("I'm buying!!")
+                                self.database.updateCoins(with: coinPurchase) {
+                                    print("bought coins :D")
+                                }
                             }
-                        }
+                        })
                     })
-                })
-                alertController.addAction(topUpAccount)
-                self.present(alertController, animated: true, completion: nil)
+                    alertController.addAction(topUpAccount)
+                    self.present(alertController, animated: true, completion: nil)
+                }
             }
         }
     }

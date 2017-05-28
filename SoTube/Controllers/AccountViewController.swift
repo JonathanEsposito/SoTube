@@ -17,11 +17,6 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     @IBOutlet weak var amountOfCoinsLabel: UILabel!
     @IBOutlet weak var amountOfSongsLabel: UILabel!
     
-    // UserDefaults
-    let kuserDefaultsEmailKey = "userEmail"
-    let kuserDefaultsPasswordKey = "userPassword"
-    let userDefaults = UserDefaults.standard
-    
     let paymentViewModel = PaymentViewModel()
     var pricePerAmount: [Int: Double]?
     var buyAmounts: [Int]?
@@ -106,6 +101,7 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
             self.usernameTextField.text = profile.username
             self.emailTextField.text = profile.email
             self.amountOfCoinsLabel.text = "\(profile.amountOfCoins)"
+            self.amountOfSongsLabel.text = "\(profile.amountOfSongs)"
         }
     }
     

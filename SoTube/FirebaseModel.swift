@@ -151,9 +151,14 @@ class Firebase: DatabaseModel {
 //            print(snapshot.value)
             let amountOfCoins = snapshot.value as? Int
             
-            let userProfile = Profile(username: userUsername, email: userEmail, amountOfCoins: amountOfCoins ?? 0, amountOfSongs: 0)
-            
-            completionHandler(userProfile)
+            userReference.child("songs").observeSingleEvent(of: .value, with: { snapshot in
+                let tracks = snapshot.value as? NSDictionary
+                let amountOfSongs = tracks?.count
+                
+                let userProfile = Profile(username: userUsername, email: userEmail, amountOfCoins: amountOfCoins ?? 0, amountOfSongs: amountOfSongs ?? 0)
+                
+                completionHandler(userProfile)
+            })
         })
     }
     

@@ -35,8 +35,6 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         
         
         // If a login object is being saved to UserDefaults, use this object to log in and do the segue
-        print(userDefaults.object(forKey: kuserDefaultsEmailKey))
-        print(userDefaults.object(forKey: kuserDefaultsPasswordKey))
         if userDefaults.object(forKey: kuserDefaultsEmailKey) != nil,
             userDefaults.object(forKey: kuserDefaultsPasswordKey) != nil {
             // Get credentials from UserDefaults

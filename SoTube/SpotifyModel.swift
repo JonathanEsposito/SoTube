@@ -212,7 +212,8 @@ class SpotifyModel {
                     let artistId = dictionary.value(forKeyPath: "artists.id") as! [String]
                     let albumName = dictionary.value(forKeyPath: "album.name") as! String
                     let albumId = dictionary.value(forKeyPath: "album.id") as! String
-                    let track = Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl.first!, artistName: artistName.first!, artistId: artistId.first!, albumName: albumName, albumId: albumId)
+                    print("id: \(id), name: \(name), trackNumber: \(trackNumber), discNumber: \(discNumber), duration: \(duration), coverUrl: \(coverUrl), artistName: \(artistName), artistId: \(artistId), albumName: \(albumName), albumId: \(albumId)")
+                    let track = Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl.first ?? "", artistName: artistName.first!, artistId: artistId.first!, albumName: albumName, albumId: albumId)
                     trackArray.append(track)
                 }
                 completionHandler(trackArray)
@@ -295,7 +296,7 @@ class SpotifyModel {
 
     private func getURLRequest(forUrl url: String) -> URLRequest? {
         
-        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQBNc9Tri8hreHvwAKnl6f0MYMuLRswXM6R8DG8ULp-eDWYfvdI8s4bBDdatNEl6H1okYq6PV3pc4uvA-HYYxW3reH7oV_h1VgHX0kyDFc_R46q90rYXWyMH8TyOO1ry7xGnxnn6P1jtoARJiA", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQCKRWYW_ZhmdxJb5pRHAgIvDB6E3YiBvBzoo-LcinvpP972RfXJaEXRw4Ve2RkTGgXv3lWh2WdlTvqVX1YAM8d3JqpOV2DrHmKIF5B5iYdANK2xcBNMuctu2NBRTkUSxdY_cx_3cC9EyAAfww", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         
         return urlRequest
     }

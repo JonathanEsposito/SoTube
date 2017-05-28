@@ -118,23 +118,15 @@ class DatabaseViewModel {
     }
     
     func buy(_ track: Track, withCoins coins: Int, onCompletion completionHandler: @escaping (Error?)->()) {
-        databaseModel.getCoins { currentCoins in
-            if (currentCoins - coins) > 0 {
-                
-                
-                print("yeey, enough coins")
-                self.musicSource.getCoverUrl(forArtistID: track.artistId) { url in
-                    print("url: \(url)")
-                    let track = track
-                    track.artistCoverUrl = url
-                    track.dateOfPurchase = Date()
-                    track.priceInCoins = coins
-                    
-                    self.databaseModel.buy(track, withCoins: coins, onCompletion: completionHandler)
-                }
-            } else {
-                completionHandler(DatabaseError.notEnoughCoins)
-            }
+        // we already checked for enough coins
+        self.musicSource.getCoverUrl(forArtistID: track.artistId) { url in
+            print("url: \(url)")
+            let track = track
+            track.artistCoverUrl = url
+            track.dateOfPurchase = Date()
+            track.priceInCoins = coins
+            
+            self.databaseModel.buy(track, withCoins: coins, onCompletion: completionHandler)
         }
     }
     
