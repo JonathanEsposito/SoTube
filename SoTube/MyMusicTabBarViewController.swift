@@ -157,14 +157,14 @@ class MyMusicTabBarViewController: TabBarViewController {
         })
         alertController.addAction(showArtists)
         
-        let showGenres = UIAlertAction(title: "Year", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
-            print("Year")
-            //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "GenresVC") {
-            //                UIApplication.shared.keyWindow?.rootViewController = viewController
-            //                self.dismiss(animated: true, completion: nil)
-            //            }
-        })
-        alertController.addAction(showGenres)
+//        let showGenres = UIAlertAction(title: "Year", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
+//            print("Year")
+//            //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "GenresVC") {
+//            //                UIApplication.shared.keyWindow?.rootViewController = viewController
+//            //                self.dismiss(animated: true, completion: nil)
+//            //            }
+//        })
+//        alertController.addAction(showGenres)
         
         let cancelAction = UIAlertAction(title: "cancel", style: UIAlertActionStyle.cancel/*.default*/, handler: {(alert :UIAlertAction!) in
             print("Cancel button tapped")
