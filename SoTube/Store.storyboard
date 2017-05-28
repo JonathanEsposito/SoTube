@@ -143,7 +143,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="musicCell" id="7Uq-tZ-cCo" customClass="StoreCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="5.5" width="100" height="107.5"/>
+                                        <rect key="frame" x="20" y="5" width="100" height="107.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="107.5"/>
@@ -553,9 +553,9 @@
         <image name="princeCover" width="500" height="428"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wLk-Sp-PeE"/>
         <segue reference="eH1-h5-wLJ"/>
         <segue reference="eON-JS-Uph"/>
+        <segue reference="CfO-2q-R4N"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>

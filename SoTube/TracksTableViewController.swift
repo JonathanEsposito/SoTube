@@ -72,23 +72,22 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
             fatalError("The dequeued cell is not an instance of StaticAlbumTableViewCell.")
         }
         let track = tracks[indexPath.row]
-        print("cell created")
         cell.albumImageView.image(fromLink: track.coverUrl)
         cell.titelLabel.text = track.name
         cell.albumLabel.text = track.albumName
         cell.artistLabel.text = track.artistName
         cell.timeLabel.text = string(fromIntInMiliSec: track.duration)
-        
-        
         return cell
     }
     
     // MARK: Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath)
-        let path: String! = Bundle.main.resourcePath?.appending("/\(indexPath.row).mp3")
-        let songURL = URL(fileURLWithPath: path)
-        musicPlayer.play(contentOf: String(describing: songURL))
+        let index = indexPath.row
+        let selectedTrack = tracks[index]
+//        let path: String! = Bundle.main.resourcePath?.appending("/\(indexPath.row).mp3")
+//        let songURL = URL(fileURLWithPath: path)
+        musicPlayer.play(selectedTrack)
         
         self.updateMiniPlayer()
 
