@@ -6,9 +6,10 @@
 //  Copyright © 2017 NV Met Talent. All rights reserved.
 //
 
+
 import UIKit
 
-class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, AlbumTrakCellDelegate {
+class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, AlbumTrakCellDelegate, paymentDelegate {
     // MARK: - Properties
     @IBOutlet weak var albumCoverImageView: UIImageView!
     @IBOutlet weak var backgroundView: UIView!
@@ -22,8 +23,9 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     var firstStaticCellPortretHeight: CGFloat?
     var averageCoverImageColor: UIColor?
     
-    var musicSource = SpotifyModel()
-    var database = DatabaseViewModel()
+    let paymentViewModel = PaymentViewModel()
+    let musicSource = SpotifyModel()
+    let database = DatabaseViewModel()
     
     var playlist: Playlist?
     var album: Album?
@@ -305,22 +307,49 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
         // user row as index to get song form array
         
         let track = self.tracks[index]
-        
-        
-        
-        database.buy(track, withCoins: 5, onCompletion: { error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    print("track bought :D")
-                    track.bought = true
-                    let indexPath = IndexPath(row: index, section: 1)
-                    self.tracksTableView.reloadRows(at: [indexPath], with: .automatic)
-                    
-                }
+        database.getCoins { currentCoins in
+            if (currentCoins - coinsPerTrackRate) > 0 {
+                let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nCurrently you have \(currentCoins) SoCoins.\nAfter buying this song you will have \(currentCoins - coinsPerTrackRate) SoCoins left.\n\nDo you want to continue?", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                
+                let buyTrackAction = UIAlertAction(title: "Buy this track!", style: .default, handler: { _ in
+                    self.database.buy(track, withCoins: coinsPerTrackRate, onCompletion: { error in
+                        DispatchQueue.main.async {
+                            if let error = error {
+                                print(error.localizedDescription)
+                            } else {
+                                print("track bought :D")
+                                track.bought = true
+                                let indexPath = IndexPath(row: index, section: 1)
+                                self.tracksTableView.reloadRows(at: [indexPath], with: .automatic)
+                                
+                            }
+                        }
+                    })
+                })
+                alertController.addAction(buyTrackAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+            } else {
+                let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nSadly you currently only have \(currentCoins) SoCoins left.\nWould you want to top up your acount?", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                let topUpAccount = UIAlertAction(title: "Topup account", style: .default, handler: { _ in
+                    self.presentTopUpAlertController(onCompletion: { amount in
+                        if let price = self.paymentViewModel.pricePerAmount[amount] {
+                            let coinPurchase = CoinPurchase(amount: amount, price: price)
+                            print("I'm buying!!")
+                            self.database.updateCoins(with: coinPurchase) {
+                                print("bought coins :D")
+                            }
+                        }
+                    })
+                })
+                alertController.addAction(topUpAccount)
+                self.present(alertController, animated: true, completion: nil)
             }
-        })
+        }
     }
     
     /*

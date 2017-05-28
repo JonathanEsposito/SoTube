@@ -34,10 +34,10 @@ protocol DatabaseModel {
     // Store stuff
     func updateCoins(with: CoinPurchase, onCompletion: @escaping ()->())
     func getCoinHistory(onCompletion completionHandler: @escaping ([CoinPurchase])->())
+    func getCoins(onCompletion: @escaping (Int)->())
     func buy(_ track: Track, withCoins coins: Int, onCompletion: (Error?)->())
     // Music stuff
     func getTracks(onCompletion completionHandler: @escaping ([Track])->())
-    func getCoins(onCompletion: @escaping (Int)->())
     func getAlbums(onCompletion completionHandler: @escaping ([Album])->())
     func getAlbum(byID id: String, onCompletion completionHandler: @escaping (Album) -> ())
     func getArtists(onCompletion completionHandler: @escaping ([Artist])->())
@@ -113,9 +113,15 @@ class DatabaseViewModel {
         databaseModel.getTracks(onCompletion: completionHandler)
     }
     
+    func getCoins(onCompletion completionHandler: @escaping (Int)->()) {
+        databaseModel.getCoins(onCompletion: completionHandler)
+    }
+    
     func buy(_ track: Track, withCoins coins: Int, onCompletion completionHandler: @escaping (Error?)->()) {
         databaseModel.getCoins { currentCoins in
             if (currentCoins - coins) > 0 {
+                
+                
                 print("yeey, enough coins")
                 self.musicSource.getCoverUrl(forArtistID: track.artistId) { url in
                     print("url: \(url)")

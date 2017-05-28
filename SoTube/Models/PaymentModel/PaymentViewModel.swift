@@ -8,6 +8,8 @@
 
 import Foundation
 
+let coinsPerTrackRate = 5
+
 class PaymentViewModel {
     let paymentModel = PayPalModel()
     

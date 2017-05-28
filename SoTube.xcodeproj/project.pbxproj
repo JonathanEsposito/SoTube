@@ -32,8 +32,7 @@
 		2FC986BA1ECB025E00B037CE /* PurchaseHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */; };
 		2FC986BC1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */; };
 		2FCDF2871ECC80D000095FF4 /* AVPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCDF2861ECC80D000095FF4 /* AVPlayerModel.swift */; };
-		2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */; };
-		2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */; };
+		2FEC9C901EC9C40800324AE1 /* PaymentProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8F1EC9C40800324AE1 /* PaymentProtocolExtension.swift */; };
 		486AD1AADA1121E7657201DB /* Pods_SoTubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */; };
 		A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03227E11ECAF7060041197B /* MinimizedPlayer.swift */; };
 		A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */; };
@@ -133,8 +132,7 @@
 		2FC986B91ECB025E00B037CE /* PurchaseHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryViewController.swift; sourceTree = "<group>"; };
 		2FC986BB1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		2FCDF2861ECC80D000095FF4 /* AVPlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVPlayerModel.swift; path = Models/AVPlayerModel.swift; sourceTree = "<group>"; };
-		2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Payment.storyboard; sourceTree = "<group>"; };
-		2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentViewController.swift; path = Controllers/PaymentViewController.swift; sourceTree = "<group>"; };
+		2FEC9C8F1EC9C40800324AE1 /* PaymentProtocolExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentProtocolExtension.swift; path = Controllers/PaymentProtocolExtension.swift; sourceTree = "<group>"; };
 		2FEC9C911EC9C75A00324AE1 /* SoTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoTube-Bridging-Header.h"; sourceTree = "<group>"; };
 		606381C2A33886FCBAE26F58 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 		726495C053F085FDC806A67F /* Pods-SoTubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeTests/Pods-SoTubeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -235,24 +233,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F0F66D21EC1CABB0019034F /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */,
-				A05F92A41EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift */,
-				A05F92A61EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift */,
-				A05F92A21EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift */,
-				2F0F66D01EC1CA860019034F /* AlbumsCollectionViewController.swift */,
-				2F0F66CA1EC1CA400019034F /* AlbumCollectionViewCell.swift */,
-				2F0F66D31EC1CB1C0019034F /* TracksTableViewController.swift */,
-				2F0F66DF1EC1D8830019034F /* TrackTableViewCell.swift */,
-				A0429A611ED5E0650088F71F /* AlbumViewController.swift */,
-				A07775CE1ED86A8200E09D76 /* StaticAlbumTableViewCell.swift */,
-				A0DB26F61ED841560054C9A5 /* AlbumTrackTableViewCell.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		2F0F66D91EC1CC320019034F /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,18 +252,8 @@
 				A0429A591ED5450C0088F71F /* CoinPurchase.swift */,
 				A0A6D20F1EDB1A630036572B /* music */,
 				A0A29F981ECDB39D00E06D95 /* Database */,
-				2FEC9C8A1EC9C30A00324AE1 /* PaymentModel */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		2FEC9C8A1EC9C30A00324AE1 /* PaymentModel */ = {
-			isa = PBXGroup;
-			children = (
-				A0A29F5D1ECC2B5800E06D95 /* PayPalModel.swift */,
-				A0A29F5E1ECC2B5800E06D95 /* PaymentViewModel.swift */,
-			);
-			name = PaymentModel;
 			sourceTree = "<group>";
 		};
 		931173615AF3B4AB05B64803 /* Pods */ = {
@@ -377,12 +347,12 @@
 				2F0F66D91EC1CC320019034F /* Login */,
 				A0A29F741ECC2CCE00E06D95 /* Account */,
 				A0A29F6F1ECC2BDF00E06D95 /* MusicViews */,
-				A0A29F701ECC2C5000E06D95 /* MusicPlayer */,
 				A0A29F9B1ECDEABA00E06D95 /* Store */,
-				A0A29F761ECC2D6A00E06D95 /* Payment */,
 				A05F929C1EC48B5700F62432 /* Navigation */,
-				2FEC9C891EC9C2F600324AE1 /* Models */,
 				A03E69931EC1BE5500F12FA9 /* Views */,
+				2FEC9C891EC9C2F600324AE1 /* Models */,
+				A0A29F761ECC2D6A00E06D95 /* PaymentModel */,
+				A0A29F701ECC2C5000E06D95 /* MusicPlayerModel */,
 				A0ADCB811EC07C6A00C82CC9 /* Extensions */,
 				A03E69A71EC1DCCF00F12FA9 /* Recourses */,
 				A03E69A41EC1CC8A00F12FA9 /* Supporting Files */,
@@ -411,29 +381,31 @@
 		A0A29F6F1ECC2BDF00E06D95 /* MusicViews */ = {
 			isa = PBXGroup;
 			children = (
-				A0A29F731ECC2CB000E06D95 /* Storyboards */,
-				2F0F66D21EC1CABB0019034F /* Controllers */,
+				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
+				2F0F66D71EC1CBB30019034F /* MusicSplitViewController.swift */,
+				A05F92A41EC4AF2400F62432 /* MusicSplitViewMasterViewController.swift */,
+				A05F92A61EC4B42800F62432 /* MusicSplitViewMasterTableViewCell.swift */,
+				A05F92A21EC4AEF600F62432 /* MusicSplitViewDetailViewController.swift */,
+				2F0F66D01EC1CA860019034F /* AlbumsCollectionViewController.swift */,
+				2F0F66CA1EC1CA400019034F /* AlbumCollectionViewCell.swift */,
+				2F0F66D31EC1CB1C0019034F /* TracksTableViewController.swift */,
+				2F0F66DF1EC1D8830019034F /* TrackTableViewCell.swift */,
+				2F7029931EC31ACC002B8395 /* Album.storyboard */,
+				A0429A611ED5E0650088F71F /* AlbumViewController.swift */,
+				A07775CE1ED86A8200E09D76 /* StaticAlbumTableViewCell.swift */,
+				A0DB26F61ED841560054C9A5 /* AlbumTrackTableViewCell.swift */,
 			);
 			name = MusicViews;
 			sourceTree = "<group>";
 		};
-		A0A29F701ECC2C5000E06D95 /* MusicPlayer */ = {
+		A0A29F701ECC2C5000E06D95 /* MusicPlayerModel */ = {
 			isa = PBXGroup;
 			children = (
 				A05F929F1EC4ADCD00F62432 /* MusicPlayer.storyboard */,
 				A05F92A81EC58E9A00F62432 /* MusicPlayerViewController.swift */,
 				A0D814FA1EC9C31A0094DEC7 /* Models */,
 			);
-			name = MusicPlayer;
-			sourceTree = "<group>";
-		};
-		A0A29F731ECC2CB000E06D95 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				2F0F66DD1EC1CE3F0019034F /* MusicViews.storyboard */,
-				2F7029931EC31ACC002B8395 /* Album.storyboard */,
-			);
-			name = Storyboards;
+			name = MusicPlayerModel;
 			sourceTree = "<group>";
 		};
 		A0A29F741ECC2CCE00E06D95 /* Account */ = {
@@ -448,13 +420,14 @@
 			name = Account;
 			sourceTree = "<group>";
 		};
-		A0A29F761ECC2D6A00E06D95 /* Payment */ = {
+		A0A29F761ECC2D6A00E06D95 /* PaymentModel */ = {
 			isa = PBXGroup;
 			children = (
-				2FEC9C8D1EC9C36B00324AE1 /* Payment.storyboard */,
-				2FEC9C8F1EC9C40800324AE1 /* PaymentViewController.swift */,
+				2FEC9C8F1EC9C40800324AE1 /* PaymentProtocolExtension.swift */,
+				A0A29F5D1ECC2B5800E06D95 /* PayPalModel.swift */,
+				A0A29F5E1ECC2B5800E06D95 /* PaymentViewModel.swift */,
 			);
-			name = Payment;
+			name = PaymentModel;
 			sourceTree = "<group>";
 		};
 		A0A29F981ECDB39D00E06D95 /* Database */ = {
@@ -648,7 +621,6 @@
 				A0A29F691ECC2BA800E06D95 /* 1.mp3 in Resources */,
 				A057303B1ED33046008EC7B0 /* ChangePasswordViewController.xib in Resources */,
 				A0A29F681ECC2BA800E06D95 /* 0.mp3 in Resources */,
-				2FEC9C8E1EC9C36B00324AE1 /* Payment.storyboard in Resources */,
 				A0A29F6C1ECC2BA800E06D95 /* 4.mp3 in Resources */,
 				A0A29F6A1ECC2BA800E06D95 /* 2.mp3 in Resources */,
 				2F7029941EC31ACC002B8395 /* Album.storyboard in Resources */,
@@ -861,7 +833,7 @@
 				A0DB26F51ED833320054C9A5 /* UIImageAverigeColor.swift in Sources */,
 				A05730411ED385F5008EC7B0 /* userInfoDelegate.swift in Sources */,
 				A0A6D20E1EDAEE500036572B /* UIImageColors.swift in Sources */,
-				2FEC9C901EC9C40800324AE1 /* PaymentViewController.swift in Sources */,
+				2FEC9C901EC9C40800324AE1 /* PaymentProtocolExtension.swift in Sources */,
 				A057303D1ED33088008EC7B0 /* ChangePasswordViewController.swift in Sources */,
 				2F804E701ED433DB00E6A7B4 /* Album.swift in Sources */,
 				A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */,

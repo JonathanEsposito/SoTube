@@ -13,16 +13,6 @@ protocol paymentDelegate {
     var paymentViewModel: PaymentViewModel {get}
 }
 
-
-class PaymentViewController: UIViewController, paymentDelegate {
-    
-    let paymentViewModel = PaymentViewModel()
-
-    @IBAction func buySoCoin(_ sender: UIButton) {
-        buySoCoin(amount: Int(sender.title(for: .normal)!)!, onCompletion: {_ in})
-    }
-}
-
 extension paymentDelegate where Self: UIViewController {
 
     func buySoCoin(amount: Int, onCompletion completionHandler: @escaping (Int)->()) {
@@ -40,6 +30,26 @@ extension paymentDelegate where Self: UIViewController {
         })
         alertController.addAction(cancelAction)
         alertController.addAction(payWithPayPal)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func presentTopUpAlertController(onCompletion completionHandler: @escaping (Int)->()) {
+        let alertController = UIAlertController(title: "Topup your account", message: "Choose the amount you want:", preferredStyle: .actionSheet)
+        
+        // Sort pricePerAmount dictionary
+        let pricePerAmount = paymentViewModel.pricePerAmount
+        let buyAmounts = pricePerAmount.keys.sorted(by: <)
+        
+        let alertActions = buyAmounts.map { UIAlertAction(title: "\($0) at \(pricePerAmount[$0]!)€", style: .default, handler: { (alertAction) in
+            let alertTitle = alertAction.title
+            let titleComponents = alertTitle?.components(separatedBy: " at ")
+            if let amountString = titleComponents?.first, let amount = Int(amountString) {
+                self.buySoCoin(amount: amount, onCompletion: completionHandler)
+            }
+        }) }
+        
+        alertActions.forEach { alertController.addAction($0) }
+        
         present(alertController, animated: true, completion: nil)
     }
 }
