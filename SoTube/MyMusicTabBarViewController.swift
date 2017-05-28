@@ -104,23 +104,23 @@ class MyMusicTabBarViewController: TabBarViewController {
         })
         alertController.addAction(showArtists)
         
-        let showGenres = UIAlertAction(title: "Genres", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
-            print("Genres")
-            if let splitViewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") as? MusicSplitViewController {
-                // TODO: Set destination viewController to artist or genre
-                // TODO: Set master vc title
-                if let navigationController = splitViewController.masterViewController as? UINavigationController {
-                    navigationController.visibleViewController?.title = "Genres"
-                } else {
-                    splitViewController.masterViewController?.title = "Genres"
-                }
-                
-                
-                UIApplication.shared.keyWindow?.rootViewController = splitViewController
-                self.dismiss(animated: true, completion: nil)
-            }
-        })
-        alertController.addAction(showGenres)
+//        let showGenres = UIAlertAction(title: "Genres", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
+//            print("Genres")
+//            if let splitViewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") as? MusicSplitViewController {
+//                // TODO: Set destination viewController to artist or genre
+//                // TODO: Set master vc title
+//                if let navigationController = splitViewController.masterViewController as? UINavigationController {
+//                    navigationController.visibleViewController?.title = "Genres"
+//                } else {
+//                    splitViewController.masterViewController?.title = "Genres"
+//                }
+//                
+//                
+//                UIApplication.shared.keyWindow?.rootViewController = splitViewController
+//                self.dismiss(animated: true, completion: nil)
+//            }
+//        })
+//        alertController.addAction(showGenres)
         
         let cancelAction = UIAlertAction(title: "cancel", style: UIAlertActionStyle.cancel/*.default*/, handler: {(alert :UIAlertAction!) in
             print("Cancel button tapped")

@@ -202,10 +202,7 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
                 let category = categories[indexPaths!.first!.row]
                 destinationVC.navigationItem.title = category.name
                 spotifyModel.getPlaylist(from: category, OnCompletion: {playlists in
-                    DispatchQueue.main.async {
-                        destinationVC.collection = playlists
-                        
-                    }
+                    destinationVC.collection = playlists
                 })
             }
         }

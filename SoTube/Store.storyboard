@@ -553,9 +553,9 @@
         <image name="princeCover" width="500" height="428"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="wLk-Sp-PeE"/>
         <segue reference="eH1-h5-wLJ"/>
-        <segue reference="CfO-2q-R4N"/>
-        <segue reference="00T-JW-MQD"/>
+        <segue reference="eON-JS-Uph"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>
