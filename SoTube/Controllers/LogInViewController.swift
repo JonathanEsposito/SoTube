@@ -35,6 +35,8 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         
         
         // If a login object is being saved to UserDefaults, use this object to log in and do the segue
+        print(userDefaults.object(forKey: kuserDefaultsEmailKey))
+        print(userDefaults.object(forKey: kuserDefaultsPasswordKey))
         if userDefaults.object(forKey: kuserDefaultsEmailKey) != nil,
             userDefaults.object(forKey: kuserDefaultsPasswordKey) != nil {
             // Get credentials from UserDefaults
@@ -102,10 +104,10 @@ class LogInViewController: UIViewController, DatabaseDelegate {
     // MARK: - Private Methodes
     private func login(withEmail emailAddress: String, password: String) {
         // activityindicator should start here. Check stop actions first!!!
-        //        self.loginActivityIndicatorView.startAnimating()
+                self.loginActivityIndicatorView.startAnimating()
         
         database.login(withEmail: emailAddress, password: password, onCompletion: {
-            self.loginActivityIndicatorView.startAnimating()
+//            self.loginActivityIndicatorView.startAnimating()
             // Dismiss the keyboard
             self.view.endEditing(true)
             

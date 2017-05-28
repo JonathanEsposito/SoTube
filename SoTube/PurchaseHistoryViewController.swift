@@ -34,7 +34,7 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
             self.SoCoinHistory.append(contentsOf: sortedCoinPurchases)
         }
         
-        database.getMusicHistory { musicPurchases in
+        database.getTracks { musicPurchases in
             let sortedMusicPurchases = musicPurchases.sorted(by: {
                 $0.dateOfPurchase! > $1.dateOfPurchase!
             })

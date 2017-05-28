@@ -40,9 +40,9 @@ class MusicPlayerViewController: UIViewController {
         // set toolbar background transparent
         toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
 
-        // Set controller backgroundColor
-        let color = averageColor(ofImage: coverImageView.image!)
-        controllersView.backgroundColor = UIColor(patternImage: color).withAlphaComponent(0.5)
+        // Set controller backgroundColor to averige of cover
+//        controllersView.backgroundColor = coverImageView.image!.areaAverage().withAlphaComponent(0.5) // To slow :s
+        controllersView.backgroundColor = coverImageView.image?.averageColor.withAlphaComponent(0.5) ?? UIColor.white
         
         
         /****
@@ -137,26 +137,4 @@ class MusicPlayerViewController: UIViewController {
     private func configureProgresSlider() {
         progressSlider.setThumbImage(UIImage(named: "slider"), for: .normal)
     }
-    
-    private func averageColor(ofImage originalimage: UIImage) -> UIImage {
-        
-        let context = CIContext(options: nil)
-        let convertImage = CIImage(image: originalimage)
-        
-        let filter = CIFilter(name: "CIAreaAverage")
-        filter?.setValue(convertImage , forKey: kCIInputImageKey)
-        
-        let processImage = filter?.outputImage
-        
-        let finalImage = context.createCGImage(processImage!, from: processImage!.extent)
-        
-        let newImage = UIImage(cgImage: finalImage!)
-        
-        return newImage
-    }
-    
-    private func thumbRectForBounds(bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
-        return bounds
-    }
-
 }

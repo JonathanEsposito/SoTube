@@ -10,15 +10,16 @@ import Foundation
 import Firebase
 
 class Firebase: DatabaseModel {
-
     func login(withEmail email: String, password: String, delegate: DatabaseDelegate, onCompletion completionHandler:  (() -> ())? ) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             if let error = error {
+                print("error")
                 delegate.showAlert(withTitle: "Login Error", message: error.localizedDescription, actions: nil)
                 return
             }
             
             guard let currentUser = user, currentUser.isEmailVerified else {
+                print("email not verified")
                 let actions = [
                     UIAlertAction(title: "Resent email", style: .default, handler: { (action) in
                         user?.sendEmailVerification(completion: nil)
@@ -33,6 +34,8 @@ class Firebase: DatabaseModel {
             // On completion
             if let completionHandler = completionHandler {
                 completionHandler()
+            } else {
+                print("no completionhandler")
             }
         })
     }
@@ -94,6 +97,10 @@ class Firebase: DatabaseModel {
         }
     }
     
+    
+    // can be optimized with REST API "shallow=true"
+    // https://yourapp.firebaseio.com/users/[userID]/songs?shallow=true
+    // to be tested
     func checkForSongs(onCompletion completionHandler: @escaping (Bool) -> () ) {
         guard let userID = FIRAuth.auth()?.currentUser?.uid else {
             print("user not loged in")
@@ -105,17 +112,21 @@ class Firebase: DatabaseModel {
         userReference.child(userID).child("songs").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             if snapshot.exists() {
-            
-            if let value = snapshot.value as? NSDictionary {
-                print(value)
-                let songCount = value.count
                 
-                if songCount > 0 {
-                    completionHandler(true)
+                if let value = snapshot.value as? NSDictionary {
+                    print("checkForSongs \(value)")
+                    let songCount = value.count
+                    
+                    if songCount > 0 {
+                        completionHandler(true)
+                    } else {
+                        completionHandler(false)
+                    }
                 } else {
+                    print("cannot cast snapshot as NSDictionary")
+                    print(snapshot.value)
                     completionHandler(false)
                 }
-            }
             } else {
                 completionHandler(false)
             }
@@ -135,8 +146,8 @@ class Firebase: DatabaseModel {
         let userUsername = currentUser.displayName ?? ""
         let userID = currentUser.uid
         
-        let userReference = FIRDatabase.database().reference(withPath: "users")
-        userReference.child(userID).child("properties").child("coins").observeSingleEvent(of: .value, with: { (snapshot) in
+        let userReference = FIRDatabase.database().reference(withPath: "users/\(userID)")
+        userReference.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
             print(snapshot.value)
             let amountOfCoins = snapshot.value as? Int
             
@@ -167,23 +178,48 @@ class Firebase: DatabaseModel {
         }
     }
     
-    func updateCoins(with coinPurchase: CoinPurchase, onCompletion completionHandler: @escaping ()->()) {
+    func getCoins(onCompletion completionHandler: @escaping (Int) -> ()) {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
-            let userReference = FIRDatabase.database().reference(withPath: "users")
-            userReference.child("\(userID)/properties/coins").observeSingleEvent(of: .value, with: { snapshot in
+            let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
+            userRef.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
+                print("coinsSnapshot: \(snapshot.value)")
+                if let currentAmount = snapshot.value as? Int {
+                    completionHandler(currentAmount)
+                }
+            })
+        }
+    }
+    
+    func updateCoins(with coinPurchase: CoinPurchase, onCompletion completionHandler: @escaping ()->()) {
+        print("we will update our coins")
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            print("userId: \(userID)")
+            
+            let userReference = FIRDatabase.database().reference(withPath: "users/\(userID)")
+            
+//            userReference.child("properties/coins").runTransactionBlock({ snapshot in
+//                if let currentAmount = snapshot.value as? Int {
+//                    snapshot.value = currentAmount + coinPurchase.amount
+//                    completionHandler()
+//                    return FIRTransactionResult.success(withValue: snapshot)
+//                }
+//                print("adding coins not succesfull")
+//                return FIRTransactionResult.abort()
+//            })
+            
+            userReference.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
                 print(snapshot.value)
                 if let currentAmount = snapshot.value as? Int {
                     let newTotal = currentAmount + coinPurchase.amount
-                    userReference.child("\(userID)/properties/coins").setValue(newTotal) //.updateChildValues([ : newTotal])
+                    userReference.child("properties/coins").setValue(newTotal)
                     completionHandler()
                 }
             })
             
-            let coinsHistoryChild = userReference.child("\(userID)/properties/coinsHistory")
-            print(coinPurchase.date)
-            print(coinPurchase.date.timeIntervalSinceReferenceDate)
-            print(coinPurchase.keyDate)
-            coinsHistoryChild.updateChildValues(coinPurchase.dictionary)
+            
+            userReference.child("properties/coinsHistory").updateChildValues(coinPurchase.dictionary)
+//            let coinsHistoryChild = userReference.child("properties/coinsHistory")
+//            coinsHistoryChild.updateChildValues(coinPurchase.dictionary)
         } else {
             print("user not logged in")
         }
@@ -201,7 +237,7 @@ class Firebase: DatabaseModel {
                         guard let price = $0.value.values.first else {fatalError("Database error")}
                         
                         if let date = Int(dateString), let amount = Int(amountString) {
-                            print("time: \(time), amount: \(amount), price: \(round(price * 100) / 100)")
+//                            print("time: \(time), amount: \(amount), price: \(round(price * 100) / 100)")
                             coinPurchases.append(CoinPurchase(amount: amount, price: price, databaseTime: date))
                         }
                     }
@@ -213,25 +249,40 @@ class Firebase: DatabaseModel {
         }
     }
     
-    func buy(_ musicPurchase: Track, withCoins coins: Int, onCompletion completionHandler: ()->()) {
+    func buy(_ track: Track, withCoins coins: Int, onCompletion completionHandler: (Error?)->()) {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
-            let userMusicHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/properties/musicHistory")
-            userMusicHistoryRef.updateChildValues(musicPurchase.dictionary)
+            let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
+            
+            // updateCoins
+            userRef.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
+                if let currentAmount = snapshot.value as? Int {
+                    let newTotal = currentAmount - coins
+                    userRef.child("properties/coins").setValue(newTotal)
+                }
+            })
+            
+            userRef.child("songs").updateChildValues(track.dictionary)
+            userRef.child("albums/\(track.albumId)").updateChildValues(track.albumDictionary)
+            userRef.child("albums/\(track.albumId)/trackIds").updateChildValues(["\(track.id)" : true])
+            userRef.child("artists/\(track.artistId)").updateChildValues(track.artistDictionary)
+            userRef.child("artists/\(track.artistId)/albumIds").updateChildValues(["\(track.albumId)" : true])
+            
+            completionHandler(nil)
         } else {
-            print("user not logged in")
+            completionHandler(DatabaseError.notLoggedIn)
         }
     }
     
-    func getMusicHistory(onCompletion completionHandler: @escaping ([Track])->()) {
+    func getTracks(onCompletion completionHandler: @escaping ([Track])->()) {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userMusicHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/songs")
             userMusicHistoryRef.observeSingleEvent(of: .value, with: { snapshot in
                 if let purchaseDictionary = snapshot.value as? [String : [String : String]] {
-                    print(purchaseDictionary)
+//                    print(purchaseDictionary)
                     var musicPurchases: [Track] = []
                     purchaseDictionary.forEach {
-                        print($0)
-                        guard let id = String($0.key) else {fatalError("Database error")}
+//                        print($0)
+                        let id = $0.key
                         guard let name = $0.value["name"] else {fatalError("Database error")}
                         guard let trackNumberString = $0.value["trackNumber"], let trackNumber = Int(trackNumberString) else {fatalError("Database error")}
                         guard let discNumberString = $0.value["discNumber"], let discNumber = Int(discNumberString) else {fatalError("Database error")}
@@ -252,5 +303,122 @@ class Firebase: DatabaseModel {
         } else {
             print("user not logged in")
         }
+    }
+    
+    func getAlbums(onCompletion completionHandler: @escaping ([Album]) -> ()) {
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
+            userRef.child("albums").observeSingleEvent(of: .value, with: { snapshot in
+                if let albumDictionary = snapshot.value as? [String : [String : Any]] {
+//                    print(albumDictionary)
+                    var albums: [Album] = []
+                    albumDictionary.forEach {
+//                        print($0)
+                        let albumId = $0.key
+                        guard let albumName = $0.value["albumName"] as? String else {fatalError("Database error")}
+                        guard let coverUrl = $0.value["coverUrl"] as? String else {fatalError("Database error")}
+                        guard let artistId = $0.value["artistId"] as? String else {fatalError("Database error")}
+                        guard let artistName = $0.value["artistName"] as? String else {fatalError("Database error")}
+                        guard let trackIdsDictionary = $0.value["trackIds"] as? [String : Bool] else {fatalError("Database error")}
+                        let trackIds = Array(trackIdsDictionary.keys)
+                        
+                        albums.append(Album(albumId: albumId, albumName: albumName, coverUrl: coverUrl, artistId: artistId, artistName: artistName, trackIds: trackIds))
+                    }
+                    completionHandler(albums)
+                    
+                } else {
+                    print("snapshot cast error")
+                }
+            })
+        } else {
+            print("user not logged in")
+        }
+    }
+    
+    func getArtists(onCompletion completionHandler: @escaping ([Artist]) -> ()) {
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
+            userRef.child("artists").observeSingleEvent(of: .value, with: { snapshot in
+                if let artistDictionary = snapshot.value as? [String : [String : Any]] {
+//                    print(albumDictionary)
+                    var artists: [Artist] = []
+                    artistDictionary.forEach {
+                        print($0)
+                        let artistId = $0.key
+                        guard let artistName = $0.value["artistName"] as? String else {fatalError("Database error")}
+                        guard let artistCoverUrl = $0.value["artistCoverUrl"] as? String else {fatalError("Database error")}
+                        guard let albumIdsDictionary = $0.value["albumIds"] as? [String : Bool] else {fatalError("Database error")}
+                        let albumIds = Array(albumIdsDictionary.keys)
+                        
+                        artists.append(Artist(artistId: artistId, artistName: artistName, artistCoverUrl: artistCoverUrl, albumIds: albumIds))
+                    }
+                    completionHandler(artists)
+                    
+                } else {
+                    print("snapshot cast error")
+                }
+            })
+        } else {
+            print("user not logged in")
+        }
+    }
+    
+    func getAlbums(forArtist artist: Artist, onCompletion completionHandler: @escaping ([Album]) -> ()) {
+        
+        
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
+            userRef.child("albums").observeSingleEvent(of: .value, with: { snapshot in
+                if let albumDictionary = snapshot.value as? [String : [String : Any]] {
+                    //                    print(albumDictionary)
+                    var albums: [Album] = []
+                    albumDictionary.forEach {
+                        //                        print($0)
+                        let albumId = $0.key
+                        guard let albumName = $0.value["albumName"] as? String else {fatalError("Database error")}
+                        guard let coverUrl = $0.value["coverUrl"] as? String else {fatalError("Database error")}
+                        guard let artistId = $0.value["artistId"] as? String else {fatalError("Database error")}
+                        guard let artistName = $0.value["artistName"] as? String else {fatalError("Database error")}
+                        guard let trackIdsDictionary = $0.value["trackIds"] as? [String : Bool] else {fatalError("Database error")}
+                        let trackIds = Array(trackIdsDictionary.keys)
+                        
+                        albums.append(Album(albumId: albumId, albumName: albumName, coverUrl: coverUrl, artistId: artistId, artistName: artistName, trackIds: trackIds))
+                    }
+                    completionHandler(albums)
+                    
+                } else {
+                    print("snapshot cast error")
+                }
+            })
+        } else {
+            print("user not logged in")
+        }
+    }
+    
+    func getAlbum(byID id: String, onCompletion completionHandler: @escaping (Album) -> ()) {
+        print("id: \(id)")
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
+            userRef.child("albums/\(id)").observeSingleEvent(of: .value, with: { snapshot in
+                print(snapshot.value)
+                if let albumDictionary = snapshot.value as? [String : Any] {
+                    print("albumDictionary: \(albumDictionary)")
+                    guard let albumName = albumDictionary["albumName"] as? String else {fatalError("Database error")}
+                    guard let coverUrl = albumDictionary["coverUrl"] as? String else {fatalError("Database error")}
+                    guard let artistId = albumDictionary["artistId"] as? String else {fatalError("Database error")}
+                    guard let artistName = albumDictionary["artistName"] as? String else {fatalError("Database error")}
+                    guard let trackIdsDictionary = albumDictionary["trackIds"] as? [String : Bool] else {fatalError("Database error")}
+                    let trackIds = Array(trackIdsDictionary.keys)
+                    
+                    let album = Album(albumId: id, albumName: albumName, coverUrl: coverUrl, artistId: artistId, artistName: artistName, trackIds: trackIds)
+                    completionHandler(album)
+                } else {
+                    print("snapshot cast error")
+                }
+            })
+        } else {
+            print("user not logged in")
+        }
+
     }
 }

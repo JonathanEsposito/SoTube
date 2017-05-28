@@ -20,8 +20,10 @@ struct Track {
     let albumName: String
     let albumId: String
     
+    var artistCoverUrl: String?
     var dateOfPurchase: Date?
     var priceInCoins: Int?
+    
     
     var dateString: String {
         return DateFormatter.localizedString(from: dateOfPurchase!, dateStyle: .medium, timeStyle: .none)
@@ -45,6 +47,22 @@ struct Track {
             "dateOfPurchase" : String(keyDate),
             "priceInCoins" : String(priceInCoins!)
             ]]
+    }
+    
+    var albumDictionary: [String : Any] {
+        return [
+            "albumName" : albumName,
+            "artistName" : artistName,
+            "artistId" : artistId,
+            "coverUrl" : coverUrl
+            ]
+    }
+    
+    var artistDictionary: [String : Any] {
+        return [
+            "artistName" : artistName,
+            "artistCoverUrl" : artistCoverUrl ?? ""
+            ]
     }
     
     init(id: String, name: String, trackNumber: Int, discNumber: Int, duration: Int, coverUrl: String, artistName: String, artistId: String, albumName: String, albumId: String, dateOfPurchase: Date?, priceInCoins: Int?) {

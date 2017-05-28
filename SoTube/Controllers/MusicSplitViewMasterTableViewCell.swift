@@ -10,7 +10,7 @@ import UIKit
 
 class MusicSplitViewMasterTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var albumImageView: UIImageView!
+    @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
     

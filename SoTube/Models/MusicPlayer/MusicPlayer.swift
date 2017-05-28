@@ -124,9 +124,9 @@ class MusicPlayer: NSObject {
         let hours = (time / 3600)
         
         if hours == 0 {
-            return String(format: "%0.2d:%0.2d",minutes,seconds)
+            return String(format: "%0.1d:%0.2d",minutes,seconds)
         } else {
-            return String(format: "%0.2d:%0.2d:%0.2d",hours,minutes,seconds)
+            return String(format: "%0.1d:%0.2d:%0.2d",hours,minutes,seconds)
         }
     }
     
