@@ -272,8 +272,10 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             trackCell.trackDurationLabel.text = string(fromIntInMiliSec: track.duration)
             if track.bought || self.guestuser {
                 trackCell.buyTrackButton.isHidden = true
-                trackCell.buyTrackButton.bounds.size.width = 0
+            } else {
+                trackCell.buyTrackButton.isHidden = false
             }
+            
             trackCell.delegate = self
             cell = trackCell
         }
