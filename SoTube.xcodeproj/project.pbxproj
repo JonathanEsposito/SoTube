@@ -88,7 +88,6 @@
 		A0DB26F71ED841560054C9A5 /* AlbumTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB26F61ED841560054C9A5 /* AlbumTrackTableViewCell.swift */; };
 		AAD332C2D683670C2E3B77E5 /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */; };
 		E955702D1ED8AE1B00B6F432 /* StoreCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E955702C1ED8AE1B00B6F432 /* StoreCategoryViewController.swift */; };
-		E955702F1ED8AF7700B6F432 /* StoreAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E955702E1ED8AF7700B6F432 /* StoreAlbumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,7 +200,6 @@
 		D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA2687859902B7E8525CD38 /* Pods-SoTubeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeUITests/Pods-SoTubeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E955702C1ED8AE1B00B6F432 /* StoreCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCategoryViewController.swift; sourceTree = "<group>"; };
-		E955702E1ED8AF7700B6F432 /* StoreAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreAlbumViewController.swift; sourceTree = "<group>"; };
 		F2760E79BB7A2B6DC5E2F7B6 /* Pods-SoTubeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeTests/Pods-SoTubeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTubeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -263,36 +261,24 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		2F0F66D91EC1CC320019034F /* Main */ = {
+		2F0F66D91EC1CC320019034F /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				2F5283701ED303DC0034BB17 /* Models */,
 				A0A29F751ECC2D0600E06D95 /* Storyboards */,
 				A0A29F781ECC2DA300E06D95 /* Controllers */,
 			);
-			name = Main;
-			sourceTree = "<group>";
-		};
-		2F5283701ED303DC0034BB17 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				2F52836E1ED300B30034BB17 /* SpotifyModel.swift */,
-				2F804E6F1ED433DB00E6A7B4 /* Album.swift */,
-				2F804E711ED433F500E6A7B4 /* Playlist.swift */,
-				2F804E731ED4340400E6A7B4 /* Category.swift */,
-				2F7120081ED563C100DD96FA /* Track.swift */,
-			);
-			name = Models;
+			name = Login;
 			sourceTree = "<group>";
 		};
 		2FEC9C891EC9C2F600324AE1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2F52836E1ED300B30034BB17 /* SpotifyModel.swift */,
 				A05730381ED2F9C8008EC7B0 /* Profile.swift */,
+				A0429A591ED5450C0088F71F /* CoinPurchase.swift */,
+				A0A6D20F1EDB1A630036572B /* music */,
 				A0A29F981ECDB39D00E06D95 /* Database */,
 				2FEC9C8A1EC9C30A00324AE1 /* PaymentModel */,
-				A0429A591ED5450C0088F71F /* CoinPurchase.swift */,
-				A06BE0C01ED9E68800767F91 /* Artist.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -393,11 +379,11 @@
 		A09477C21EBCA03A00B62278 /* SoTube */ = {
 			isa = PBXGroup;
 			children = (
-				2F0F66D91EC1CC320019034F /* Main */,
+				2F0F66D91EC1CC320019034F /* Login */,
+				A0A29F741ECC2CCE00E06D95 /* Account */,
 				A0A29F6F1ECC2BDF00E06D95 /* MusicViews */,
 				A0A29F701ECC2C5000E06D95 /* MusicPlayer */,
 				A0A29F9B1ECDEABA00E06D95 /* Store */,
-				A0A29F741ECC2CCE00E06D95 /* Account */,
 				A0A29F761ECC2D6A00E06D95 /* Payment */,
 				2F0F66301EC0781B0019034F /* Controllers */,
 				A05F929C1EC48B5700F62432 /* Navigation */,
@@ -559,10 +545,21 @@
 				A0A29F9E1ECDEF9A00E06D95 /* StoreOverviewViewController.swift */,
 				A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */,
 				A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */,
-				E955702E1ED8AF7700B6F432 /* StoreAlbumViewController.swift */,
 				E955702C1ED8AE1B00B6F432 /* StoreCategoryViewController.swift */,
 			);
 			name = Store;
+			sourceTree = "<group>";
+		};
+		A0A6D20F1EDB1A630036572B /* music */ = {
+			isa = PBXGroup;
+			children = (
+				2F804E6F1ED433DB00E6A7B4 /* Album.swift */,
+				2F804E711ED433F500E6A7B4 /* Playlist.swift */,
+				2F804E731ED4340400E6A7B4 /* Category.swift */,
+				2F7120081ED563C100DD96FA /* Track.swift */,
+				A06BE0C01ED9E68800767F91 /* Artist.swift */,
+			);
+			name = music;
 			sourceTree = "<group>";
 		};
 		A0ADCB811EC07C6A00C82CC9 /* Extensions */ = {
@@ -945,7 +942,6 @@
 				2FC986BA1ECB025E00B037CE /* PurchaseHistoryViewController.swift in Sources */,
 				2FC986B01ECAD76000B037CE /* AccountViewController.swift in Sources */,
 				A09477C41EBCA03A00B62278 /* AppDelegate.swift in Sources */,
-				E955702F1ED8AF7700B6F432 /* StoreAlbumViewController.swift in Sources */,
 				A0A29FA11ECDEFB100E06D95 /* StoreDetailViewController.swift in Sources */,
 				2F0F66D41EC1CB1C0019034F /* TracksTableViewController.swift in Sources */,
 				A0D814D81EC970B90094DEC7 /* UIViewLoadingFromXib.swift in Sources */,

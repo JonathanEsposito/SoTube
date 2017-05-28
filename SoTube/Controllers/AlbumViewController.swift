@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoreAlbumViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, AlbumTrakCellDelegate {
+class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, AlbumTrakCellDelegate {
     // MARK: - Properties
     @IBOutlet weak var albumCoverImageView: UIImageView!
     @IBOutlet weak var backgroundView: UIView!
@@ -29,6 +29,7 @@ class StoreAlbumViewController: TabBarViewController, UITableViewDelegate, UITab
     var album: Album?
     var totalAlbumDuration: Int?
     var totalAmountOfSongs: Int?
+    var storeTracks: [Track] = []
     var myTracks: [Track] = []
     var tracks: [Track] = [] {
         didSet {
@@ -57,27 +58,52 @@ class StoreAlbumViewController: TabBarViewController, UITableViewDelegate, UITab
                 //                }
             })
             
-            // If album tracks is ampty, get tracks from database
-            if album.trackIds.isEmpty {
-                
-            }
-            
-            
             // Get Tracks from musicSource
             musicSource.getTracks(from: album, OnCompletion: { tracks in
                 DispatchQueue.main.async {
-                    if album.trackIds.isEmpty { // If Album comes from store, load my tracks if any
-                        self.database.getAlbum(byId: album.id) { databaseAlbum in
-                            self.myTracks = tracks.filter { databaseAlbum.trackIds.contains($0.id) }
-                            
-                            print(self.myTracks)
-                        }
+                    // If we are comming from the store, album.trackIds will be empty so display all album tracks
+                    if album.trackIds.isEmpty {
+                        // Set store tracks as default
+                        self.storeTracks = tracks
                         self.tracks = tracks
+                        self.database.getAlbum(byId: album.id) { databaseAlbum in
+                            DispatchQueue.main.async {
+                                // update storeTracks bought property
+                                var updatedIndexes: [Int] = []
+                                self.storeTracks.enumerated().forEach { index, track in
+                                    if databaseAlbum.trackIds.contains(track.id) {
+                                        updatedIndexes.append(index)
+                                        return track.bought = true
+                                    }
+                                }
+                                
+                                // Update rows
+                                let indexPaths = updatedIndexes.map { IndexPath(row: $0, section: 1) }
+                                self.tracksTableView.beginUpdates()
+                                self.tracksTableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.automatic)
+                                self.tracksTableView.endUpdates()
+                                
+                                // filter updated storeTracks and save as myTracks
+                                self.myTracks = self.storeTracks.filter { databaseAlbum.trackIds.contains($0.id) }
+                            }
+                        }
                     } else {
-                        self.tracks = tracks.filter { self.album!.trackIds.contains($0.id) }
+                        // By default load only my tracks
+                        self.storeTracks = tracks
+                        let filteredTrasks = tracks.filter { self.album!.trackIds.contains($0.id) }
+                        self.myTracks = filteredTrasks
+                        
+                        
+                        // update storeTracks bought property
+                        self.storeTracks.forEach { track in
+                            if album.trackIds.contains(track.id) {
+                                return track.bought = true
+                            }
+                        }
+                        
+                        // Set (and update) table
+                        self.tracks = filteredTrasks
                     }
-                    
-                    print(tracks)
                     
                     self.totalAmountOfSongs = tracks.count
                     let totalAlbumDuration = tracks.map {$0.duration}.reduce(0, +)
@@ -100,21 +126,35 @@ class StoreAlbumViewController: TabBarViewController, UITableViewDelegate, UITab
                 self.averageCoverImageColor = image.averageColor
             }
             
-            musicSource.getTracks(from: playlist) { tracks in
-                DispatchQueue.main.async {
-                    self.tracks = tracks
-                    
-                    self.totalAmountOfSongs = tracks.count
-                    let totalAlbumDuration = tracks.map {$0.duration}.reduce(0, +)
-                    self.totalAlbumDuration = totalAlbumDuration
-                    
-                    self.landscapeTotalAmountOfSongsLabel.text = "\(tracks.count)"
-                    self.landscapeTotalAlbumDurationLabel.text = self.string(fromIntInMiliSec: totalAlbumDuration)
-                    
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    self.tracksTableView.beginUpdates()
-                    self.tracksTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-                    self.tracksTableView.endUpdates()
+            musicSource.getTracks(from: playlist) { playlistTracks in
+                self.database.getTracks { databaseTracks in
+                    DispatchQueue.main.async {
+                        // Get array with all the track ids
+                        let databaseTrackIds = databaseTracks.map { $0.id }
+                        
+                        // set store tracks bought to true if was bought by user
+                        playlistTracks.forEach { storeTrack in
+                            if databaseTrackIds.contains(storeTrack.id) {
+                                return storeTrack.bought = true
+                            }
+                        }
+                        
+                        // Set tracks
+                        self.tracks = playlistTracks
+                        
+                        self.totalAmountOfSongs = playlistTracks.count
+                        let totalAlbumDuration = playlistTracks.map {$0.duration}.reduce(0, +)
+                        self.totalAlbumDuration = totalAlbumDuration
+                        
+                        self.landscapeTotalAmountOfSongsLabel.text = "\(playlistTracks.count)"
+                        self.landscapeTotalAlbumDurationLabel.text = self.string(fromIntInMiliSec: totalAlbumDuration)
+                        
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        self.tracksTableView.beginUpdates()
+                        self.tracksTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                        self.tracksTableView.endUpdates()
+                        
+                    }
                 }
             }
         }
@@ -228,6 +268,11 @@ class StoreAlbumViewController: TabBarViewController, UITableViewDelegate, UITab
             }
             trackCell.trackNameLabel.text = "\(track.name)"
             trackCell.trackDurationLabel.text = string(fromIntInMiliSec: track.duration)
+            if track.bought {
+                trackCell.buyTrackButton.isHidden = true
+                trackCell.buyTrackButton.bounds.size.width = 0
+                trackCell.buyTrackButton.setTitle("mine", for: .normal)
+            }
             trackCell.delegate = self
             cell = trackCell
         }
@@ -255,16 +300,25 @@ class StoreAlbumViewController: TabBarViewController, UITableViewDelegate, UITab
     
     // MARK: - AlbumTrakCellDelegate
     func buySong(_ cell: AlbumTrackTableViewCell) {
-        guard let row = tracksTableView.indexPath(for: cell)?.row else { return }
-        print(row)
+        guard let index = tracksTableView.indexPath(for: cell)?.row else { return }
+        print(index)
         // user row as index to get song form array
         
-        let track = tracks[row]
+        let track = self.tracks[index]
+        
+        
+        
         database.buy(track, withCoins: 5, onCompletion: { error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("track bought :D")
+            DispatchQueue.main.async {
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("track bought :D")
+                    track.bought = true
+                    let indexPath = IndexPath(row: index, section: 1)
+                    self.tracksTableView.reloadRows(at: [indexPath], with: .automatic)
+                    
+                }
             }
         })
     }
