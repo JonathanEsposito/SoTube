@@ -12,14 +12,19 @@ import UIKit
 class StoreDetailViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var musicCollectionView: UICollectionView!
     @IBOutlet weak var musicFlowLayout: UICollectionViewFlowLayout!
-
-    var collection: [Any] = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.musicCollectionView.reloadData()
-            }
-        }
-    }
+    
+    
+    var albums: [Album] = []
+    var playlists: [Playlist] = []
+    var categories: [Category] = []
+    var collection: [Any] = []
+//        {
+//        didSet {
+////            DispatchQueue.main.async {
+//                self.musicCollectionView.reloadData()
+////            }
+//        }
+//    }
     let spotifyModel = SpotifyModel()
 
     override func viewDidLoad() {
@@ -43,6 +48,7 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
     }
         if let albums = collection as? [Album] {
             let album = albums[indexPath.row]
+            print(album)
             cell.coverImageView.image(fromLink: album.coverUrl)
             cell.nameLabel.text = album.name
         }
@@ -93,20 +99,26 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
         let indexPaths = musicCollectionView.indexPathsForSelectedItems
         if segue.identifier == "showPlaylistsInCategorySegue" {
             if let destinationVC = destinationVC as? StoreDetailViewController {
-                if let collection = collection as? [Category] {
-                    spotifyModel.getPlaylist(from: collection[indexPaths!.first!.row], OnCompletion: {playlists in
+                if let categories = collection as? [Category] {
+                    let category = categories[indexPaths!.first!.row]
+                    spotifyModel.getPlaylist(from: category, OnCompletion: {playlists in
                     destinationVC.collection = playlists
+                        destinationVC.navigationItem.title = category.name
                     })
                 }
             }
         }
         if segue.identifier == "showAlbumSegue" {
             if let destinationVC = destinationVC as? StoreAlbumViewController {
-                if let collection = collection as? [Playlist] {
-                    destinationVC.playlist = collection[indexPaths!.first!.row]
+                if let playlists = collection as? [Playlist] {
+                    let playlist = playlists[indexPaths!.first!.row]
+                    destinationVC.playlist = playlist
+                    destinationVC.navigationItem.title = playlist.name
                 }
-                if let collection = collection as? [Album] {
-                    destinationVC.album = collection[indexPaths!.first!.row]
+                if let albums = collection as? [Album] {
+                    let album = albums[indexPaths!.first!.row]
+                    destinationVC.album = album
+                    destinationVC.navigationItem.title = album.name
                 }
             }
         }

@@ -29,16 +29,22 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         // Do any additional setup after loading the view.
         
         spotifyModel.getNewReleases(amount: 10, withOffset: 0, OnCompletion: {albums in
-            self.newReleases = albums
-            self.newReleasesCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.newReleases = albums
+                self.newReleasesCollectionView.reloadData()
+            }
         })
         spotifyModel.getFeaturedPlaylists(amount: 10, withOffset: 0, OnCompletion: {playlists in
-            self.featuredPlaylists = playlists
-            self.featuredPlaylistsCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.featuredPlaylists = playlists
+                self.featuredPlaylistsCollectionView.reloadData()
+            }
         })
         spotifyModel.getCategories(amount: 10, withOffset: 0, OnCompletion: {categories in
-            self.categories = categories
-            self.categoriesCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self.categories = categories
+                self.categoriesCollectionView.reloadData()
+            }
         })
     }
     
@@ -152,25 +158,28 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         if segue.identifier == "showNewReleasesSegue" {
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.newReleases
-                spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {albums in
-                    destinationVC.collection.append(albums)
-                })
+                destinationVC.navigationItem.title = "New Releases"
+//                spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {albums in
+//                    destinationVC.collection.append(albums)
+//                })
             }
         }
         if segue.identifier == "showFeaturedPlaylistsSegue" {
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.featuredPlaylists
-                spotifyModel.getFeaturedPlaylists(amount: 40, withOffset: 10, OnCompletion: {playlists in
-                    destinationVC.collection.append(playlists)
-                })
+                destinationVC.navigationItem.title = "Featured Playlists"
+//                spotifyModel.getFeaturedPlaylists(amount: 40, withOffset: 10, OnCompletion: {playlists in
+//                    destinationVC.collection.append(playlists)
+//                })
             }
         }
         if segue.identifier == "showCategoriesSegue" {
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.categories
-                spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {categories in
-                    destinationVC.collection.append(categories)
-                })
+                destinationVC.navigationItem.title = "Categories"
+//                spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {categories in
+//                    destinationVC.collection.append(categories)
+//                })
             }
         }
         if segue.identifier == "showAlbumSegue" {
