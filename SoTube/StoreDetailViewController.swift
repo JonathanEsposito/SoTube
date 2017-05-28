@@ -9,11 +9,11 @@
 import UIKit
 
 
-class StoreDetailViewController: TabBarViewController {
+class StoreDetailViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var musicCollectionView: UICollectionView!
     @IBOutlet weak var musicFlowLayout: UICollectionViewFlowLayout!
 
-    var collection: [Any]? {
+    var collection: [Any] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.musicCollectionView.reloadData()
@@ -24,7 +24,7 @@ class StoreDetailViewController: TabBarViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        musicCollectionView.reloadData()
+//        musicCollectionView.reloadData()
     }
 
     // MARK: - Collection viewDidLoad
@@ -34,28 +34,33 @@ class StoreDetailViewController: TabBarViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collection?.count ?? 0
+        return collection.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath) as! StoreCollectionViewCell
-        if let collection = collection as! [Album]? {
-            cell.coverImageView.image(fromLink: collection[indexPath.row].coverUrl)
-            cell.nameLabel.text = collection[indexPath.row].name
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath) as? StoreCollectionViewCell else {
+        fatalError("Could not cast cell as StoreCollectionViewCell")
+    }
+        if let albums = collection as? [Album] {
+            let album = albums[indexPath.row]
+            cell.coverImageView.image(fromLink: album.coverUrl)
+            cell.nameLabel.text = album.name
         }
-        if let collection = collection as! [Playlist]? {
-            cell.coverImageView.image(fromLink: collection[indexPath.row].coverUrl)
-            cell.nameLabel.text = collection[indexPath.row].name
+        if let playlists = collection as? [Playlist] {
+            let playlist = playlists[indexPath.row]
+            cell.coverImageView.image(fromLink: playlist.coverUrl)
+            cell.nameLabel.text = playlist.name
         }
-        if let collection = collection as! [Category]? {
-            cell.coverImageView.image(fromLink: collection[indexPath.row].coverUrl)
-            cell.nameLabel.text = collection[indexPath.row].name
+        if let categories = collection as? [Category] {
+            let category = categories[indexPath.row]
+            cell.coverImageView.image(fromLink: category.coverUrl)
+            cell.nameLabel.text = category.name
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let _ = collection as? [Category]? {
+        if let _ = collection as? [Category] {
             performSegue(withIdentifier: "showPlaylistsInCategorySegue", sender: nil)
         } else {
             performSegue(withIdentifier: "showAlbumSegue", sender: nil)

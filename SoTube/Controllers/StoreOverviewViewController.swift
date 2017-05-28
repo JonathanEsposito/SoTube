@@ -39,14 +39,7 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         spotifyModel.getCategories(amount: 10, withOffset: 0, OnCompletion: {categories in
             self.categories = categories
             self.categoriesCollectionView.reloadData()
-            
         })
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Collection viewDidLoad
@@ -160,7 +153,7 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.newReleases
                 spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {albums in
-                    destinationVC.collection!.append(albums)
+                    destinationVC.collection.append(albums)
                 })
             }
         }
@@ -168,7 +161,7 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.featuredPlaylists
                 spotifyModel.getFeaturedPlaylists(amount: 40, withOffset: 10, OnCompletion: {playlists in
-                    destinationVC.collection!.append(playlists)
+                    destinationVC.collection.append(playlists)
                 })
             }
         }
@@ -176,7 +169,7 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.categories
                 spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {categories in
-                    destinationVC.collection!.append(categories)
+                    destinationVC.collection.append(categories)
                 })
             }
         }
