@@ -304,8 +304,10 @@ class Firebase: DatabaseModel {
                     }
                     completionHandler(musicPurchases)
                 }
+                completionHandler([])
             })
         } else {
+            completionHandler([])
             print("user not logged in")
         }
     }
@@ -332,10 +334,12 @@ class Firebase: DatabaseModel {
                     completionHandler(albums)
                     
                 } else {
+                    completionHandler([])
                     print("snapshot cast error")
                 }
             })
         } else {
+            completionHandler([])
             print("user not logged in")
         }
     }
@@ -360,10 +364,12 @@ class Firebase: DatabaseModel {
                     completionHandler(artists)
                     
                 } else {
+                    completionHandler([])
                     print("snapshot cast error")
                 }
             })
         } else {
+            completionHandler([])
             print("user not logged in")
         }
     }
@@ -390,10 +396,12 @@ class Firebase: DatabaseModel {
                     completionHandler(albums)
                     
                 } else {
+                    completionHandler([])
                     print("snapshot cast error")
                 }
             })
         } else {
+            completionHandler([])
             print("user not logged in")
         }
     }
@@ -416,10 +424,12 @@ class Firebase: DatabaseModel {
                     let album = Album(albumId: id, albumName: albumName, coverUrl: coverUrl, artistId: artistId, artistName: artistName, trackIds: trackIds)
                     completionHandler(album)
                 } else {
+//                    completionHandler()
                     print("snapshot cast error")
                 }
             })
         } else {
+//            completionHandler()
             print("user not logged in")
         }
 
