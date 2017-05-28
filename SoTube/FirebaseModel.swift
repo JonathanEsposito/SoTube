@@ -282,11 +282,12 @@ class Firebase: DatabaseModel {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userMusicHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/songs")
             userMusicHistoryRef.observeSingleEvent(of: .value, with: { snapshot in
+                print(snapshot.value)
                 if let purchaseDictionary = snapshot.value as? [String : [String : String]] {
 //                    print(purchaseDictionary)
                     var musicPurchases: [Track] = []
                     purchaseDictionary.forEach {
-//                        print($0)
+                        print($0)
                         let id = $0.key
                         guard let name = $0.value["name"] else {fatalError("Database error")}
                         guard let trackNumberString = $0.value["trackNumber"], let trackNumber = Int(trackNumberString) else {fatalError("Database error")}
@@ -303,8 +304,10 @@ class Firebase: DatabaseModel {
                         musicPurchases.append(Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl, artistName: artistName, artistId: artistId, albumName: albumName, albumId: albumId, bought: true, databaseDate: dateOfPurchase, priceInCoins: priceInCoins))
                     }
                     completionHandler(musicPurchases)
+                } else {
+                    completionHandler([])
+                    print("my my, snapshot cast error")
                 }
-                completionHandler([])
             })
         } else {
             completionHandler([])
