@@ -9,7 +9,7 @@
 class SpotifyModel {
     
     private var auth = SPTAuth.defaultInstance()!
-    private var session:SPTSession!
+    private var session: SPTSession?
     private var loginUrl: URL?
     
     enum StringType {
@@ -25,8 +25,9 @@ class SpotifyModel {
     
     
     func setUpLogin() {
+        print("START SETUP")
         setup()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateAfterFirstLogin), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SpotifyModel.updateAfterFirstLogin), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
     }
     
     func spotifyLogin() {
@@ -45,15 +46,12 @@ class SpotifyModel {
         }
     }
     
-    @objc private func updateAfterFirstLogin () {
-        
+    @objc func updateAfterFirstLogin () {
+        print("UPDATEAFTERFIRSTLOGIN")
         let userDefaults = UserDefaults.standard
-        
-        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
-            let sessionDataObj = sessionObj as! Data
-            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
-            self.session = firstTimeSession
-        }
+        self.session = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.object(forKey: "SpotifySession") as! Data) as? SPTSession
+        print("ACCESTOKEN COMING")
+        print(session?.accessToken ?? "NO ACCESTOKEN")
     }
     
     private func setup () {
@@ -295,9 +293,7 @@ class SpotifyModel {
     }
 
     private func getURLRequest(forUrl url: String) -> URLRequest? {
-        
-        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: session.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
-        
+        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         return urlRequest
     }
     
