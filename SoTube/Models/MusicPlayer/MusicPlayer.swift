@@ -10,11 +10,12 @@ import Foundation
 
 protocol MusicPlayerModel {
     //MARK: - Protocol
-    var isPlaying: Bool { get }
+    var isPlaying: Bool { get set}
+//    var stopedPlaying: Bool { get }
     var currentTime: TimeInterval { get }
     var duration: TimeInterval { get }
     
-    func play(contentOf: String) throws
+    func play(_: Track) throws
     func stop()
     func setCurrentTime(to: TimeInterval)
     func pause()
@@ -23,9 +24,10 @@ protocol MusicPlayerModel {
 
 class MusicPlayer: NSObject {
     // MARK: - Private Properties
-    private let player: MusicPlayerModel = SPTPlayerModel()
-    var track: Track?
     private var link: String?
+    dynamic var player = SPTPlayerModel()
+    var track: Track?
+    var cover: UIImage?
     
     // MARK: - MusicPlayer API
     // MARK: Properties
@@ -75,16 +77,19 @@ class MusicPlayer: NSObject {
     }
     
     func pause() {
+//        player.isPlaying = false
         player.pause()
     }
     
     func play() {
         if isNotPlaying {
+//            player.isPlaying = true
             player.play()
         }
     }
     
     func stop() {
+//        player.isPlaying = false
         stopPlayer()
     }
     
@@ -100,10 +105,11 @@ class MusicPlayer: NSObject {
     
     func play(_ track: Track) {
         self.track = track
-        let link = track.id
-        print(link)
+        
+        setCover(fromLink: track.coverUrl)
+        
         do {
-            try player.play(contentOf: link)
+            try player.play(track)
         } catch {
             print("error")
         }
@@ -132,5 +138,19 @@ class MusicPlayer: NSObject {
             return String(format: "%0.1d:%0.2d:%0.2d",hours,minutes,seconds)
         }
     }
-    
+        
+    private func setCover(fromLink link: String) {
+        guard let url = URL(string: link) else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() { () -> Void in
+                self.cover = image
+            }
+            }.resume()
+    }
 }

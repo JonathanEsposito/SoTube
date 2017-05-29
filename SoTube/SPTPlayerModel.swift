@@ -7,53 +7,15 @@
 //
 
 
-class SPTPlayerModel:NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
+class SPTPlayerModel: NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     var player: SPTAudioStreamingController?
     let auth = SPTAuth.defaultInstance()!
     let clientID = "9b9a7a7d663a41b9a65a29142e095b89"
     var trackUri = ""
-//    let token = "BQBblXXW1pPLAMd7gIQmM6V-aAR4tFnkOZ3nPd3hqEiGAF9VfzlUNxfghvA5BUu7yK-sD_8NOBdUgjv5_T2ViJhudpd74ivYPZWYiNcMSnokbb8NPPXFKHsfVzwNC_pYPae1tD6T73RvUaoLtA"
-
-    var isPlaying: Bool {
-        if self.player == nil {
-            return false
-        }
-        return self.player?.playbackState?.isPlaying ?? false
-    }
+    var track: Track?
+    var isPlayerPlayingContext = 0
     
-    var currentTime: TimeInterval {
-        return self.player?.playbackState?.position ?? 0
-    }
-    
-    var duration: TimeInterval {
-        // TO FIX USING JSON
-        return 0
-    }
-    
-    func play(contentOf link: String) throws {
-        self.trackUri = "spotify:track:\(link)"
-        if player == nil {
-            initializePlayer()
-        }
-//        self.player?.playSpotifyURI(uri, startingWith: 0, startingWithPosition: 0, callback: nil)
-
-    }
-
-    func stop() {
-    }
-    
-    func setCurrentTime(to timeInterval: TimeInterval) {
-        self.player?.seek(to: timeInterval, callback: nil)
-    }
-    
-    func pause() {
-        self.player?.setIsPlaying(false, callback: nil)
-    }
-    
-    func play() {
-        self.player?.setIsPlaying(true, callback: nil)
-    }
-    
+    // MARK: - Lifecycle
     private func initializePlayer(){
         let userDefaults = UserDefaults.standard
         let session = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.object(forKey: "SpotifySession") as! Data) as? SPTSession
@@ -71,17 +33,70 @@ class SPTPlayerModel:NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPTA
         }
     }
     
+    // after a user authenticates a session, the SPTAudioStreamingController is then initialized and this method called
     func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
-        // after a user authenticates a session, the SPTAudioStreamingController is then initialized and this method called
-        print("logged in")
-        //  spotify:track:58s6EuEYJdlb0kO7awm3Vp
+        // Player is logged in
         
         self.player?.playSpotifyURI(trackUri, startingWith: 0, startingWithPosition: 0, callback: { (error) in
-            if (error != nil) {
-                print("playing!")
+            if error == nil {
+                self.isPlaying = true
             }
         })
     }
+    
+//    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
+//        if trackUri == self.trackUri {
+//            self.isPlaying = false
+//        }
+//    }
+    
+    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
+        self.isPlaying = isPlaying
+    }
+    
+    // MARK: - API
+    dynamic var isPlaying: Bool = false
+    
+    var currentTime: TimeInterval {
+        return self.player?.playbackState?.position ?? 0
+    }
+    
+    var duration: TimeInterval {
+        if let track = track {
+            return TimeInterval(track.duration / 1000)
+        }
+        return 0
+    }
+    
+    func play(_ track: Track) throws {
+        self.track = track
+        self.trackUri = "spotify:track:\(track.id)"
+        if player == nil {
+            initializePlayer()
+        }
+        self.player?.playSpotifyURI(self.trackUri, startingWith: 0, startingWithPosition: 0, callback: { error in
+            if error == nil {
+                self.isPlaying = true
+            }
+            
+        })
+    }
+
+    func stop() {
+    }
+    
+    func setCurrentTime(to timeInterval: TimeInterval) {
+        self.player?.seek(to: timeInterval, callback: nil)
+    }
+    
+    func pause() {
+        self.player?.setIsPlaying(false, callback: nil)
+    }
+    
+    func play() {
+        self.player?.setIsPlaying(true, callback: nil)
+    }
+    
     
 //    private func setup () {
 //        // insert redirect your url and client ID below

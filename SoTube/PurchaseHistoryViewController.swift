@@ -13,6 +13,7 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
     @IBOutlet weak var selectHistorySegmentedController2: UISegmentedControl!
     @IBOutlet weak var selectHistorySegmentedController: UISegmentedControl!
     @IBOutlet weak var historyTableView: UITableView!
+    @IBOutlet weak var tableViewFooter: UITableView!
     
     var SoCoinHistory: [CoinPurchase] = []
     var musicHistory: [Track] = []  {
@@ -42,6 +43,33 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
             self.musicHistory.append(contentsOf: sortedMusicPurchases)
             
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateFooterHeight()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let footerView = historyTableView.tableFooterView {
+            let height = footerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            var footerFrame = footerView.frame
+            
+            //Comparison necessary to avoid infinite loop
+            if height != footerFrame.size.height {
+                footerFrame.size.height = height
+                footerView.frame = footerFrame
+                historyTableView.tableFooterView = footerView
+            }
+        }
+    }
+    
+    // MARK: - Constraints Size Classes
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateFooterHeight()
     }
     
     
@@ -93,6 +121,27 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
     // MARK: - IBActions
     @IBAction func selectHistorySegmentedController(_ sender: UISegmentedControl) {
         historyTableView.reloadData()
+    }
+    
+    // Private Methods
+    private func updateFooterHeight() {
+        let height: CGFloat
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            if musicPlayer.hasSong {
+                height = 94
+            } else {
+                height = 50
+            }
+        } else {
+            height = 50
+        }
+        historyTableView.tableFooterView?.frame.size.height = height
+        
+        // Reset tableview contentsize height
+        let lastTableViewSubviewYPosition = historyTableView.tableFooterView?.frame.origin.y
+        let lastTableViewSubviewHeight = historyTableView.tableFooterView?.bounds.height
+        let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
+        historyTableView.contentSize = CGSize(width: historyTableView.contentSize.width, height: newHeight)
     }
     
 }

@@ -17,6 +17,7 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var categoriesFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var coinsButton: UIBarButtonItem!
+    @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
     
     let database = DatabaseViewModel()
     let paymentViewModel = PaymentViewModel()
@@ -59,6 +60,17 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
                 self.categoriesCollectionView.reloadData()
             }
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateBottomConstraint()
+    }
+    
+    // MARK: - Constraints Size Classes
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateBottomConstraint()
     }
     
     // MARK: - Collection viewDidLoad
@@ -249,6 +261,18 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         presentTopUpAlertController(onCompletion: {_ in})
     }
     
+    // MARK: - Private Methodes
+    func updateBottomConstraint() {
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            if musicPlayer.hasSong {
+                bottomLayoutConstraint.constant = 94
+            } else {
+                bottomLayoutConstraint.constant = 50
+            }
+        } else {
+            bottomLayoutConstraint.constant = 50
+        }
+    }
 }
 
 

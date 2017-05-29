@@ -10,7 +10,7 @@ import UIKit
 
 var selectedTabBarItemWithTitle = "Store"
 
-class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDelegate {
+class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerDelegate, UIPopoverPresentationControllerDelegate {
     // MARK: - Properties
     
     // UserDefaults
@@ -30,23 +30,41 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
     var tabBar = UITabBar()
     var rightTabBar = UITabBar()
     
-//    var database = DatabaseViewModel()
+    var playerIsPlayingContext = 0
+    
+    var observingMusicPlayer: Bool = false {
+        didSet {
+            if observingMusicPlayer {
+                // Set Player observer
+                weak var weakSelf = self
+                musicPlayer.player.addObserver(weakSelf!, forKeyPath: "isPlaying", options: .new, context: &playerIsPlayingContext)
+            }
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set up all tabbar related navigations
         setupTabBar()
+        
+        // Start observing musicPlayer
+        observingMusicPlayer = true
+       
+    }
+    
+    deinit {
+        if observingMusicPlayer {
+            // Remove previously added observers
+            musicPlayer.player.removeObserver(self, forKeyPath: "isPlaying", context: &playerIsPlayingContext)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
-        print(musicPlayer.isPlaying)
-        
-        
-        updateMiniPlayer()
-        // I should put this in a function!!
+        if musicPlayer.hasSong {
+            updateMiniPlayer()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -63,20 +81,15 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-//        if !sharedConstraints[0].isActive {
-//            // Activating shared constraints
-//            NSLayoutConstraint.activate(sharedConstraints)
-//        }
-        
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
             NSLayoutConstraint.deactivate(regularConstraints)
             // Activating compact constraints
             NSLayoutConstraint.activate(compactConstraints)
             
-            // Set minimizedPlayer background
             if miniPlayer != nil {
-                miniPlayer.backgroundColor = UIColor.clear
+                // Get default background
                 miniPlayer.setBackgroundImage(UIImage(named: ""), forToolbarPosition: .any, barMetrics: .default)
+                // Show border
                 miniPlayer.clipsToBounds = false
             }
             
@@ -87,16 +100,23 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
             // Activating regular constraints
             NSLayoutConstraint.activate(regularConstraints)
             
-            // clean up minimizedPlayer background
             if miniPlayer != nil {
-                miniPlayer.backgroundColor = UIColor.clear
+                // Hide background
                 miniPlayer.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
+                // Hide border
                 miniPlayer.clipsToBounds = true
             }
         }
     }
     
-    // MARK: - TabBarDelegate
+    /****
+     * 
+     * Everything TabBar
+     *
+     ****/
+    
+    // MARK: TabBar
+    // MARK: TabBarDelegate
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         //This method will be called when user changes tab.
         guard let tabBarItemTitle = item.title else {
@@ -155,7 +175,6 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         }
     }
     
-    // MARK: - Private Methodes
     private func setupTabBar() {
         
         // Create tab bar
@@ -200,9 +219,6 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         rightTabBar.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         rightTabBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        
-        
-        
         // Set tab bar delegate
         weak var weakSelf = self
         tabBar.delegate = weakSelf
@@ -212,11 +228,61 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
         tabBar.selectedItem = selectedTab.first
     }
     
+    /****
+     *
+     * Everything miniplayer
+     *
+     ****/
+    
+    // MARK: - MiniPlayer
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        switch object! {
+        case let player as MusicPlayerModel where player.isPlaying == true:
+            miniPlayer?.setButton(to: .pause)
+            // Set up progressbar tracker
+            startUpdater()
+            
+        case let player as MusicPlayerModel where player.isPlaying == false:
+            miniPlayer?.setButton(to: .play)
+            // Dismiss tracker
+            stopUpdater()
+            updateAudioProgressView()
+            
+        default:
+            break
+        }
+    }
+
+    func updateMiniPlayer() {
+        if miniPlayer == nil {
+            setupMinimizedPlayer()
+        }
+        
+        // Set Labels
+        let track = musicPlayer.track
+        miniPlayer.artistAndAlbumLabel.text = "\(track?.artistName ?? "") - \(track?.albumName ?? "")"
+        miniPlayer.titleLabel.text = track?.name
+        
+        // Manage Play/Pause button
+        if musicPlayer.isPlaying {
+            miniPlayer.setButton(to: .pause)
+            
+            // Set up progressbar tracker
+            startUpdater()
+        } else {
+            miniPlayer.setButton(to: .play)
+        }
+        
+        // Update progress bar to current time
+        updateAudioProgressView()
+    }
+    
     // Create Minimized Music Player
     private func setupMinimizedPlayer() {
         
         miniPlayer = MinimizedPlayer.loadFromNib()
-        miniPlayer.backgroundColor = UIColor.white.withAlphaComponent(0.95)
+        miniPlayer.backgroundColor = UIColor.clear
         weak var weakSelf = self
         miniPlayer.minimizedPlayerDelegate = weakSelf
         
@@ -262,48 +328,30 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
             ])
         
         updateAudioProgressView()
-    }
-    
-    func updateMiniPlayer() {
-        if musicPlayer.hasSong {
-            if miniPlayer == nil {
-                setupMinimizedPlayer()
-            }
-            let track = musicPlayer.track
-            
-            miniPlayer.artistAndAlbumLabel.text = "\(track?.artistName ?? "") - \(track?.albumName ?? "")"
-            miniPlayer.titleLabel.text = track?.name
-            
-            if musicPlayer.isNotPlaying {
-                if let buttonIndex = miniPlayer.items?.index(where: { $0 == (miniPlayer.musicPlayButton ?? miniPlayer.pauseButton) }) {
-                    print(buttonIndex)
-                    miniPlayer.items![buttonIndex] = miniPlayer.playButton
-                    updateAudioProgressView()
-                    print("updated")
-                }
-            } else {
-                if let buttonIndex = miniPlayer.items?.index(where: { $0 == miniPlayer.playButton }) {
-                    miniPlayer.items![buttonIndex] = miniPlayer.pauseButton
-                    updateAudioProgressView()
-                }
-            }
-        }
+        
         self.traitCollectionDidChange(nil)
-        setUpdater()
     }
     
     func updateAudioProgressView() {
         musicProgressView.setProgress(musicPlayer.progress, animated: true)
+//        if musicProgressView.progress == 1 {
+//            miniPlayer.setButton(to: .play)
+//        }
     }
     
-    func setUpdater() {
+    func startUpdater() {
         if musicPlayer.isPlaying {
             updater = CADisplayLink(target: self, selector: #selector(self.updateAudioProgressView))
-            updater.preferredFramesPerSecond = 1
+            updater.preferredFramesPerSecond = 20
             updater.add(to: .current, forMode: .commonModes)
         }
     }
     
+    func stopUpdater() {
+        if updater != nil {
+            updater.invalidate()
+        }
+    }
     
     // Minimized Player Delegate
     func present(_ view: UIViewController) {

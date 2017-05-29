@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="antlers" translatesAutoresizingMaskIntoConstraints="NO" id="PDX-jz-Z4f">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PDX-jz-Z4f">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PDX-jz-Z4f" secondAttribute="height" multiplier="1:1" id="i8J-x1-i7j"/>
@@ -243,7 +243,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="antlers" width="480" height="480"/>
         <image name="arrowDown" width="201" height="201"/>
         <image name="volumeDownSmall" width="7" height="11"/>
         <image name="volumeUpSmall" width="17" height="15"/>

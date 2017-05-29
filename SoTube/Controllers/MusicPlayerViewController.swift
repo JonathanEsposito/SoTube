@@ -36,6 +36,20 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     var playButton: UIBarButtonItem!
     var pauseButton: UIBarButtonItem!
     
+    
+    // Observe musicPlayer
+    var playerIsPlayingContext = 0
+    
+    var observingMusicPlayer: Bool = false {
+        didSet {
+            if observingMusicPlayer {
+                // Set Player observer
+                weak var weakSelf = self
+                musicPlayer.player.addObserver(weakSelf!, forKeyPath: "isPlaying", options: .new, context: &playerIsPlayingContext)
+            }
+        }
+    }
+    
     // UserDefaults
     let kuserDefaultsEmailKey = "userEmail"
     let kuserDefaultsPasswordKey = "userPassword"
@@ -49,6 +63,11 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Start observing player
+        observingMusicPlayer = true
+        
+        // Hide navigationbar
+        self.navigationController?.isNavigationBarHidden = true
         
         let track = musicPlayer.track
         
@@ -58,12 +77,20 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
             buyTrackButton.isEnabled = true
         }
         
-        dump(track)
-        albumCoverImageView.image(fromLink: track?.coverUrl ?? "") { image in
-            // Set controller backgroundColor to averige of cover
-            //        controllersView.backgroundColor = coverImageView.image!.areaAverage().withAlphaComponent(0.5) // To slow :s
-            self.controllersView.backgroundColor = image.averageColor.withAlphaComponent(0.5) ?? UIColor.white
+        // Get and Set AlbumCover
+        if let albumCover = musicPlayer.cover {
+            print("has albumcover")
+            albumCoverImageView.image = albumCover
+            self.controllersView.backgroundColor = albumCover.averageColor.withAlphaComponent(0.5)
+        } else {
+            albumCoverImageView.image(fromLink: track?.coverUrl ?? "") { image in
+                // Set controller backgroundColor to averige of cover
+                //        controllersView.backgroundColor = coverImageView.image!.areaAverage().withAlphaComponent(0.5) // To slow :s
+                self.controllersView.backgroundColor = image.averageColor.withAlphaComponent(0.5)
+            }
         }
+        
+        // Set other labels
         trackTitleLabel.text = track?.name ?? ""
         artistAndAlbumLabel.text =  "\(track?.artistName ?? "") - \(track?.albumName ?? "")"
         
@@ -84,8 +111,7 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
          * Start Player
          ****/
         updater = CADisplayLink(target: self, selector: #selector(updateAudioProgressView))
-        updater.preferredFramesPerSecond = 1
-//        print((updater.targetTimestamp - updater.timestamp))
+        updater.preferredFramesPerSecond = 20
         updater.add(to: .current, forMode: .commonModes)
         
         // Set Playbuttons
@@ -102,6 +128,14 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
 
     override func viewWillDisappear(_ animated: Bool) {
         updater.invalidate()
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    deinit {
+        if observingMusicPlayer {
+            // Remove previously added observers
+            musicPlayer.player.removeObserver(self, forKeyPath: "isPlaying", context: &playerIsPlayingContext)
+        }
     }
     
     // MARK: - IBActions
@@ -222,7 +256,18 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
         }
     }
     
+    
+    
     // MARK: - Private Methods
+    func setButton(to buttonState: PlayerButtonState) {
+        switch buttonState {
+        case .play:
+            self.toolbar.items![0] = playButton
+        case .pause:
+            self.toolbar.items![0] = pauseButton
+        }
+    }
+    
     private func resetProgress() {
         progressSlider.setValue(0, animated: false)
         currentTimeLabel.text = musicPlayer.currentTime
@@ -243,5 +288,10 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     // MARK: UISetup
     private func configureProgresSlider() {
         progressSlider.setThumbImage(UIImage(named: "slider"), for: .normal)
+    }
+    
+    // MARK: - Private Objects
+    enum PlayerButtonState {
+        case play, pause
     }
 }
