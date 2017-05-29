@@ -23,20 +23,21 @@ protocol MusicPlayerModel {
 
 class MusicPlayer: NSObject {
     // MARK: - Private Properties
-    private let player: MusicPlayerModel = AVAudioPlayerModel()
-    private var song: URL?
+    private let player: MusicPlayerModel = SPTPlayerModel()
+    private var track: Track?
+    private var link: String?
     
     // MARK: - MusicPlayer API
     // MARK: Properties
     var hasSong: Bool {
-        if song != nil {
+        if track != nil {
             return true
         }
         return false
     }
     
     var isPlaying: Bool {
-        if song != nil {
+        if track != nil {
             return player.isPlaying
         }
         return false
@@ -97,10 +98,12 @@ class MusicPlayer: NSObject {
         }
     }
     
-    func play(contentOf url: String) {
-        song = URL(string: url)
+    func play(_ track: Track) {
+        self.track = track
+        let link = track.id
+        print(link)
         do {
-            try player.play(contentOf: url)
+            try player.play(contentOf: link)
         } catch {
             print("error")
         }
