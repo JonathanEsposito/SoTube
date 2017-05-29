@@ -36,6 +36,8 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     var playButton: UIBarButtonItem!
     var pauseButton: UIBarButtonItem!
     
+    var pausePlayButtonIndex = 4
+    
     
     // Observe musicPlayer
     var playerIsPlayingContext = 0
@@ -63,8 +65,6 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Start observing player
-        observingMusicPlayer = true
         
         // Hide navigationbar
         self.navigationController?.isNavigationBarHidden = true
@@ -104,15 +104,21 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
          * Set up Player
          ****/
         
+        // Start observing player
+        observingMusicPlayer = true
         
+        startUpdater()
+        
+        // Set play button index
+        if let index = toolbar.items?.index(of: musicPlayButton) {
+            self.pausePlayButtonIndex = index
+        }
         
         
         /****
          * Start Player
          ****/
-        updater = CADisplayLink(target: self, selector: #selector(updateAudioProgressView))
-        updater.preferredFramesPerSecond = 20
-        updater.add(to: .current, forMode: .commonModes)
+        
         
         // Set Playbuttons
         playButton = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playButton(_:)))
@@ -127,7 +133,7 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        updater.invalidate()
+        stopUpdater()
         self.navigationController?.isNavigationBarHidden = false
     }
     
@@ -138,33 +144,41 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
         }
     }
     
+    // MARK: - Observer
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        switch object! {
+        case let player as MusicPlayerModel where player.isPlaying == true:
+            self.setButton(to: .pause)
+            // Set up progressbar tracker
+            startUpdater()
+            
+        case let player as MusicPlayerModel where player.isPlaying == false:
+            self.setButton(to: .play)
+            // Dismiss tracker
+            stopUpdater()
+            updateAudioProgressView()
+            
+        default:
+            break
+        }
+    }
+    
     // MARK: - IBActions
     @IBAction func playButton(_ sender: UIBarButtonItem) {
         musicPlayer.play()
-        
-        let buttonIndex = toolbar.items?.index(where: { $0 == sender})
-        toolbar.items![buttonIndex!] = pauseButton
     }
     
     @IBAction func pauseButton(_ sender: UIBarButtonItem) {
         musicPlayer.pause()
-        
-        let buttonIndex = toolbar.items?.index(where: { $0 == sender})
-        toolbar.items![buttonIndex!] = playButton
     }
     
     @IBAction func fastForward(_ sender: UIBarButtonItem) {
         musicPlayer.fastForward()
-        if musicPlayer.stopped {
-            resetProgress()
-        }
     }
     
     @IBAction func fastBackward(_ sender: UIBarButtonItem) {
         musicPlayer.fastBackward()
-        if musicPlayer.stopped {
-            resetProgress()
-        }
     }
     
     @IBAction func slide(_ sender: UISlider) {
@@ -262,9 +276,9 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     func setButton(to buttonState: PlayerButtonState) {
         switch buttonState {
         case .play:
-            self.toolbar.items![0] = playButton
+            self.toolbar.items![pausePlayButtonIndex] = playButton
         case .pause:
-            self.toolbar.items![0] = pauseButton
+            self.toolbar.items![pausePlayButtonIndex] = pauseButton
         }
     }
     
@@ -283,6 +297,20 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
         progressSlider.setValue(musicPlayer.progress, animated: true)
         currentTimeLabel.text = musicPlayer.currentTime
         timeLeftLabel.text = musicPlayer.timeLeft
+    }
+    
+    func startUpdater() {
+        if musicPlayer.isPlaying {
+            updater = CADisplayLink(target: self, selector: #selector(updateAudioProgressView))
+            updater.preferredFramesPerSecond = 20
+            updater.add(to: .current, forMode: .commonModes)
+        }
+    }
+    
+    func stopUpdater() {
+        if updater != nil {
+            updater.invalidate()
+        }
     }
     
     // MARK: UISetup

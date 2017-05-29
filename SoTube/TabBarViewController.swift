@@ -68,9 +68,7 @@ class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerD
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        if updater != nil {
-            updater.invalidate()
-        }
+       stopUpdater()
     }
     
     // MARK: - Constraints Size Classes

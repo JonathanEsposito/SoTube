@@ -51,6 +51,7 @@ class SPTPlayerModel: NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPT
 //    }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
+        print(isPlaying)
         self.isPlaying = isPlaying
     }
     
@@ -83,6 +84,7 @@ class SPTPlayerModel: NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPT
     }
 
     func stop() {
+        try! player?.stop()
     }
     
     func setCurrentTime(to timeInterval: TimeInterval) {

@@ -77,19 +77,16 @@ class MusicPlayer: NSObject {
     }
     
     func pause() {
-//        player.isPlaying = false
         player.pause()
     }
     
     func play() {
         if isNotPlaying {
-//            player.isPlaying = true
             player.play()
         }
     }
     
     func stop() {
-//        player.isPlaying = false
         stopPlayer()
     }
     
