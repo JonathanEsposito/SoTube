@@ -10,6 +10,7 @@ import UIKit
 
 class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK : - Properties
+    @IBOutlet weak var selectHistorySegmentedController2: UISegmentedControl!
     @IBOutlet weak var selectHistorySegmentedController: UISegmentedControl!
     @IBOutlet weak var historyTableView: UITableView!
     
