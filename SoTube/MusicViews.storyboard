@@ -51,7 +51,7 @@
                                         <rect key="frame" x="0.0" y="28" width="1004" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vbx-Sr-4cZ" id="cB8-vz-NK7">
-                                            <rect key="frame" x="0.0" y="0.0" width="1004" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1004" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="princeCover" translatesAutoresizingMaskIntoConstraints="NO" id="muQ-X0-zW8">
@@ -172,11 +172,11 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="15A-K6-b6Z"/>
+                                                    <exclude reference="JtE-mb-Ids"/>
+                                                    <exclude reference="XYS-qy-rfb"/>
                                                     <exclude reference="V3i-nT-MoZ"/>
                                                     <exclude reference="vBH-DJ-vXf"/>
                                                     <exclude reference="ziK-tO-qCT"/>
-                                                    <exclude reference="JtE-mb-Ids"/>
-                                                    <exclude reference="XYS-qy-rfb"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -197,10 +197,10 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="15A-K6-b6Z"/>
-                                                    <include reference="V3i-nT-MoZ"/>
-                                                    <exclude reference="nUQ-bw-B5b"/>
                                                     <include reference="JtE-mb-Ids"/>
                                                     <include reference="XYS-qy-rfb"/>
+                                                    <include reference="V3i-nT-MoZ"/>
+                                                    <exclude reference="nUQ-bw-B5b"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -251,7 +251,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OdS-Ax-ssm">
-                                <rect key="frame" x="0.0" y="72" width="703" height="696"/>
+                                <rect key="frame" x="0.0" y="72" width="702.5" height="696"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sqB-NK-v0f">
                                     <size key="itemSize" width="100" height="140"/>
@@ -313,7 +313,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MusicFooter" id="ICc-vS-seb">
-                                    <rect key="frame" x="0.0" y="150" width="703" height="50"/>
+                                    <rect key="frame" x="0.0" y="150" width="702.5" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>

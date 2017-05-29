@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlbumsCollectionViewController: MyMusicTabBarViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class AlbumsCollectionViewController: MyMusicTabBarViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SortDelegate {
     // MARK: - Properties
     @IBOutlet weak var albumsCollectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var albumsCollectionView: UICollectionView!
@@ -24,6 +24,12 @@ class AlbumsCollectionViewController: MyMusicTabBarViewController, UICollectionV
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set self as weak sort delegate
+        weak var weakSelf = self
+        sortDelegate = weakSelf
+        
+        // get albums
         database.getAlbums { albums in
             self.albums = albums
         }
@@ -71,6 +77,22 @@ class AlbumsCollectionViewController: MyMusicTabBarViewController, UICollectionV
         
         heightPerItem = widthPerItem + 50
         return CGSize(width: widthPerItem, height: heightPerItem)
+    }
+    
+    // MARK: - Sort Functions
+    func sortByName() {
+        self.albums.sort(by: {
+            $0.name < $1.name
+        })
+    }
+    
+    func sortByArtist() {
+        self.albums.sort(by: {
+            if $0.artist == $1.artist {
+                return $0.name < $0.name
+            }
+            return $0.artist < $1.artist
+        })
     }
     
     // MARK: - Navigation

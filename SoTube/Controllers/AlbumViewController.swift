@@ -43,6 +43,10 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         //        album = Album(named: "Climate Change", fromArtist: "Pitbull", withCoverUrl: "https://i.scdn.co/image/e1ca3a27d6b2d897ec72425c95685f0475c35be3", withId: "4jtKPpBQ5eneMwEI94f5Y0")
         
+        // Hide Navigation controller background and shadow
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: ""), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage(named: "")
+        
         super.viewDidLoad()
         // get tracks from music source
         if let album = album {
@@ -160,6 +164,13 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
                 }
             }
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        // Hide Navigation controller background and shadow
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidLayoutSubviews() {

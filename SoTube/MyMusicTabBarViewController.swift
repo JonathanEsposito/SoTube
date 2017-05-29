@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol SortDelegate {
+    func sortByArtist()
+    func sortByName()
+}
+
 class MyMusicTabBarViewController: TabBarViewController {
     // MARK: - Properties
     var navigationBar = UINavigationBar()
+    var sortDelegate: SortDelegate?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -141,19 +147,17 @@ class MyMusicTabBarViewController: TabBarViewController {
         
         let showSongs = UIAlertAction(title: "Name", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Name")
-            //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SongsVC") {
-            //                UIApplication.shared.keyWindow?.rootViewController = viewController
-            //                self.dismiss(animated: true, completion: nil)
-            //            }
+            if let delegate = self.sortDelegate {
+                delegate.sortByName()
+            }
         })
         alertController.addAction(showSongs)
 
         let showArtists = UIAlertAction(title: "Artist", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Artist")
-            //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ArtistsVC") {
-            //                UIApplication.shared.keyWindow?.rootViewController = viewController
-            //                self.dismiss(animated: true, completion: nil)
-            //            }
+            if let delegate = self.sortDelegate {
+                delegate.sortByArtist()
+            }
         })
         alertController.addAction(showArtists)
         

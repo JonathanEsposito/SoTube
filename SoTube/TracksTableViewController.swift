@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegate, UITableViewDataSource {
+class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegate, UITableViewDataSource, SortDelegate {
     // MARK: - Properties
     @IBOutlet weak var tableFooterView: UIView!
     @IBOutlet weak var songTableView: UITableView!
@@ -23,7 +23,11 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set self as weak sort delegate
+        weak var weakSelf = self
+        sortDelegate = weakSelf
         
+        // Get tracks
         database.getTracks { tracks in
             self.tracks = tracks
         }
@@ -96,51 +100,24 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
         print(musicPlayer.hasSong)
     }
     
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return
-//    }
-//    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        return
-//    }
+    // MARK: - Sort functions
+    func sortByName() {
+        self.tracks.sort(by: {
+            $0.name < $1.name
+        })
+    }
     
-    
-    
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
+    func sortByArtist() {
+        self.tracks.sort(by: {
+            if $0.artistName == $1.artistName {
+                if $0.albumName == $1.albumName {
+                    return $0.trackNumber < $1.trackNumber
+                }
+                return $0.albumName < $1.albumName
+            }
+            return $0.artistName < $1.artistName
+        })
+    }
     
     // MARK: - Navigation
     
