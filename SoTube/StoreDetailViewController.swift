@@ -14,16 +14,9 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
     @IBOutlet weak var musicFlowLayout: UICollectionViewFlowLayout!
     
     
-    var albums: [Album] = [] {
-        didSet {
-            DispatchQueue.main.async {
-//                self.musicCollectionView.insertItems(at: (1...self.albums.count).map({ IndexPath(row: $0, section: 0) }))
-                self.musicCollectionView.reloadData()
-            }
-        }
-    }
-    var playlists: [Playlist] = []
-    var categories: [Category] = []
+//    var albums: [Album] = []
+//    var playlists: [Playlist] = []
+//    var categories: [Category] = []
     var collection: [Any] = []
     let spotifyModel = SpotifyModel()
 

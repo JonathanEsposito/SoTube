@@ -161,29 +161,51 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.newReleases
                 destinationVC.navigationItem.title = "New Releases"
-                DispatchQueue.main.async {
                     self.spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {albums in
-                        destinationVC.collection.append(albums)
+                        DispatchQueue.main.async {
+                            let albums = albums as NSArray
+                            let currentCount = destinationVC.collection.count
+                            destinationVC.collection.append(contentsOf: albums)
+                            let indexPaths = albums.enumerated().map{ index, album in
+                            IndexPath(row: currentCount + index, section: 0)
+                            }
+                            destinationVC.musicCollectionView.insertItems(at: indexPaths)
+                        }
                     })
-                }
             }
         }
         if segue.identifier == "showFeaturedPlaylistsSegue" {
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.featuredPlaylists
                 destinationVC.navigationItem.title = "Featured Playlists"
-//                spotifyModel.getFeaturedPlaylists(amount: 40, withOffset: 10, OnCompletion: {playlists in
-//                    destinationVC.collection.append(playlists)
-//                })
+                spotifyModel.getFeaturedPlaylists(amount: 40, withOffset: 10, OnCompletion: {playlists in
+                    DispatchQueue.main.async {
+                        let playlists = playlists as NSArray
+                        let currentCount = destinationVC.collection.count
+                        destinationVC.collection.append(contentsOf: playlists)
+                        let indexPaths = playlists.enumerated().map{ index, playlist in
+                            IndexPath(row: currentCount + index, section: 0)
+                        }
+                        destinationVC.musicCollectionView.insertItems(at: indexPaths)
+                    }
+                })
             }
         }
         if segue.identifier == "showCategoriesSegue" {
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.categories
                 destinationVC.navigationItem.title = "Categories"
-//                spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {categories in
-//                    destinationVC.collection.append(categories)
-//                })
+                spotifyModel.getCategories(amount: 40, withOffset: 10, OnCompletion: {categories in
+                    DispatchQueue.main.async {
+                        let categories = categories as NSArray
+                        let currentCount = destinationVC.collection.count
+                        destinationVC.collection.append(contentsOf: categories)
+                        let indexPaths = categories.enumerated().map{ index, category in
+                            IndexPath(row: currentCount + index, section: 0)
+                        }
+                        destinationVC.musicCollectionView.insertItems(at: indexPaths)
+                    }
+                })
             }
         }
         if segue.identifier == "showAlbumSegue" {

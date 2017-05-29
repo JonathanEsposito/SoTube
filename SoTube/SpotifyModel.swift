@@ -296,7 +296,7 @@ class SpotifyModel {
 
     private func getURLRequest(forUrl url: String) -> URLRequest? {
         
-        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: "BQCKRWYW_ZhmdxJb5pRHAgIvDB6E3YiBvBzoo-LcinvpP972RfXJaEXRw4Ve2RkTGgXv3lWh2WdlTvqVX1YAM8d3JqpOV2DrHmKIF5B5iYdANK2xcBNMuctu2NBRTkUSxdY_cx_3cC9EyAAfww", httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: session.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         
         return urlRequest
     }
