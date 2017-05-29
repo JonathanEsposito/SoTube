@@ -9,7 +9,7 @@
 class SpotifyModel {
     
     private var auth = SPTAuth.defaultInstance()!
-    private var session: SPTSession?
+    private var session: SPTSession!
     private var loginUrl: URL?
     
     enum StringType {
@@ -27,7 +27,7 @@ class SpotifyModel {
     func setUpLogin() {
         print("START SETUP")
         setup()
-        NotificationCenter.default.addObserver(self, selector: #selector(SpotifyModel.updateAfterFirstLogin), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(SpotifyModel.updateAfterFirstLogin), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
     }
     
     func spotifyLogin() {
@@ -47,7 +47,7 @@ class SpotifyModel {
     }
     
     @objc func updateAfterFirstLogin () {
-        print("UPDATEAFTERFIRSTLOGIN")
+        print("UPDATE AFTER FIRST LOGIN")
         let userDefaults = UserDefaults.standard
         self.session = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.object(forKey: "SpotifySession") as! Data) as? SPTSession
         print("ACCESTOKEN COMING")
@@ -293,33 +293,11 @@ class SpotifyModel {
     }
 
     private func getURLRequest(forUrl url: String) -> URLRequest? {
-        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+        let userDefaults = UserDefaults.standard
+        self.session = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.object(forKey: "SpotifySession") as! Data) as? SPTSession
+        print("GETTING URL REQUEST WITH TOKEN : ")
+        print(session?.accessToken ?? "NO ACCESTOKEN")
+        let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: session.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         return urlRequest
     }
-    
-    
-    
-    
-    
-//    let userDefaults = UserDefaults.standard
-//    session = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.object(forKey: "SpotifySession") as! Data) as? SPTSession
-//    
-//    
-//    let newReleasesRequest = giveURLRequest(forUrl: "https://api.spotify.com/v1/browse/new-releases?offset=0&limit=50", withHttpMethod: "get")
-//    
-//    
-//    let albumFeed =  getDataArray(from: newReleasesRequest!, withKeyPath: "albums.items.id")
-//    
-//    let firstAlbumRequest = giveURLRequest(forUrl: getSpotifyString(ofType: .hrefString, forItemType: .albums, andID: (albumFeed?.first)!), withHttpMethod: "get")
-//
-//    
-//    let firstAlbumFeed = getDataArray(from: firstAlbumRequest!, withKeyPath: "tracks.items.id"))
-//    
-//    let firstSongRequest = giveURLRequest(forUrl: getSpotifyString(ofType: .hrefString, forItemType: .tracks, andID: (firstAlbumFeed?.first)!), withHttpMethod: "get")
-//    
-//    let firstSongFeed = getDataString(from: firstSongRequest!, withKeyPath: "id")
-    
-    
-    
-    
 }
