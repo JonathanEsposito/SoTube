@@ -9,11 +9,11 @@
 import UIKit
 
 
-protocol paymentDelegate {
+protocol PaymentDelegate {
     var paymentViewModel: PaymentViewModel {get}
 }
 
-extension paymentDelegate where Self: UIViewController {
+extension PaymentDelegate where Self: UIViewController {
 
     func buySoCoin(amount: Int, onCompletion completionHandler: @escaping (Int)->()) {
         

@@ -79,7 +79,11 @@
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="N03-Tz-kyU"/>
-                                            <barButtonItem systemItem="action" id="s0K-Im-1s2"/>
+                                            <barButtonItem systemItem="action" id="s0K-Im-1s2">
+                                                <connections>
+                                                    <action selector="shareButton:" destination="fFf-Nn-7cb" id="xRF-Hm-l2z"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </items>
                                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <color key="barTintColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -147,14 +151,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="un7-cN-g3F">
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="un7-cN-g3F">
                                 <rect key="frame" x="15" y="25" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="AzS-Cr-yWe"/>
                                     <constraint firstAttribute="width" secondItem="un7-cN-g3F" secondAttribute="height" multiplier="1:1" id="E99-03-KPh"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="▼">
+                                <state key="normal" image="arrowDown">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -220,8 +223,10 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="albumCoverImageView" destination="PDX-jz-Z4f" id="Lku-if-1iE"/>
+                        <outlet property="artistAndAlbumLabel" destination="1Dr-hY-BVO" id="WWo-qA-RBG"/>
+                        <outlet property="buyTrackButton" destination="h4W-Mf-uP4" id="Q7K-ag-008"/>
                         <outlet property="controllersView" destination="TJk-e7-Ha5" id="KeB-Bl-eXm"/>
-                        <outlet property="coverImageView" destination="PDX-jz-Z4f" id="1M3-HQ-ASY"/>
                         <outlet property="currentTimeLabel" destination="oE4-zU-TJc" id="hkK-Jo-qv2"/>
                         <outlet property="fastBackwardButton" destination="Gzg-87-U0k" id="U2s-Sd-Hyr"/>
                         <outlet property="fastForwardButton" destination="gF9-Wu-bmj" id="zZ3-0O-CMb"/>
@@ -229,6 +234,7 @@
                         <outlet property="progressSlider" destination="jxm-SJ-fSl" id="TiH-mD-pZb"/>
                         <outlet property="timeLeftLabel" destination="CwU-jM-5uY" id="KcI-FH-BGk"/>
                         <outlet property="toolbar" destination="qK0-5F-mrX" id="3ZE-dO-RN6"/>
+                        <outlet property="trackTitleLabel" destination="UDG-5M-AfU" id="Ier-Ci-nBp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uko-PY-2nc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -238,6 +244,7 @@
     </scenes>
     <resources>
         <image name="antlers" width="480" height="480"/>
+        <image name="arrowDown" width="201" height="201"/>
         <image name="volumeDownSmall" width="7" height="11"/>
         <image name="volumeUpSmall" width="17" height="15"/>
     </resources>

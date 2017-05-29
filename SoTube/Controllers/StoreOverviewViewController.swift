@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, paymentDelegate {
+class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PaymentDelegate {
     // MARK: - Properties
     @IBOutlet weak var newReleasesCollectionView: UICollectionView!
     @IBOutlet weak var newReleasesFlowLayout: UICollectionViewFlowLayout!

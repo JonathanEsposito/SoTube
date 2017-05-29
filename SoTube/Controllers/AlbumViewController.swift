@@ -9,7 +9,7 @@
 
 import UIKit
 
-class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, AlbumTrakCellDelegate, paymentDelegate {
+class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, AlbumTrakCellDelegate, PaymentDelegate {
     // MARK: - Properties
     @IBOutlet weak var albumCoverImageView: UIImageView!
     @IBOutlet weak var backgroundView: UIView!

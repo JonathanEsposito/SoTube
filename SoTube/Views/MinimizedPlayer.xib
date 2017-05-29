@@ -43,6 +43,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BlS-D3-HSk" firstAttribute="top" secondItem="Z5J-US-SN5" secondAttribute="bottom" id="DoS-nk-P76"/>
+                            <constraint firstItem="BlS-D3-HSk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7r4-8A-vaQ" secondAttribute="leading" id="Y52-kj-X9z"/>
+                            <constraint firstItem="Z5J-US-SN5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7r4-8A-vaQ" secondAttribute="leading" id="cKc-ol-fM5"/>
                             <constraint firstItem="Z5J-US-SN5" firstAttribute="centerX" secondItem="7r4-8A-vaQ" secondAttribute="centerX" id="hN4-zd-0md"/>
                             <constraint firstItem="Z5J-US-SN5" firstAttribute="top" secondItem="7r4-8A-vaQ" secondAttribute="top" constant="-4" id="mhW-ih-w81"/>
                             <constraint firstItem="BlS-D3-HSk" firstAttribute="centerX" secondItem="7r4-8A-vaQ" secondAttribute="centerX" id="pKQ-aN-QUE"/>

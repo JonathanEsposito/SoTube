@@ -269,6 +269,10 @@ class TabBarViewController: UIViewController, UITabBarDelegate,MinimizedPlayerDe
             if miniPlayer == nil {
                 setupMinimizedPlayer()
             }
+            let track = musicPlayer.track
+            
+            miniPlayer.artistAndAlbumLabel.text = "\(track?.artistName ?? "") - \(track?.albumName ?? "")"
+            miniPlayer.titleLabel.text = track?.name
             
             if musicPlayer.isNotPlaying {
                 if let buttonIndex = miniPlayer.items?.index(where: { $0 == (miniPlayer.musicPlayButton ?? miniPlayer.pauseButton) }) {

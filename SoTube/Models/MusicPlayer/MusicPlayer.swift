@@ -24,7 +24,7 @@ protocol MusicPlayerModel {
 class MusicPlayer: NSObject {
     // MARK: - Private Properties
     private let player: MusicPlayerModel = SPTPlayerModel()
-    private var track: Track?
+    var track: Track?
     private var link: String?
     
     // MARK: - MusicPlayer API
@@ -102,11 +102,11 @@ class MusicPlayer: NSObject {
         self.track = track
         let link = track.id
         print(link)
-        do {
-            try player.play(contentOf: link)
-        } catch {
-            print("error")
-        }
+//        do {
+//            try player.play(contentOf: link)
+//        } catch {
+//            print("error")
+//        }
     }
     
     func set(time: TimeInterval) {

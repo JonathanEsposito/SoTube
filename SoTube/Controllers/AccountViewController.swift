@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, paymentDelegate, userInfoDelegate {
+class AccountViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PaymentDelegate, userInfoDelegate {
     // MARK: - Properties
     @IBOutlet weak var collectionViewFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var usernameTextField: UITextField!
