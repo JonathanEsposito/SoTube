@@ -10,6 +10,7 @@ import UIKit
 
 
 class StoreDetailViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    // MARK: - Properties
     @IBOutlet weak var musicCollectionView: UICollectionView!
     @IBOutlet weak var musicFlowLayout: UICollectionViewFlowLayout!
     
@@ -20,9 +21,15 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
     var collection: [Any] = []
     let spotifyModel = SpotifyModel()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        musicCollectionView.reloadData()
+    }
+    
+    // MARK: - Constraints Size Classes
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateFooterHeight()
     }
 
     // MARK: - Collection viewDidLoad
@@ -95,9 +102,11 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
                 if let categories = collection as? [Category] {
                     let category = categories[indexPaths!.first!.row]
                     spotifyModel.getPlaylist(from: category, OnCompletion: {playlists in
-                        destinationVC.collection = playlists
-                        destinationVC.navigationItem.title = category.name
-                        destinationVC.musicCollectionView.reloadData()
+                        DispatchQueue.main.async {
+                            destinationVC.collection = playlists
+                            destinationVC.navigationItem.title = category.name
+                            destinationVC.musicCollectionView.reloadData()
+                        }
                     })
                 }
             }
@@ -117,10 +126,20 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
             }
         }
     }
+    
+    // MARK: - Private Methods
+    private func updateFooterHeight() {
+        let newHeight: CGFloat
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            if musicPlayer.hasSong {
+                newHeight = 94
+            } else {
+                newHeight = 50
+            }
+        } else {
+            newHeight = 50
+        }
+        
+        musicFlowLayout.footerReferenceSize.height = newHeight
+    }
 }
-
-
-
-
-
-

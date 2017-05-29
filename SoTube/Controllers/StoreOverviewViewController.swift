@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PaymentDelegate {
     // MARK: - Properties
     @IBOutlet weak var newReleasesCollectionView: UICollectionView!
     @IBOutlet weak var newReleasesFlowLayout: UICollectionViewFlowLayout!
@@ -16,7 +16,10 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
     @IBOutlet weak var featuredPlaylistsFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
     @IBOutlet weak var categoriesFlowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var coinsButton: UIBarButtonItem!
     
+    let database = DatabaseViewModel()
+    let paymentViewModel = PaymentViewModel()
     let spotifyModel = SpotifyModel()
     let player = SPTPlayerModel()
     var newReleases: [Album] = []
@@ -30,6 +33,11 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
+        // Get amount of coins
+//        database.getCoins { currentCoins in
+//            
+//            
+//        }
         
         // Do any additional setup after loading the view.
         
@@ -235,6 +243,12 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
             }
         }
     }
+    
+    // MARK: - IBActions
+    @IBAction func buyCoins(_ sender: UIBarButtonItem) {
+        presentTopUpAlertController(onCompletion: {_ in})
+    }
+    
 }
 
 

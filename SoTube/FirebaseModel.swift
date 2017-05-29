@@ -10,12 +10,14 @@ import Foundation
 import Firebase
 
 class Firebase: DatabaseModel {
-    func login(withEmail email: String, password: String, delegate: DatabaseDelegate, onCompletion completionHandler:  (() -> ())? ) {
+    func login(withEmail email: String, password: String, onCompletion completionHandler:  ((ErrorAlert?) -> ())? ) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             if let error = error {
-                print("error")
-                delegate.showAlert(withTitle: "Login Error", message: error.localizedDescription, actions: nil)
-                return
+                if let completionHandler = completionHandler {
+                    let errorAlert = ErrorAlert(title: "Login Error", message: error.localizedDescription, actions: nil)
+                    completionHandler(errorAlert)
+                    return
+                }
             }
             
             guard let currentUser = user, currentUser.isEmailVerified else {
@@ -26,14 +28,17 @@ class Firebase: DatabaseModel {
                     }),
                     UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 ]
+                let errorAlert = ErrorAlert(title: "Email address not confirmed", message: "You haven't confirmed your email address yet. We sent you a confirmation email upon refistration. You can click the verification link in that email. If you lost that email we'll gladly send you a new confirmation email. In that case you ought to tap Resend confirmation email.", actions: actions)
                 
-                delegate.showAlert(withTitle: "Email address not confirmed", message: "You haven't confirmed your email address yet. We sent you a confirmation email upon refistration. You can click the verification link in that email. If you lost that email we'll gladly send you a new confirmation email. In that case you ought to tap Resend confirmation email.", actions: actions)
+                if let completionHandler = completionHandler {
+                    completionHandler(errorAlert)
+                }
                 return
             }
             
             // On completion
             if let completionHandler = completionHandler {
-                completionHandler()
+                completionHandler(nil)
             } else {
                 print("no completionhandler")
             }
@@ -282,11 +287,12 @@ class Firebase: DatabaseModel {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userMusicHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/songs")
             userMusicHistoryRef.observeSingleEvent(of: .value, with: { snapshot in
+                print(snapshot.value)
                 if let purchaseDictionary = snapshot.value as? [String : [String : String]] {
 //                    print(purchaseDictionary)
                     var musicPurchases: [Track] = []
                     purchaseDictionary.forEach {
-//                        print($0)
+                        print($0)
                         let id = $0.key
                         guard let name = $0.value["name"] else {fatalError("Database error")}
                         guard let trackNumberString = $0.value["trackNumber"], let trackNumber = Int(trackNumberString) else {fatalError("Database error")}
@@ -303,9 +309,13 @@ class Firebase: DatabaseModel {
                         musicPurchases.append(Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl, artistName: artistName, artistId: artistId, albumName: albumName, albumId: albumId, bought: true, databaseDate: dateOfPurchase, priceInCoins: priceInCoins))
                     }
                     completionHandler(musicPurchases)
+                } else {
+                    completionHandler([])
+                    print("my my, snapshot cast error")
                 }
             })
         } else {
+            completionHandler([])
             print("user not logged in")
         }
     }
@@ -332,10 +342,12 @@ class Firebase: DatabaseModel {
                     completionHandler(albums)
                     
                 } else {
+                    completionHandler([])
                     print("snapshot cast error")
                 }
             })
         } else {
+            completionHandler([])
             print("user not logged in")
         }
     }
@@ -360,10 +372,12 @@ class Firebase: DatabaseModel {
                     completionHandler(artists)
                     
                 } else {
+                    completionHandler([])
                     print("snapshot cast error")
                 }
             })
         } else {
+            completionHandler([])
             print("user not logged in")
         }
     }
@@ -390,10 +404,12 @@ class Firebase: DatabaseModel {
                     completionHandler(albums)
                     
                 } else {
+                    completionHandler([])
                     print("snapshot cast error")
                 }
             })
         } else {
+            completionHandler([])
             print("user not logged in")
         }
     }
@@ -416,10 +432,12 @@ class Firebase: DatabaseModel {
                     let album = Album(albumId: id, albumName: albumName, coverUrl: coverUrl, artistId: artistId, artistName: artistName, trackIds: trackIds)
                     completionHandler(album)
                 } else {
+//                    completionHandler()
                     print("snapshot cast error")
                 }
             })
         } else {
+//            completionHandler()
             print("user not logged in")
         }
 

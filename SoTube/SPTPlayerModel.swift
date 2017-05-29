@@ -8,14 +8,20 @@
 
 
 class SPTPlayerModel:NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
-    var player = SPTAudioStreamingController.sharedInstance()
-    
+    var player: SPTAudioStreamingController?
+    let auth = SPTAuth.defaultInstance()!
+    let clientID = "9b9a7a7d663a41b9a65a29142e095b89"
+    let token = "BQBblXXW1pPLAMd7gIQmM6V-aAR4tFnkOZ3nPd3hqEiGAF9VfzlUNxfghvA5BUu7yK-sD_8NOBdUgjv5_T2ViJhudpd74ivYPZWYiNcMSnokbb8NPPXFKHsfVzwNC_pYPae1tD6T73RvUaoLtA"
+
     var isPlaying: Bool {
-        return player?.playbackState.isPlaying ?? false
+        if self.player == nil {
+            return false
+        }
+        return self.player?.playbackState.isPlaying ?? false
     }
     
     var currentTime: TimeInterval {
-        return player?.playbackState.position ?? 0
+        return self.player?.playbackState.position ?? 0
     }
     
     var duration: TimeInterval {
@@ -23,8 +29,11 @@ class SPTPlayerModel:NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPTA
         return 0
     }
     
-    func play(contentOf uri: String) throws {
-        player?.playSpotifyURI(uri, startingWith: 0, startingWithPosition: 0, callback: nil)
+    func play(contentOf link: String) throws {
+        let uri = "spotify:track:\(link)"
+        print(uri)
+        initializePlayer()
+        self.player?.playSpotifyURI(uri, startingWith: 0, startingWithPosition: 0, callback: nil)
 
     }
 
@@ -32,14 +41,38 @@ class SPTPlayerModel:NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPTA
     }
     
     func setCurrentTime(to timeInterval: TimeInterval) {
-        player?.seek(to: timeInterval, callback: nil)
+        self.player?.seek(to: timeInterval, callback: nil)
     }
     
     func pause() {
-        player?.setIsPlaying(false, callback: nil)
+        self.player?.setIsPlaying(false, callback: nil)
     }
     
     func play() {
-        player?.setIsPlaying(true, callback: nil)
+        self.player?.setIsPlaying(true, callback: nil)
     }
+    
+    private func initializePlayer(){
+        if self.player == nil {
+            self.player = SPTAudioStreamingController.sharedInstance()
+            self.player?.playbackDelegate = self
+            self.player?.delegate = self
+            do {
+                try player?.start(withClientId: clientID)
+            } catch {
+                print("ERROR")
+            }
+            self.player!.login(withAccessToken: token)
+        }
+    }
+    
+//    private func setup () {
+//        // insert redirect your url and client ID below
+//        let redirectURL = "Spotify-TestApp://returnAfterLogin" // put your redirect URL here
+//         // put your client ID here
+//        auth.redirectURL     = URL(string: redirectURL)
+//        auth.clientID        = clientID
+//        auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
+////        loginUrl = auth.spotifyWebAuthenticationURL()
+//    }
 }

@@ -11,7 +11,7 @@ import UIKit
 // Declare MusicPlayer
 var musicPlayer = MusicPlayer()
 
-class LogInViewController: UIViewController, DatabaseDelegate {
+class LogInViewController: UIViewController{
     @IBOutlet weak var emailAddressTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginActivityIndicatorView: UIActivityIndicatorView!
@@ -27,9 +27,6 @@ class LogInViewController: UIViewController, DatabaseDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Set database delegate
-        weak var weakSelf = self
-        database.delegate = weakSelf
         
         spotifyModel.setUpLogin()
         
@@ -47,18 +44,6 @@ class LogInViewController: UIViewController, DatabaseDelegate {
     override func viewWillAppear(_ animated: Bool) {
         emailAddressTextField.text = ""
         passwordTextField.text = ""
-    }
-    
-    // MARK: - DatabaseDelegate
-    func showAlert(withTitle title: String, message: String, actions: [UIAlertAction]? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        if actions == nil {
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-        } else {
-            actions?.forEach { alertController.addAction($0)}
-        }
-        present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Navigation
@@ -101,11 +86,16 @@ class LogInViewController: UIViewController, DatabaseDelegate {
     
     // MARK: - Private Methodes
     private func login(withEmail emailAddress: String, password: String) {
-        // activityindicator should start here. Check stop actions first!!!
-                self.loginActivityIndicatorView.startAnimating()
+        // Activityindicator should start here.
+        self.loginActivityIndicatorView.startAnimating()
         
-        database.login(withEmail: emailAddress, password: password, onCompletion: {
-//            self.loginActivityIndicatorView.startAnimating()
+        database.login(withEmail: emailAddress, password: password, onCompletion: { error in
+            if let error = error {
+                self.loginActivityIndicatorView.stopAnimating()
+                self.showAlert(withTitle: error.title, message: error.message, actions: error.actions)
+                return
+            }
+            
             // Dismiss the keyboard
             self.view.endEditing(true)
             
@@ -142,5 +132,16 @@ class LogInViewController: UIViewController, DatabaseDelegate {
         let userEmail = userDefaults.object(forKey: kuserDefaultsEmailKey) as! String
         let userPassword = userDefaults.object(forKey: kuserDefaultsPasswordKey) as! String
         return (userEmail, userPassword)
+    }
+    
+    private func showAlert(withTitle title: String, message: String, actions: [UIAlertAction]? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        if actions == nil {
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+        } else {
+            actions?.forEach { alertController.addAction($0)}
+        }
+        present(alertController, animated: true, completion: nil)
     }
 }

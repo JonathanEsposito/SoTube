@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol SortDelegate {
+    func sortByArtist()
+    func sortByName()
+}
+
 class MyMusicTabBarViewController: TabBarViewController {
     // MARK: - Properties
     var navigationBar = UINavigationBar()
+    var sortDelegate: SortDelegate?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -104,23 +110,23 @@ class MyMusicTabBarViewController: TabBarViewController {
         })
         alertController.addAction(showArtists)
         
-        let showGenres = UIAlertAction(title: "Genres", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
-            print("Genres")
-            if let splitViewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") as? MusicSplitViewController {
-                // TODO: Set destination viewController to artist or genre
-                // TODO: Set master vc title
-                if let navigationController = splitViewController.masterViewController as? UINavigationController {
-                    navigationController.visibleViewController?.title = "Genres"
-                } else {
-                    splitViewController.masterViewController?.title = "Genres"
-                }
-                
-                
-                UIApplication.shared.keyWindow?.rootViewController = splitViewController
-                self.dismiss(animated: true, completion: nil)
-            }
-        })
-        alertController.addAction(showGenres)
+//        let showGenres = UIAlertAction(title: "Genres", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
+//            print("Genres")
+//            if let splitViewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") as? MusicSplitViewController {
+//                // TODO: Set destination viewController to artist or genre
+//                // TODO: Set master vc title
+//                if let navigationController = splitViewController.masterViewController as? UINavigationController {
+//                    navigationController.visibleViewController?.title = "Genres"
+//                } else {
+//                    splitViewController.masterViewController?.title = "Genres"
+//                }
+//                
+//                
+//                UIApplication.shared.keyWindow?.rootViewController = splitViewController
+//                self.dismiss(animated: true, completion: nil)
+//            }
+//        })
+//        alertController.addAction(showGenres)
         
         let cancelAction = UIAlertAction(title: "cancel", style: UIAlertActionStyle.cancel/*.default*/, handler: {(alert :UIAlertAction!) in
             print("Cancel button tapped")
@@ -141,30 +147,28 @@ class MyMusicTabBarViewController: TabBarViewController {
         
         let showSongs = UIAlertAction(title: "Name", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Name")
-            //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SongsVC") {
-            //                UIApplication.shared.keyWindow?.rootViewController = viewController
-            //                self.dismiss(animated: true, completion: nil)
-            //            }
+            if let delegate = self.sortDelegate {
+                delegate.sortByName()
+            }
         })
         alertController.addAction(showSongs)
 
         let showArtists = UIAlertAction(title: "Artist", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
             print("Artist")
-            //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "ArtistsVC") {
-            //                UIApplication.shared.keyWindow?.rootViewController = viewController
-            //                self.dismiss(animated: true, completion: nil)
-            //            }
+            if let delegate = self.sortDelegate {
+                delegate.sortByArtist()
+            }
         })
         alertController.addAction(showArtists)
         
-        let showGenres = UIAlertAction(title: "Year", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
-            print("Year")
-            //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "GenresVC") {
-            //                UIApplication.shared.keyWindow?.rootViewController = viewController
-            //                self.dismiss(animated: true, completion: nil)
-            //            }
-        })
-        alertController.addAction(showGenres)
+//        let showGenres = UIAlertAction(title: "Year", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
+//            print("Year")
+//            //            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "GenresVC") {
+//            //                UIApplication.shared.keyWindow?.rootViewController = viewController
+//            //                self.dismiss(animated: true, completion: nil)
+//            //            }
+//        })
+//        alertController.addAction(showGenres)
         
         let cancelAction = UIAlertAction(title: "cancel", style: UIAlertActionStyle.cancel/*.default*/, handler: {(alert :UIAlertAction!) in
             print("Cancel button tapped")

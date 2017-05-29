@@ -363,7 +363,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cck-Mc-8u1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="yAH-0s-40w">
                     <connections>
-                        <segue destination="ztz-SK-Aiy" kind="show" identifier="showPurchaseHistoryVC" id="YfA-65-8HS"/>
+                        <segue destination="ztz-SK-Aiy" kind="show" identifier="showPurchaseHistoryVC" id="CXB-7A-vCZ"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -382,24 +382,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="25" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WTN-am-mk9">
-                                <rect key="frame" x="0.0" y="58" width="414" height="678"/>
+                                <rect key="frame" x="0.0" y="30" width="414" height="706"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="z8L-BI-nTK" customClass="PurchaseHistoryTableViewCell" customModule="SoTube" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="25"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z8L-BI-nTK" id="3TH-ml-MTU">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="24.666666666666668"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="24"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="46O-iT-HjY">
-                                                    <rect key="frame" x="5" y="0.0" width="25" height="25"/>
+                                                    <rect key="frame" x="5" y="0.0" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="46O-iT-HjY" secondAttribute="height" id="jz9-aC-fWM"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999-99-99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePE-1W-hcq">
-                                                    <rect key="frame" x="40" y="5" width="75" height="15"/>
+                                                    <rect key="frame" x="39" y="5" width="75" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="75" id="cj4-cJ-1by"/>
                                                     </constraints>
@@ -408,7 +408,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Product" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vR-qZ-DXu">
-                                                    <rect key="frame" x="125" y="5" width="226" height="15"/>
+                                                    <rect key="frame" x="124" y="5" width="227" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -451,35 +451,37 @@
                                     <outlet property="delegate" destination="ztz-SK-Aiy" id="RUW-qJ-T7C"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MI9-fF-tcn">
-                                <rect key="frame" x="148.66666666666669" y="20" width="117.00000000000006" height="29"/>
-                                <segments>
-                                    <segment title="Music"/>
-                                    <segment title="SoCoin"/>
-                                </segments>
-                                <connections>
-                                    <action selector="selectHistorySegmentedController:" destination="ztz-SK-Aiy" eventType="valueChanged" id="Cyk-TH-bgC"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="WTN-am-mk9" secondAttribute="trailing" id="0hU-e3-vLR"/>
-                            <constraint firstItem="MI9-fF-tcn" firstAttribute="top" secondItem="SDX-3f-v0a" secondAttribute="bottom" id="A2T-BM-eVz"/>
-                            <constraint firstItem="WTN-am-mk9" firstAttribute="top" secondItem="MI9-fF-tcn" secondAttribute="bottom" constant="10" id="c8n-k5-wSb"/>
+                            <constraint firstItem="WTN-am-mk9" firstAttribute="top" secondItem="SDX-3f-v0a" secondAttribute="bottom" constant="10" id="LEa-k2-mej"/>
                             <constraint firstItem="WTN-am-mk9" firstAttribute="leading" secondItem="lPL-RB-bhf" secondAttribute="leading" id="qhJ-x4-kT0"/>
                             <constraint firstItem="W9e-n2-pJY" firstAttribute="top" secondItem="WTN-am-mk9" secondAttribute="bottom" id="zBZ-s8-BYA"/>
-                            <constraint firstItem="MI9-fF-tcn" firstAttribute="centerX" secondItem="lPL-RB-bhf" secondAttribute="centerX" id="zvZ-TA-4F9"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="QYv-Ol-1D1">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="x7R-ed-Ddz">
+                            <rect key="frame" x="125" y="7" width="165" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Music"/>
+                                <segment title="SoCoin"/>
+                            </segments>
+                            <connections>
+                                <action selector="selectHistorySegmentedController:" destination="ztz-SK-Aiy" eventType="valueChanged" id="fwM-hd-1MM"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <outlet property="historyTableView" destination="WTN-am-mk9" id="Oo1-hK-INA"/>
-                        <outlet property="selectHistorySegmentedController" destination="MI9-fF-tcn" id="V9I-9k-tuf"/>
+                        <outlet property="selectHistorySegmentedController" destination="x7R-ed-Ddz" id="8CD-wc-1zg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ji2-5g-q0q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1398.75" y="85.563380281690144"/>
+            <point key="canvasLocation" x="1398.5507246376812" y="84.782608695652186"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jle-zA-MTP">

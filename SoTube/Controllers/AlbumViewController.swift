@@ -9,7 +9,7 @@
 
 import UIKit
 
-class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, AlbumTrakCellDelegate, paymentDelegate {
+class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, AlbumTrakCellDelegate, PaymentDelegate {
     // MARK: - Properties
     @IBOutlet weak var albumCoverImageView: UIImageView!
     @IBOutlet weak var backgroundView: UIView!
@@ -42,6 +42,10 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     // MARK: - Lifecycle
     override func viewDidLoad() {
         //        album = Album(named: "Climate Change", fromArtist: "Pitbull", withCoverUrl: "https://i.scdn.co/image/e1ca3a27d6b2d897ec72425c95685f0475c35be3", withId: "4jtKPpBQ5eneMwEI94f5Y0")
+        
+        // Hide Navigation controller background and shadow
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: ""), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage(named: "")
         
         super.viewDidLoad()
         // get tracks from music source
@@ -162,6 +166,13 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        // Hide Navigation controller background and shadow
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -272,8 +283,10 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             trackCell.trackDurationLabel.text = string(fromIntInMiliSec: track.duration)
             if track.bought || self.guestuser {
                 trackCell.buyTrackButton.isHidden = true
-                trackCell.buyTrackButton.bounds.size.width = 0
+            } else {
+                trackCell.buyTrackButton.isHidden = false
             }
+            
             trackCell.delegate = self
             cell = trackCell
         }

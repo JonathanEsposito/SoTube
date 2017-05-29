@@ -9,11 +9,11 @@
 import UIKit
 
 
-protocol paymentDelegate {
+protocol PaymentDelegate {
     var paymentViewModel: PaymentViewModel {get}
 }
 
-extension paymentDelegate where Self: UIViewController {
+extension PaymentDelegate where Self: UIViewController {
 
     func buySoCoin(amount: Int, onCompletion completionHandler: @escaping (Int)->()) {
         
@@ -47,8 +47,10 @@ extension paymentDelegate where Self: UIViewController {
                 self.buySoCoin(amount: amount, onCompletion: completionHandler)
             }
         }) }
-        
         alertActions.forEach { alertController.addAction($0) }
+        
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
     }
