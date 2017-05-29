@@ -42,8 +42,8 @@ class LogInViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        emailAddressTextField.text = ""
-        passwordTextField.text = ""
+//        emailAddressTextField.text = ""
+//        passwordTextField.text = ""
     }
     
     // MARK: - Navigation

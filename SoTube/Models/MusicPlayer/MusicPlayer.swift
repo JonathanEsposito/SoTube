@@ -40,7 +40,7 @@ class MusicPlayer: NSObject {
         if track != nil {
             return player.isPlaying
         }
-        return false
+        return true
     }
     
     var isNotPlaying: Bool {
@@ -102,11 +102,11 @@ class MusicPlayer: NSObject {
         self.track = track
         let link = track.id
         print(link)
-//        do {
-//            try player.play(contentOf: link)
-//        } catch {
-//            print("error")
-//        }
+        do {
+            try player.play(contentOf: link)
+        } catch {
+            print("error")
+        }
     }
     
     func set(time: TimeInterval) {

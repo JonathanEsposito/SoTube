@@ -27,7 +27,7 @@ class SpotifyModel {
     func setUpLogin() {
         print("START SETUP")
         setup()
-//        NotificationCenter.default.addObserver(self, selector: #selector(SpotifyModel.updateAfterFirstLogin), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SpotifyModel.updateAfterFirstLogin), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
     }
     
     func spotifyLogin() {
@@ -50,6 +50,8 @@ class SpotifyModel {
         print("UPDATE AFTER FIRST LOGIN")
         let userDefaults = UserDefaults.standard
         self.session = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.object(forKey: "SpotifySession") as! Data) as? SPTSession
+//        let sessionData = NSKeyedArchiver.archivedData(withRootObject: session!)
+//        userDefaults.set(sessionData, forKey: "SpotifySession")
         print("ACCESTOKEN COMING")
         print(session?.accessToken ?? "NO ACCESTOKEN")
     }

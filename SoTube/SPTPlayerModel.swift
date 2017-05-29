@@ -11,17 +11,18 @@ class SPTPlayerModel:NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPTA
     var player: SPTAudioStreamingController?
     let auth = SPTAuth.defaultInstance()!
     let clientID = "9b9a7a7d663a41b9a65a29142e095b89"
-    let token = "BQBblXXW1pPLAMd7gIQmM6V-aAR4tFnkOZ3nPd3hqEiGAF9VfzlUNxfghvA5BUu7yK-sD_8NOBdUgjv5_T2ViJhudpd74ivYPZWYiNcMSnokbb8NPPXFKHsfVzwNC_pYPae1tD6T73RvUaoLtA"
+    var trackUri = ""
+//    let token = "BQBblXXW1pPLAMd7gIQmM6V-aAR4tFnkOZ3nPd3hqEiGAF9VfzlUNxfghvA5BUu7yK-sD_8NOBdUgjv5_T2ViJhudpd74ivYPZWYiNcMSnokbb8NPPXFKHsfVzwNC_pYPae1tD6T73RvUaoLtA"
 
     var isPlaying: Bool {
         if self.player == nil {
             return false
         }
-        return self.player?.playbackState.isPlaying ?? false
+        return self.player?.playbackState?.isPlaying ?? false
     }
     
     var currentTime: TimeInterval {
-        return self.player?.playbackState.position ?? 0
+        return self.player?.playbackState?.position ?? 0
     }
     
     var duration: TimeInterval {
@@ -30,10 +31,11 @@ class SPTPlayerModel:NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPTA
     }
     
     func play(contentOf link: String) throws {
-        let uri = "spotify:track:\(link)"
-        print(uri)
-        initializePlayer()
-        self.player?.playSpotifyURI(uri, startingWith: 0, startingWithPosition: 0, callback: nil)
+        self.trackUri = "spotify:track:\(link)"
+        if player == nil {
+            initializePlayer()
+        }
+//        self.player?.playSpotifyURI(uri, startingWith: 0, startingWithPosition: 0, callback: nil)
 
     }
 
@@ -53,6 +55,9 @@ class SPTPlayerModel:NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPTA
     }
     
     private func initializePlayer(){
+        let userDefaults = UserDefaults.standard
+        let session = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.object(forKey: "SpotifySession") as! Data) as? SPTSession
+        print(session?.accessToken)
         if self.player == nil {
             self.player = SPTAudioStreamingController.sharedInstance()
             self.player?.playbackDelegate = self
@@ -62,8 +67,20 @@ class SPTPlayerModel:NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPTA
             } catch {
                 print("ERROR")
             }
-            self.player!.login(withAccessToken: token)
+            self.player!.login(withAccessToken: session?.accessToken)
         }
+    }
+    
+    func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
+        // after a user authenticates a session, the SPTAudioStreamingController is then initialized and this method called
+        print("logged in")
+        //  spotify:track:58s6EuEYJdlb0kO7awm3Vp
+        
+        self.player?.playSpotifyURI(trackUri, startingWith: 0, startingWithPosition: 0, callback: { (error) in
+            if (error != nil) {
+                print("playing!")
+            }
+        })
     }
     
 //    private func setup () {
