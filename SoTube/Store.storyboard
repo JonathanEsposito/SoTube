@@ -466,8 +466,46 @@
                                 <rect key="frame" x="0.0" y="127" width="320" height="441"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MusicCell" rowHeight="44" id="ywk-6r-EVz" customClass="MusicSplitViewMasterTableViewCell" customModule="SoTube" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ywk-6r-EVz" id="XBP-Wt-KdV">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="princeCover" translatesAutoresizingMaskIntoConstraints="NO" id="f2k-AO-U8L">
+                                                    <rect key="frame" x="0.0" y="5" width="34" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="f2k-AO-U8L" secondAttribute="height" multiplier="1:1" id="UDC-sq-cg4"/>
+                                                        <constraint firstAttribute="width" constant="34" id="WH1-XQ-8pE"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="17"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre/Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToI-kq-ygc">
+                                                    <rect key="frame" x="49" y="11" width="143" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="f2k-AO-U8L" firstAttribute="leading" secondItem="XBP-Wt-KdV" secondAttribute="leading" id="bwa-bV-aJP"/>
+                                                <constraint firstItem="f2k-AO-U8L" firstAttribute="centerY" secondItem="XBP-Wt-KdV" secondAttribute="centerY" id="cbp-Dg-AEl"/>
+                                                <constraint firstItem="ToI-kq-ygc" firstAttribute="leading" secondItem="f2k-AO-U8L" secondAttribute="trailing" constant="15" id="dQL-DJ-l7Y"/>
+                                                <constraint firstItem="ToI-kq-ygc" firstAttribute="centerY" secondItem="XBP-Wt-KdV" secondAttribute="centerY" id="imY-Hg-yHK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="itemImageView" destination="f2k-AO-U8L" id="3b8-M7-wyc"/>
+                                            <outlet property="nameLabel" destination="ToI-kq-ygc" id="qAl-63-ygg"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TrackCell" rowHeight="70" id="CqL-yB-pnL" customClass="TrackTableViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="70"/>
+                                        <rect key="frame" x="0.0" y="72" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CqL-yB-pnL" id="wbc-ad-Jwe">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
@@ -634,6 +672,16 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5We-c4-CMY">
+                                <rect key="frame" x="16" y="28" width="288" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Albums"/>
+                                    <segment title="artists"/>
+                                    <segment title="tracks"/>
+                                    <segment title="playlists"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -661,7 +709,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="930" y="-673"/>
+            <point key="canvasLocation" x="930" y="-673.94366197183103"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="K4E-M7-tXj">
