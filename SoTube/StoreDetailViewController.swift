@@ -101,7 +101,7 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 if let categories = collection as? [Category] {
                     let category = categories[indexPaths!.first!.row]
-                    spotifyModel.getPlaylist(from: category, OnCompletion: {playlists in
+                    spotifyModel.getPlaylist(from: category, onCompletion: {playlists in
                         DispatchQueue.main.async {
                             destinationVC.collection = playlists
                             destinationVC.navigationItem.title = category.name

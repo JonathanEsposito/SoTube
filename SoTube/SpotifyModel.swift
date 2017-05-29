@@ -21,7 +21,7 @@ class SpotifyModel {
     }
     
     enum SearchItemType {
-        case album, track, artist
+        case album, track, artist, playlist
     }
     
     
@@ -70,7 +70,7 @@ class SpotifyModel {
     
     //MARK: - Music Retrieval Fuctions
     
-    func getCoverUrl(forArtistID artistID: String, OnCompletion completionHandler: @escaping (String)->()) {
+    func getCoverUrl(forArtistID artistID: String, onCompletion completionHandler: @escaping (String)->()) {
         let urlRequest = getURLRequest(forUrl: getSpotifyString(ofType: .hrefString, forItemType: .artists, andID: artistID))
         
         let urlSession = URLSession.shared
@@ -87,7 +87,7 @@ class SpotifyModel {
     }
 
 
-    func getNewReleases(amount: Int, withOffset offset: Int, OnCompletion completionHandler: @escaping ([Album])->()) {
+    func getNewReleases(amount: Int, withOffset offset: Int, onCompletion completionHandler: @escaping ([Album])->()) {
         let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/browse/new-releases?offset=\(offset)&limit=\(amount)")
         
         let urlSession = URLSession.shared
@@ -111,7 +111,7 @@ class SpotifyModel {
         }.resume()
     }
     
-    func getCategories(amount: Int, withOffset offset: Int, OnCompletion completionHandler: @escaping ([Category])->()) {
+    func getCategories(amount: Int, withOffset offset: Int, onCompletion completionHandler: @escaping ([Category])->()) {
         let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/browse/categories?offset=\(offset)&limit=\(amount)")
         
         let urlSession = URLSession.shared
@@ -136,7 +136,7 @@ class SpotifyModel {
         }.resume()
     }
     
-    func getFeaturedPlaylists(amount: Int, withOffset offset: Int, OnCompletion completionHandler: @escaping ([Playlist])->()) {
+    func getFeaturedPlaylists(amount: Int, withOffset offset: Int, onCompletion completionHandler: @escaping ([Playlist])->()) {
         let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/browse/featured-playlists?offset=\(offset)&limit=\(amount)")
         
         let urlSession = URLSession.shared
@@ -161,7 +161,7 @@ class SpotifyModel {
         }.resume()
     }
     
-    func getTracks(from album: Album, OnCompletion completionHandler: @escaping ([Track])->()) {
+    func getTracks(from album: Album, onCompletion completionHandler: @escaping ([Track])->()) {
         let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/albums/\(album.id)/tracks")
         
         let urlSession = URLSession.shared
@@ -192,7 +192,7 @@ class SpotifyModel {
         }.resume()
     }
     
-    func getTracks(from playlist: Playlist, OnCompletion completionHandler: @escaping ([Track])->()) {
+    func getTracks(from playlist: Playlist, onCompletion completionHandler: @escaping ([Track])->()) {
         let userId = "spotify"
         let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/users/\(userId)/playlists/\(playlist.id)/tracks")
         
@@ -225,7 +225,7 @@ class SpotifyModel {
             }.resume()
     }
     
-    func getTracks(from artist: Artist, OnCompletion completionHandler: @escaping ([Track])->()) {
+    func getTracks(from artist: Artist, onCompletion completionHandler: @escaping ([Track])->()) {
         let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/artists/\(artist.artistId)/top-tracks?country=BE")
         
         let urlSession = URLSession.shared
@@ -256,7 +256,7 @@ class SpotifyModel {
             }.resume()
     }
     
-    func getPlaylist(from category: Category, OnCompletion completionHandler: @escaping ([Playlist])->()) {
+    func getPlaylist(from category: Category, onCompletion completionHandler: @escaping ([Playlist])->()) {
         let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/browse/categories/\(category.id)/playlists")
         
         let urlSession = URLSession.shared
@@ -281,7 +281,7 @@ class SpotifyModel {
             }.resume()
     }
     
-    func getSearchResults(fromUrl url: String, OnCompletion completionHandler: @escaping ([Album], [Artist], [Track], [Playlist])->()) {
+    func getSearchResults(fromUrl url: String, onCompletion completionHandler: @escaping ([Album], [Artist], [Track], [Playlist])->()) {
         let urlRequest = getURLRequest(forUrl: url)
         
         let urlSession = URLSession.shared

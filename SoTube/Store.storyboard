@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aLl-vu-1ph">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aLl-vu-1ph">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -144,7 +144,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="musicCell" id="7Uq-tZ-cCo" customClass="StoreCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="5" width="100" height="107.5"/>
+                                        <rect key="frame" x="20" y="5.5" width="100" height="107.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="107.5"/>
@@ -456,17 +456,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-Co-HQG">
-                                <rect key="frame" x="0.0" y="83" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="144" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="mgv-bp-B79" id="jN8-mU-G2J"/>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YDL-7V-Ttq">
-                                <rect key="frame" x="0.0" y="127" width="320" height="441"/>
+                                <rect key="frame" x="0.0" y="208" width="320" height="360"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MusicCell" rowHeight="44" id="ywk-6r-EVz" customClass="MusicSplitViewMasterTableViewCell" customModule="SoTube" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MusicCell" rowHeight="44" id="ywk-6r-EVz" customClass="MusicTableViewCell" customModule="SoTube" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ywk-6r-EVz" id="XBP-Wt-KdV">
@@ -500,8 +500,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="itemImageView" destination="f2k-AO-U8L" id="3b8-M7-wyc"/>
-                                            <outlet property="nameLabel" destination="ToI-kq-ygc" id="qAl-63-ygg"/>
+                                            <outlet property="itemImageView" destination="f2k-AO-U8L" id="FHl-4p-Auf"/>
+                                            <outlet property="nameLabel" destination="ToI-kq-ygc" id="cHy-ti-W6K"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TrackCell" rowHeight="70" id="CqL-yB-pnL" customClass="TrackTableViewCell" customModule="SoTube" customModuleProvider="target">
@@ -629,11 +629,11 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="8bw-T8-GcZ"/>
+                                                    <exclude reference="O9o-Ec-1xd"/>
+                                                    <exclude reference="dKw-PZ-CGJ"/>
+                                                    <exclude reference="lFF-r4-5C3"/>
                                                     <exclude reference="Eyo-Xr-q5r"/>
                                                     <exclude reference="iLQ-uo-oGc"/>
-                                                    <exclude reference="O9o-Ec-1xd"/>
-                                                    <exclude reference="lFF-r4-5C3"/>
-                                                    <exclude reference="dKw-PZ-CGJ"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -642,10 +642,10 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <include reference="8bw-T8-GcZ"/>
-                                                    <exclude reference="yBV-qh-CK2"/>
                                                     <exclude reference="7kN-dk-LKg"/>
-                                                    <include reference="lFF-r4-5C3"/>
                                                     <include reference="dKw-PZ-CGJ"/>
+                                                    <include reference="lFF-r4-5C3"/>
+                                                    <exclude reference="yBV-qh-CK2"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
@@ -654,10 +654,10 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="8bw-T8-GcZ"/>
+                                                    <exclude reference="7kN-dk-LKg"/>
+                                                    <include reference="O9o-Ec-1xd"/>
                                                     <include reference="Eyo-Xr-q5r"/>
                                                     <include reference="iLQ-uo-oGc"/>
-                                                    <include reference="O9o-Ec-1xd"/>
-                                                    <exclude reference="7kN-dk-LKg"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -671,9 +671,13 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="bfh-Sg-IyC" id="jDu-Rc-ern"/>
+                                    <outlet property="delegate" destination="bfh-Sg-IyC" id="YkF-ZU-h5l"/>
+                                </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5We-c4-CMY">
-                                <rect key="frame" x="16" y="28" width="288" height="29"/>
+                                <rect key="frame" x="16" y="88" width="288" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Albums"/>
@@ -681,13 +685,16 @@
                                     <segment title="tracks"/>
                                     <segment title="playlists"/>
                                 </segments>
+                                <connections>
+                                    <action selector="typePicker:" destination="bfh-Sg-IyC" eventType="valueChanged" id="rbf-8U-KyV"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="YDL-7V-Ttq" secondAttribute="trailing" id="12Y-H2-7UH"/>
-                            <constraint firstItem="YDL-7V-Ttq" firstAttribute="top" secondItem="2iB-Co-HQG" secondAttribute="bottom" id="EL2-vW-QSa"/>
-                            <constraint firstItem="2iB-Co-HQG" firstAttribute="top" secondItem="LfJ-vg-hvY" secondAttribute="bottom" constant="63" id="Goe-gj-YRF"/>
+                            <constraint firstItem="YDL-7V-Ttq" firstAttribute="top" secondItem="2iB-Co-HQG" secondAttribute="bottom" constant="20" id="EL2-vW-QSa"/>
+                            <constraint firstItem="2iB-Co-HQG" firstAttribute="top" secondItem="LfJ-vg-hvY" secondAttribute="bottom" constant="80" id="Goe-gj-YRF"/>
                             <constraint firstItem="YDL-7V-Ttq" firstAttribute="leading" secondItem="OmF-Sy-QdJ" secondAttribute="leading" id="Rpd-AK-lRS"/>
                             <constraint firstAttribute="trailing" secondItem="2iB-Co-HQG" secondAttribute="trailing" id="Tcj-7Y-tEn"/>
                             <constraint firstItem="HnP-Xa-vlZ" firstAttribute="top" secondItem="YDL-7V-Ttq" secondAttribute="bottom" id="rbp-AS-5vm"/>
@@ -697,6 +704,8 @@
                     <connections>
                         <outlet property="searchBar" destination="2iB-Co-HQG" id="dto-0x-vKh"/>
                         <outlet property="searchDisplayController" destination="pmj-KG-2iu" id="p98-4N-29D"/>
+                        <outlet property="searchTableView" destination="YDL-7V-Ttq" id="ykn-sa-k75"/>
+                        <outlet property="typePicker" destination="5We-c4-CMY" id="jjA-98-OmY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gi7-rC-8Zc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -835,9 +844,9 @@
         <image name="princeCover" width="500" height="428"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="gcj-z9-tis"/>
         <segue reference="ZBh-ge-q4r"/>
-        <segue reference="eON-JS-Uph"/>
-        <segue reference="CfO-2q-R4N"/>
+        <segue reference="wLk-Sp-PeE"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>

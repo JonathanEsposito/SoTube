@@ -65,7 +65,7 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             })
             
             // Get Tracks from musicSource
-            musicSource.getTracks(from: album, OnCompletion: { tracks in
+            musicSource.getTracks(from: album, onCompletion: { tracks in
                 DispatchQueue.main.async {
                     // If we are comming from the store, album.trackIds will be empty so display all album tracks
                     if album.trackIds.isEmpty {

@@ -41,19 +41,19 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
         
         // Do any additional setup after loading the view.
         
-        spotifyModel.getNewReleases(amount: 10, withOffset: 0, OnCompletion: {albums in
+        spotifyModel.getNewReleases(amount: 10, withOffset: 0, onCompletion: {albums in
             DispatchQueue.main.async {
                 self.newReleases = albums
                 self.newReleasesCollectionView.reloadData()
             }
         })
-        spotifyModel.getFeaturedPlaylists(amount: 10, withOffset: 0, OnCompletion: {playlists in
+        spotifyModel.getFeaturedPlaylists(amount: 10, withOffset: 0, onCompletion: {playlists in
             DispatchQueue.main.async {
                 self.featuredPlaylists = playlists
                 self.featuredPlaylistsCollectionView.reloadData()
             }
         })
-        spotifyModel.getCategories(amount: 10, withOffset: 0, OnCompletion: {categories in
+        spotifyModel.getCategories(amount: 10, withOffset: 0, onCompletion: {categories in
             DispatchQueue.main.async {
                 self.categories = categories
                 self.categoriesCollectionView.reloadData()
@@ -169,7 +169,7 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.newReleases
                 destinationVC.navigationItem.title = "New Releases"
-                    self.spotifyModel.getNewReleases(amount: 40, withOffset: 10, OnCompletion: {albums in
+                    self.spotifyModel.getNewReleases(amount: 40, withOffset: 10, onCompletion: {albums in
                         DispatchQueue.main.async {
                             let albums = albums as NSArray
                             let currentCount = destinationVC.collection.count
@@ -186,7 +186,7 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.featuredPlaylists
                 destinationVC.navigationItem.title = "Featured Playlists"
-                spotifyModel.getFeaturedPlaylists(amount: 40, withOffset: 10, OnCompletion: {playlists in
+                spotifyModel.getFeaturedPlaylists(amount: 40, withOffset: 10, onCompletion: {playlists in
                     DispatchQueue.main.async {
                         let playlists = playlists as NSArray
                         let currentCount = destinationVC.collection.count
@@ -203,7 +203,7 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 destinationVC.collection = self.categories
                 destinationVC.navigationItem.title = "Categories"
-                spotifyModel.getCategories(amount: 40, withOffset: 10, OnCompletion: {categories in
+                spotifyModel.getCategories(amount: 40, withOffset: 10, onCompletion: {categories in
                     DispatchQueue.main.async {
                         let categories = categories as NSArray
                         let currentCount = destinationVC.collection.count
@@ -233,7 +233,7 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
                let indexPaths = categoriesCollectionView.indexPathsForSelectedItems
                 let category = categories[indexPaths!.first!.row]
                 destinationVC.navigationItem.title = category.name
-                spotifyModel.getPlaylist(from: category, OnCompletion: {playlists in
+                spotifyModel.getPlaylist(from: category, onCompletion: {playlists in
                     DispatchQueue.main.async {
                         destinationVC.collection = playlists
                         destinationVC.navigationItem.title = category.name
