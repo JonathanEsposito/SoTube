@@ -9,9 +9,6 @@
 import UIKit
 
 class StoreCollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    
-    
 }

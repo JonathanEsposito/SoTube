@@ -52,7 +52,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tYB-R7-2cV" userLabel="New Releases">
-                                <rect key="frame" x="0.0" y="81" width="320" height="139.5"/>
+                                <rect key="frame" x="0.0" y="81" width="320" height="140"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="82y-aI-Ww3">
                                     <size key="itemSize" width="50" height="50"/>
@@ -62,7 +62,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="musicCell" id="Sde-im-02N" customClass="StoreCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="8.5" width="100" height="108"/>
+                                        <rect key="frame" x="20" y="9" width="100" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="108"/>
@@ -108,10 +108,10 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hF-C0-9Ds" userLabel="Featured Playlists Label">
-                                <rect key="frame" x="0.0" y="220.5" width="320" height="17"/>
+                                <rect key="frame" x="0.0" y="221" width="320" height="17"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Featured Playlists" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzy-4R-g7i">
-                                        <rect key="frame" x="10" y="-2" width="132.5" height="21"/>
+                                        <rect key="frame" x="10" y="-2" width="133" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -134,7 +134,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l0b-DY-1IL" userLabel="Fearured Playlists">
-                                <rect key="frame" x="0.0" y="237.5" width="320" height="139"/>
+                                <rect key="frame" x="0.0" y="238" width="320" height="139"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eVp-WV-I9n">
                                     <size key="itemSize" width="50" height="50"/>
@@ -144,7 +144,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="musicCell" id="7Uq-tZ-cCo" customClass="StoreCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="8.5" width="100" height="107.5"/>
+                                        <rect key="frame" x="20" y="8" width="100" height="107.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="107.5"/>
@@ -190,7 +190,7 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UEx-dt-UOb" userLabel="Categories">
-                                <rect key="frame" x="0.0" y="393.5" width="320" height="124.5"/>
+                                <rect key="frame" x="0.0" y="394" width="320" height="124"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qom-F8-lQI">
                                     <size key="itemSize" width="50" height="50"/>
@@ -200,7 +200,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="musicCell" id="LL7-Rc-kNC" customClass="StoreCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="8.5" width="100" height="107.5"/>
+                                        <rect key="frame" x="20" y="8" width="100" height="107.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="107.5"/>
@@ -246,10 +246,10 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IjG-Sy-BZD" userLabel="Categies Label">
-                                <rect key="frame" x="0.0" y="376.5" width="320" height="17"/>
+                                <rect key="frame" x="0.0" y="377" width="320" height="17"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXT-AZ-SGG">
-                                        <rect key="frame" x="10" y="-2" width="82.5" height="21"/>
+                                        <rect key="frame" x="10" y="-2" width="83" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -464,6 +464,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="hvv-Jr-c9b">
+                                    <rect key="frame" x="0.0" y="186" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MusicCell" rowHeight="44" id="ywk-6r-EVz" customClass="MusicTableViewCell" customModule="SoTube" customModuleProvider="target">
@@ -690,6 +695,7 @@
                         <outlet property="searchDisplayController" destination="tmR-Eb-DIM" id="MHR-Ha-PKA"/>
                         <outlet property="searchTableView" destination="YDL-7V-Ttq" id="ykn-sa-k75"/>
                         <outlet property="tableHeaderView" destination="97f-jN-eTq" id="HTK-Qg-FIy"/>
+                        <outlet property="tableViewFooter" destination="hvv-Jr-c9b" id="quh-1u-prf"/>
                         <segue destination="JA6-ZG-CSk" kind="show" identifier="showPlaylistSegue" id="9cI-KK-KhU"/>
                         <segue destination="JA6-ZG-CSk" kind="show" identifier="showAlbumSegue" id="iQf-6l-rht"/>
                         <segue destination="9lc-y6-chP" kind="show" identifier="playTrackSegue" id="nGS-pZ-vDU"/>

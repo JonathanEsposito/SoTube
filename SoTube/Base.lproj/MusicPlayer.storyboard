@@ -59,7 +59,11 @@
                                         <rect key="frame" x="0.0" y="124" width="320" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <items>
-                                            <barButtonItem title="Buy" id="h4W-Mf-uP4"/>
+                                            <barButtonItem title="Buy" id="h4W-Mf-uP4">
+                                                <connections>
+                                                    <action selector="buyCurrentTrack:" destination="fFf-Nn-7cb" id="Bxa-4J-1lO"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="5Go-4h-F0u"/>
                                             <barButtonItem systemItem="rewind" id="Gzg-87-U0k">
                                                 <connections>

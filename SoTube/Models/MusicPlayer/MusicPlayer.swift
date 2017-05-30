@@ -27,7 +27,7 @@ class MusicPlayer: NSObject {
     private let defaultLimitedDuration: TimeInterval = 30
     private var link: String?
     dynamic var player = SPTPlayerModel()
-    private var restrictedDuration: TimeInterval?
+    var restrictedDuration: TimeInterval?
     var track: Track?
     var cover: UIImage?
     
@@ -63,6 +63,9 @@ class MusicPlayer: NSObject {
     }
     
     var progress: Float {
+        if (player.currentTime / self.duration) > 1 {
+            player.stop()
+        }
         return Float(player.currentTime / self.duration)
     }
     
@@ -71,9 +74,6 @@ class MusicPlayer: NSObject {
     }
     
     var timeLeft: String {
-        if (self.duration - player.currentTime) < 0 {
-            player.stop()
-        }
         return "-\(string(fromTimeInterval: self.duration - player.currentTime))"
     }
     

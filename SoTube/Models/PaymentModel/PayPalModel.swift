@@ -59,7 +59,8 @@ class PayPalModel: NSObject, PayPalPaymentDelegate {
         payment.paymentDetails = paymentDetails
         
         if (payment.processable) {
-            let paymentViewController = PayPalPaymentViewController(payment: payment, configuration: payPalConfig, delegate: self)
+            weak var weakSelf = self
+            let paymentViewController = PayPalPaymentViewController(payment: payment, configuration: payPalConfig, delegate: weakSelf!)
             return paymentViewController
         } else {
             print("Payment not processable: \(payment)")
