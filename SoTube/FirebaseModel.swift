@@ -12,35 +12,37 @@ import Firebase
 class Firebase: DatabaseModel {
     func login(withEmail email: String, password: String, onCompletion completionHandler:  ((ErrorAlert?) -> ())? ) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
-            if let error = error {
-                if let completionHandler = completionHandler {
-                    let errorAlert = ErrorAlert(title: "Login Error", message: error.localizedDescription, actions: nil)
-                    completionHandler(errorAlert)
+            DispatchQueue.main.async {
+                if let error = error {
+                    if let completionHandler = completionHandler {
+                        let errorAlert = ErrorAlert(title: "Login Error", message: error.localizedDescription, actions: nil)
+                        completionHandler(errorAlert)
+                        return
+                    }
+                }
+                
+                guard let currentUser = user, currentUser.isEmailVerified else {
+                    print("email not verified")
+                    let actions = [
+                        UIAlertAction(title: "Resent email", style: .default, handler: { (action) in
+                            user?.sendEmailVerification(completion: nil)
+                        }),
+                        UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    ]
+                    let errorAlert = ErrorAlert(title: "Email address not confirmed", message: "You haven't confirmed your email address yet. We sent you a confirmation email upon refistration. You can click the verification link in that email. If you lost that email we'll gladly send you a new confirmation email. In that case you ought to tap Resend confirmation email.", actions: actions)
+                    
+                    if let completionHandler = completionHandler {
+                        completionHandler(errorAlert)
+                    }
                     return
                 }
-            }
-            
-            guard let currentUser = user, currentUser.isEmailVerified else {
-                print("email not verified")
-                let actions = [
-                    UIAlertAction(title: "Resent email", style: .default, handler: { (action) in
-                        user?.sendEmailVerification(completion: nil)
-                    }),
-                    UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                ]
-                let errorAlert = ErrorAlert(title: "Email address not confirmed", message: "You haven't confirmed your email address yet. We sent you a confirmation email upon refistration. You can click the verification link in that email. If you lost that email we'll gladly send you a new confirmation email. In that case you ought to tap Resend confirmation email.", actions: actions)
                 
+                // On completion
                 if let completionHandler = completionHandler {
-                    completionHandler(errorAlert)
+                    completionHandler(nil)
+                } else {
+                    print("no completionhandler")
                 }
-                return
-            }
-            
-            // On completion
-            if let completionHandler = completionHandler {
-                completionHandler(nil)
-            } else {
-                print("no completionhandler")
             }
         })
     }
