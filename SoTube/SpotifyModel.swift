@@ -256,6 +256,30 @@ class SpotifyModel {
             }.resume()
     }
     
+    func getAlbums(from artist: Artist, onCompletion completionHandler: @escaping ([Album])->()) {
+        let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/artists/\(artist.artistId)/albums?limit=50")
+        
+        let urlSession = URLSession.shared
+        
+        urlSession.dataTask(with: urlRequest!) { data, response, error in
+            if let jsonData = data,
+                let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary {
+                let albums = feed.value(forKeyPath: "items") as! NSArray
+                var albumArray = [Album]()
+                for album in albums {
+                    let dictionary = album as! NSDictionary
+                    let name =  dictionary.value(forKeyPath: "name") as! String
+                    let artists = dictionary.value(forKeyPath: "artists.name") as! [String]
+                    let coverUrls = dictionary.value(forKeyPath: "images.url") as! [String]
+                    let id = dictionary.value(forKeyPath: "id") as! String
+                    let album = Album(named: name, fromArtist: artists.first!, withCoverUrl: coverUrls.first!, withId: id)
+                    albumArray.append(album)
+                }
+                completionHandler(albumArray)
+            }
+            }.resume()
+    }
+    
     func getPlaylist(from category: Category, onCompletion completionHandler: @escaping ([Playlist])->()) {
         let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/browse/categories/\(category.id)/playlists")
         
@@ -302,7 +326,7 @@ class SpotifyModel {
                     let artists = dictionary.value(forKeyPath: "artists.name") as! [String]
                     let coverUrls = dictionary.value(forKeyPath: "images.url") as! [String]
                     let id = dictionary.value(forKeyPath: "id") as! String
-                    let album = Album(named: name, fromArtist: artists.first!, withCoverUrl: coverUrls.first!, withId: id)
+                    let album = Album(named: name, fromArtist: artists.first!, withCoverUrl: coverUrls.first ?? "", withId: id)
                     albumArray.append(album)
                 }
                 
@@ -312,7 +336,13 @@ class SpotifyModel {
                     let artistId = dictionary.value(forKeyPath: "id") as! String
                     let artistName = dictionary.value(forKeyPath: "name") as! String
                     let artistCoverUrl = dictionary.value(forKeyPath: "images.url") as! [String]
-                    let artist = Artist(artistId: artistId, artistName: artistName, artistCoverUrl: artistCoverUrl.first!, albumIds: [])
+                    
+                    print("ARTIST")
+                    print(artistId)
+                    print(artistName)
+                    print(artistCoverUrl)
+                    
+                    let artist = Artist(artistId: artistId, artistName: artistName, artistCoverUrl: artistCoverUrl.first ?? "", albumIds: [])
                     artistArray.append(artist)
                 }
                 
@@ -329,7 +359,7 @@ class SpotifyModel {
                     let artistId = dictionary.value(forKeyPath: "artists.id") as! [String]
                     let albumName = dictionary.value(forKeyPath: "album.name") as! String
                     let albumId = dictionary.value(forKeyPath: "album.id") as! String
-                    let track = Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl.first!, artistName: artistName.first!, artistId: artistId.first!, albumName: albumName, albumId: albumId)
+                    let track = Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl.first ?? "", artistName: artistName.first!, artistId: artistId.first!, albumName: albumName, albumId: albumId)
                     trackArray.append(track)
                 }
                 
@@ -340,7 +370,7 @@ class SpotifyModel {
                     let coverUrl = dictionary.value(forKeyPath: "images.url") as! [String]
                     let id = dictionary.value(forKeyPath: "id") as! String
                     let owner = dictionary.value(forKeyPath: "owner.id") as! String
-                    let playlist = Playlist(named: name, withCoverUrl: coverUrl.first!, withId: id, fromOwner: owner)
+                    let playlist = Playlist(named: name, withCoverUrl: coverUrl.first ?? "", withId: id, fromOwner: owner)
                     playlistArray.append(playlist)
                 }
                 completionHandler(albumArray, artistArray, trackArray, playlistArray)
@@ -404,7 +434,9 @@ class SpotifyModel {
     }
     
     func getSearchUrl(for query: String, ofTypes ItemTypes: [SearchItemType], amount: Int, offSet: Int) -> String {
-        let url = "https://api.spotify.com/v1/search?q=\(query)&type=\(ItemTypes)&limit=\(amount)&offset=\(offSet)"
+        let typesString = ItemTypes.map({"\($0)"}).joined(separator: ",")
+        let fixedQuery = query.replacingOccurrences(of: " ", with: "-")
+        let url = "https://api.spotify.com/v1/search?q=\(fixedQuery)&type=\(typesString)&limit=\(amount)&offset=\(offSet)"
         print(url)
         return  url
     }
