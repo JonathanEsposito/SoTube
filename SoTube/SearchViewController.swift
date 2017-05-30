@@ -198,6 +198,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if let destinationVC = destinationVC as? StoreDetailViewController {
                 let indexPath = searchTableView.indexPathForSelectedRow
                 destinationVC.navigationItem.title = artists[indexPath!.row].artistName
+                destinationVC.navigationItem.backBarButtonItem?.title = "Search"
                 spotifyModel.getAlbums(from: artists[indexPath!.row], onCompletion: {albums in
                     DispatchQueue.main.async {
                         destinationVC.collection = albums
@@ -210,13 +211,17 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if segue.identifier == "showAlbumSegue" {
             if let destinationVC = destinationVC as? AlbumViewController {
                 let indexPath = searchTableView.indexPathForSelectedRow
+                destinationVC.navigationItem.title = albums[indexPath!.row].name
+                destinationVC.navigationItem.backBarButtonItem?.title = "Search"
                 destinationVC.album = self.albums[indexPath!.row]
-                destinationVC.tracksTableView.reloadData()
+//                destinationVC.tracksTableView.reloadData()
             }
         }
         if segue.identifier == "showPlaylistSegue" {
             if let destinationVC = destinationVC as? AlbumViewController {
                 let indexPath = searchTableView.indexPathForSelectedRow
+                destinationVC.navigationItem.title = playlists[indexPath!.row].name
+                destinationVC.navigationItem.backBarButtonItem?.title = "Search"
                 destinationVC.playlist = self.playlists[indexPath!.row]
 //                destinationVC.tracksTableView.reloadData()
             }
