@@ -30,8 +30,15 @@ class AlbumsCollectionViewController: MyMusicTabBarViewController, UICollectionV
         sortDelegate = weakSelf
         
         // get albums
-        database.getAlbums { albums in
-            self.albums = albums
+        database.getAlbums { [weak self] albums in
+            DispatchQueue.main.async {
+                self?.albums = albums.sorted {
+                    if $0.artist == $1.artist {
+                        return $0.name < $1.name
+                    }
+                    return $0.artist < $1.artist
+                }
+            }
         }
     }
     
@@ -51,6 +58,9 @@ class AlbumsCollectionViewController: MyMusicTabBarViewController, UICollectionV
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlbumCell", for: indexPath) as? AlbumCollectionViewCell else {
             fatalError("The dequeued cell is not an instance of AlbumCollectionViewCell.")
         }
+        // Remove previous image to prevent flickering on scroll (or wrongly displayd images)
+        cell.albumCoverImageView.image = nil
+        // Set values
         let album = albums[indexPath.row]
         cell.albumCoverImageView.image(fromLink: album.coverUrl)
         cell.albumNameLabel.text = album.name

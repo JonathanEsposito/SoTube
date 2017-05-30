@@ -51,6 +51,9 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "paymentCell", for: indexPath) as! PaymentCollectionViewCell
         if let amount = buyAmounts?[indexPath.row] {
+            // Remove previous image to prevent flickering on scroll
+            cell.coinImageView.image = nil
+            // Set values
             cell.amountLabel.text = "\(amount) SoCoins"
             cell.coinImageView.image = UIImage(named: "coin")
         
@@ -64,19 +67,22 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     // MARK: Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let amount = buyAmounts?[indexPath.row]
-        buySoCoin(amount: amount!) { amount in
-            if let price = self.pricePerAmount?[amount] {
-                let coinPurchase = CoinPurchase(amount: amount, price: price)
-                print("I'm buying!!")
-                self.database.updateCoins(with: coinPurchase) {
-                    
-                    // update coins count
-                    let currentAmount = Int(self.amountOfCoinsLabel.text ?? "0")
-                    let amountOfCoins = (currentAmount ?? 0) + amount
-                    self.amountOfCoinsLabel.text = "\(amountOfCoins)"
+        buySoCoin(amount: amount!) { [weak self] amount in
+            DispatchQueue.main.async {
+                if let price = self?.pricePerAmount?[amount] {
+                    let coinPurchase = CoinPurchase(amount: amount, price: price)
+                    print("I'm buying!!")
+                    self?.database.updateCoins(with: coinPurchase) {
+                        DispatchQueue.main.async {
+                            // update coins count
+                            let currentAmount = Int(self?.amountOfCoinsLabel.text ?? "0")
+                            let amountOfCoins = (currentAmount ?? 0) + amount
+                            self?.amountOfCoinsLabel.text = "\(amountOfCoins)"
+                        }
+                    } // End coinUpdate
                 }
             }
-        }
+        } // End buy coins
     }
     
     // MARK: FlowLayout
@@ -96,12 +102,14 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     // MARK: - UsernameDelegate
     func updateTextFields() {
         self.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.startAnimating() }
-        database.getCurrentUserProfile { profile in
-            self.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
-            self.usernameTextField.text = profile.username
-            self.emailTextField.text = profile.email
-            self.amountOfCoinsLabel.text = "\(profile.amountOfCoins)"
-            self.amountOfSongsLabel.text = "\(profile.amountOfSongs)"
+        database.getCurrentUserProfile { [weak self] profile in
+            DispatchQueue.main.async {
+                self?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
+                self?.usernameTextField.text = profile.username
+                self?.emailTextField.text = profile.email
+                self?.amountOfCoinsLabel.text = "\(profile.amountOfCoins)"
+                self?.amountOfSongsLabel.text = "\(profile.amountOfSongs)"
+            }
         }
     }
     
@@ -119,17 +127,18 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
     
     // MARK: - IBActions
     @IBAction func signOut(_ sender: UIBarButtonItem) {
-        database.signOut {
-            userDefaults.removeObject(forKey: kuserDefaultsEmailKey)
-            userDefaults.removeObject(forKey: kuserDefaultsPasswordKey)
+        database.signOut { [weak self] in
+            self?.userDefaults.removeObject(forKey: self!.kuserDefaultsEmailKey)
+            self?.userDefaults.removeObject(forKey: self!.kuserDefaultsPasswordKey)
             
             // remove player
             musicPlayer.track = nil
+            musicPlayer.player.player = nil
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
             UIApplication.shared.keyWindow?.rootViewController = loginViewController
-            self.dismiss(animated: true, completion: nil)
+            self?.dismiss(animated: true, completion: nil)
         }
     }
     

@@ -9,7 +9,7 @@
 extension UIImageView {
     func image(fromUrl url: URL, contentMode mode: UIViewContentMode = .scaleAspectFit, onCompletion completionHandler:  ((UIImage)->())? = nil) {
         contentMode = mode
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
             guard
                 let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                 let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
@@ -17,7 +17,7 @@ extension UIImageView {
                 let image = UIImage(data: data)
                 else { return }
             DispatchQueue.main.async() { () -> Void in
-                self.image = image
+                self?.image = image
                 if let completionHandler = completionHandler {
                     completionHandler(image)
                 }

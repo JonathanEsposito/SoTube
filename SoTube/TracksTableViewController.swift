@@ -125,7 +125,6 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
             destinationvc = navcon.visibleViewController ?? destinationvc
         }
         if let musicCollectionVC = destinationvc as? AlbumsCollectionViewController {
-//            musicCollectionVC.data = self.dummmyData
         }
     }
     

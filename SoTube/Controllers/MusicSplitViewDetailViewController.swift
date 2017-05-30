@@ -42,9 +42,9 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
         
         // Get data
         if let artist = self.artist {
-            database.getAlbums(forArtist: artist) { albums in
+            database.getAlbums(forArtist: artist) { [weak self] albums in
                 DispatchQueue.main.async {
-                    self.albums = albums
+                    self?.albums = albums
                 }
             }
         } else {
@@ -75,7 +75,9 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicCell", for: indexPath) as? AlbumCollectionViewCell else {
             fatalError("The dequeued cell is not an instance of AlbumCollectionViewCell.")
         }
-        
+        // Remove previous image to prevent flickering on scroll (or wrongly displayd images)
+        cell.albumCoverImageView.image = nil
+        // Set values
         let album = albums[indexPath.row]
         cell.albumCoverImageView.image(fromLink: album.coverUrl)
         cell.albumNameLabel.text = album.name

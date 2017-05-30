@@ -27,14 +27,16 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
         setTabBarAndMiniPlayerVisibility()
         
         // Get all artists from owned tracks
-        database.getArtists { artists in
-            self.artists = artists
+        database.getArtists { [weak self] artists in
+            DispatchQueue.main.async {
+                // Return artist sorted by name
+                self?.artists = artists.sorted { $0.artistName < $1.artistName }
+            }
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         // Set tabBar and miniPlayer
         setTabBarAndMiniPlayerVisibility()
     }
@@ -60,16 +62,16 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MusicCell", for: indexPath) as? MusicSplitViewMasterTableViewCell else {
             fatalError("not the right Cell")
         }
-        
+        // Remove previous image to prevent flickering on scroll (or wrongly displayd images)
+        cell.itemImageView.image = nil
+        // Set values
         if self.title == "Genres" {
             cell.nameLabel.text = "Genre Name"
         } else if self.title == "Artists" {
             let artist = artists[indexPath.row]
-            
             cell.itemImageView.image(fromLink: artist.artistCoverUrl)
             cell.nameLabel.text = artist.artistName
         }
-        
         return cell
     }
     
@@ -119,11 +121,7 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
     }
     
     private func setTabBarAndMiniPlayerVisibility() {
-        print("update")
-        
-        print("UIScreen: \(UIScreen.main.bounds.width)")
-        print("view: \(self.view.bounds.width)")
-        // if this view is fullscreen (iPhone), show miniPlayer otherwise, detailView will have player
+        // If this viewController is fullscreen (iPhone), show miniPlayer otherwise, detailView will have player and we need to hide it here
         if UIScreen.main.bounds.width != self.view.bounds.width {
             self.view.subviews.forEach {
                 if let miniPlayer = miniPlayer {

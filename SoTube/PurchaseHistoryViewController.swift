@@ -28,20 +28,22 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        database.getCoinHistory { coinPurchases in
-            let sortedCoinPurchases = coinPurchases.sorted {
-                $0.date > $1.date
+        database.getCoinHistory { [weak self] coinPurchases in
+            DispatchQueue.main.async {
+                let sortedCoinPurchases = coinPurchases.sorted {
+                    $0.date > $1.date
+                }
+                self?.SoCoinHistory.append(contentsOf: sortedCoinPurchases)
             }
-            
-            self.SoCoinHistory.append(contentsOf: sortedCoinPurchases)
         }
         
-        database.getTracks { musicPurchases in
-            let sortedMusicPurchases = musicPurchases.sorted(by: {
-                $0.dateOfPurchase! > $1.dateOfPurchase!
-            })
-            self.musicHistory.append(contentsOf: sortedMusicPurchases)
-            
+        database.getTracks { [weak self] musicPurchases in
+            DispatchQueue.main.async {
+                let sortedMusicPurchases = musicPurchases.sorted(by: {
+                    $0.dateOfPurchase! > $1.dateOfPurchase!
+                })
+                self?.musicHistory.append(contentsOf: sortedMusicPurchases)
+            }
         }
     }
     
@@ -94,6 +96,10 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath) as! PurchaseHistoryTableViewCell
         
+        // Remove previous image to prevent flickering on scroll
+        cell.imageView?.image = nil
+        
+        // Set values
         switch selectHistorySegmentedController.selectedSegmentIndex {
         case 0:
             let trackPurchase = musicHistory[indexPath.row]
@@ -101,13 +107,13 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
             cell.dateLabel.text = trackPurchase.dateString
             cell.productLabel.text = trackPurchase.name
             if let price = trackPurchase.priceInCoins {
-                print(price)
+//                print(price)
                 cell.priceLabel.text = "\(price) SoCoins"
             }
         case 1:
             let coinPurchase = SoCoinHistory[indexPath.row]
             cell.productImageView.image = #imageLiteral(resourceName: "coin")
-            print(coinPurchase.dateString)
+//            print(coinPurchase.dateString)
             cell.dateLabel.text = "\(coinPurchase.dateString)"
             cell.productLabel.text = "\(coinPurchase.amount) SoCoins"
             cell.priceLabel.text = "\(coinPurchase.price) €"
