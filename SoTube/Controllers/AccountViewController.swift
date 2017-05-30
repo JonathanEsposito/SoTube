@@ -71,7 +71,7 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
             DispatchQueue.main.async {
                 if let price = self?.pricePerAmount?[amount] {
                     let coinPurchase = CoinPurchase(amount: amount, price: price)
-                    print("I'm buying!!")
+//                    print("I'm buying!!")
                     self?.database.updateCoins(with: coinPurchase) {
                         DispatchQueue.main.async {
                             // update coins count

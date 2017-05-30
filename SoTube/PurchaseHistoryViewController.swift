@@ -15,7 +15,7 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var tableViewFooter: UITableView!
     
-    var SoCoinHistory: [CoinPurchase] = []
+    var soCoinHistory: [CoinPurchase] = []
     var musicHistory: [Track] = []  {
         didSet {
             historyTableView.reloadData()
@@ -33,7 +33,8 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
                 let sortedCoinPurchases = coinPurchases.sorted {
                     $0.date > $1.date
                 }
-                self?.SoCoinHistory.append(contentsOf: sortedCoinPurchases)
+                print(sortedCoinPurchases)
+                self?.soCoinHistory.append(contentsOf: sortedCoinPurchases)
             }
         }
         
@@ -86,7 +87,7 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
         case 0:
             return musicHistory.count
         case 1:
-            return SoCoinHistory.count
+            return soCoinHistory.count
         default:
             return 0
         }
@@ -107,13 +108,11 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
             cell.dateLabel.text = trackPurchase.dateString
             cell.productLabel.text = trackPurchase.name
             if let price = trackPurchase.priceInCoins {
-//                print(price)
                 cell.priceLabel.text = "\(price) SoCoins"
             }
         case 1:
-            let coinPurchase = SoCoinHistory[indexPath.row]
+            let coinPurchase = soCoinHistory[indexPath.row]
             cell.productImageView.image = #imageLiteral(resourceName: "coin")
-//            print(coinPurchase.dateString)
             cell.dateLabel.text = "\(coinPurchase.dateString)"
             cell.productLabel.text = "\(coinPurchase.amount) SoCoins"
             cell.priceLabel.text = "\(coinPurchase.price) €"
@@ -126,6 +125,8 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
     
     // MARK: - IBActions
     @IBAction func selectHistorySegmentedController(_ sender: UISegmentedControl) {
+        print("reloadData")
+        print(soCoinHistory)
         historyTableView.reloadData()
     }
     
@@ -143,11 +144,11 @@ class PurchaseHistoryViewController: TabBarViewController, UITableViewDelegate, 
         }
         historyTableView.tableFooterView?.frame.size.height = height
         
-        // Reset tableview contentsize height
-        let lastTableViewSubviewYPosition = historyTableView.tableFooterView?.frame.origin.y
-        let lastTableViewSubviewHeight = historyTableView.tableFooterView?.bounds.height
-        let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
-        historyTableView.contentSize = CGSize(width: historyTableView.contentSize.width, height: newHeight)
+//        // Reset tableview contentsize height
+//        let lastTableViewSubviewYPosition = historyTableView.tableFooterView?.frame.origin.y
+//        let lastTableViewSubviewHeight = historyTableView.tableFooterView?.bounds.height
+//        let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
+//        historyTableView.contentSize = CGSize(width: historyTableView.contentSize.width, height: newHeight)
     }
     
 }

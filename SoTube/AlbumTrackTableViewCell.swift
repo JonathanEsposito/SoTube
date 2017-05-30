@@ -27,21 +27,10 @@ class AlbumTrackTableViewCell: UITableViewCell {
         self.delegate = nil
     }
 
-//    // MARK: - LifeCycle
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-
     // MARK: - IBActions
     @IBAction func buySong(_ sender: UIButton) {
         print("clicked")
-        self.delegate?.buySong(self)
+        weak var weakSelf = self
+        self.delegate?.buySong(weakSelf!)
     }
 }

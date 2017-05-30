@@ -121,14 +121,14 @@ class DatabaseViewModel {
     
     func buy(_ track: Track, withCoins coins: Int, onCompletion completionHandler: @escaping (Error?)->()) {
         // we already checked for enough coins
-        self.musicSource.getCoverUrl(forArtistID: track.artistId) { url in
-            print("url: \(url)")
+        self.musicSource.getCoverUrl(forArtistID: track.artistId) { [weak self] url in
+//            print("url: \(url)")
             let track = track
             track.artistCoverUrl = url
             track.dateOfPurchase = Date()
             track.priceInCoins = coins
             
-            self.databaseModel.buy(track, withCoins: coins, onCompletion: completionHandler)
+            self?.databaseModel.buy(track, withCoins: coins, onCompletion: completionHandler)
         }
     }
     
@@ -138,7 +138,7 @@ class DatabaseViewModel {
         var albums: [Album] = []
         albumIds.forEach {
             databaseModel.getAlbum(byID: $0) { album in
-                print("getAlbum(byID: \(album)")
+//                print("getAlbum(byID: \(album)")
                 DispatchQueue.main.async {
                     albums.append(album)
                     if albums.count >= albumIdsCount {

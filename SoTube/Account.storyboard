@@ -102,7 +102,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="paymentCell" id="bbo-kd-Ptm" customClass="PaymentCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="2" width="105" height="82"/>
+                                        <rect key="frame" x="10" y="1.5" width="105" height="82"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="105" height="82"/>
@@ -309,13 +309,13 @@
                                 <exclude reference="ApR-Ld-ycQ"/>
                                 <exclude reference="RcT-VU-k7Q"/>
                                 <exclude reference="ZdB-zs-Hal"/>
-                                <exclude reference="cgJ-GW-Wnf"/>
                                 <exclude reference="Xfk-i7-rET"/>
+                                <exclude reference="cgJ-GW-Wnf"/>
+                                <exclude reference="453-7q-p6E"/>
+                                <exclude reference="YRx-p0-ZB3"/>
                                 <exclude reference="0J8-Bh-a0l"/>
                                 <exclude reference="ACE-uP-Ujv"/>
                                 <exclude reference="ilT-0E-mTt"/>
-                                <exclude reference="453-7q-p6E"/>
-                                <exclude reference="YRx-p0-ZB3"/>
                                 <exclude reference="qkE-r5-6nX"/>
                             </mask>
                         </variation>
@@ -326,19 +326,19 @@
                                 <exclude reference="SF6-og-EH1"/>
                                 <exclude reference="ZdB-zs-Hal"/>
                                 <exclude reference="mx6-va-R6f"/>
+                                <include reference="Xfk-i7-rET"/>
+                                <exclude reference="eay-mt-LK3"/>
                                 <exclude reference="4YU-o7-j9F"/>
                                 <exclude reference="BD4-6T-3I0"/>
                                 <include reference="cgJ-GW-Wnf"/>
-                                <include reference="Xfk-i7-rET"/>
-                                <exclude reference="eay-mt-LK3"/>
-                                <include reference="0J8-Bh-a0l"/>
-                                <include reference="ACE-uP-Ujv"/>
-                                <exclude reference="QcJ-B4-PC1"/>
-                                <include reference="ilT-0E-mTt"/>
                                 <exclude reference="453-7q-p6E"/>
                                 <exclude reference="5Lu-9E-gtY"/>
                                 <exclude reference="6pT-gs-UXp"/>
                                 <include reference="YRx-p0-ZB3"/>
+                                <include reference="0J8-Bh-a0l"/>
+                                <include reference="ACE-uP-Ujv"/>
+                                <exclude reference="QcJ-B4-PC1"/>
+                                <include reference="ilT-0E-mTt"/>
                                 <include reference="qkE-r5-6nX"/>
                             </mask>
                         </variation>

@@ -30,7 +30,7 @@ class MinimizedPlayer: UIToolbar {
         playButton = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playButton(_:)))
         pauseButton = UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(pauseButton(_:)))
         
-        print("awakefromnib")
+//        print("awakefromnib")
         // set player buttonIndex
         if musicPlayer.isNotPlaying {
             setButton(to: .play)

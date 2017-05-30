@@ -28,40 +28,30 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
         sortDelegate = weakSelf
         
         // Get tracks
-        database.getTracks { tracks in
-            self.tracks = tracks
-        }
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateFooterHeight()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        if let footerView = songTableView.tableFooterView {
-            let height = footerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-            var footerFrame = footerView.frame
-            
-            //Comparison necessary to avoid infinite loop
-            if height != footerFrame.size.height {
-                footerFrame.size.height = height
-                footerView.frame = footerFrame
-                songTableView.tableFooterView = footerView
+        database.getTracks {[weak self] tracks in
+            DispatchQueue.main.async {
+               self?.tracks = tracks.sorted {
+                    if $0.artistName == $1.artistName {
+                        if $0.albumName == $1.albumName {
+                            return $0.trackNumber < $1.trackNumber
+                        }
+                        return $0.albumName < $1.albumName
+                    }
+                    return $0.artistName < $1.artistName
+                }
             }
         }
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        updateFooterHeight()
+//    }
+    
     // MARK: - Constraints Size Classes
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        // because our player moves down when in landscape mode
         updateFooterHeight()
     }
     
@@ -75,6 +65,9 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as? TrackTableViewCell else {
             fatalError("The dequeued cell is not an instance of StaticAlbumTableViewCell.")
         }
+        // Remove previous image to prevent flickering on scroll (or wrongly displayd images)
+        cell.albumImageView.image = nil
+        // Set values
         let track = tracks[indexPath.row]
         cell.albumImageView.image(fromLink: track.coverUrl)
         cell.titelLabel.text = track.name
@@ -90,9 +83,6 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
         let selectedTrack = tracks[index]
         
         musicPlayer.play(selectedTrack)
-        
-        print("musicPlayer.Play:")
-        print(musicPlayer.isPlaying)
         self.updateMiniPlayer()
 
         updateFooterHeight()
@@ -117,17 +107,6 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
         })
     }
     
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var destinationvc = segue.destination
-        if let navcon = destinationvc as? UINavigationController {
-            destinationvc = navcon.visibleViewController ?? destinationvc
-        }
-        if let musicCollectionVC = destinationvc as? AlbumsCollectionViewController {
-        }
-    }
-    
     // Private Methods
     private func updateFooterHeight() {
         let height: CGFloat
@@ -142,7 +121,7 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
         }
         songTableView.tableFooterView?.frame.size.height = height
         
-        // Reset tableview contentsize height
+        // Reset tableview contentsize height is miniPlayer is shown
         let lastTableViewSubviewYPosition = songTableView.tableFooterView?.frame.origin.y
         let lastTableViewSubviewHeight = songTableView.tableFooterView?.bounds.height
         let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)

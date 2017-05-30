@@ -61,15 +61,17 @@ class ChangeUsernameViewController: UIViewController {
             return
         }
         
-        database?.changeUsername(to: newUsername) { error in
-            self.changeActivityIndicatorView.stopAnimating()
-            if let error = error {
-                self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
-                self.showAlert(withTitle: "Username error", message: "Failed to change the display name: \(error.localizedDescription)")
-            } else {
-                self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.startAnimating() }
-                self.delegate?.updateTextFields()
-                self.presentingViewController?.dismiss(animated: true)
+        database?.changeUsername(to: newUsername) { [weak self] error in
+            DispatchQueue.main.async {
+                self?.changeActivityIndicatorView.stopAnimating()
+                if let error = error {
+                    self?.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
+                    self?.showAlert(withTitle: "Username error", message: "Failed to change the display name: \(error.localizedDescription)")
+                } else {
+                    self?.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.startAnimating() }
+                    self?.delegate?.updateTextFields()
+                    self?.presentingViewController?.dismiss(animated: true)
+                }
             }
         }
     }
