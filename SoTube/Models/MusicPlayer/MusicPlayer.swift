@@ -24,6 +24,7 @@ protocol MusicPlayerModel {
 
 class MusicPlayer: NSObject {
     // MARK: - Private Properties
+    private let defaultLimitedDuration: TimeInterval = 30
     private var link: String?
     dynamic var player = SPTPlayerModel()
     private var restrictedDuration: TimeInterval?
@@ -62,7 +63,7 @@ class MusicPlayer: NSObject {
     }
     
     var progress: Float {
-        return Float(player.currentTime / player.duration)
+        return Float(player.currentTime / self.duration)
     }
     
     var currentTime: String {
@@ -70,45 +71,20 @@ class MusicPlayer: NSObject {
     }
     
     var timeLeft: String {
-        return "-\(string(fromTimeInterval: player.duration - player.currentTime))"
-    }
-    
-    // MARK: Methods
-    func fastBackward() {
-        var time: TimeInterval = player.currentTime
-        time -= 5.0 // Go back by 5 seconds
-        if time < 0 {
-            stopPlayer()
-        } else {
-            player.setCurrentTime(to: time)
+        if (self.duration - player.currentTime) < 0 {
+            player.stop()
         }
+        return "-\(string(fromTimeInterval: self.duration - player.currentTime))"
     }
     
-    func pause() {
-        player.pause()
-    }
-    
-    func play() {
-        if isNotPlaying {
-            player.play()
-        }
-    }
-    
-    func stop() {
-        stopPlayer()
-    }
-    
-    func fastForward() {
-        var time: TimeInterval = player.currentTime
-        time += 5.0 // Go forward by 5 seconds
-        if time > player.duration {
-            stopPlayer()
-        } else {
-            player.setCurrentTime(to: time)
-        }
-    }
-    
+    // MARK: Action Methods
     func play(_ track: Track) {
+        if !track.bought {
+            restrictedDuration = defaultLimitedDuration
+        } else {
+            restrictedDuration = nil
+        }
+        
         self.track = track
         
         setCover(fromLink: track.coverUrl)
@@ -120,8 +96,42 @@ class MusicPlayer: NSObject {
         }
     }
     
+    func pause() {
+        player.pause()
+    }
+    
+    func resume() {
+        if isNotPlaying {
+            player.play()
+        }
+    }
+    
+    func stop() {
+        player.stop()
+    }
+
+    func fastBackward() {
+        var time: TimeInterval = player.currentTime
+        time -= 5.0 // Go back by 5 seconds
+        if time < 0 {
+            stopPlayer()
+        } else {
+            player.setCurrentTime(to: time)
+        }
+    }
+    
+    func fastForward() {
+        var time: TimeInterval = player.currentTime
+        time += 5.0 // Go forward by 5 seconds
+        if time > self.duration {
+            stopPlayer()
+        } else {
+            player.setCurrentTime(to: time)
+        }
+    }
+    
     func set(time: TimeInterval) {
-        player.setCurrentTime(to: time * player.duration)
+        player.setCurrentTime(to: time * self.duration)
     }
     
     // MARK: - Private Methods

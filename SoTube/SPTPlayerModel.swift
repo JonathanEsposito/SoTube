@@ -84,7 +84,8 @@ class SPTPlayerModel: NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPT
     }
 
     func stop() {
-        try! player?.stop()
+        self.player?.seek(to: 0, callback: nil)
+        self.player?.setIsPlaying(false, callback: nil)
     }
     
     func setCurrentTime(to timeInterval: TimeInterval) {

@@ -39,7 +39,7 @@ class MinimizedPlayer: UIToolbar {
     
     // MARK: - IBActions
     @IBAction func playButton(_ sender: UIBarButtonItem) {
-        musicPlayer.play()
+        musicPlayer.resume()
     }
     
     @IBAction func pauseButton(_ sender: UIBarButtonItem) {
