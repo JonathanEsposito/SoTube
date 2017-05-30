@@ -97,22 +97,24 @@ class StoreOverviewViewController: TabBarViewController, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell: StoreCollectionViewCell?
-        
 
         if collectionView === newReleasesCollectionView {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath) as? StoreCollectionViewCell
+            cell?.coverImageView.image = nil
             cell?.nameLabel.text = newReleases[indexPath.row].name
             cell?.coverImageView.image(fromLink: newReleases[indexPath.row].coverUrl)
         }
         
         if collectionView === featuredPlaylistsCollectionView {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath) as? StoreCollectionViewCell
+            cell?.coverImageView.image = nil
             cell?.nameLabel.text = featuredPlaylists[indexPath.row].name
             cell?.coverImageView.image(fromLink: featuredPlaylists[indexPath.row].coverUrl)
         }
         
         if collectionView === categoriesCollectionView {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath) as? StoreCollectionViewCell
+            cell?.coverImageView.image = nil
             cell?.nameLabel.text = categories[indexPath.row].name
             cell?.coverImageView.image(fromLink: categories[indexPath.row].coverUrl)
         }

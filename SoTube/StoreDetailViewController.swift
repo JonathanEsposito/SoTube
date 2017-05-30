@@ -43,9 +43,12 @@ class StoreDetailViewController: TabBarViewController, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath) as? StoreCollectionViewCell else {
-        fatalError("Could not cast cell as StoreCollectionViewCell")
-    }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "musicCell", for: indexPath) as? StoreCollectionViewCell else {
+            fatalError("Could not cast cell as StoreCollectionViewCell")
+        }
+        
+        cell.coverImageView.image = nil
+        
         if let albums = collection as? [Album] {
             let album = albums[indexPath.row]
             print(album)

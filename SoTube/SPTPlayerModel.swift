@@ -19,7 +19,7 @@ class SPTPlayerModel: NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPT
     private func initializePlayer(){
         let userDefaults = UserDefaults.standard
         let session = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.object(forKey: "SpotifySession") as! Data) as? SPTSession
-        print(session?.accessToken)
+//        print(session?.accessToken)
         if self.player == nil {
             self.player = SPTAudioStreamingController.sharedInstance()
             self.player?.playbackDelegate = self
@@ -51,7 +51,7 @@ class SPTPlayerModel: NSObject, MusicPlayerModel, SPTAudioStreamingDelegate, SPT
 //    }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
-        print(isPlaying)
+        print("Player is playing: \(isPlaying)")
         self.isPlaying = isPlaying
     }
     
