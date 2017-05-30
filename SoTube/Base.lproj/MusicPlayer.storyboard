@@ -136,7 +136,8 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jxm-SJ-fSl">
                                 <rect key="frame" x="-2" y="399" width="418" height="31"/>
                                 <connections>
-                                    <action selector="slide:" destination="fFf-Nn-7cb" eventType="valueChanged" id="b8Y-Cf-Nfu"/>
+                                    <action selector="seekTo:" destination="fFf-Nn-7cb" eventType="touchUpInside" id="DMI-iH-oEw"/>
+                                    <action selector="slide:" destination="fFf-Nn-7cb" eventType="valueChanged" id="bKo-bK-BdU"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-2:47" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwU-jM-5uY">

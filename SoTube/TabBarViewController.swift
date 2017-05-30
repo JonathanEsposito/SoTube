@@ -23,7 +23,10 @@ class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerD
         userDefaults.object(forKey: kuserDefaultsPasswordKey) == nil
     }
     
+    // miniPlayer progress updater
     var updater: CADisplayLink! = nil
+    
+    var rigthTabBarleadingConstraint = NSLayoutConstraint()
     
     let musicProgressView = UIProgressView()
     var miniPlayer: MinimizedPlayer! = nil
@@ -45,6 +48,7 @@ class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerD
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Set up all tabbar related navigations
         setupTabBar()
         
@@ -175,6 +179,8 @@ class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerD
     
     private func setupTabBar() {
         
+//        print("tabBarDelegate: \(tabBarDelegate)")
+        
         // Create tab bar
         tabBar = UITabBar(frame: CGRect(x: 0, y: self.view.bounds.height - 50, width: self.view.bounds.width, height: 50))
         
@@ -212,7 +218,10 @@ class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerD
         // AutoLayout
         rightTabBar.translatesAutoresizingMaskIntoConstraints = false
         
-        rightTabBar.leadingAnchor.constraint(equalTo: tabBar.trailingAnchor).isActive = true
+        // Set captured leadingConstraint
+        rigthTabBarleadingConstraint = rightTabBar.leadingAnchor.constraint(equalTo: tabBar.trailingAnchor)
+        rigthTabBarleadingConstraint.isActive = true
+        
         rightTabBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         rightTabBar.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         rightTabBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -284,6 +293,7 @@ class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerD
         weak var weakSelf = self
         miniPlayer.minimizedPlayerDelegate = weakSelf
         
+
         self.view.addSubview(miniPlayer)
         
         // Autolayout
@@ -306,6 +316,7 @@ class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerD
         
         // Set progressBar
         musicProgressView.setProgress(0, animated: false)
+
         self.view.insertSubview(musicProgressView, aboveSubview: miniPlayer)
         
         // AutoLayout

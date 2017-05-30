@@ -23,10 +23,20 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set tabBar and miniPlayer
+        setTabBarAndMiniPlayerVisibility()
+        
         // Get all artists from owned tracks
         database.getArtists { artists in
             self.artists = artists
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // Set tabBar and miniPlayer
+        setTabBarAndMiniPlayerVisibility()
     }
     
     // MARK: - Constraints Size Classes
@@ -106,5 +116,36 @@ class MusicSplitViewMasterViewController: MyMusicTabBarViewController, UITableVi
             height = 50
         }
         musicTableView.tableFooterView?.frame.size.height = height
+    }
+    
+    private func setTabBarAndMiniPlayerVisibility() {
+        print("update")
+        
+        print("UIScreen: \(UIScreen.main.bounds.width)")
+        print("view: \(self.view.bounds.width)")
+        // if this view is fullscreen (iPhone), show miniPlayer otherwise, detailView will have player
+        if UIScreen.main.bounds.width != self.view.bounds.width {
+            self.view.subviews.forEach {
+                if let miniPlayer = miniPlayer {
+                    if $0 == miniPlayer {
+                        $0.isHidden = true
+                    }
+                    if $0 == musicProgressView {
+                        $0.isHidden = true
+                    }
+                }
+            }
+        } else {
+            self.view.subviews.forEach {
+                if let miniPlayer = miniPlayer {
+                    if $0 == miniPlayer {
+                        $0.isHidden = false
+                    }
+                    if $0 == musicProgressView {
+                        $0.isHidden = false
+                    }
+                }
+            }
+        }
     }
 }

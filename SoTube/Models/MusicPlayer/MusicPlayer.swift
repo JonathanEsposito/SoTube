@@ -26,6 +26,7 @@ class MusicPlayer: NSObject {
     // MARK: - Private Properties
     private var link: String?
     dynamic var player = SPTPlayerModel()
+    private var restrictedDuration: TimeInterval?
     var track: Track?
     var cover: UIImage?
     
@@ -47,6 +48,13 @@ class MusicPlayer: NSObject {
     
     var isNotPlaying: Bool {
         return !isPlaying
+    }
+    
+    var duration: TimeInterval {
+        if let restrictedDuration = restrictedDuration {
+            return restrictedDuration
+        }
+        return player.duration
     }
     
     var stopped: Bool {

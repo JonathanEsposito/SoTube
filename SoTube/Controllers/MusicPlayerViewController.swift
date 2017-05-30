@@ -180,10 +180,22 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     @IBAction func fastBackward(_ sender: UIBarButtonItem) {
         musicPlayer.fastBackward()
     }
-    
     @IBAction func slide(_ sender: UISlider) {
+        stopUpdater()
+        let currentSliderValue = sender.value
+        let currentTime = musicPlayer.duration * Double(currentSliderValue)
+        let timeLeft = musicPlayer.duration - currentTime
+        currentTimeLabel.text = string(fromTimeInterval: currentTime)//"\(currentTime)"
+        timeLeftLabel.text = "-\(string(fromTimeInterval: timeLeft))"
+    }
+    @IBAction func seekTo(_ sender: UISlider) {
+        startUpdater()
         musicPlayer.set(time: TimeInterval(sender.value))
     }
+    
+//    @IBAction func seekslide(_ sender: UISlider) {
+//        musicPlayer.set(time: TimeInterval(sender.value))
+//    }
     
     @IBAction func dismissView(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
@@ -282,16 +294,16 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
         }
     }
     
-    private func resetProgress() {
-        progressSlider.setValue(0, animated: false)
-        currentTimeLabel.text = musicPlayer.currentTime
-        timeLeftLabel.text = musicPlayer.timeLeft
-        
-        // set pause to play
-        if let buttonIndex = toolbar.items?.index(where: { $0 == (musicPlayButton ?? pauseButton) }) {
-            toolbar.items![buttonIndex] = playButton
-        }
-    }
+//    private func resetProgress() {
+//        progressSlider.setValue(0, animated: false)
+//        currentTimeLabel.text = musicPlayer.currentTime
+//        timeLeftLabel.text = musicPlayer.timeLeft
+//        
+//        // set pause to play
+//        if let buttonIndex = toolbar.items?.index(where: { $0 == (musicPlayButton ?? pauseButton) }) {
+//            toolbar.items![buttonIndex] = playButton
+//        }
+//    }
     
     func updateAudioProgressView() {
         progressSlider.setValue(musicPlayer.progress, animated: true)
@@ -321,5 +333,20 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     // MARK: - Private Objects
     enum PlayerButtonState {
         case play, pause
+    }
+    
+    private func string(fromTimeInterval interval: TimeInterval) -> String {
+        
+        let time = Int(interval)
+        
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+        
+        if hours == 0 {
+            return String(format: "%0.1d:%0.2d",minutes,seconds)
+        } else {
+            return String(format: "%0.1d:%0.2d:%0.2d",hours,minutes,seconds)
+        }
     }
 }
