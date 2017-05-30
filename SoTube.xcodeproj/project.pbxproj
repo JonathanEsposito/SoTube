@@ -87,7 +87,6 @@
 		A0DB26F51ED833320054C9A5 /* UIImageAverigeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB26F41ED833320054C9A5 /* UIImageAverigeColor.swift */; };
 		A0DB26F71ED841560054C9A5 /* AlbumTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB26F61ED841560054C9A5 /* AlbumTrackTableViewCell.swift */; };
 		AAD332C2D683670C2E3B77E5 /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */; };
-		E955702D1ED8AE1B00B6F432 /* StoreCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E955702C1ED8AE1B00B6F432 /* StoreCategoryViewController.swift */; };
 		E96EA55C1EDCA7850081A256 /* MusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96EA55B1EDCA7850081A256 /* MusicTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -200,7 +199,6 @@
 		CE00E31D6BDA723D74E74335 /* Pods_SoTubeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTubeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5F8546CAA6D03E6D68520FE /* Pods_SoTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA2687859902B7E8525CD38 /* Pods-SoTubeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeUITests/Pods-SoTubeUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		E955702C1ED8AE1B00B6F432 /* StoreCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCategoryViewController.swift; sourceTree = "<group>"; };
 		E96EA55B1EDCA7850081A256 /* MusicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicTableViewCell.swift; sourceTree = "<group>"; };
 		F2760E79BB7A2B6DC5E2F7B6 /* Pods-SoTubeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeTests/Pods-SoTubeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTubeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -452,7 +450,6 @@
 				A0A29F9E1ECDEF9A00E06D95 /* StoreOverviewViewController.swift */,
 				A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */,
 				A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */,
-				E955702C1ED8AE1B00B6F432 /* StoreCategoryViewController.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -806,7 +803,6 @@
 			files = (
 				2F0F662F1EC077FC0019034F /* CreateAccountViewController.swift in Sources */,
 				2FC986BC1ECB16F700B037CE /* PurchaseHistoryTableViewCell.swift in Sources */,
-				E955702D1ED8AE1B00B6F432 /* StoreCategoryViewController.swift in Sources */,
 				2F804E721ED433F500E6A7B4 /* Playlist.swift in Sources */,
 				A0A29F5C1ECC2B1E00E06D95 /* MusicPlayer.swift in Sources */,
 				2F0F66CC1EC1CA400019034F /* AlbumCollectionViewCell.swift in Sources */,

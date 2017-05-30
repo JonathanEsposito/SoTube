@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aLl-vu-1ph">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aLl-vu-1ph">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -147,7 +147,7 @@
                                         <rect key="frame" x="20" y="5.5" width="100" height="107.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="107.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="107"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtistName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Psj-YF-0X2">
@@ -203,7 +203,7 @@
                                         <rect key="frame" x="20" y="5" width="100" height="107.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="107.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="108"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtistName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMY-cW-MFX">
@@ -469,7 +469,7 @@
                                         <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ywk-6r-EVz" id="XBP-Wt-KdV">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="princeCover" translatesAutoresizingMaskIntoConstraints="NO" id="f2k-AO-U8L">
@@ -507,7 +507,7 @@
                                         <rect key="frame" x="0.0" y="116" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CqL-yB-pnL" id="wbc-ad-Jwe">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="princeCover" translatesAutoresizingMaskIntoConstraints="NO" id="PCy-SP-wlV">
@@ -688,6 +688,10 @@
                         <outlet property="searchDisplayController" destination="tmR-Eb-DIM" id="MHR-Ha-PKA"/>
                         <outlet property="searchTableView" destination="YDL-7V-Ttq" id="ykn-sa-k75"/>
                         <outlet property="tableHeaderView" destination="97f-jN-eTq" id="HTK-Qg-FIy"/>
+                        <segue destination="JA6-ZG-CSk" kind="show" identifier="showPlaylistSegue" id="9cI-KK-KhU"/>
+                        <segue destination="JA6-ZG-CSk" kind="show" identifier="showAlbumSegue" id="iQf-6l-rht"/>
+                        <segue destination="9lc-y6-chP" kind="show" identifier="playTrackSegue" id="nGS-pZ-vDU"/>
+                        <segue destination="Eie-Gp-ljj" kind="show" identifier="showAlbumsFromArtistSegue" id="FHg-1u-e1G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gi7-rC-8Zc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -716,7 +720,15 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="795" y="-417"/>
+            <point key="canvasLocation" x="1035" y="-593"/>
+        </scene>
+        <!--Storyboard Reference-->
+        <scene sceneID="hZs-Yr-C8s">
+            <objects>
+                <viewControllerPlaceholder id="9lc-y6-chP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ucB-HW-vT4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1780" y="-594"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="K4E-M7-tXj">
@@ -749,7 +761,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qku-yk-lag">
-                                <rect key="frame" x="16" y="64" width="288" height="504"/>
+                                <rect key="frame" x="16" y="20" width="288" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BWZ-eV-H5j">
                                     <size key="itemSize" width="50" height="50"/>
@@ -839,10 +851,10 @@
         <image name="princeCover" width="500" height="428"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZBh-ge-q4r"/>
+        <segue reference="Ctw-18-uNX"/>
+        <segue reference="azh-SU-ZUt"/>
         <segue reference="Qoj-M1-8Jk"/>
-        <segue reference="Lkx-kq-mux"/>
-        <segue reference="CfO-2q-R4N"/>
+        <segue reference="FHg-1u-e1G"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>

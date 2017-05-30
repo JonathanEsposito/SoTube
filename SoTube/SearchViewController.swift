@@ -18,6 +18,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let searchController = UISearchController(searchResultsController: nil)
     var typePicker: UISearchBar?
     
+    var indexForType: [String: Int] = ["albums": 0, "artists": 1, "tracks": 2, "playlists": 3]
     
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var tableHeaderView: UIView!
@@ -44,13 +45,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - UITableView Delegate and DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if typePicker?.selectedScopeButtonIndex == 0 {
+        if typePicker?.selectedScopeButtonIndex == indexForType["albums"] {
             return albums.count
-        } else if typePicker?.selectedScopeButtonIndex == 1 {
+        } else if typePicker?.selectedScopeButtonIndex == indexForType["artists"] {
             return artists.count
-        } else if typePicker?.selectedScopeButtonIndex == 2 {
+        } else if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
             return tracks.count
-        } else if typePicker?.selectedScopeButtonIndex == 3 {
+        } else if typePicker?.selectedScopeButtonIndex == indexForType["playlists"] {
             return playlists.count
         } else {
             return 1
@@ -58,7 +59,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if typePicker?.selectedScopeButtonIndex == 2 {
+        if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
             return 70
         } else {
             return 44
@@ -66,7 +67,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if typePicker?.selectedScopeButtonIndex == 2 {
+        if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TrackTableViewCell
             let track = tracks[indexPath.row]
             cell.albumImageView.image(fromLink: track.coverUrl)
@@ -78,24 +79,39 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MusicCell", for: indexPath) as! MusicTableViewCell
-            if typePicker?.selectedScopeButtonIndex == 0 {
+            if typePicker?.selectedScopeButtonIndex == indexForType["albums"] {
                 let album = albums[indexPath.row]
                 print(indexPath.row)
                 print(albums)
                 print(album)
                 cell.itemImageView.image(fromLink: album.coverUrl)
                 cell.nameLabel.text = album.name
-            } else if typePicker?.selectedScopeButtonIndex == 1 {
+            } else if typePicker?.selectedScopeButtonIndex == indexForType["artists"] {
                 let artist = artists[indexPath.row]
                 cell.itemImageView.image(fromLink: artist.artistCoverUrl)
                 cell.nameLabel.text = artist.artistName
-            } else if typePicker?.selectedScopeButtonIndex == 3 {
+            } else if typePicker?.selectedScopeButtonIndex == indexForType["playlists"] {
                 let playlist = playlists[indexPath.row]
                 cell.itemImageView.image(fromLink: playlist.coverUrl)
                 cell.nameLabel.text = playlist.name
             }
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if typePicker?.selectedScopeButtonIndex == indexForType["albums"] {
+            performSegue(withIdentifier: "showAlbumSegue", sender: nil)
+        }
+        if typePicker?.selectedScopeButtonIndex == indexForType["artists"] {
+            performSegue(withIdentifier: "showAlbumsFromArtistSegue", sender: nil)
+        }
+        if typePicker?.selectedScopeButtonIndex == indexForType["playlists"] {
+            performSegue(withIdentifier: "showPlaylistSegue", sender: nil)
+        }
+//        if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
+//          performSegue(withIdentifier: "playTrackSegue", sender: nil)
+//        }
     }
     
     // MARK: - UISearchResultsUpdating
@@ -147,8 +163,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return String(format: "%0.1d:%0.2d:%0.2d",hours,minutes,seconds)
         }
     }
-    
-    // MARK: - HomemadeFunctions
+
     private func updateHeaderHeight() {
         let height: CGFloat
         if typePicker?.selectedScopeButtonIndex == 2 {
@@ -163,5 +178,41 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let lastTableViewSubviewHeight = searchTableView.tableFooterView?.bounds.height
         let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
         searchTableView.contentSize = CGSize(width: searchTableView.contentSize.width, height: newHeight)
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination
+        if segue.identifier == "showAlbumsFromArtistSegue" {
+            if let destinationVC = destinationVC as? StoreDetailViewController {
+                let indexPath = searchTableView.indexPathForSelectedRow
+                destinationVC.navigationItem.title = artists[indexPath!.row].artistName
+                spotifyModel.getAlbums(from: artists[indexPath!.row], onCompletion: {albums in
+                    DispatchQueue.main.async {
+                        destinationVC.collection = albums
+                        destinationVC.musicCollectionView.reloadData()
+                    }
+                })
+                
+            }
+        }
+        if segue.identifier == "showAlbumSegue" {
+            if let destinationVC = destinationVC as? AlbumViewController {
+                let indexPath = searchTableView.indexPathForSelectedRow
+                destinationVC.album = self.albums[indexPath!.row]
+                destinationVC.tracksTableView.reloadData()
+            }
+        }
+        if segue.identifier == "showPlaylistSegue" {
+            if let destinationVC = destinationVC as? AlbumViewController {
+                let indexPath = searchTableView.indexPathForSelectedRow
+                destinationVC.playlist = self.playlists[indexPath!.row]
+//                destinationVC.tracksTableView.reloadData()
+            }
+        }
+//        if segue.identifier == "playTrackSegue" {
+//            let indexPath = searchTableView.indexPathForSelectedRow
+//            let track = self.tracks[indexPath!.row]
+//        }
     }
 }

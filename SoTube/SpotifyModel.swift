@@ -193,8 +193,8 @@ class SpotifyModel {
     }
     
     func getTracks(from playlist: Playlist, onCompletion completionHandler: @escaping ([Track])->()) {
-        let userId = "spotify"
-        let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/users/\(userId)/playlists/\(playlist.id)/tracks")
+//        let userId = "spotify"
+        let urlRequest = getURLRequest(forUrl: "https://api.spotify.com/v1/users/\(playlist.owner)/playlists/\(playlist.id)/tracks")
         
         let urlSession = URLSession.shared
         
