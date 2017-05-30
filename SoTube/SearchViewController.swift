@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
+class SearchViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
     var spotifyModel = SpotifyModel()
     var albums: [Album] = []
@@ -17,6 +17,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var playlists: [Playlist] = []
     let searchController = UISearchController(searchResultsController: nil)
     var typePicker: UISearchBar?
+    @IBOutlet weak var tableViewFooter: UIView!
     
     var indexForType: [String: Int] = ["albums": 0, "artists": 1, "tracks": 2, "playlists": 3]
     
@@ -26,6 +27,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set navigation bar title
+        self.navigationItem.title = "Search"
         
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
@@ -41,6 +44,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         typePicker = searchController.searchBar
         
         updateHeaderHeight()
+//        updateFooterHeight()
     }
     
     // Show en hide navigationcontroller navigationbar
@@ -54,7 +58,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewWillDisappear(animated)
     }
     
-    // MARK: - UITableView Delegate and DataSource
+    // MARK: - Constraints Size Classes
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        // because our player moves down when in landscape mode
+//        updateFooterHeight()
+    }
+    
+    // MARK: - UITableView
+    // MARK: DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if typePicker?.selectedScopeButtonIndex == indexForType["albums"] {
             return albums.count
@@ -68,15 +80,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return 1
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
-            return 70
-        } else {
-            return 44
-        }
-    }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TrackTableViewCell
@@ -110,6 +114,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    // MARK: Delegate
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
+            return 70
+        } else {
+            return 44
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if typePicker?.selectedScopeButtonIndex == indexForType["albums"] {
             performSegue(withIdentifier: "showAlbumSegue", sender: nil)
@@ -120,9 +133,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if typePicker?.selectedScopeButtonIndex == indexForType["playlists"] {
             performSegue(withIdentifier: "showPlaylistSegue", sender: nil)
         }
-//        if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
-//          performSegue(withIdentifier: "playTrackSegue", sender: nil)
-//        }
+        if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
+            let index = indexPath.row
+            let selectedTrack = tracks[index]
+            
+            musicPlayer.play(selectedTrack)
+            self.updateMiniPlayer()
+            
+            //                updateFooterHeight()
+        }
     }
     
     // MARK: - UISearchResultsUpdating
@@ -190,6 +209,26 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
         searchTableView.contentSize = CGSize(width: searchTableView.contentSize.width, height: newHeight)
     }
+    
+//    private func updateFooterHeight() {
+//        let height: CGFloat
+//        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+//            if musicPlayer.hasSong {
+//                height = 94
+//            } else {
+//                height = 50
+//            }
+//        } else {
+//            height = 50
+//        }
+//        searchTableView.tableFooterView?.frame.size.height = height
+//        
+//        // Reset tableview contentsize height is miniPlayer is shown
+//        let lastTableViewSubviewYPosition = searchTableView.tableFooterView?.frame.origin.y
+//        let lastTableViewSubviewHeight = searchTableView.tableFooterView?.bounds.height
+//        let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
+//        searchTableView.contentSize = CGSize(width: searchTableView.contentSize.width, height: newHeight)
+//    }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -30,12 +30,4 @@ class PaymentViewModel {
         paymentModel.onPaymentCompleted = completionHandler
         return paymentModel.givePaypalVC(forProduct: product, amount: amount, withPrice: pricePerAmount[amount]!, inCurrency: currency.code, withSku: sku)
     }
-    
-//    func paymentDidCancel(_ paymentViewController: PayPalPaymentViewController) {
-//        paymentModel.payPalPaymentDidCancel(paymentViewController)
-//    }
-//    
-//    func paymentDidComplete(_ paymentViewController: PayPalPaymentViewController, didComplete completedPayment: PayPalPayment) {
-//        paymentModel.payPalPaymentViewController(paymentViewController, didComplete: completedPayment)
-//    }
 }

@@ -78,36 +78,9 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
             
             // Set Device volume controller
             let wrapperView = UIView(frame: CGRect(x: 0, y: 0, width: ( rect.width - 100 ), height: 20))
-//            self.view.backgroundColor = UIColor.clear
-//            self.view.addSubview(wrapperView)
-            
             let volumeView = MPVolumeView(frame: wrapperView.bounds)
-            
-//            volumeView.volumeSliderRect(forBounds: volumeControllerSliderView.bounds)
-//            volumeView.setMaximumVolumeSliderImage(#imageLiteral(resourceName: "volumeUpSmall"), for: .normal)
-//            volumeView.setMinimumVolumeSliderImage(#imageLiteral(resourceName: "volumeDownSmall"), for: .normal)
-//            volumeView.mini
+
             volumeControllerSliderView.addSubview(volumeView)
-            
-//            let wrapperView = UIView(frame: CGRect(x: 30, y: 200, width: 260, height: 20))
-//            self.view.backgroundColor = UIColor.clear
-//            self.view.addSubview(wrapperView)
-            
-//            wrapperView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
-//            wrapperView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 30).isActive = true
-//            wrapperView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//            wrapperView.widthAnchor.constraint(equalToConstant: 260).isActive = true
-//            wrapperView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-            
-//            let volumeView = MPVolumeView(frame: wrapperView.bounds)
-//            volumeView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
-//            volumeView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 30).isActive = true
-//            volumeView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            
-            //        var volumView  =
-            //        wrapperView.inser
-//            self.view.addSubview(volumeView)
-            //addSubview(volumeView)
         }
         
         
@@ -282,45 +255,46 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
             present(alertController, animated: true, completion: nil)
         } else {
             if let track = musicPlayer.track {
-                database.getCoins { currentCoins in
+                database.getCoins { [weak self] currentCoins in
                     if (currentCoins - coinsPerTrackRate) > 0 {
                         let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nCurrently you have \(currentCoins) SoCoins.\nAfter buying this song you will have \(currentCoins - coinsPerTrackRate) SoCoins left.\n\nDo you want to continue?", preferredStyle: .alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                         alertController.addAction(cancelAction)
                         
                         let buyTrackAction = UIAlertAction(title: "Buy this track!", style: .default, handler: { _ in
-                            self.database.buy(track, withCoins: coinsPerTrackRate, onCompletion: { error in
+                            self?.database.buy(track, withCoins: coinsPerTrackRate, onCompletion: { error in
                                 DispatchQueue.main.async {
                                     if let error = error {
                                         print(error.localizedDescription)
                                     } else {
                                         print("track bought :D")
+                                        musicPlayer.restrictedDuration = nil
                                         track.bought = true
-                                        self.buyTrackButton.isEnabled = false
+                                        self?.buyTrackButton.isEnabled = false
                                     }
                                 }
                             })
                         })
                         alertController.addAction(buyTrackAction)
-                        self.present(alertController, animated: true, completion: nil)
+                        self?.present(alertController, animated: true, completion: nil)
                         
                     } else {
                         let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nSadly you currently only have \(currentCoins) SoCoins left.\nWould you want to top up your acount?", preferredStyle: .alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                         alertController.addAction(cancelAction)
                         let topUpAccount = UIAlertAction(title: "Topup account", style: .default, handler: { _ in
-                            self.presentTopUpAlertController(onCompletion: { amount in
-                                if let price = self.paymentViewModel.pricePerAmount[amount] {
+                            self?.presentTopUpAlertController(onCompletion: { amount in
+                                if let price = self!.paymentViewModel.pricePerAmount[amount] {
                                     let coinPurchase = CoinPurchase(amount: amount, price: price)
                                     print("I'm buying!!")
-                                    self.database.updateCoins(with: coinPurchase) {
+                                    self?.database.updateCoins(with: coinPurchase) {
                                         print("bought coins :D")
                                     }
                                 }
                             })
                         })
                         alertController.addAction(topUpAccount)
-                        self.present(alertController, animated: true, completion: nil)
+                        self?.present(alertController, animated: true, completion: nil)
                     }
                 }
             }
