@@ -21,7 +21,6 @@ class MyMusicTabBarViewController: TabBarViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("boe")
         
         if let _ = navigationController?.navigationBar {
             // Set navigation controller background and shadow
@@ -76,7 +75,7 @@ class MyMusicTabBarViewController: TabBarViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let showSongs = UIAlertAction(title: "Songs", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
-            print("Songs")
+//            print("Songs")
             if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SongsVC") {
                 UIApplication.shared.keyWindow?.rootViewController = viewController
                 self.dismiss(animated: true, completion: nil)
@@ -85,7 +84,7 @@ class MyMusicTabBarViewController: TabBarViewController {
         alertController.addAction(showSongs)
         
         let showAlbums = UIAlertAction(title: "Albums", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
-            print("Albums")
+//            print("Albums")
             if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "AlbumsNavCont") {
                 UIApplication.shared.keyWindow?.rootViewController = viewController
                 self.dismiss(animated: true, completion: nil)
@@ -94,7 +93,7 @@ class MyMusicTabBarViewController: TabBarViewController {
         alertController.addAction(showAlbums)
         
         let showArtists = UIAlertAction(title: "Artists", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
-            print("Artists")
+//            print("Artists")
             if let splitViewController = self.storyboard?.instantiateViewController(withIdentifier: "MusicSplitView") as? MusicSplitViewController {
                 // TODO: Set destination viewController to artist or genre
                 // TODO: Set master vc title
@@ -129,7 +128,7 @@ class MyMusicTabBarViewController: TabBarViewController {
 //        alertController.addAction(showGenres)
         
         let cancelAction = UIAlertAction(title: "cancel", style: UIAlertActionStyle.cancel/*.default*/, handler: {(alert :UIAlertAction!) in
-            print("Cancel button tapped")
+//            print("Cancel button tapped")
         })
         alertController.addAction(cancelAction)
         
@@ -146,7 +145,7 @@ class MyMusicTabBarViewController: TabBarViewController {
         let alertController = UIAlertController(title: "Sort by:", message: nil, preferredStyle: .actionSheet)
         
         let showSongs = UIAlertAction(title: "Name", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
-            print("Name")
+//            print("Name")
             if let delegate = self.sortDelegate {
                 delegate.sortByName()
             }
@@ -154,7 +153,7 @@ class MyMusicTabBarViewController: TabBarViewController {
         alertController.addAction(showSongs)
 
         let showArtists = UIAlertAction(title: "Artist", style: UIAlertActionStyle.default, handler: { (alert :UIAlertAction!) in
-            print("Artist")
+//            print("Artist")
             if let delegate = self.sortDelegate {
                 delegate.sortByArtist()
             }
@@ -171,7 +170,7 @@ class MyMusicTabBarViewController: TabBarViewController {
 //        alertController.addAction(showGenres)
         
         let cancelAction = UIAlertAction(title: "cancel", style: UIAlertActionStyle.cancel/*.default*/, handler: {(alert :UIAlertAction!) in
-            print("Cancel button tapped")
+//            print("Cancel button tapped")
         })
         alertController.addAction(cancelAction)
         

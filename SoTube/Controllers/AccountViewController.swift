@@ -123,6 +123,9 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
             userDefaults.removeObject(forKey: kuserDefaultsEmailKey)
             userDefaults.removeObject(forKey: kuserDefaultsPasswordKey)
             
+            // remove player
+            musicPlayer.track = nil
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
             UIApplication.shared.keyWindow?.rootViewController = loginViewController

@@ -351,7 +351,12 @@ class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerD
     func startUpdater() {
         if musicPlayer.isPlaying {
             updater = CADisplayLink(target: self, selector: #selector(self.updateAudioProgressView))
-            updater.preferredFramesPerSecond = 20
+            if #available(iOS 10.0, *) {
+                updater.preferredFramesPerSecond = 20
+            } else {
+                // Fallback on earlier versions
+                updater.frameInterval = 1
+            }
             updater.add(to: .current, forMode: .commonModes)
         }
     }
