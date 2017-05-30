@@ -8,8 +8,11 @@
 
 import UIKit
 import CoreImage
+import MediaPlayer
 
 class MusicPlayerViewController: UIViewController, PaymentDelegate {
+    
+    var forDevice: Bool = true
 
     // MARK: - Properties
     @IBOutlet weak var buyTrackButton: UIBarButtonItem!
@@ -18,6 +21,8 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet weak var timeLeftLabel: UILabel!
     @IBOutlet weak var currentTimeLabel: UILabel!
+    @IBOutlet weak var volumeControlSlider: UISlider!
+    @IBOutlet weak var volumeControllerSliderView: UIView!
     
     @IBOutlet weak var fastBackwardButton: UIBarButtonItem!
     @IBOutlet weak var musicPlayButton: UIBarButtonItem!
@@ -37,7 +42,6 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     var pauseButton: UIBarButtonItem!
     
     var pausePlayButtonIndex = 4
-    
     
     // Observe musicPlayer
     var playerIsPlayingContext = 0
@@ -66,6 +70,47 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if forDevice {
+            // Hide classic volumeController
+            volumeControlSlider.isHidden = true
+            
+            let rect = self.view.bounds
+            
+            // Set Device volume controller
+            let wrapperView = UIView(frame: CGRect(x: 0, y: 0, width: ( rect.width - 100 ), height: 20))
+//            self.view.backgroundColor = UIColor.clear
+//            self.view.addSubview(wrapperView)
+            
+            let volumeView = MPVolumeView(frame: wrapperView.bounds)
+            
+//            volumeView.volumeSliderRect(forBounds: volumeControllerSliderView.bounds)
+//            volumeView.setMaximumVolumeSliderImage(#imageLiteral(resourceName: "volumeUpSmall"), for: .normal)
+//            volumeView.setMinimumVolumeSliderImage(#imageLiteral(resourceName: "volumeDownSmall"), for: .normal)
+//            volumeView.mini
+            volumeControllerSliderView.addSubview(volumeView)
+            
+//            let wrapperView = UIView(frame: CGRect(x: 30, y: 200, width: 260, height: 20))
+//            self.view.backgroundColor = UIColor.clear
+//            self.view.addSubview(wrapperView)
+            
+//            wrapperView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
+//            wrapperView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 30).isActive = true
+//            wrapperView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//            wrapperView.widthAnchor.constraint(equalToConstant: 260).isActive = true
+//            wrapperView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            
+//            let volumeView = MPVolumeView(frame: wrapperView.bounds)
+//            volumeView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
+//            volumeView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 30).isActive = true
+//            volumeView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            
+            //        var volumView  =
+            //        wrapperView.inser
+//            self.view.addSubview(volumeView)
+            //addSubview(volumeView)
+        }
+        
+        
         // Hide navigationbar
         self.navigationController?.isNavigationBarHidden = true
         
@@ -83,10 +128,10 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
             albumCoverImageView.image = albumCover
             self.controllersView.backgroundColor = albumCover.averageColor.withAlphaComponent(0.5)
         } else {
-            albumCoverImageView.image(fromLink: track?.coverUrl ?? "") { image in
+            albumCoverImageView.image(fromLink: track?.coverUrl ?? "") { [weak self] image in
                 // Set controller backgroundColor to averige of cover
                 //        controllersView.backgroundColor = coverImageView.image!.areaAverage().withAlphaComponent(0.5) // To slow :s
-                self.controllersView.backgroundColor = image.averageColor.withAlphaComponent(0.5)
+                self!.controllersView.backgroundColor = image.averageColor.withAlphaComponent(0.5)
             }
         }
         
@@ -166,7 +211,7 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     
     // MARK: - IBActions
     @IBAction func playButton(_ sender: UIBarButtonItem) {
-        musicPlayer.play()
+        musicPlayer.resume()
     }
     
     @IBAction func pauseButton(_ sender: UIBarButtonItem) {
@@ -314,7 +359,12 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     func startUpdater() {
         if musicPlayer.isPlaying {
             updater = CADisplayLink(target: self, selector: #selector(updateAudioProgressView))
-            updater.preferredFramesPerSecond = 20
+            if #available(iOS 10.0, *) {
+                updater.preferredFramesPerSecond = 20
+            } else {
+                // Fallback on earlier versions
+                updater.frameInterval = 1
+            }
             updater.add(to: .current, forMode: .commonModes)
         }
     }
