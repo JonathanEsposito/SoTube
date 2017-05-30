@@ -23,7 +23,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var tableHeaderView: UIView!
     
-
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +41,17 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         typePicker = searchController.searchBar
         
         updateHeaderHeight()
+    }
+    
+    // Show en hide navigationcontroller navigationbar
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
     }
     
     // MARK: - UITableView Delegate and DataSource

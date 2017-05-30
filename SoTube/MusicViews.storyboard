@@ -172,11 +172,11 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="15A-K6-b6Z"/>
-                                                    <exclude reference="JtE-mb-Ids"/>
-                                                    <exclude reference="XYS-qy-rfb"/>
                                                     <exclude reference="V3i-nT-MoZ"/>
                                                     <exclude reference="vBH-DJ-vXf"/>
                                                     <exclude reference="ziK-tO-qCT"/>
+                                                    <exclude reference="JtE-mb-Ids"/>
+                                                    <exclude reference="XYS-qy-rfb"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -197,10 +197,10 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="15A-K6-b6Z"/>
-                                                    <include reference="JtE-mb-Ids"/>
-                                                    <include reference="XYS-qy-rfb"/>
                                                     <include reference="V3i-nT-MoZ"/>
                                                     <exclude reference="nUQ-bw-B5b"/>
+                                                    <include reference="JtE-mb-Ids"/>
+                                                    <include reference="XYS-qy-rfb"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -594,7 +594,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RlX-kh-0wj"/>
-        <segue reference="Yai-hI-usw"/>
+        <segue reference="jEW-Nc-qj6"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>

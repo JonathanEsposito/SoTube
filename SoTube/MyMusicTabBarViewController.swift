@@ -51,6 +51,7 @@ class MyMusicTabBarViewController: TabBarViewController {
         constraintsOnTopLayoutGuide.forEach { $0.constant += 44 }
     }
     
+    // Show en hide navigationcontroller navigationbar
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)

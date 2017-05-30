@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aLl-vu-1ph">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aLl-vu-1ph">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -62,7 +62,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="musicCell" id="Sde-im-02N" customClass="StoreCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="8" width="100" height="108"/>
+                                        <rect key="frame" x="20" y="8.5" width="100" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="108"/>
@@ -144,10 +144,10 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="musicCell" id="7Uq-tZ-cCo" customClass="StoreCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="5.5" width="100" height="107.5"/>
+                                        <rect key="frame" x="20" y="8.5" width="100" height="107.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="107"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="107.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtistName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Psj-YF-0X2">
@@ -200,10 +200,10 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="musicCell" id="LL7-Rc-kNC" customClass="StoreCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="9" width="100" height="107.5"/>
+                                        <rect key="frame" x="20" y="8.5" width="100" height="107.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="108"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="107.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtistName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMY-cW-MFX">
@@ -306,7 +306,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="BTF-5n-rmh">
                             <connections>
-                                <segue destination="bfh-Sg-IyC" kind="presentation" id="Lkx-kq-mux"/>
+                                <segue destination="hcz-UU-YT9" kind="presentation" id="Lkx-kq-mux"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -422,7 +422,7 @@
                     <navigationItem key="navigationItem" id="fJ0-w3-dFP">
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="Y4A-Pd-M45">
                             <connections>
-                                <segue destination="bfh-Sg-IyC" kind="presentation" id="Ctw-18-uNX"/>
+                                <segue destination="hcz-UU-YT9" kind="presentation" id="Ctw-18-uNX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -470,7 +470,7 @@
                                         <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ywk-6r-EVz" id="XBP-Wt-KdV">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="princeCover" translatesAutoresizingMaskIntoConstraints="NO" id="f2k-AO-U8L">
@@ -508,7 +508,7 @@
                                         <rect key="frame" x="0.0" y="116" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CqL-yB-pnL" id="wbc-ad-Jwe">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="princeCover" translatesAutoresizingMaskIntoConstraints="NO" id="PCy-SP-wlV">
@@ -685,6 +685,7 @@
                             <constraint firstItem="HnP-Xa-vlZ" firstAttribute="top" secondItem="YDL-7V-Ttq" secondAttribute="bottom" id="rbp-AS-5vm"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="qlR-Ol-fPS"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="tmR-Eb-DIM" id="MHR-Ha-PKA"/>
                         <outlet property="searchTableView" destination="YDL-7V-Ttq" id="ykn-sa-k75"/>
@@ -721,7 +722,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1035" y="-593"/>
+            <point key="canvasLocation" x="1035" y="-287"/>
         </scene>
         <!--Storyboard Reference-->
         <scene sceneID="hZs-Yr-C8s">
@@ -729,7 +730,7 @@
                 <viewControllerPlaceholder id="9lc-y6-chP" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ucB-HW-vT4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1780" y="-594"/>
+            <point key="canvasLocation" x="1942" y="-322"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="K4E-M7-tXj">
@@ -833,7 +834,7 @@
                     <navigationItem key="navigationItem" id="6fV-QB-7iR">
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="v82-tb-sqt">
                             <connections>
-                                <segue destination="bfh-Sg-IyC" kind="presentation" id="WZY-qS-JW1"/>
+                                <segue destination="hcz-UU-YT9" kind="presentation" id="WZY-qS-JW1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -847,19 +848,33 @@
             </objects>
             <point key="canvasLocation" x="-1159" y="-269"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Zw5-e8-Xju">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hcz-UU-YT9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QSb-pp-bvO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bfh-Sg-IyC" kind="relationship" relationship="rootViewController" id="qGl-7y-7wC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UTF-U1-qLp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1035" y="-1105"/>
+        </scene>
     </scenes>
     <resources>
         <image name="princeCover" width="500" height="428"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wLk-Sp-PeE"/>
-        <segue reference="gcj-z9-tis"/>
-        <segue reference="eH1-h5-wLJ"/>
-        <segue reference="ZBh-ge-q4r"/>
-        <segue reference="Ctw-18-uNX"/>
-        <segue reference="azh-SU-ZUt"/>
-        <segue reference="Qoj-M1-8Jk"/>
+        <segue reference="iQf-6l-rht"/>
+        <segue reference="WZY-qS-JW1"/>
         <segue reference="FHg-1u-e1G"/>
+        <segue reference="azh-SU-ZUt"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="0.16078431369999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
 </document>
