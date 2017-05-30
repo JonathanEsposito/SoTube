@@ -343,9 +343,6 @@ class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerD
     
     func updateAudioProgressView() {
         musicProgressView.setProgress(musicPlayer.progress, animated: true)
-//        if musicProgressView.progress == 1 {
-//            miniPlayer.setButton(to: .play)
-//        }
     }
     
     func startUpdater() {

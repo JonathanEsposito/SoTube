@@ -71,20 +71,20 @@ class ChangePasswordViewController: UIViewController {
             return
         }
         
-        
-        
         // change password
-        database?.change(currentPassword, with: newPassword, for: email, on: delegate!) { error in
-            self.changeActivityIndicatorView.stopAnimating()
-            if let error = error {
-                self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
-                self.showAlert(withTitle: "Error reauthenticating user" , message: error.localizedDescription)
-            } else {
-                // do something
-                self.delegate?.updateUserDefaults(password: newPassword, orEmail: nil)
-                self.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.startAnimating() }
-                self.delegate?.updateTextFields()
-                self.presentingViewController?.dismiss(animated: true)
+        database?.change(currentPassword, with: newPassword, for: email, on: delegate!) { [weak self] error in
+            DispatchQueue.main.async {
+                self?.changeActivityIndicatorView.stopAnimating()
+                if let error = error {
+                    self?.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.stopAnimating() }
+                    self?.showAlert(withTitle: "Error reauthenticating user" , message: error.localizedDescription)
+                } else {
+                    // do something
+                    self?.delegate?.updateUserDefaults(password: newPassword, orEmail: nil)
+                    self?.delegate?.reloadUserInfoActivityIndicatorViewCollection.forEach { $0.startAnimating() }
+                    self?.delegate?.updateTextFields()
+                    self?.presentingViewController?.dismiss(animated: true)
+                }
             }
         }
     }
