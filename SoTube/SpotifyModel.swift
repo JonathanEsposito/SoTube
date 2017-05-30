@@ -29,7 +29,7 @@ class SpotifyModel {
     
     
     func setUpLogin() {
-        print("START SETUP")
+//        print("START SETUP")
         setup()
         NotificationCenter.default.addObserver(self, selector: #selector(SpotifyModel.updateAfterFirstLogin), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
     }
@@ -51,13 +51,13 @@ class SpotifyModel {
     }
     
     @objc func updateAfterFirstLogin () {
-        print("UPDATE AFTER FIRST LOGIN")
+//        print("UPDATE AFTER FIRST LOGIN")
         let userDefaults = UserDefaults.standard
         self.session = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.object(forKey: "SpotifySession") as! Data) as? SPTSession
 //        let sessionData = NSKeyedArchiver.archivedData(withRootObject: session!)
 //        userDefaults.set(sessionData, forKey: "SpotifySession")
-        print("ACCESTOKEN COMING")
-        print(session?.accessToken ?? "NO ACCESTOKEN")
+//        print("ACCESTOKEN COMING")
+//        print(session?.accessToken ?? "NO ACCESTOKEN")
     }
     
     private func setup () {
@@ -216,7 +216,7 @@ class SpotifyModel {
                     let artistId = dictionary.value(forKeyPath: "artists.id") as! [String]
                     let albumName = dictionary.value(forKeyPath: "album.name") as! String
                     let albumId = dictionary.value(forKeyPath: "album.id") as! String
-                    print("id: \(id), name: \(name), trackNumber: \(trackNumber), discNumber: \(discNumber), duration: \(duration), coverUrl: \(coverUrl), artistName: \(artistName), artistId: \(artistId), albumName: \(albumName), albumId: \(albumId)")
+//                    print("id: \(id), name: \(name), trackNumber: \(trackNumber), discNumber: \(discNumber), duration: \(duration), coverUrl: \(coverUrl), artistName: \(artistName), artistId: \(artistId), albumName: \(albumName), albumId: \(albumId)")
                     let track = Track(id: id, name: name, trackNumber: trackNumber, discNumber: discNumber, duration: duration, coverUrl: coverUrl.first ?? "", artistName: artistName.first!, artistId: artistId.first!, albumName: albumName, albumId: albumId)
                     trackArray.append(track)
                 }
@@ -337,10 +337,10 @@ class SpotifyModel {
                     let artistName = dictionary.value(forKeyPath: "name") as! String
                     let artistCoverUrl = dictionary.value(forKeyPath: "images.url") as! [String]
                     
-                    print("ARTIST")
-                    print(artistId)
-                    print(artistName)
-                    print(artistCoverUrl)
+//                    print("ARTIST")
+//                    print(artistId)
+//                    print(artistName)
+//                    print(artistCoverUrl)
                     
                     let artist = Artist(artistId: artistId, artistName: artistName, artistCoverUrl: artistCoverUrl.first ?? "", albumIds: [])
                     artistArray.append(artist)
@@ -395,7 +395,7 @@ class SpotifyModel {
         urlSession.dataTask(with: urlRequest) { data, response, error in
             if let jsonData = data,
                 let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary {
-                print(feed)
+//                print(feed)
                 keyData = feed.value(forKeyPath: keyPath) as? [String]
             } else {
             }
@@ -427,8 +427,8 @@ class SpotifyModel {
     private func getURLRequest(forUrl url: String) -> URLRequest? {
         let userDefaults = UserDefaults.standard
         self.session = NSKeyedUnarchiver.unarchiveObject(with: userDefaults.object(forKey: "SpotifySession") as! Data) as? SPTSession
-        print("GETTING URL REQUEST WITH TOKEN : ")
-        print(session?.accessToken ?? "NO ACCESTOKEN")
+//        print("GETTING URL REQUEST WITH TOKEN : ")
+//        print(session?.accessToken ?? "NO ACCESTOKEN")
         let urlRequest = try? SPTRequest.createRequest(for: URL(string: url) , withAccessToken: session.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         return urlRequest
     }
@@ -437,7 +437,7 @@ class SpotifyModel {
         let typesString = ItemTypes.map({"\($0)"}).joined(separator: ",")
         let fixedQuery = query.replacingOccurrences(of: " ", with: "-")
         let url = "https://api.spotify.com/v1/search?q=\(fixedQuery)&type=\(typesString)&limit=\(amount)&offset=\(offSet)"
-        print(url)
+//        print(url)
         return  url
     }
 }
