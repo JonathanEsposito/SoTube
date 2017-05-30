@@ -43,11 +43,10 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         //        album = Album(named: "Climate Change", fromArtist: "Pitbull", withCoverUrl: "https://i.scdn.co/image/e1ca3a27d6b2d897ec72425c95685f0475c35be3", withId: "4jtKPpBQ5eneMwEI94f5Y0")
         
-        // Hide Navigation controller background and shadow
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: ""), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage(named: "")
-        
         super.viewDidLoad()
+        // Set Navigation controller background and shadow
+        setNavigationBarBackground()
+        
         // get tracks from music source
         if let album = album {
             // Get cover
@@ -166,6 +165,12 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Set Navigation controller background and shadow
+        setNavigationBarBackground()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         // Hide Navigation controller background and shadow
@@ -229,6 +234,9 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateFooterHeight()
+        
+        // Set Navigation controller background and shadow
+        setNavigationBarBackground()
     }
     
     // MARK: - TableView
@@ -310,6 +318,16 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             }
         }
         return tableView.rowHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = indexPath.row
+        let selectedTrack = tracks[index]
+        musicPlayer.play(selectedTrack)
+        
+        self.updateMiniPlayer()
+        
+        updateFooterHeight()
     }
     
     // MARK: - AlbumTrakCellDelegate
@@ -402,6 +420,18 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     
     
     // Private Methods
+    func setNavigationBarBackground() {
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
+            // Set Navigation controller background and shadow
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: ""), for: UIBarMetrics.default)
+            self.navigationController?.navigationBar.shadowImage = UIImage(named: "")
+        } else {
+            // Remove Navigation controller background and shadow
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+        }
+    }
+    
     private func updateFooterHeight() {
         let height: CGFloat
         let tabBarHeight: CGFloat = 50

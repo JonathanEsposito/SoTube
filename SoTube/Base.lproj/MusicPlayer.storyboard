@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fFf-Nn-7cb">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -20,11 +20,11 @@
                         <viewControllerLayoutGuide type="bottom" id="yVI-qe-pnr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rrg-7h-aOZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="antlers" translatesAutoresizingMaskIntoConstraints="NO" id="PDX-jz-Z4f">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PDX-jz-Z4f">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PDX-jz-Z4f" secondAttribute="height" multiplier="1:1" id="i8J-x1-i7j"/>
                                 </constraints>
@@ -35,28 +35,28 @@
                                 </variation>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="★★★★★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYy-hP-Jqb">
-                                <rect key="frame" x="170" y="197" width="73" height="21"/>
+                                <rect key="frame" x="123" y="150" width="73" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJk-e7-Ha5" userLabel="Controllers View">
-                                <rect key="frame" x="0.0" y="414" width="414" height="322"/>
+                                <rect key="frame" x="0.0" y="320" width="320" height="248"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Little Red Corvette" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDG-5M-AfU">
-                                        <rect key="frame" x="134" y="129" width="147" height="21"/>
+                                        <rect key="frame" x="87" y="55" width="147" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prince - The North Borders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dr-hY-BVO">
-                                        <rect key="frame" x="126" y="157" width="163" height="16"/>
+                                        <rect key="frame" x="79" y="83" width="163" height="16"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qK0-5F-mrX">
-                                        <rect key="frame" x="0.0" y="198" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="124" width="320" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <items>
                                             <barButtonItem title="Buy" id="h4W-Mf-uP4"/>
@@ -91,11 +91,19 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </toolbar>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wH-S9-0hH">
+                                        <rect key="frame" x="50" y="198" width="220" height="20"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="78q-QN-Erd"/>
+                                        </constraints>
+                                    </view>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" minimumValueImage="volumeDownSmall" maximumValueImage="volumeUpSmall" translatesAutoresizingMaskIntoConstraints="NO" id="8sl-GI-T1F">
-                                        <rect key="frame" x="48" y="262" width="318" height="31"/>
+                                        <rect key="frame" x="48" y="188" width="224" height="31"/>
                                     </slider>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="4wH-S9-0hH" firstAttribute="centerX" secondItem="TJk-e7-Ha5" secondAttribute="centerX" id="0Bb-7s-n0a"/>
                                     <constraint firstItem="1Dr-hY-BVO" firstAttribute="centerX" secondItem="TJk-e7-Ha5" secondAttribute="centerX" id="5nz-y4-kIb"/>
                                     <constraint firstItem="8sl-GI-T1F" firstAttribute="leading" secondItem="TJk-e7-Ha5" secondAttribute="leading" constant="50" id="7V3-ib-hM9"/>
                                     <constraint firstItem="UDG-5M-AfU" firstAttribute="centerX" secondItem="TJk-e7-Ha5" secondAttribute="centerX" id="8iZ-NA-5y0"/>
@@ -104,9 +112,11 @@
                                         <variation key="heightClass=compact" constant="175"/>
                                     </constraint>
                                     <constraint firstItem="8sl-GI-T1F" firstAttribute="centerX" secondItem="TJk-e7-Ha5" secondAttribute="centerX" id="H76-DV-JD9"/>
+                                    <constraint firstItem="4wH-S9-0hH" firstAttribute="leading" secondItem="TJk-e7-Ha5" secondAttribute="leading" constant="50" id="NOy-fL-tg0"/>
                                     <constraint firstItem="1Dr-hY-BVO" firstAttribute="top" secondItem="UDG-5M-AfU" secondAttribute="bottom" constant="7" id="Wf5-u6-MPU"/>
                                     <constraint firstItem="qK0-5F-mrX" firstAttribute="centerX" secondItem="TJk-e7-Ha5" secondAttribute="centerX" id="Xa1-Em-A1X"/>
                                     <constraint firstItem="qK0-5F-mrX" firstAttribute="leading" secondItem="TJk-e7-Ha5" secondAttribute="leading" id="YaF-Ah-YZi"/>
+                                    <constraint firstAttribute="bottom" secondItem="4wH-S9-0hH" secondAttribute="bottom" constant="30" id="s0X-ba-O4a"/>
                                     <constraint firstItem="qK0-5F-mrX" firstAttribute="top" secondItem="1Dr-hY-BVO" secondAttribute="bottom" constant="25" id="zMT-jR-aNc">
                                         <variation key="heightClass=compact" constant="40"/>
                                     </constraint>
@@ -134,19 +144,20 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jxm-SJ-fSl">
-                                <rect key="frame" x="-2" y="399" width="418" height="31"/>
+                                <rect key="frame" x="-2" y="305" width="324" height="31"/>
                                 <connections>
-                                    <action selector="slide:" destination="fFf-Nn-7cb" eventType="valueChanged" id="b8Y-Cf-Nfu"/>
+                                    <action selector="seekTo:" destination="fFf-Nn-7cb" eventType="touchUpInside" id="DMI-iH-oEw"/>
+                                    <action selector="slide:" destination="fFf-Nn-7cb" eventType="valueChanged" id="bKo-bK-BdU"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-2:47" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwU-jM-5uY">
-                                <rect key="frame" x="370" y="424" width="34" height="16"/>
+                                <rect key="frame" x="276" y="330" width="34" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oE4-zU-TJc">
-                                <rect key="frame" x="10" y="424" width="29" height="16"/>
+                                <rect key="frame" x="10" y="330" width="29" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -235,6 +246,8 @@
                         <outlet property="timeLeftLabel" destination="CwU-jM-5uY" id="KcI-FH-BGk"/>
                         <outlet property="toolbar" destination="qK0-5F-mrX" id="3ZE-dO-RN6"/>
                         <outlet property="trackTitleLabel" destination="UDG-5M-AfU" id="Ier-Ci-nBp"/>
+                        <outlet property="volumeControlSlider" destination="8sl-GI-T1F" id="TRr-Q1-Ecw"/>
+                        <outlet property="volumeControllerSliderView" destination="4wH-S9-0hH" id="ztX-qh-DEx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uko-PY-2nc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -243,7 +256,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="antlers" width="480" height="480"/>
         <image name="arrowDown" width="201" height="201"/>
         <image name="volumeDownSmall" width="7" height="11"/>
         <image name="volumeUpSmall" width="17" height="15"/>

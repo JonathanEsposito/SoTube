@@ -17,6 +17,8 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
     var genre: String = ""
     var artist: Artist?
     
+    var specialRigthTabBarLeadingConstraint = NSLayoutConstraint()
+    
     var albums: [Album] = [] {
         didSet {
             albumsCollectionView.reloadData()
@@ -26,18 +28,35 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set right tabbar leading constraint
+        specialRigthTabBarLeadingConstraint = rightTabBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        specialRigthTabBarLeadingConstraint.isActive = false
+        
+        
+        // Set tabBar and miniPlayer
+        setTabBarAndMiniPlayerVisibility()
+        
         // Hide Navigation controller background and shadow
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         // Get data
         if let artist = self.artist {
-            database.getAlbums(forArtist: artist) { albums in
-                self.albums = albums
+            database.getAlbums(forArtist: artist) { [weak self] albums in
+                DispatchQueue.main.async {
+                    self?.albums = albums
+                }
             }
         } else {
             print("By genre it is!")
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // Set tabBar and miniPlayer
+        setTabBarAndMiniPlayerVisibility()
     }
     
     // MARK: - Constraints Size Classes
@@ -56,7 +75,9 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicCell", for: indexPath) as? AlbumCollectionViewCell else {
             fatalError("The dequeued cell is not an instance of AlbumCollectionViewCell.")
         }
-        
+        // Remove previous image to prevent flickering on scroll (or wrongly displayd images)
+        cell.albumCoverImageView.image = nil
+        // Set values
         let album = albums[indexPath.row]
         cell.albumCoverImageView.image(fromLink: album.coverUrl)
         cell.albumNameLabel.text = album.name
@@ -114,5 +135,26 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
         }
         
         albumsCollectionViewFlowLayout.footerReferenceSize.height = newHeight
+    }
+    
+    private func setTabBarAndMiniPlayerVisibility() {
+        // if this view is fullscreen (iPhone), show tabBar otherwise, detailView will have tabBar
+        if UIScreen.main.bounds.width != self.view.bounds.width {
+            rigthTabBarleadingConstraint.isActive = false
+            specialRigthTabBarLeadingConstraint.isActive = true
+            self.view.subviews.forEach {
+                if $0 == tabBar {
+                    $0.isHidden = true
+                }
+            }
+        } else {
+            rigthTabBarleadingConstraint.isActive = true
+            specialRigthTabBarLeadingConstraint.isActive = false
+            self.view.subviews.forEach {
+                if $0 == tabBar {
+                    $0.isHidden = false
+                }
+            }
+        }
     }
 }

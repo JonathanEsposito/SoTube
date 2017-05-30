@@ -46,15 +46,15 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if let headerView = songTableView.tableFooterView {
-            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-            var headerFrame = headerView.frame
+        if let footerView = songTableView.tableFooterView {
+            let height = footerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            var footerFrame = footerView.frame
             
             //Comparison necessary to avoid infinite loop
-            if height != headerFrame.size.height {
-                headerFrame.size.height = height
-                headerView.frame = headerFrame
-                songTableView.tableFooterView = headerView
+            if height != footerFrame.size.height {
+                footerFrame.size.height = height
+                footerView.frame = footerFrame
+                songTableView.tableFooterView = footerView
             }
         }
     }
@@ -86,17 +86,16 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
     
     // MARK: Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
         let index = indexPath.row
         let selectedTrack = tracks[index]
-//        let path: String! = Bundle.main.resourcePath?.appending("/\(indexPath.row).mp3")
-//        let songURL = URL(fileURLWithPath: path)
+        
         musicPlayer.play(selectedTrack)
         
+        print("musicPlayer.Play:")
+        print(musicPlayer.isPlaying)
         self.updateMiniPlayer()
 
         updateFooterHeight()
-        print(musicPlayer.hasSong)
     }
     
     // MARK: - Sort functions
@@ -126,7 +125,6 @@ class TracksTableViewController: MyMusicTabBarViewController, UITableViewDelegat
             destinationvc = navcon.visibleViewController ?? destinationvc
         }
         if let musicCollectionVC = destinationvc as? AlbumsCollectionViewController {
-//            musicCollectionVC.data = self.dummmyData
         }
     }
     

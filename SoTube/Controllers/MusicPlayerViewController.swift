@@ -8,8 +8,11 @@
 
 import UIKit
 import CoreImage
+import MediaPlayer
 
 class MusicPlayerViewController: UIViewController, PaymentDelegate {
+    
+    var forDevice: Bool = true
 
     // MARK: - Properties
     @IBOutlet weak var buyTrackButton: UIBarButtonItem!
@@ -18,6 +21,8 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet weak var timeLeftLabel: UILabel!
     @IBOutlet weak var currentTimeLabel: UILabel!
+    @IBOutlet weak var volumeControlSlider: UISlider!
+    @IBOutlet weak var volumeControllerSliderView: UIView!
     
     @IBOutlet weak var fastBackwardButton: UIBarButtonItem!
     @IBOutlet weak var musicPlayButton: UIBarButtonItem!
@@ -36,6 +41,21 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     var playButton: UIBarButtonItem!
     var pauseButton: UIBarButtonItem!
     
+    var pausePlayButtonIndex = 4
+    
+    // Observe musicPlayer
+    var playerIsPlayingContext = 0
+    
+    var observingMusicPlayer: Bool = false {
+        didSet {
+            if observingMusicPlayer {
+                // Set Player observer
+                weak var weakSelf = self
+                musicPlayer.player.addObserver(weakSelf!, forKeyPath: "isPlaying", options: .new, context: &playerIsPlayingContext)
+            }
+        }
+    }
+    
     // UserDefaults
     let kuserDefaultsEmailKey = "userEmail"
     let kuserDefaultsPasswordKey = "userPassword"
@@ -50,6 +70,50 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if forDevice {
+            // Hide classic volumeController
+            volumeControlSlider.isHidden = true
+            
+            let rect = self.view.bounds
+            
+            // Set Device volume controller
+            let wrapperView = UIView(frame: CGRect(x: 0, y: 0, width: ( rect.width - 100 ), height: 20))
+//            self.view.backgroundColor = UIColor.clear
+//            self.view.addSubview(wrapperView)
+            
+            let volumeView = MPVolumeView(frame: wrapperView.bounds)
+            
+//            volumeView.volumeSliderRect(forBounds: volumeControllerSliderView.bounds)
+//            volumeView.setMaximumVolumeSliderImage(#imageLiteral(resourceName: "volumeUpSmall"), for: .normal)
+//            volumeView.setMinimumVolumeSliderImage(#imageLiteral(resourceName: "volumeDownSmall"), for: .normal)
+//            volumeView.mini
+            volumeControllerSliderView.addSubview(volumeView)
+            
+//            let wrapperView = UIView(frame: CGRect(x: 30, y: 200, width: 260, height: 20))
+//            self.view.backgroundColor = UIColor.clear
+//            self.view.addSubview(wrapperView)
+            
+//            wrapperView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
+//            wrapperView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 30).isActive = true
+//            wrapperView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//            wrapperView.widthAnchor.constraint(equalToConstant: 260).isActive = true
+//            wrapperView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            
+//            let volumeView = MPVolumeView(frame: wrapperView.bounds)
+//            volumeView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
+//            volumeView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 30).isActive = true
+//            volumeView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            
+            //        var volumView  =
+            //        wrapperView.inser
+//            self.view.addSubview(volumeView)
+            //addSubview(volumeView)
+        }
+        
+        
+        // Hide navigationbar
+        self.navigationController?.isNavigationBarHidden = true
+        
         let track = musicPlayer.track
         
         if track!.bought || guestuser {
@@ -58,12 +122,20 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
             buyTrackButton.isEnabled = true
         }
         
-        dump(track)
-        albumCoverImageView.image(fromLink: track?.coverUrl ?? "") { image in
-            // Set controller backgroundColor to averige of cover
-            //        controllersView.backgroundColor = coverImageView.image!.areaAverage().withAlphaComponent(0.5) // To slow :s
-            self.controllersView.backgroundColor = image.averageColor.withAlphaComponent(0.5) ?? UIColor.white
+        // Get and Set AlbumCover
+        if let albumCover = musicPlayer.cover {
+            print("has albumcover")
+            albumCoverImageView.image = albumCover
+            self.controllersView.backgroundColor = albumCover.averageColor.withAlphaComponent(0.5)
+        } else {
+            albumCoverImageView.image(fromLink: track?.coverUrl ?? "") { [weak self] image in
+                // Set controller backgroundColor to averige of cover
+                //        controllersView.backgroundColor = coverImageView.image!.areaAverage().withAlphaComponent(0.5) // To slow :s
+                self!.controllersView.backgroundColor = image.averageColor.withAlphaComponent(0.5)
+            }
         }
+        
+        // Set other labels
         trackTitleLabel.text = track?.name ?? ""
         artistAndAlbumLabel.text =  "\(track?.artistName ?? "") - \(track?.albumName ?? "")"
         
@@ -77,16 +149,21 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
          * Set up Player
          ****/
         
+        // Start observing player
+        observingMusicPlayer = true
         
+        startUpdater()
+        
+        // Set play button index
+        if let index = toolbar.items?.index(of: musicPlayButton) {
+            self.pausePlayButtonIndex = index
+        }
         
         
         /****
          * Start Player
          ****/
-        updater = CADisplayLink(target: self, selector: #selector(updateAudioProgressView))
-        updater.preferredFramesPerSecond = 1
-//        print((updater.targetTimestamp - updater.timestamp))
-        updater.add(to: .current, forMode: .commonModes)
+        
         
         // Set Playbuttons
         playButton = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(playButton(_:)))
@@ -101,41 +178,69 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        updater.invalidate()
+        stopUpdater()
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    deinit {
+        if observingMusicPlayer {
+            // Remove previously added observers
+            musicPlayer.player.removeObserver(self, forKeyPath: "isPlaying", context: &playerIsPlayingContext)
+        }
+    }
+    
+    // MARK: - Observer
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        switch object! {
+        case let player as MusicPlayerModel where player.isPlaying == true:
+            self.setButton(to: .pause)
+            // Set up progressbar tracker
+            startUpdater()
+            
+        case let player as MusicPlayerModel where player.isPlaying == false:
+            self.setButton(to: .play)
+            // Dismiss tracker
+            stopUpdater()
+            updateAudioProgressView()
+            
+        default:
+            break
+        }
     }
     
     // MARK: - IBActions
     @IBAction func playButton(_ sender: UIBarButtonItem) {
-        musicPlayer.play()
-        
-        let buttonIndex = toolbar.items?.index(where: { $0 == sender})
-        toolbar.items![buttonIndex!] = pauseButton
+        musicPlayer.resume()
     }
     
     @IBAction func pauseButton(_ sender: UIBarButtonItem) {
         musicPlayer.pause()
-        
-        let buttonIndex = toolbar.items?.index(where: { $0 == sender})
-        toolbar.items![buttonIndex!] = playButton
     }
     
     @IBAction func fastForward(_ sender: UIBarButtonItem) {
         musicPlayer.fastForward()
-        if musicPlayer.stopped {
-            resetProgress()
-        }
     }
     
     @IBAction func fastBackward(_ sender: UIBarButtonItem) {
         musicPlayer.fastBackward()
-        if musicPlayer.stopped {
-            resetProgress()
-        }
     }
-    
     @IBAction func slide(_ sender: UISlider) {
+        stopUpdater()
+        let currentSliderValue = sender.value
+        let currentTime = musicPlayer.duration * Double(currentSliderValue)
+        let timeLeft = musicPlayer.duration - currentTime
+        currentTimeLabel.text = string(fromTimeInterval: currentTime)//"\(currentTime)"
+        timeLeftLabel.text = "-\(string(fromTimeInterval: timeLeft))"
+    }
+    @IBAction func seekTo(_ sender: UISlider) {
+        startUpdater()
         musicPlayer.set(time: TimeInterval(sender.value))
     }
+    
+//    @IBAction func seekslide(_ sender: UISlider) {
+//        musicPlayer.set(time: TimeInterval(sender.value))
+//    }
     
     @IBAction func dismissView(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
@@ -222,17 +327,28 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
         }
     }
     
+    
+    
     // MARK: - Private Methods
-    private func resetProgress() {
-        progressSlider.setValue(0, animated: false)
-        currentTimeLabel.text = musicPlayer.currentTime
-        timeLeftLabel.text = musicPlayer.timeLeft
-        
-        // set pause to play
-        if let buttonIndex = toolbar.items?.index(where: { $0 == (musicPlayButton ?? pauseButton) }) {
-            toolbar.items![buttonIndex] = playButton
+    func setButton(to buttonState: PlayerButtonState) {
+        switch buttonState {
+        case .play:
+            self.toolbar.items![pausePlayButtonIndex] = playButton
+        case .pause:
+            self.toolbar.items![pausePlayButtonIndex] = pauseButton
         }
     }
+    
+//    private func resetProgress() {
+//        progressSlider.setValue(0, animated: false)
+//        currentTimeLabel.text = musicPlayer.currentTime
+//        timeLeftLabel.text = musicPlayer.timeLeft
+//        
+//        // set pause to play
+//        if let buttonIndex = toolbar.items?.index(where: { $0 == (musicPlayButton ?? pauseButton) }) {
+//            toolbar.items![buttonIndex] = playButton
+//        }
+//    }
     
     func updateAudioProgressView() {
         progressSlider.setValue(musicPlayer.progress, animated: true)
@@ -240,8 +356,47 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
         timeLeftLabel.text = musicPlayer.timeLeft
     }
     
+    func startUpdater() {
+        if musicPlayer.isPlaying {
+            updater = CADisplayLink(target: self, selector: #selector(updateAudioProgressView))
+            if #available(iOS 10.0, *) {
+                updater.preferredFramesPerSecond = 20
+            } else {
+                // Fallback on earlier versions
+                updater.frameInterval = 1
+            }
+            updater.add(to: .current, forMode: .commonModes)
+        }
+    }
+    
+    func stopUpdater() {
+        if updater != nil {
+            updater.invalidate()
+        }
+    }
+    
     // MARK: UISetup
     private func configureProgresSlider() {
         progressSlider.setThumbImage(UIImage(named: "slider"), for: .normal)
+    }
+    
+    // MARK: - Private Objects
+    enum PlayerButtonState {
+        case play, pause
+    }
+    
+    private func string(fromTimeInterval interval: TimeInterval) -> String {
+        
+        let time = Int(interval)
+        
+        let seconds = time % 60
+        let minutes = (time / 60) % 60
+        let hours = (time / 3600)
+        
+        if hours == 0 {
+            return String(format: "%0.1d:%0.2d",minutes,seconds)
+        } else {
+            return String(format: "%0.1d:%0.2d:%0.2d",hours,minutes,seconds)
+        }
     }
 }

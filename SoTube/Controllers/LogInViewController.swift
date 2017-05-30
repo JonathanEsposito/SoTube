@@ -89,36 +89,40 @@ class LogInViewController: UIViewController{
         // Activityindicator should start here.
         self.loginActivityIndicatorView.startAnimating()
         
-        database.login(withEmail: emailAddress, password: password, onCompletion: { error in
-            if let error = error {
-                self.loginActivityIndicatorView.stopAnimating()
-                self.showAlert(withTitle: error.title, message: error.message, actions: error.actions)
-                return
-            }
-            
-            // Dismiss the keyboard
-            self.view.endEditing(true)
-            
-            // check if user already has any songs
-            self.database.checkUserHasSongs { userHasSongs in
-                self.loginActivityIndicatorView.stopAnimating()
-                // Perform segue
-                if !userHasSongs {
-                    print("lets go to the store")
-                    let storyboard = UIStoryboard(name: "Store", bundle: nil)
-                    guard let navigationController = storyboard.instantiateViewController(withIdentifier: "storeNavCont") as? UINavigationController else { print("Couldn't find account navigation controller"); return }
-                    selectedTabBarItemWithTitle = "Store"
-                    UIApplication.shared.keyWindow?.rootViewController = navigationController
-                    self.dismiss(animated: true, completion: nil)
-                } else {
-                    print("Go to my music")
-                    selectedTabBarItemWithTitle = "My music"
-                    self.performSegue(withIdentifier: "login", sender: nil)
+        database.login(withEmail: emailAddress, password: password, onCompletion: { [weak self] error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.loginActivityIndicatorView.stopAnimating()
+                    self?.showAlert(withTitle: error.title, message: error.message, actions: error.actions)
+                    return
                 }
+                
+                // Dismiss the keyboard
+                self?.view.endEditing(true)
+                
+                // check if user already has any songs
+                self?.database.checkUserHasSongs { userHasSongs in
+                    DispatchQueue.main.async {
+                        self?.loginActivityIndicatorView.stopAnimating()
+                        // Perform segue
+                        if !userHasSongs {
+                            print("lets go to the store")
+                            let storyboard = UIStoryboard(name: "Store", bundle: nil)
+                            guard let navigationController = storyboard.instantiateViewController(withIdentifier: "storeNavCont") as? UINavigationController else { print("Couldn't find account navigation controller"); return }
+                            selectedTabBarItemWithTitle = "Store"
+                            UIApplication.shared.keyWindow?.rootViewController = navigationController
+                            self?.dismiss(animated: true, completion: nil)
+                        } else {
+                            print("Go to my music")
+                            selectedTabBarItemWithTitle = "My music"
+                            self?.performSegue(withIdentifier: "login", sender: nil)
+                        }
+                    }
+                }
+                
+                // If new user, save credentials to user defaults
+                self?.saveLoginToUserDefaults(email: emailAddress, password: password)
             }
-            
-            // If new user, save credentials to user defaults
-            self.saveLoginToUserDefaults(email: emailAddress, password: password)
         })
     }
     
