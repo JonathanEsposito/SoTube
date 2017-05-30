@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         auth.redirectURL = URL(string: "SoTube://returnAfterLogin")
         auth.sessionUserDefaultsKey = "current session"
+        
+//        IQKeyboardManager.sharedManager().enable = true
+        
         return true
     }
     
