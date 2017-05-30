@@ -852,12 +852,15 @@
         <image name="princeCover" width="500" height="428"/>
     </resources>
     <inferredMetricsTieBreakers>
+<<<<<<< HEAD
         <segue reference="wLk-Sp-PeE"/>
         <segue reference="gcj-z9-tis"/>
         <segue reference="eH1-h5-wLJ"/>
         <segue reference="ZBh-ge-q4r"/>
+=======
         <segue reference="Ctw-18-uNX"/>
         <segue reference="azh-SU-ZUt"/>
+>>>>>>> yoni
         <segue reference="Qoj-M1-8Jk"/>
         <segue reference="FHg-1u-e1G"/>
     </inferredMetricsTieBreakers>
