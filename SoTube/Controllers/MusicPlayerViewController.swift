@@ -127,7 +127,7 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
         // Start observing player
         observingMusicPlayer = true
 //
-//        startUpdater()
+        startUpdater()
         
         // Set play button index
         if let index = toolbar.items?.index(of: musicPlayButton) {
