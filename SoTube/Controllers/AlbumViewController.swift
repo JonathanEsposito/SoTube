@@ -96,8 +96,8 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
                     } else {
                         // By default load only my tracks
                         self.storeTracks = tracks
-                        let filteredTrasks = tracks.filter { self.album!.trackIds.contains($0.id) }
-                        self.myTracks = filteredTrasks
+                        let filteredTracks = tracks.filter { self.album!.trackIds.contains($0.id) }
+                        self.myTracks = filteredTracks
                         
                         
                         // update storeTracks bought property
@@ -108,7 +108,7 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
                         }
                         
                         // Set (and update) table
-                        self.tracks = filteredTrasks
+                        self.tracks = filteredTracks
                     }
                     
                     self.totalAmountOfSongs = tracks.count
