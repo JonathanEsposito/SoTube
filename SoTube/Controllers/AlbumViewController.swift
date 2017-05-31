@@ -134,30 +134,32 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             musicSource.getTracks(from: playlist) { [weak self] playlistTracks in
                 DispatchQueue.main.async {
                     self?.database.getTracks { databaseTracks in
-                        // Get array with all the track ids
-                        let databaseTrackIds = databaseTracks.map { $0.id }
-                        
-                        // set store tracks bought to true if was bought by user
-                        playlistTracks.forEach { storeTrack in
-                            if databaseTrackIds.contains(storeTrack.id) {
-                                return storeTrack.bought = true
+                        DispatchQueue.main.async {
+                            // Get array with all the track ids
+                            let databaseTrackIds = databaseTracks.map { $0.id }
+                            
+                            // set store tracks bought to true if was bought by user
+                            playlistTracks.forEach { storeTrack in
+                                if databaseTrackIds.contains(storeTrack.id) {
+                                    return storeTrack.bought = true
+                                }
                             }
+                            
+                            // Set tracks
+                            self?.tracks = playlistTracks
+                            
+                            self?.totalAmountOfSongs = playlistTracks.count
+                            let totalAlbumDuration = playlistTracks.map {$0.duration}.reduce(0, +)
+                            self?.totalAlbumDuration = totalAlbumDuration
+                            
+                            self?.landscapeTotalAmountOfSongsLabel.text = "\(playlistTracks.count)"
+                            self?.landscapeTotalAlbumDurationLabel.text = self!.string(fromIntInMiliSec: totalAlbumDuration)
+                            
+                            let indexPath = IndexPath(row: 0, section: 0)
+                            self?.tracksTableView.beginUpdates()
+                            self?.tracksTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                            self?.tracksTableView.endUpdates()
                         }
-                        
-                        // Set tracks
-                        self?.tracks = playlistTracks
-                        
-                        self?.totalAmountOfSongs = playlistTracks.count
-                        let totalAlbumDuration = playlistTracks.map {$0.duration}.reduce(0, +)
-                        self?.totalAlbumDuration = totalAlbumDuration
-                        
-                        self?.landscapeTotalAmountOfSongsLabel.text = "\(playlistTracks.count)"
-                        self?.landscapeTotalAlbumDurationLabel.text = self!.string(fromIntInMiliSec: totalAlbumDuration)
-                        
-                        let indexPath = IndexPath(row: 0, section: 0)
-                        self?.tracksTableView.beginUpdates()
-                        self?.tracksTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-                        self?.tracksTableView.endUpdates()
                     }
                 }
             }
@@ -407,17 +409,6 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             }
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     
     // Private Methods
     func setNavigationBarBackground() {

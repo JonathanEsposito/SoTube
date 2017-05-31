@@ -69,6 +69,13 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // set toolbar background transparent
+        toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
+        
+        // Hide navigationbar
+        self.navigationController?.isNavigationBarHidden = true
+        
+        configureUIOfProgresSlider()
         
         if forDevice {
             // Hide classic volumeController
@@ -83,10 +90,7 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
             volumeControllerSliderView.addSubview(volumeView)
         }
         
-        
-        // Hide navigationbar
-        self.navigationController?.isNavigationBarHidden = true
-        
+        // Get playing track
         let track = musicPlayer.track
         
         if track!.bought || guestuser {
@@ -112,30 +116,23 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
         trackTitleLabel.text = track?.name ?? ""
         artistAndAlbumLabel.text =  "\(track?.artistName ?? "") - \(track?.albumName ?? "")"
         
-        //
-        configureProgresSlider()
         
-        // set toolbar background transparent
-        toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
         
         /****
          * Set up Player
          ****/
+        updateAudioProgressView()
+        
         
         // Start observing player
         observingMusicPlayer = true
-        
-        startUpdater()
+//
+//        startUpdater()
         
         // Set play button index
         if let index = toolbar.items?.index(of: musicPlayButton) {
             self.pausePlayButtonIndex = index
         }
-        
-        
-        /****
-         * Start Player
-         ****/
         
         
         // Set Playbuttons
@@ -164,7 +161,7 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     
     // MARK: - Observer
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
+        print("update!")
         switch object! {
         case let player as MusicPlayerModel where player.isPlaying == true:
             self.setButton(to: .pause)
@@ -198,6 +195,7 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     @IBAction func fastBackward(_ sender: UIBarButtonItem) {
         musicPlayer.fastBackward()
     }
+    
     @IBAction func slide(_ sender: UISlider) {
         stopUpdater()
         let currentSliderValue = sender.value
@@ -206,6 +204,7 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
         currentTimeLabel.text = string(fromTimeInterval: currentTime)//"\(currentTime)"
         timeLeftLabel.text = "-\(string(fromTimeInterval: timeLeft))"
     }
+    
     @IBAction func seekTo(_ sender: UISlider) {
         startUpdater()
         musicPlayer.set(time: TimeInterval(sender.value))
@@ -223,7 +222,7 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
         print("share")
         let currentTrack = musicPlayer.track
-        let activityViewController = UIActivityViewController(activityItems: [currentTrack], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [currentTrack!], applicationActivities: nil)
         activityViewController.excludedActivityTypes = [.postToVimeo]
         self.present(activityViewController, animated: true, completion: { _ in })
     }
@@ -350,7 +349,7 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     }
     
     // MARK: UISetup
-    private func configureProgresSlider() {
+    private func configureUIOfProgresSlider() {
         progressSlider.setThumbImage(UIImage(named: "slider"), for: .normal)
     }
     
