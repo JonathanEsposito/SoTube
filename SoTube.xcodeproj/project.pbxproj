@@ -35,6 +35,7 @@
 		2FCDF2871ECC80D000095FF4 /* AVPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCDF2861ECC80D000095FF4 /* AVPlayerModel.swift */; };
 		2FEC9C901EC9C40800324AE1 /* PaymentProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEC9C8F1EC9C40800324AE1 /* PaymentProtocolExtension.swift */; };
 		486AD1AADA1121E7657201DB /* Pods_SoTubeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8D9CD8FE75D5C7CEE073FF5 /* Pods_SoTubeTests.framework */; };
+		A00D14001EDE81C800481F31 /* SearchTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00D13FF1EDE81C800481F31 /* SearchTrackTableViewCell.swift */; };
 		A03227E21ECAF7060041197B /* MinimizedPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03227E11ECAF7060041197B /* MinimizedPlayer.swift */; };
 		A03E690E1EC0F4E900F12FA9 /* MinimizedPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */; };
 		A03E69911EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03E69901EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift */; };
@@ -138,6 +139,7 @@
 		2FEC9C911EC9C75A00324AE1 /* SoTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoTube-Bridging-Header.h"; sourceTree = "<group>"; };
 		606381C2A33886FCBAE26F58 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 		726495C053F085FDC806A67F /* Pods-SoTubeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTubeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTubeTests/Pods-SoTubeTests.release.xcconfig"; sourceTree = "<group>"; };
+		A00D13FF1EDE81C800481F31 /* SearchTrackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTrackTableViewCell.swift; sourceTree = "<group>"; };
 		A03227E11ECAF7060041197B /* MinimizedPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimizedPlayer.swift; sourceTree = "<group>"; };
 		A03E690D1EC0F4E900F12FA9 /* MinimizedPlayer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MinimizedPlayer.xib; path = Views/MinimizedPlayer.xib; sourceTree = "<group>"; };
 		A03E69901EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMusicTabBarViewController.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				A0A29F9C1ECDEAD100E06D95 /* Store.storyboard */,
 				E96EA55B1EDCA7850081A256 /* MusicTableViewCell.swift */,
 				2F373A611EDC454100433818 /* SearchViewController.swift */,
+				A00D13FF1EDE81C800481F31 /* SearchTrackTableViewCell.swift */,
 				A0A29F9E1ECDEF9A00E06D95 /* StoreOverviewViewController.swift */,
 				A0A29FA01ECDEFB100E06D95 /* StoreDetailViewController.swift */,
 				A0A29FA21ECDF71E00E06D95 /* StoreCollectionViewCell.swift */,
@@ -841,6 +844,7 @@
 				2FEC9C901EC9C40800324AE1 /* PaymentProtocolExtension.swift in Sources */,
 				A057303D1ED33088008EC7B0 /* ChangePasswordViewController.swift in Sources */,
 				2F804E701ED433DB00E6A7B4 /* Album.swift in Sources */,
+				A00D14001EDE81C800481F31 /* SearchTrackTableViewCell.swift in Sources */,
 				A0ADCB801EC07C6400C82CC9 /* UIViewExtensions.swift in Sources */,
 				A03E69911EC1BE2000F12FA9 /* MyMusicTabBarViewController.swift in Sources */,
 				2FCDF2871ECC80D000095FF4 /* AVPlayerModel.swift in Sources */,

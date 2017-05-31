@@ -8,13 +8,17 @@
 
 import UIKit
 
-class SearchViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
+class SearchViewController: TabBarViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, SearchTrakCellDelegate, PaymentDelegate {
     // MARK: - Properties
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var tableHeaderView: UIView!
     @IBOutlet weak var tableViewFooter: UIView!
     
-    var spotifyModel = SpotifyModel()
+    let paymentViewModel = PaymentViewModel()
+    let database = DatabaseViewModel()
+    let spotifyModel = SpotifyModel()
+    var ownedTracks: [Track] = []
+//    var databaseTrackIds: [String] = []
     var albums: [Album] = []
     var artists: [Artist] = []
     var tracks: [Track] = []
@@ -28,6 +32,13 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Get ownedTracks
+        database.getTracks { [weak self] databaseTracks in
+            DispatchQueue.main.async {
+                self?.ownedTracks = databaseTracks
+            }
+        }
+        
         // Set navigation bar title
         self.navigationItem.title = "Search"
         
@@ -84,7 +95,7 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TrackTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! SearchTrackTableViewCell
             let track = tracks[indexPath.row]
             cell.albumImageView.image = nil
             cell.albumImageView.image(fromLink: track.coverUrl)
@@ -92,6 +103,16 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
             cell.artistLabel.text = track.artistName
             cell.albumLabel.text = track.albumName
 //            cell.ratingLabel.text = ""
+            
+            if track.bought || self.guestuser {
+                cell.buyTrackButton.isHidden = true
+            } else {
+                cell.buyTrackButton.isHidden = false
+            }
+            
+            // Set Cell Delegate
+            weak var weakSelf = self
+            cell.delegate = weakSelf
             cell.timeLabel.text = string(fromDuration: track.duration)
             return cell
         } else {
@@ -145,26 +166,109 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    // MARK: - AlbumTrakCellDelegate
+    func buySong(_ cell: SearchTrackTableViewCell) {
+        // If there is a logged in user
+        if self.guestuser {
+            let alertController = UIAlertController(title: "SoTunes Store", message: "As a guest you can only preview tracks but not buy track. Do you want to create an account or log in?", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            let creatAccountAction = UIAlertAction(title: "Create new account", style: .default, handler: { _ in
+                // Go to Create Account screen
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let createNewAccountController = storyboard.instantiateViewController(withIdentifier: "createAccountVC")
+                self.present(createNewAccountController, animated: true, completion: nil)
+            })
+            alertController.addAction(creatAccountAction)
+            let loginAction = UIAlertAction(title: "Log in", style: .default, handler: { _ in
+                // Go to login screen
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+                UIApplication.shared.keyWindow?.rootViewController = loginViewController
+                self.dismiss(animated: true, completion: nil)
+            })
+            alertController.addAction(loginAction)
+            
+            present(alertController, animated: true, completion: nil)
+        } else {
+            guard let index = searchTableView.indexPath(for: cell)?.row else { return }
+            //            print(index)
+            // user row as index to get song form array
+            
+            let track = self.tracks[index]
+            database.getCoins { [weak self] currentCoins in
+                DispatchQueue.main.async {
+                    if (currentCoins - coinsPerTrackRate) > 0 {
+                        let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nCurrently you have \(currentCoins) SoCoins.\nAfter buying this song you will have \(currentCoins - coinsPerTrackRate) SoCoins left.\n\nDo you want to continue?", preferredStyle: .alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                        alertController.addAction(cancelAction)
+                        
+                        let buyTrackAction = UIAlertAction(title: "Buy this track!", style: .default, handler: { _ in
+                            self?.database.buy(track, withCoins: coinsPerTrackRate, onCompletion: { error in
+                                DispatchQueue.main.async {
+                                    if let error = error {
+                                        print(error.localizedDescription)
+                                    } else {
+                                        //                                        print("track bought :D")
+                                        track.bought = true
+                                        let indexPath = IndexPath(row: index, section: 1)
+                                        self?.searchTableView.reloadRows(at: [indexPath], with: .automatic)
+                                        
+                                    }
+                                }
+                            })
+                        })
+                        alertController.addAction(buyTrackAction)
+                        self?.present(alertController, animated: true, completion: nil)
+                        
+                    } else {
+                        let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nSadly you currently only have \(currentCoins) SoCoins left.\nWould you want to top up your acount?", preferredStyle: .alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                        alertController.addAction(cancelAction)
+                        let topUpAccount = UIAlertAction(title: "Topup account", style: .default, handler: { _ in
+                            self?.presentTopUpAlertController(onCompletion: { amount in
+                                if let price = self!.paymentViewModel.pricePerAmount[amount] {
+                                    let coinPurchase = CoinPurchase(amount: amount, price: price)
+                                    //                                    print("I'm buying!!")
+                                    self?.database.updateCoins(with: coinPurchase) {
+                                        //                                        print("bought coins :D")
+                                    }
+                                }
+                            })
+                        })
+                        alertController.addAction(topUpAccount)
+                        self?.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
     // MARK: - UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         if let searchQuery = searchBar.text {
             if searchQuery != "" {
                 let url = spotifyModel.getSearchUrl(for: searchQuery, ofTypes: [.album,.artist,.playlist,.track], amount: 50, offSet: 0)
-                print(url)
-                spotifyModel.getSearchResults(fromUrl: url, onCompletion: { [weak self] albums, artists, tracks, playlists in
-                    weak var weakSelf: SearchViewController! = self
+//                print(url)
+                spotifyModel.getSearchResults(fromUrl: url, onCompletion: { [weak self] albums, artists, playlistTracks, playlists in
                     DispatchQueue.main.async {
-                        print("LOOK HERE")
-                        print(albums)
-                        print(artists)
-                        print(tracks)
-                        print(playlists)
                         
-                        weakSelf.albums = albums
-                        weakSelf.artists = artists
-                        weakSelf.playlists = playlists
-                        weakSelf.tracks = tracks
+                        
+                        // Get array with all the track ids
+                        let databaseTrackIds = self!.ownedTracks.map { $0.id }
+                        
+                        // set store tracks bought to true if was bought by user
+                        playlistTracks.forEach { storeTrack in
+                            if databaseTrackIds.contains(storeTrack.id) {
+                                return storeTrack.bought = true
+                            }
+                        }
+                        
+                        self?.albums = albums
+                        self?.artists = artists
+                        self?.playlists = playlists
+                        self?.tracks = playlistTracks
                         self?.searchTableView.reloadData()
                     }
                 })
@@ -195,22 +299,6 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
             return String(format: "%0.1d:%0.2d:%0.2d",hours,minutes,seconds)
         }
     }
-
-//    private func updateHeaderHeight() {
-//        let height: CGFloat
-//        if typePicker?.selectedScopeButtonIndex == 2 {
-//            height = 70
-//        } else {
-//            height = 44
-//        }
-//        searchTableView.tableHeaderView?.frame.size.height = height
-//        
-//        // Reset tableview contentsize height
-//        let lastTableViewSubviewYPosition = searchTableView.tableHeaderView?.frame.origin.y
-//        let lastTableViewSubviewHeight = searchTableView.tableFooterView?.bounds.height
-//        let newHeight = (lastTableViewSubviewYPosition ?? 0) + (lastTableViewSubviewHeight ?? 0)
-//        searchTableView.contentSize = CGSize(width: searchTableView.contentSize.width, height: newHeight)
-//    }
     
     private func updateFooterHeight() {
         let height: CGFloat
@@ -255,7 +343,6 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
                 destinationVC.navigationItem.title = albums[indexPath!.row].name
                 destinationVC.navigationItem.backBarButtonItem?.title = "Search"
                 destinationVC.album = self.albums[indexPath!.row]
-//                destinationVC.tracksTableView.reloadData()
             }
         }
         if segue.identifier == "showPlaylistSegue" {
@@ -264,12 +351,7 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
                 destinationVC.navigationItem.title = playlists[indexPath!.row].name
                 destinationVC.navigationItem.backBarButtonItem?.title = "Search"
                 destinationVC.playlist = self.playlists[indexPath!.row]
-//                destinationVC.tracksTableView.reloadData()
             }
         }
-//        if segue.identifier == "playTrackSegue" {
-//            let indexPath = searchTableView.indexPathForSelectedRow
-//            let track = self.tracks[indexPath!.row]
-//        }
     }
 }
