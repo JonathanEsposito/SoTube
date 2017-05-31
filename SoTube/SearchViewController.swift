@@ -17,10 +17,13 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
     var playlists: [Playlist] = []
     let searchController = UISearchController(searchResultsController: nil)
     var typePicker: UISearchBar?
+    var indexForType: [Types: Int] = [.albums: 0, .artists: 1, .tracks: 2, .playlists: 3]
+    
+    enum Types {
+        case albums, artists, tracks, playlists
+    }
+    
     @IBOutlet weak var tableViewFooter: UIView!
-    
-    var indexForType: [String: Int] = ["albums": 0, "artists": 1, "tracks": 2, "playlists": 3]
-    
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var tableHeaderView: UIView!
     
@@ -68,13 +71,13 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
     // MARK: - UITableView
     // MARK: DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if typePicker?.selectedScopeButtonIndex == indexForType["albums"] {
+        if typePicker?.selectedScopeButtonIndex == indexForType[.albums] {
             return albums.count
-        } else if typePicker?.selectedScopeButtonIndex == indexForType["artists"] {
+        } else if typePicker?.selectedScopeButtonIndex == indexForType[.artists] {
             return artists.count
-        } else if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
+        } else if typePicker?.selectedScopeButtonIndex == indexForType[.tracks] {
             return tracks.count
-        } else if typePicker?.selectedScopeButtonIndex == indexForType["playlists"] {
+        } else if typePicker?.selectedScopeButtonIndex == indexForType[.playlists] {
             return playlists.count
         } else {
             return 1
@@ -82,7 +85,7 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
+        if typePicker?.selectedScopeButtonIndex == indexForType[.tracks] {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TrackCell", for: indexPath) as! TrackTableViewCell
             let track = tracks[indexPath.row]
             cell.albumImageView.image(fromLink: track.coverUrl)
@@ -94,18 +97,18 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MusicCell", for: indexPath) as! MusicTableViewCell
-            if typePicker?.selectedScopeButtonIndex == indexForType["albums"] {
+            if typePicker?.selectedScopeButtonIndex == indexForType[.albums] {
                 let album = albums[indexPath.row]
                 print(indexPath.row)
                 print(albums)
                 print(album)
                 cell.itemImageView.image(fromLink: album.coverUrl)
                 cell.nameLabel.text = album.name
-            } else if typePicker?.selectedScopeButtonIndex == indexForType["artists"] {
+            } else if typePicker?.selectedScopeButtonIndex == indexForType[.artists] {
                 let artist = artists[indexPath.row]
                 cell.itemImageView.image(fromLink: artist.artistCoverUrl)
                 cell.nameLabel.text = artist.artistName
-            } else if typePicker?.selectedScopeButtonIndex == indexForType["playlists"] {
+            } else if typePicker?.selectedScopeButtonIndex == indexForType[.playlists] {
                 let playlist = playlists[indexPath.row]
                 cell.itemImageView.image(fromLink: playlist.coverUrl)
                 cell.nameLabel.text = playlist.name
@@ -116,7 +119,7 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
     
     // MARK: Delegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
+        if typePicker?.selectedScopeButtonIndex == indexForType[.tracks] {
             return 70
         } else {
             return 44
@@ -124,16 +127,16 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if typePicker?.selectedScopeButtonIndex == indexForType["albums"] {
+        if typePicker?.selectedScopeButtonIndex == indexForType[.albums] {
             performSegue(withIdentifier: "showAlbumSegue", sender: nil)
         }
-        if typePicker?.selectedScopeButtonIndex == indexForType["artists"] {
+        if typePicker?.selectedScopeButtonIndex == indexForType[.artists] {
             performSegue(withIdentifier: "showAlbumsFromArtistSegue", sender: nil)
         }
-        if typePicker?.selectedScopeButtonIndex == indexForType["playlists"] {
+        if typePicker?.selectedScopeButtonIndex == indexForType[.playlists] {
             performSegue(withIdentifier: "showPlaylistSegue", sender: nil)
         }
-        if typePicker?.selectedScopeButtonIndex == indexForType["tracks"] {
+        if typePicker?.selectedScopeButtonIndex == indexForType[.tracks] {
             let index = indexPath.row
             let selectedTrack = tracks[index]
             
