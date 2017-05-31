@@ -18,7 +18,6 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
     let database = DatabaseViewModel()
     let spotifyModel = SpotifyModel()
     var ownedTracks: [Track] = []
-//    var databaseTrackIds: [String] = []
     var albums: [Album] = []
     var artists: [Artist] = []
     var tracks: [Track] = []
@@ -104,6 +103,7 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
             cell.albumLabel.text = track.albumName
 //            cell.ratingLabel.text = ""
             
+            print(track.bought)
             if track.bought || self.guestuser {
                 cell.buyTrackButton.isHidden = true
             } else {
@@ -209,11 +209,21 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
                                     if let error = error {
                                         print(error.localizedDescription)
                                     } else {
-                                        //                                        print("track bought :D")
+                                        let boughtTrack = track
                                         track.bought = true
-                                        let indexPath = IndexPath(row: index, section: 1)
+                                        // print("track bought :D")
+                                        self?.tracks.forEach { storeTrack in
+                                            if storeTrack.id == boughtTrack.id {
+                                                storeTrack.bought = true
+                                            }
+                                        }
+                                        track.bought = true
+                                        dump(track)
+                                        let indexPath = IndexPath(row: index, section: 0)
+                                        print(indexPath)
+                                        self?.searchTableView.beginUpdates()
                                         self?.searchTableView.reloadRows(at: [indexPath], with: .automatic)
-                                        
+                                        self?.searchTableView.endUpdates()
                                     }
                                 }
                             })
@@ -229,9 +239,9 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
                             self?.presentTopUpAlertController(onCompletion: { amount in
                                 if let price = self!.paymentViewModel.pricePerAmount[amount] {
                                     let coinPurchase = CoinPurchase(amount: amount, price: price)
-                                    //                                    print("I'm buying!!")
+                                    // print("I'm buying!!")
                                     self?.database.updateCoins(with: coinPurchase) {
-                                        //                                        print("bought coins :D")
+                                        // print("bought coins :D")
                                     }
                                 }
                             })
@@ -254,7 +264,6 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
                 spotifyModel.getSearchResults(fromUrl: url, onCompletion: { [weak self] albums, artists, playlistTracks, playlists in
                     DispatchQueue.main.async {
                         
-                        
                         // Get array with all the track ids
                         let databaseTrackIds = self!.ownedTracks.map { $0.id }
                         
@@ -270,6 +279,7 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
                         self?.playlists = playlists
                         self?.tracks = playlistTracks
                         self?.searchTableView.reloadData()
+                        self?.searchTableView.contentOffset = CGPoint(x: 0, y: 50)
                     }
                 })
             }
@@ -280,7 +290,6 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         searchTableView.reloadData()
         searchTableView.contentOffset = CGPoint.zero
-//        updateHeaderHeight()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

@@ -630,6 +630,9 @@
                                                         <constraint firstAttribute="width" constant="30" id="Ob6-Pw-q4O"/>
                                                     </constraints>
                                                     <state key="normal" title="Buy"/>
+                                                    <connections>
+                                                        <action selector="buySong:" destination="4D3-pg-UcY" eventType="touchUpInside" id="LCe-19-uSb"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

@@ -29,7 +29,7 @@ class AlbumTrackTableViewCell: UITableViewCell {
 
     // MARK: - IBActions
     @IBAction func buySong(_ sender: UIButton) {
-        print("clicked")
+//        print("clicked")
         weak var weakSelf = self
         self.delegate?.buySong(weakSelf!)
     }
