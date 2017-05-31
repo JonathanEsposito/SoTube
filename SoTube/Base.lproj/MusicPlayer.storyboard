@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fFf-Nn-7cb">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -20,11 +20,11 @@
                         <viewControllerLayoutGuide type="bottom" id="yVI-qe-pnr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rrg-7h-aOZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PDX-jz-Z4f">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="0.0" width="333.5" height="375"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PDX-jz-Z4f" secondAttribute="height" multiplier="1:1" priority="750" id="duS-DV-45B"/>
                                     <constraint firstAttribute="width" secondItem="PDX-jz-Z4f" secondAttribute="height" multiplier="1:1" id="i8J-x1-i7j"/>
@@ -47,28 +47,28 @@
                                 </variation>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="★★★★★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYy-hP-Jqb">
-                                <rect key="frame" x="152" y="177" width="73" height="21"/>
+                                <rect key="frame" x="130.5" y="177" width="73" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJk-e7-Ha5" userLabel="Controllers View">
-                                <rect key="frame" x="0.0" y="375" width="375" height="292"/>
+                                <rect key="frame" x="333.5" y="0.0" width="333.5" height="375"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Little Red Corvette" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDG-5M-AfU">
-                                        <rect key="frame" x="114.5" y="99" width="147" height="21"/>
+                                        <rect key="frame" x="94" y="72" width="147" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prince - The North Borders" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dr-hY-BVO">
-                                        <rect key="frame" x="106.5" y="127" width="163" height="16"/>
+                                        <rect key="frame" x="86" y="100" width="163" height="16"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qK0-5F-mrX">
-                                        <rect key="frame" x="0.0" y="168" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="156" width="333.5" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <items>
                                             <barButtonItem title="Buy" id="h4W-Mf-uP4">
@@ -108,14 +108,14 @@
                                         </userDefinedRuntimeAttributes>
                                     </toolbar>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4wH-S9-0hH">
-                                        <rect key="frame" x="50" y="242" width="275" height="20"/>
+                                        <rect key="frame" x="50" y="325" width="233.5" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="78q-QN-Erd"/>
                                         </constraints>
                                     </view>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" minimumValueImage="volumeDownSmall" maximumValueImage="volumeUpSmall" translatesAutoresizingMaskIntoConstraints="NO" id="8sl-GI-T1F">
-                                        <rect key="frame" x="48" y="232" width="279" height="31"/>
+                                        <rect key="frame" x="48" y="315" width="237.5" height="31"/>
                                     </slider>
                                 </subviews>
                                 <constraints>
@@ -171,20 +171,20 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="jxm-SJ-fSl">
-                                <rect key="frame" x="-2" y="360" width="379" height="31"/>
+                                <rect key="frame" x="331.5" y="200" width="337.5" height="31"/>
                                 <connections>
                                     <action selector="seekTo:" destination="fFf-Nn-7cb" eventType="touchUpInside" id="DMI-iH-oEw"/>
                                     <action selector="slide:" destination="fFf-Nn-7cb" eventType="valueChanged" id="bKo-bK-BdU"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-2:47" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CwU-jM-5uY">
-                                <rect key="frame" x="331" y="385" width="34" height="16"/>
+                                <rect key="frame" x="623" y="225" width="34" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oE4-zU-TJc">
-                                <rect key="frame" x="10" y="385" width="29" height="16"/>
+                                <rect key="frame" x="343.5" y="225" width="29" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -241,10 +241,10 @@
                             <mask key="constraints">
                                 <exclude reference="6Qa-tF-4iS"/>
                                 <exclude reference="sP9-MU-aPl"/>
-                                <exclude reference="54M-TK-vJf"/>
-                                <exclude reference="BJS-jZ-GLK"/>
                                 <exclude reference="1Up-hL-hLn"/>
                                 <exclude reference="UwI-px-DVB"/>
+                                <exclude reference="54M-TK-vJf"/>
+                                <exclude reference="BJS-jZ-GLK"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -252,14 +252,14 @@
                                 <include reference="6Qa-tF-4iS"/>
                                 <exclude reference="hzk-ee-STU"/>
                                 <include reference="sP9-MU-aPl"/>
-                                <include reference="54M-TK-vJf"/>
-                                <include reference="BJS-jZ-GLK"/>
-                                <exclude reference="tuq-5u-Zgl"/>
-                                <exclude reference="wr9-Kd-RhW"/>
                                 <include reference="1Up-hL-hLn"/>
                                 <exclude reference="Aq2-Yr-qWa"/>
                                 <include reference="UwI-px-DVB"/>
                                 <exclude reference="kYn-cI-whH"/>
+                                <include reference="54M-TK-vJf"/>
+                                <include reference="BJS-jZ-GLK"/>
+                                <exclude reference="tuq-5u-Zgl"/>
+                                <exclude reference="wr9-Kd-RhW"/>
                             </mask>
                         </variation>
                     </view>

@@ -208,6 +208,9 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     @IBAction func seekTo(_ sender: UISlider) {
         startUpdater()
         musicPlayer.set(time: TimeInterval(sender.value))
+        // realy set time!
+        musicPlayer.resume()
+        musicPlayer.pause()
     }
     
 //    @IBAction func seekslide(_ sender: UISlider) {
@@ -220,11 +223,15 @@ class MusicPlayerViewController: UIViewController, PaymentDelegate {
     }
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
-        print("share")
-        let currentTrack = musicPlayer.track
-        let activityViewController = UIActivityViewController(activityItems: [currentTrack!], applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [.postToVimeo]
-        self.present(activityViewController, animated: true, completion: { _ in })
+//        print("share")
+        if let currentTrack = musicPlayer.track {
+            let link = "https://open.spotify.com/track/\(currentTrack.id)"
+            let someText = "I'm currently listening to \(currentTrack.name) by \(currentTrack.artistName)"
+            let shareItems = [someText, link]
+            let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+            activityViewController.excludedActivityTypes = [.postToVimeo]
+            self.present(activityViewController, animated: true, completion: { _ in })
+        }
     }
     
     @IBAction func buyCurrentTrack(_ sender: UIBarButtonItem) {

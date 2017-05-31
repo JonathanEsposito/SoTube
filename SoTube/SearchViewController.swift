@@ -105,7 +105,7 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
             cell.albumLabel.text = track.albumName
             //            cell.ratingLabel.text = ""
             
-            print(track.bought)
+//            print(track.bought)
             if track.bought || self.guestuser {
                 cell.buyTrackButton.isHidden = true
             } else {
@@ -220,9 +220,9 @@ class SearchViewController: TabBarViewController, UITableViewDelegate, UITableVi
                                             }
                                         }
                                         track.bought = true
-                                        dump(track)
+//                                        dump(track)
                                         let indexPath = IndexPath(row: index, section: 0)
-                                        print(indexPath)
+//                                        print(indexPath)
                                         self?.searchTableView.beginUpdates()
                                         self?.searchTableView.reloadRows(at: [indexPath], with: .automatic)
                                         self?.searchTableView.endUpdates()

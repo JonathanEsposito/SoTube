@@ -54,7 +54,6 @@ class TabBarViewController: UIViewController, UITabBarDelegate, MinimizedPlayerD
         
         // Start observing musicPlayer
         observingMusicPlayer = true
-       
     }
     
     deinit {
