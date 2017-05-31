@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         auth.redirectURL = URL(string: "SoTube://returnAfterLogin")
         auth.sessionUserDefaultsKey = "current session"
         
-//        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enable = true
         
         return true
     }
