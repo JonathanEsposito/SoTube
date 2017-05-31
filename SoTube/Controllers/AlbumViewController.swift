@@ -43,10 +43,11 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         //        album = Album(named: "Climate Change", fromArtist: "Pitbull", withCoverUrl: "https://i.scdn.co/image/e1ca3a27d6b2d897ec72425c95685f0475c35be3", withId: "4jtKPpBQ5eneMwEI94f5Y0")
         
-        super.viewDidLoad()
-        // Set Navigation controller background and shadow
-        setNavigationBarBackground()
+        // Hide Navigation controller background and shadow
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: ""), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage(named: "")
         
+        super.viewDidLoad()
         // get tracks from music source
         if let album = album {
             // Get cover
@@ -64,18 +65,18 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             })
             
             // Get Tracks from musicSource
-            musicSource.getTracks(from: album, onCompletion: { [weak self] tracks in
+            musicSource.getTracks(from: album, OnCompletion: { tracks in
                 DispatchQueue.main.async {
                     // If we are comming from the store, album.trackIds will be empty so display all album tracks
                     if album.trackIds.isEmpty {
                         // Set store tracks as default
-                        self?.storeTracks = tracks
-                        self?.tracks = tracks
-                        self?.database.getAlbum(byId: album.id) { [weak self] databaseAlbum in
+                        self.storeTracks = tracks
+                        self.tracks = tracks
+                        self.database.getAlbum(byId: album.id) { databaseAlbum in
                             DispatchQueue.main.async {
                                 // update storeTracks bought property
                                 var updatedIndexes: [Int] = []
-                                self?.storeTracks.enumerated().forEach { index, track in
+                                self.storeTracks.enumerated().forEach { index, track in
                                     if databaseAlbum.trackIds.contains(track.id) {
                                         updatedIndexes.append(index)
                                         return track.bought = true
@@ -84,92 +85,85 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
                                 
                                 // Update rows
                                 let indexPaths = updatedIndexes.map { IndexPath(row: $0, section: 1) }
-                                self?.tracksTableView.beginUpdates()
-                                self?.tracksTableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.automatic)
-                                self?.tracksTableView.endUpdates()
+                                self.tracksTableView.beginUpdates()
+                                self.tracksTableView.reloadRows(at: indexPaths, with: UITableViewRowAnimation.automatic)
+                                self.tracksTableView.endUpdates()
                                 
                                 // filter updated storeTracks and save as myTracks
-                                self?.myTracks = self!.storeTracks.filter { databaseAlbum.trackIds.contains($0.id) }
+                                self.myTracks = self.storeTracks.filter { databaseAlbum.trackIds.contains($0.id) }
                             }
                         }
                     } else {
                         // By default load only my tracks
-                        self?.storeTracks = tracks
-                        let filteredTrasks = tracks.filter { self!.album!.trackIds.contains($0.id) }
-                        self?.myTracks = filteredTrasks
+                        self.storeTracks = tracks
+                        let filteredTracks = tracks.filter { self.album!.trackIds.contains($0.id) }
+                        self.myTracks = filteredTracks
                         
                         
                         // update storeTracks bought property
-                        self?.storeTracks.forEach { track in
+                        self.storeTracks.forEach { track in
                             if album.trackIds.contains(track.id) {
                                 return track.bought = true
                             }
                         }
                         
                         // Set (and update) table
-                        self?.tracks = filteredTrasks
+                        self.tracks = filteredTracks
                     }
                     
-                    self?.totalAmountOfSongs = tracks.count
+                    self.totalAmountOfSongs = tracks.count
                     let totalAlbumDuration = tracks.map {$0.duration}.reduce(0, +)
-                    self?.totalAlbumDuration = totalAlbumDuration
+                    self.totalAlbumDuration = totalAlbumDuration
                     
-                    self?.landscapeTotalAmountOfSongsLabel.text = "\(tracks.count)"
-                    self?.landscapeTotalAlbumDurationLabel.text = self!.string(fromIntInMiliSec: totalAlbumDuration)
+                    self.landscapeTotalAmountOfSongsLabel.text = "\(tracks.count)"
+                    self.landscapeTotalAlbumDurationLabel.text = self.string(fromIntInMiliSec: totalAlbumDuration)
                     
                     
                     let indexPath = IndexPath(row: 0, section: 0)
-                    self?.tracksTableView.beginUpdates()
-                    self?.tracksTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-                    self?.tracksTableView.endUpdates()
+                    self.tracksTableView.beginUpdates()
+                    self.tracksTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                    self.tracksTableView.endUpdates()
                 }
             })
         } else if let playlist = self.playlist {
-            albumCoverImageView.image(fromLink: playlist.coverUrl) { [weak self] image in
+            albumCoverImageView.image(fromLink: playlist.coverUrl) { image in
                 // set expensive color. If no image is set, user white
                 // self.averageCoverImageColor = albumCoverImageView.image?.areaAverage() ?? UIColor.white // To slow :s
-                self?.averageCoverImageColor = image.averageColor
+                self.averageCoverImageColor = image.averageColor
             }
             
-            musicSource.getTracks(from: playlist) { [weak self] playlistTracks in
-                DispatchQueue.main.async {
-                    self?.database.getTracks { databaseTracks in
-                        DispatchQueue.main.async {
-                            // Get array with all the track ids
-                            let databaseTrackIds = databaseTracks.map { $0.id }
-                            
-                            // set store tracks bought to true if was bought by user
-                            playlistTracks.forEach { storeTrack in
-                                if databaseTrackIds.contains(storeTrack.id) {
-                                    return storeTrack.bought = true
-                                }
+            musicSource.getTracks(from: playlist) { playlistTracks in
+                self.database.getTracks { databaseTracks in
+                    DispatchQueue.main.async {
+                        // Get array with all the track ids
+                        let databaseTrackIds = databaseTracks.map { $0.id }
+                        
+                        // set store tracks bought to true if was bought by user
+                        playlistTracks.forEach { storeTrack in
+                            if databaseTrackIds.contains(storeTrack.id) {
+                                return storeTrack.bought = true
                             }
-                            
-                            // Set tracks
-                            self?.tracks = playlistTracks
-                            
-                            self?.totalAmountOfSongs = playlistTracks.count
-                            let totalAlbumDuration = playlistTracks.map {$0.duration}.reduce(0, +)
-                            self?.totalAlbumDuration = totalAlbumDuration
-                            
-                            self?.landscapeTotalAmountOfSongsLabel.text = "\(playlistTracks.count)"
-                            self?.landscapeTotalAlbumDurationLabel.text = self!.string(fromIntInMiliSec: totalAlbumDuration)
-                            
-                            let indexPath = IndexPath(row: 0, section: 0)
-                            self?.tracksTableView.beginUpdates()
-                            self?.tracksTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-                            self?.tracksTableView.endUpdates()
                         }
+                        
+                        // Set tracks
+                        self.tracks = playlistTracks
+                        
+                        self.totalAmountOfSongs = playlistTracks.count
+                        let totalAlbumDuration = playlistTracks.map {$0.duration}.reduce(0, +)
+                        self.totalAlbumDuration = totalAlbumDuration
+                        
+                        self.landscapeTotalAmountOfSongsLabel.text = "\(playlistTracks.count)"
+                        self.landscapeTotalAlbumDurationLabel.text = self.string(fromIntInMiliSec: totalAlbumDuration)
+                        
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        self.tracksTableView.beginUpdates()
+                        self.tracksTableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                        self.tracksTableView.endUpdates()
+                        
                     }
                 }
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Set Navigation controller background and shadow
-        setNavigationBarBackground()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -235,9 +229,6 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateFooterHeight()
-        
-        // Set Navigation controller background and shadow
-        setNavigationBarBackground()
     }
     
     // MARK: - TableView
@@ -296,8 +287,7 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
                 trackCell.buyTrackButton.isHidden = false
             }
             
-            weak var weakSelf = self
-            trackCell.delegate = weakSelf
+            trackCell.delegate = self
             cell = trackCell
         }
         return cell
@@ -322,16 +312,6 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
         return tableView.rowHeight
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let index = indexPath.row
-        let selectedTrack = tracks[index]
-        musicPlayer.play(selectedTrack)
-        
-        self.updateMiniPlayer()
-        
-        updateFooterHeight()
-    }
-    
     // MARK: - AlbumTrakCellDelegate
     func buySong(_ cell: AlbumTrackTableViewCell) {
         // If there is a logged in user
@@ -344,6 +324,8 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let createNewAccountController = storyboard.instantiateViewController(withIdentifier: "createAccountVC")
                 self.present(createNewAccountController, animated: true, completion: nil)
+                //                UIApplication.shared.keyWindow?.rootViewController = createNewAccountController
+                //                self.dismiss(animated: true, completion: nil)
             })
             alertController.addAction(creatAccountAction)
             let loginAction = UIAlertAction(title: "Log in", style: .default, handler: { _ in
@@ -358,71 +340,68 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
             present(alertController, animated: true, completion: nil)
         } else {
             guard let index = tracksTableView.indexPath(for: cell)?.row else { return }
-//            print(index)
+            print(index)
             // user row as index to get song form array
             
             let track = self.tracks[index]
-            database.getCoins { [weak self] currentCoins in
-                DispatchQueue.main.async {
-                    if (currentCoins - coinsPerTrackRate) > 0 {
-                        let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nCurrently you have \(currentCoins) SoCoins.\nAfter buying this song you will have \(currentCoins - coinsPerTrackRate) SoCoins left.\n\nDo you want to continue?", preferredStyle: .alert)
-                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                        alertController.addAction(cancelAction)
-                        
-                        let buyTrackAction = UIAlertAction(title: "Buy this track!", style: .default, handler: { _ in
-                            self?.database.buy(track, withCoins: coinsPerTrackRate, onCompletion: { error in
-                                DispatchQueue.main.async {
-                                    if let error = error {
-                                        print(error.localizedDescription)
-                                    } else {
-//                                        print("track bought :D")
-                                        track.bought = true
-                                        let indexPath = IndexPath(row: index, section: 1)
-                                        self?.tracksTableView.reloadRows(at: [indexPath], with: .automatic)
-                                        
-                                    }
+            database.getCoins { currentCoins in
+                if (currentCoins - coinsPerTrackRate) > 0 {
+                    let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nCurrently you have \(currentCoins) SoCoins.\nAfter buying this song you will have \(currentCoins - coinsPerTrackRate) SoCoins left.\n\nDo you want to continue?", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    alertController.addAction(cancelAction)
+                    
+                    let buyTrackAction = UIAlertAction(title: "Buy this track!", style: .default, handler: { _ in
+                        self.database.buy(track, withCoins: coinsPerTrackRate, onCompletion: { error in
+                            DispatchQueue.main.async {
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                } else {
+                                    print("track bought :D")
+                                    track.bought = true
+                                    let indexPath = IndexPath(row: index, section: 1)
+                                    self.tracksTableView.reloadRows(at: [indexPath], with: .automatic)
+                                    
                                 }
-                            })
+                            }
                         })
-                        alertController.addAction(buyTrackAction)
-                        self?.present(alertController, animated: true, completion: nil)
-                        
-                    } else {
-                        let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nSadly you currently only have \(currentCoins) SoCoins left.\nWould you want to top up your acount?", preferredStyle: .alert)
-                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                        alertController.addAction(cancelAction)
-                        let topUpAccount = UIAlertAction(title: "Topup account", style: .default, handler: { _ in
-                            self?.presentTopUpAlertController(onCompletion: { amount in
-                                if let price = self!.paymentViewModel.pricePerAmount[amount] {
-                                    let coinPurchase = CoinPurchase(amount: amount, price: price)
-//                                    print("I'm buying!!")
-                                    self?.database.updateCoins(with: coinPurchase) {
-//                                        print("bought coins :D")
-                                    }
+                    })
+                    alertController.addAction(buyTrackAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    
+                } else {
+                    let alertController = UIAlertController(title: "SoTunes Store", message: "You are about to buy \"\(track.name)\" by \"\(track.artistName)\" for \(coinsPerTrackRate) SoCoins.\n\nSadly you currently only have \(currentCoins) SoCoins left.\nWould you want to top up your acount?", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    alertController.addAction(cancelAction)
+                    let topUpAccount = UIAlertAction(title: "Topup account", style: .default, handler: { _ in
+                        self.presentTopUpAlertController(onCompletion: { amount in
+                            if let price = self.paymentViewModel.pricePerAmount[amount] {
+                                let coinPurchase = CoinPurchase(amount: amount, price: price)
+                                print("I'm buying!!")
+                                self.database.updateCoins(with: coinPurchase) {
+                                    print("bought coins :D")
                                 }
-                            })
+                            }
                         })
-                        alertController.addAction(topUpAccount)
-                        self?.present(alertController, animated: true, completion: nil)
-                    }
+                    })
+                    alertController.addAction(topUpAccount)
+                    self.present(alertController, animated: true, completion: nil)
                 }
             }
         }
     }
     
-    // Private Methods
-    func setNavigationBarBackground() {
-        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
-            // Set Navigation controller background and shadow
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: ""), for: UIBarMetrics.default)
-            self.navigationController?.navigationBar.shadowImage = UIImage(named: "")
-        } else {
-            // Remove Navigation controller background and shadow
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-            self.navigationController?.navigationBar.shadowImage = UIImage()
-        }
-    }
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
+    
+    // Private Methods
     private func updateFooterHeight() {
         let height: CGFloat
         let tabBarHeight: CGFloat = 50
