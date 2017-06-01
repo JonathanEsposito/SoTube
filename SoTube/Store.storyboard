@@ -144,7 +144,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="musicCell" id="7Uq-tZ-cCo" customClass="StoreCollectionViewCell" customModule="SoTube" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="8.5" width="100" height="107.5"/>
+                                        <rect key="frame" x="20" y="8" width="100" height="107.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="107.5"/>
@@ -458,7 +458,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YDL-7V-Ttq">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="97f-jN-eTq">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -584,8 +584,8 @@
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="dar-bC-xAg"/>
                                                             <exclude reference="1L8-ed-OVc"/>
+                                                            <exclude reference="dar-bC-xAg"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=compact">
@@ -665,15 +665,15 @@
                                                     <exclude reference="bPF-eK-TaB"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="ZEp-K2-EL6"/>
-                                                    <exclude reference="s2J-oj-gG6"/>
+                                                    <exclude reference="Bon-sp-iFt"/>
                                                     <exclude reference="Qas-hJ-QoD"/>
                                                     <exclude reference="bQf-zP-yWH"/>
                                                     <exclude reference="vfV-Ye-pm7"/>
-                                                    <exclude reference="Bon-sp-iFt"/>
-                                                    <exclude reference="qho-Pd-yWX"/>
-                                                    <exclude reference="8ni-SM-9B2"/>
                                                     <exclude reference="3AD-Km-0Ce"/>
+                                                    <exclude reference="8ni-SM-9B2"/>
+                                                    <exclude reference="qho-Pd-yWX"/>
+                                                    <exclude reference="ZEp-K2-EL6"/>
+                                                    <exclude reference="s2J-oj-gG6"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=compact">
@@ -688,8 +688,8 @@
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="2JI-xq-xfd"/>
-                                                    <include reference="Qas-hJ-QoD"/>
                                                     <exclude reference="EQ9-F4-sUU"/>
+                                                    <include reference="Qas-hJ-QoD"/>
                                                     <include reference="vfV-Ye-pm7"/>
                                                     <include reference="qho-Pd-yWX"/>
                                                 </mask>
@@ -699,15 +699,15 @@
                                                     <include reference="bPF-eK-TaB"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="ZEp-K2-EL6"/>
-                                                    <include reference="s2J-oj-gG6"/>
-                                                    <include reference="bQf-zP-yWH"/>
                                                     <exclude reference="EQ9-F4-sUU"/>
                                                     <exclude reference="P60-Nn-FCZ"/>
-                                                    <exclude reference="Txl-bR-lx5"/>
-                                                    <include reference="8ni-SM-9B2"/>
-                                                    <exclude reference="eN3-6f-OPj"/>
+                                                    <include reference="bQf-zP-yWH"/>
                                                     <include reference="3AD-Km-0Ce"/>
+                                                    <include reference="8ni-SM-9B2"/>
+                                                    <exclude reference="Txl-bR-lx5"/>
+                                                    <exclude reference="eN3-6f-OPj"/>
+                                                    <include reference="ZEp-K2-EL6"/>
+                                                    <include reference="s2J-oj-gG6"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

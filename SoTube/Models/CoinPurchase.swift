@@ -18,7 +18,13 @@ struct CoinPurchase {
     }
     
     var keyDate: String {
-        return String(Int(Double(date.timeIntervalSinceReferenceDate) * 1_000_000))
+        // Best way to remove comma without UIInt32 overflow (iPhone 5)
+        let dateString = String(date.timeIntervalSinceReferenceDate)
+        var dateWithoutComma = dateString.replacingOccurrences(of: ".", with: "", options: .literal, range: nil)
+        while dateWithoutComma.characters.count < 15 {
+            dateWithoutComma.insert("0", at: dateWithoutComma.endIndex)
+        }
+        return dateWithoutComma
     }
     
     var dictionary: [String : [String : Double]] {
@@ -37,9 +43,8 @@ struct CoinPurchase {
         self.init(amount: amount, price: price, date: Date())
     }
     
-    init(amount: Int, price: Double, databaseTime: Int) {
-        let timeInterval = TimeInterval(databaseTime / 1_000_000)
-        let date = Date(timeIntervalSinceReferenceDate: timeInterval)
+    init(amount: Int, price: Double, databaseTime: TimeInterval) {
+        let date = Date(timeIntervalSinceReferenceDate: databaseTime)
         self.init(amount: amount, price: price, date: date)
     }
 }

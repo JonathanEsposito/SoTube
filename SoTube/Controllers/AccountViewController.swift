@@ -79,7 +79,7 @@ class AccountViewController: TabBarViewController, UICollectionViewDataSource, U
                             let amountOfCoins = (currentAmount ?? 0) + amount
                             self?.amountOfCoinsLabel.text = "\(amountOfCoins)"
                         }
-                    } // End coinUpdate
+                     } // End coinUpdate
                 }
             }
         } // End buy coins

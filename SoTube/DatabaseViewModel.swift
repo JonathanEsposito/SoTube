@@ -139,12 +139,12 @@ class DatabaseViewModel {
         albumIds.forEach {
             databaseModel.getAlbum(byID: $0) { album in
 //                print("getAlbum(byID: \(album)")
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     albums.append(album)
                     if albums.count >= albumIdsCount {
                         completionHandler(albums)
                     }
-                }
+//                }
             }
 //            print($0)
         }

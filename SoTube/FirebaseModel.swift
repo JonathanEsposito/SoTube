@@ -12,37 +12,35 @@ import Firebase
 class Firebase: DatabaseModel {
     func login(withEmail email: String, password: String, onCompletion completionHandler:  ((ErrorAlert?) -> ())? ) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    if let completionHandler = completionHandler {
-                        let errorAlert = ErrorAlert(title: "Login Error", message: error.localizedDescription, actions: nil)
-                        completionHandler(errorAlert)
-                        return
-                    }
-                }
-                
-                guard let currentUser = user, currentUser.isEmailVerified else {
-                    print("email not verified")
-                    let actions = [
-                        UIAlertAction(title: "Resent email", style: .default, handler: { (action) in
-                            user?.sendEmailVerification(completion: nil)
-                        }),
-                        UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                    ]
-                    let errorAlert = ErrorAlert(title: "Email address not confirmed", message: "You haven't confirmed your email address yet. We sent you a confirmation email upon refistration. You can click the verification link in that email. If you lost that email we'll gladly send you a new confirmation email. In that case you ought to tap Resend confirmation email.", actions: actions)
-                    
-                    if let completionHandler = completionHandler {
-                        completionHandler(errorAlert)
-                    }
+            if let error = error {
+                if let completionHandler = completionHandler {
+                    let errorAlert = ErrorAlert(title: "Login Error", message: error.localizedDescription, actions: nil)
+                    completionHandler(errorAlert)
                     return
                 }
+            }
+            
+            guard let currentUser = user, currentUser.isEmailVerified else {
+                print("email not verified")
+                let actions = [
+                    UIAlertAction(title: "Resent email", style: .default, handler: { (action) in
+                        user?.sendEmailVerification(completion: nil)
+                    }),
+                    UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                ]
+                let errorAlert = ErrorAlert(title: "Email address not confirmed", message: "You haven't confirmed your email address yet. We sent you a confirmation email upon refistration. You can click the verification link in that email. If you lost that email we'll gladly send you a new confirmation email. In that case you ought to tap Resend confirmation email.", actions: actions)
                 
-                // On completion
                 if let completionHandler = completionHandler {
-                    completionHandler(nil)
-                } else {
-                    print("no completionhandler")
+                    completionHandler(errorAlert)
                 }
+                return
+            }
+            
+            // On completion
+            if let completionHandler = completionHandler {
+                completionHandler(nil)
+            } else {
+                print("no completionhandler")
             }
         })
     }
@@ -53,7 +51,7 @@ class Firebase: DatabaseModel {
     
     func createNewAccount(withUserName userName: String, emailAddress: String, password: String, delegate: DatabaseDelegate) {
         FIRAuth.auth()?.createUser(withEmail: emailAddress, password: password, completion: { (user, error) in
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 if let error = error {
                     delegate.showAlert(withTitle: "Registration error", message: error.localizedDescription, actions: nil)
                     return
@@ -92,19 +90,19 @@ class Firebase: DatabaseModel {
                     let coinsChild = propertiesChild.child("coins")
                     coinsChild.setValue(200)
                 }
-            }
+//            }
         })
     }
     
     func resetPassword(forEmail email: String, delegate: DatabaseDelegate) {
         FIRAuth.auth()?.sendPasswordReset(withEmail: email) { (error) in
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 if let error = error {
                     delegate.showAlert(withTitle: "Password reset error", message: error.localizedDescription, actions:  nil)
                 } else {
                     delegate.showAlert(withTitle: "Password reset", message: "An email has been send to \(email). Please click the reset password link in that email to complete the password reset.", actions: nil)
                 }
-            }
+//            }
         }
     }
     
@@ -121,7 +119,7 @@ class Firebase: DatabaseModel {
         
         let userReference = FIRDatabase.database().reference(withPath: "users")
         userReference.child(userID).child("songs").observeSingleEvent(of: .value, with: { (snapshot) in
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 // Get user value
                 if snapshot.exists() {
                     
@@ -142,7 +140,7 @@ class Firebase: DatabaseModel {
                 } else {
                     completionHandler(false)
                 }
-            }
+//            }
             
         }) { (error) in
             print(error.localizedDescription)
@@ -166,14 +164,14 @@ class Firebase: DatabaseModel {
                 let amountOfCoins = snapshot.value as? Int
                 
                 userReference.child("songs").observeSingleEvent(of: .value, with: { snapshot in
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                         let tracks = snapshot.value as? NSDictionary
                         let amountOfSongs = tracks?.count
                         
                         let userProfile = Profile(username: userUsername, email: userEmail, amountOfCoins: amountOfCoins ?? 0, amountOfSongs: amountOfSongs ?? 0)
                         
                         completionHandler(userProfile)
-                    }
+//                    }
                 })
             }
         })
@@ -192,13 +190,13 @@ class Firebase: DatabaseModel {
         
         let credential = FIREmailPasswordAuthProvider.credential(withEmail: email, password: currentPassword)
         user?.reauthenticate(with: credential) { error in
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 if let error = error {
                     completionHandler(error)
                 } else {
                     user?.updatePassword(newPassword, completion: completionHandler)
                 }
-            }
+//            }
         }
     }
     
@@ -206,18 +204,18 @@ class Firebase: DatabaseModel {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
             userRef.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     //                print("coinsSnapshot: \(snapshot.value)")
                     if let currentAmount = snapshot.value as? Int {
                         completionHandler(currentAmount)
                     }
-                }
+//                }
             })
         }
     }
     
     func updateCoins(with coinPurchase: CoinPurchase, onCompletion completionHandler: @escaping ()->()) {
-        print("we will update our coins")
+//        print("we will update our coins")
         if let userID = FIRAuth.auth()?.currentUser?.uid {
 //            DispatchQueue.main.async {
 //            print("userId: \(userID)")
@@ -235,14 +233,14 @@ class Firebase: DatabaseModel {
 //            })
             
             userReference.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     //                print(snapshot.value)
                     if let currentAmount = snapshot.value as? Int {
                         let newTotal = currentAmount + coinPurchase.amount
                         userReference.child("properties/coins").setValue(newTotal)
                         completionHandler()
                     }
-                }
+//                }
             })
             
             userReference.child("properties/coinsHistory").updateChildValues(coinPurchase.dictionary)
@@ -257,21 +255,27 @@ class Firebase: DatabaseModel {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userCoinHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/properties/coinsHistory")
             userCoinHistoryRef.observeSingleEvent(of: .value, with: { snapshot in
-                DispatchQueue.main.async {
-                    if let purchaseDictionary = snapshot.value as? [String : [String : Double]] {
-                        var coinPurchases: [CoinPurchase] = []
-                        purchaseDictionary.forEach {
-                            let dateString = $0.key
-                            guard let amountString = $0.value.keys.first else {fatalError("Database error")}
-                            guard let price = $0.value.values.first else {fatalError("Database error")}
-                            
-                            if let date = Int(dateString), let amount = Int(amountString) {
-                                // print("time: \(time), amount: \(amount), price: \(round(price * 100) / 100)")
-                                coinPurchases.append(CoinPurchase(amount: amount, price: price, databaseTime: date))
-                            }
+                if let purchaseDictionary = snapshot.value as? [String : [String : Double]] {
+                    var coinPurchases: [CoinPurchase] = []
+                    purchaseDictionary.forEach {
+                        var dateString = $0.key
+                        guard let amountString = $0.value.keys.first else {fatalError("Database error")}
+                        guard let price = $0.value.values.first else {fatalError("Database error")}
+                        
+                        // The date string is to big to cast to int on a 32-Bit processor (iPhone 5)
+                        // Add comma back
+                        dateString.insert(".", at: dateString.index(dateString.endIndex, offsetBy: -6))
+                        
+                        if let dateTimeInterval = TimeInterval(dateString), let amount = Int(amountString) {
+                            // print("time: \(time), amount: \(amount), price: \(round(price * 100) / 100)")
+                            coinPurchases.append(CoinPurchase(amount: amount, price: price, databaseTime: dateTimeInterval))
+                        } else {
+                            print("data error")
                         }
-                        completionHandler(coinPurchases)
                     }
+                    completionHandler(coinPurchases)
+                } else {
+                    print("cast error")
                 }
             })
         } else {
@@ -285,12 +289,12 @@ class Firebase: DatabaseModel {
             
             // updateCoins
             userRef.child("properties/coins").observeSingleEvent(of: .value, with: { snapshot in
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     if let currentAmount = snapshot.value as? Int {
                         let newTotal = currentAmount - coins
                         userRef.child("properties/coins").setValue(newTotal)
                     }
-                }
+//                }
             })
             
             userRef.child("songs").updateChildValues(track.dictionary)
@@ -309,7 +313,7 @@ class Firebase: DatabaseModel {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userMusicHistoryRef = FIRDatabase.database().reference(withPath: "users/\(userID)/songs")
             userMusicHistoryRef.observeSingleEvent(of: .value, with: { snapshot in
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     //                print(snapshot.value)
                     if let purchaseDictionary = snapshot.value as? [String : [String : String]] {
                         //                    print(purchaseDictionary)
@@ -336,7 +340,7 @@ class Firebase: DatabaseModel {
                         completionHandler([])
                         print("my my, snapshot cast error")
                     }
-                }
+//                }
             })
         } else {
             completionHandler([])
@@ -348,7 +352,7 @@ class Firebase: DatabaseModel {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
             userRef.child("albums").observeSingleEvent(of: .value, with: { snapshot in
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     if let albumDictionary = snapshot.value as? [String : [String : Any]] {
                         //                    print(albumDictionary)
                         var albums: [Album] = []
@@ -370,7 +374,7 @@ class Firebase: DatabaseModel {
                         completionHandler([])
                         print("snapshot cast error")
                     }
-                }
+//                }
             })
         } else {
             completionHandler([])
@@ -382,7 +386,7 @@ class Firebase: DatabaseModel {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
             userRef.child("artists").observeSingleEvent(of: .value, with: { snapshot in
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     if let artistDictionary = snapshot.value as? [String : [String : Any]] {
                         //                    print(albumDictionary)
                         var artists: [Artist] = []
@@ -402,7 +406,7 @@ class Firebase: DatabaseModel {
                         completionHandler([])
                         print("snapshot cast error")
                     }
-                }
+//                }
             })
         } else {
             completionHandler([])
@@ -414,7 +418,7 @@ class Firebase: DatabaseModel {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
             userRef.child("albums").observeSingleEvent(of: .value, with: { snapshot in
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     if let albumDictionary = snapshot.value as? [String : [String : Any]] {
                         //                    print(albumDictionary)
                         var albums: [Album] = []
@@ -436,7 +440,7 @@ class Firebase: DatabaseModel {
                         completionHandler([])
                         print("snapshot cast error")
                     }
-                }
+//                }
             })
         } else {
             completionHandler([])
@@ -449,7 +453,7 @@ class Firebase: DatabaseModel {
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             let userRef = FIRDatabase.database().reference(withPath: "users/\(userID)")
             userRef.child("albums/\(id)").observeSingleEvent(of: .value, with: { snapshot in
-                DispatchQueue.main.async {
+//                DispatchQueue.main.async {
                     //                print(snapshot.value)
                     if let albumDictionary = snapshot.value as? [String : Any] {
                         //                    print("albumDictionary: \(albumDictionary)")
@@ -466,7 +470,7 @@ class Firebase: DatabaseModel {
                         //                    completionHandler()
                         print("snapshot cast error")
                     }
-                }
+//                }
             })
         } else {
 //            completionHandler()
