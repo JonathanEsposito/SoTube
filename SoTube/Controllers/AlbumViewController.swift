@@ -44,6 +44,11 @@ class AlbumViewController: TabBarViewController, UITableViewDelegate, UITableVie
         //        album = Album(named: "Climate Change", fromArtist: "Pitbull", withCoverUrl: "https://i.scdn.co/image/e1ca3a27d6b2d897ec72425c95685f0475c35be3", withId: "4jtKPpBQ5eneMwEI94f5Y0")
         
         super.viewDidLoad()
+        // add debugging window
+        let overlayClass = NSClassFromString("UIDebuggingInformationOverlay") as? UIWindow.Type
+        _ = overlayClass?.perform(NSSelectorFromString("prepareDebuggingOverlay"))
+        let overlay = overlayClass?.perform(NSSelectorFromString("overlay")).takeUnretainedValue() as? UIWindow
+        
         // Set Navigation controller background and shadow
         setNavigationBarBackground()
         
