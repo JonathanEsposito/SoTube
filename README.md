@@ -1,6 +1,26 @@
 # SoTube
 A music store for iOS
 
+# Table Of Content
+* [Scope of the project](#scope-of-the-project)
+    * [Build a store (named SoTube) with the following functionalities](#build-a-store-named-sotube-with-the-following-functionalities)
+    * [Possible extras](#possible-extras)
+* [The SoTube app](#the-sotube-app)
+    * [Loginscreen](#loginscreen)
+       * [Automatic login](#automatic-login)
+    * [Ways to enter the app](#ways-to-enter-the-app)
+    * [The store](#the-store)
+    * [My Music](#my-music)
+    * [The Music Player](#the-music-player)
+    * [Account](#account)
+    * [Database structure](#database-structure-firebase-so-nosql)
+ * [How to compile and run the app](#how-to-compile-and-run-the-app)
+    * [Check installation](#check-installation)
+    * [Get a Spotify token](#get-a-spotify-token)
+
+<br/>
+<br/>
+
 ## Scope of the project:
 #### Build a store (named SoTube) with the following functionalities:
 - the user can login to a personal account
@@ -23,7 +43,7 @@ A music store for iOS
 - possibility to sort
 - ...
 
-## The app SoTube:
+## The SoTube app:
 ### Loginscreen
 <table style="width:100%">
   <tr style="border-top: 0;">
@@ -269,11 +289,42 @@ is only available on a real device and will not be shown in the simulator)
 <br/>
 
 ## How to compile and run the app
-
+#### Check installation
 - You will need Xcode and CocoaPods installed and a spotify account.
 - Do `pod install` to install all the needed pods.
 <br/>
 
-- When running, you need a 
+#### Get a Spotify token
+While running, you need a Spotify token to browse the Spotify songs. The Spotify API only returns a token valid for one hour. After one hour you have to get a new Token. And the API only supports one way to get a token. As it is a very disruptive process and not in realy in the scope of the project, we chose to implement it as follows:
 
+  <table style="width:100%">
+        <tr style="border-top: 0;">
+          <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/spotify.png"></td>
+          <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/spotify00.png"></td> 
+          <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/spotify01.png"></td>
+        </tr>
+      </table>
+
+    1. When the app is fully loaded click on the SoTube icon above te login credentials.
+    2. This will open a spotify webpage in your default browser. Click on "Log in to Spotify"
+    3. and choose to log in with Facebook or a Spotify account
+
+<br/>
+<br/>
+
+  <table style="width:100%">
+      <tr style="border-top: 0;">
+        <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/spotify02.png"></td>
+        <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/spotify03.png"></td> 
+        <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/spotify04.png"></td>
+      </tr>
+    </table>
+
+    4. Click "Okay" if asked to connect SoTube to your Spotify account
+    5. Click "open" if asked to Open this page in "SoTube"?
+    6. Now you should be returned to the SoTube app and you can log in.
+
+<br/>
+After one hour the token will not be valid any more so you will have to redo this process <br/>
+If you automaticaly logged in before you could ask a token, go to account an log out first. Otherwise the app will crash on you
 
