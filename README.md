@@ -18,9 +18,6 @@ A music store for iOS
     * [Check installation](#check-installation)
     * [Get a Spotify token](#get-a-spotify-token)
 
-<br/>
-<br/>
-
 ## Scope of the project:
 #### Build a store (named SoTube) with the following functionalities:
 - the user can login to a personal account
