@@ -44,7 +44,9 @@ class MusicSplitViewDetailViewController: TabBarViewController, UICollectionView
         if let artist = self.artist {
             database.getAlbums(forArtist: artist) { [weak self] albums in
                 DispatchQueue.main.async {
-                    self?.albums = albums
+                    self?.albums = albums.sorted {
+                        return $0.name < $1.name
+                    }
                 }
             }
         } else {
