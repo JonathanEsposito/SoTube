@@ -2,7 +2,7 @@
 A music store for iOS
 
 ## Scope of the project:
-Build a store (named SoTube) with the following functionalities:
+#### Build a store (named SoTube) with the following functionalities:
 - the user can login to a personal account
 - each account contains points which can be bought with real money (the last part doesn’t need to be implemented)
 - there should be an overview of all purchases
@@ -16,11 +16,12 @@ Build a store (named SoTube) with the following functionalities:
 - the app must look good and work on every iOS device
 - you can choose to support landscape (although desirable)
 
-Possible extras:
+#### Possible extras:
 - buying points (e.g. with PayPal)
 - sharing your purchase with friends (Facebook, Twitter,…)
 - possibility to search by name
 - possibility to sort
+- ...
 
 ## The app SoTube:
 ### Loginscreen
@@ -36,7 +37,11 @@ Possible extras:
 - recover its password
 - create a new account
 
- 
+#### Automatic login
+If the user launches the app but has previously been logged in, the app will automaticaly log back in with the credentials given at the previous login. To prevent this, the user should log out before quiting the app.
+
+<br/>
+<br/>
 
 ### Ways to enter the app
 <table style="width:100%">
@@ -51,6 +56,9 @@ Possible extras:
 - When a user logs in as a registered guest and the user has no purchased songs yet, it is directed to the store as well, but with the default tabbar.
 - When a user logs in as a registered guest and the user has already bought songs, it is directed to their bought music.
 
+<br/>
+<br/>
+
 ### The store
 <table style="width:100%">
   <tr style="border-top: 0;">
@@ -60,7 +68,10 @@ Possible extras:
   </tr>
 </table>
 
-The user can browse through new releases, featured playlist and moods
+- The user can browse through new releases, featured playlist and moods
+
+<br/>
+<br/>
 
 <table style="width:100%">
   <tr style="border-top: 0;">
@@ -70,7 +81,10 @@ The user can browse through new releases, featured playlist and moods
   </tr>
 </table>
 
-The user can sumltaniously search for albums, artists, tracks and playlists and can navigate through them
+- The user can sumltaniously search for albums, artists, tracks and playlists and can navigate through them
+
+<br/>
+<br/>
 
 <table style="width:100%">
   <tr style="border-top: 0;">
@@ -85,6 +99,9 @@ In the store, the user can buy a song anywhere it is displayed. In a search resu
 - When the user does not have enough coins an alert is shown with the option to top up their account or to cancel.
 - When the user choses to top up there account, the get the option to choose the amount of coins and is shown the price.
 
+<br/>
+<br/>
+
 <table style="width:100%">
   <tr style="border-top: 0;">
     <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/03storePaypal00.png"></td>
@@ -93,7 +110,10 @@ In the store, the user can buy a song anywhere it is displayed. In a search resu
   </tr>
 </table>
 
-The user can choose to pay with PayPal. In PayPal, the user can log in to paypal and pay, or choose to use a credit card
+- The user can choose to pay with PayPal. In PayPal, the user can log in to paypal and pay, or choose to use a credit card
+
+<br/>
+<br/>
 
 ### My Music
 <table style="width:100%">
@@ -108,6 +128,9 @@ The user can choose to pay with PayPal. In PayPal, the user can log in to paypal
 - the user can choose to view all songs, all albums or all artists of their bought songs.
 - all songs can be sorted by name but are by default sorted by artist name>album name>album track number.
 
+<br/>
+<br/>
+
 <table style="width:100%">
   <tr style="border-top: 0;">
     <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/05iPadShow.png"></td>
@@ -115,7 +138,10 @@ The user can choose to pay with PayPal. In PayPal, the user can log in to paypal
   </tr>
 </table>
 
-The display and sort menus on an iPad
+- The display- and sort- menus on an iPad
+
+<br/>
+<br/>
 
 <table style="width:100%">
   <tr style="border-top: 0;">
@@ -128,6 +154,9 @@ The display and sort menus on an iPad
 - The artist view with on the left all artists and on the right all bought albums of the selected artist.
 - The album view in portret 
 - The album view in landscape
+
+<br/>
+<br/>
 
 ### The Music Player
 
@@ -143,6 +172,9 @@ The display and sort menus on an iPad
 - When in landscape the miniplayer will move into the tabbar to fill the unused space
 - The miniplayer will be present everywhere you are in the app. On it, the user can control the pause and play back of the song
 
+<br/>
+<br/>
+
 <table style="width:100%">
   <tr style="border-top: 0;">
     <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/playerPortret.png"></td>
@@ -150,7 +182,10 @@ The display and sort menus on an iPad
   </tr>
 </table>
 
-When the user taps the miniplayer anywhere but the pause/play button, a bigger player will be shown fullscreen on the iphone.
+- When the user taps the miniplayer anywhere but the pause/play button, a bigger player will be shown fullscreen on the iphone.
+
+<br/>
+<br/>
 
 <table style="width:100%">
   <tr style="border-top: 0;">
@@ -159,8 +194,11 @@ When the user taps the miniplayer anywhere but the pause/play button, a bigger p
   </tr>
 </table>
 
-On the iPad the bigger player will be shown as a popover. (Note that the volume control
+- On the iPad the bigger player will be shown as a popover. (Note that the volume control
 is only available on a real device and will not be shown in the simulator)
+
+<br/>
+<br/>
 
 <table style="width:100%">
   <tr style="border-top: 0;">
@@ -174,6 +212,9 @@ is only available on a real device and will not be shown in the simulator)
 - If the song is not yet bought, the user can buy the song right in the player.
 - When the song is succesfully bought, the user can immediatly continue playing the entire song.
 
+<br/>
+<br/>
+
 <table style="width:100%">
   <tr style="border-top: 0;">
     <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/playerShare.png"></td>
@@ -186,10 +227,53 @@ is only available on a real device and will not be shown in the simulator)
 - Sharing a song returns a message "I'm currently listening to [track title] by [artist name]" and a link to the current song on the only spotify player.
 - If there is an airPlay device in the vecinity, the user can also stream their music to the device and control its volume.
 
-### Account
+<br/>
+<br/>
 
-comming soon
+### Account
+<table style="width:100%">
+  <tr style="border-top: 0;">
+    <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/account.png"></td>
+    <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/accountChangeUsername.png"></td> 
+    <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/accountChangePassword.png"></td>
+  </tr>
+</table>
+
+- At the account, the user gets an overview of the amount of songs bought, amount of coins left, the username and password and the ability to buy extra coins.
+- the user can change its username and to make sure, the user has to enter its old username and a new username
+- the user can change its password and before changing, there is a reauthentication to make sure it is the correct user
+
+<br/>
+<br/>
+
+<table style="width:100%">
+  <tr style="border-top: 0;">
+    <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/accountPayWithPayPal.png"></td>
+    <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/accountPurchaseOverviewSongs.png"></td> 
+    <td style="border: 0;"><img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/accountPurchaseOverviewCoins.png"></td>
+  </tr>
+</table>
+
+- The user can also top up its account,
+- view a history of purchased songs,
+- and a history of purchased coins.
+
+<br/>
+<br/>
+
+### Database structure (Firebase, so NoSQL)
+
+<img src="https://github.com/JonathanEsposito/SoTube/blob/master/rmresource/firebaseStructure.png">
+
+<br/>
+<br/>
 
 ## How to compile and run the app
 
-comming soon
+- You will need Xcode and CocoaPods installed and a spotify account.
+- Do `pod install` to install all the needed pods.
+<br/>
+
+- When running, you need a 
+
+
